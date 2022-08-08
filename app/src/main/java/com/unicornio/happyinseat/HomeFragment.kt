@@ -1,5 +1,6 @@
 package com.unicornio.happyinseat
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -24,7 +25,7 @@ class HomeFragment : Fragment() {
     private fun setupBehavior(root: View) {
         val buttonRunExercise = root.findViewById<ImageButton>(R.id.button_start_stretching)
         buttonRunExercise.setOnClickListener {
-            Toast.makeText(root.context, "Start a fragment of Exercise overview, then if start, launch new activity", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(root.context, ExerciseActivity::class.java))
         }
 
         val buttonRunCore = root.findViewById<ImageButton>(R.id.button_start_core)

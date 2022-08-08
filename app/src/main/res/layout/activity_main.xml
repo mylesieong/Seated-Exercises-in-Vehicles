@@ -48,7 +48,7 @@
             android:layout_height="match_parent"
             android:layout_below="@id/app_bar_layout"
             app:defaultNavHost="true"
-            app:navGraph="@navigation/navigation_graph" />
+            app:navGraph="@navigation/navigation_graph_menu_default" />
 
     </RelativeLayout>
 
