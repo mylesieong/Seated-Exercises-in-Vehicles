@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Seated Exercise in Vehicles</string>
+    <string name="common_open_on_phone">Open on phone</string>
 </resources>

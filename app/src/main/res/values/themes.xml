@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.HappyInSeat" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.HappyInSeat" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/md_amber_400</item>
         <item name="colorPrimaryVariant">@color/md_amber_600</item>
