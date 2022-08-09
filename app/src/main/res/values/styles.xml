@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Style.Overview.Header" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="Style.Overview.Description" parent="TextAppearance.MaterialComponents.Caption" />
+
+    <style name="Style.Overview.SubTitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="Style.Overview.SubTitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="Style.Overview.SubTitle1.Dark" parent="Style.Overview.SubTitle1">
+        <item name="android:textColor">?attr/colorOnBackground</item>
+    </style>
+
+    <style name="Style.Overview.Description.Dark" parent="Style.Overview.Description">
+        <item name="android:textColor">?attr/colorOnBackground</item>
+    </style>
+</resources>
