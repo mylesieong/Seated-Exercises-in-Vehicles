@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Style.Overview.Header" parent="TextAppearance.MaterialComponents.Headline6">
+    <style name="Style.Overview.Headline" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="Style.Overview.Headline.Dark" parent="Style.Overview.Headline">
+        <item name="android:textColor">?attr/colorOnBackground</item>
     </style>
 
     <style name="Style.Overview.Description" parent="TextAppearance.MaterialComponents.Caption" />
