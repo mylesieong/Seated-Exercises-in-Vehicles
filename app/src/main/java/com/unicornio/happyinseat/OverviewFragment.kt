@@ -5,9 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.Toast
+import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.unicornio.happyinseat.helpers.navigateSafely
 
 class OverviewFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(
@@ -22,7 +23,9 @@ class OverviewFragment : Fragment() {
     }
 
     private fun setupBehavior(root: View) {
-     //TODO
+        root.findViewById<Button>(R.id.button_start).setOnClickListener {
+            findNavController().navigateSafely(R.id.action_overviewFragment_to_moveFragment)
+        }
     }
 
     companion object {

@@ -9,37 +9,28 @@
         android:id="@+id/overviewFragment"
         android:name="com.unicornio.happyinseat.OverviewFragment"
         android:label="fragment_overview"
-        tools:layout="@layout/fragment_overview" />
+        tools:layout="@layout/fragment_overview">
+
+        <action
+            android:id="@+id/action_overviewFragment_to_moveFragment"
+            app:destination="@id/moveFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/moveFragment"
         android:name="com.unicornio.happyinseat.MoveFragment"
         android:label="fragment_move"
-        tools:layout="@layout/fragment_move" />
+        tools:layout="@layout/fragment_move">
+
+        <action
+            android:id="@+id/action_moveFragment_to_finishFragment"
+            app:destination="@id/finishFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/finishFragment"
         android:name="com.unicornio.happyinseat.FinishFragment"
         android:label="fragment_finish"
         tools:layout="@layout/fragment_finish" />
-
-    <action
-        android:id="@+id/action_OverviewFragment"
-        app:destination="@id/overviewFragment"
-        app:popUpTo="@id/overviewFragment"
-        app:popUpToInclusive="true" />
-
-    <action
-        android:id="@+id/action_MoveFragment"
-        app:destination="@id/moveFragment"
-        app:popUpTo="@id/moveFragment"
-        app:popUpToInclusive="true" />
-
-    <action
-        android:id="@+id/action_FinishFragment"
-        app:destination="@id/finishFragment"
-        app:popUpTo="@id/finishFragment"
-        app:popUpToInclusive="true" />
-
 
 </navigation>
