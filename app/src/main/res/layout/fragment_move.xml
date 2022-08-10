@@ -9,7 +9,10 @@
         android:id="@+id/button_back"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:background="?selectableItemBackground"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_baseline_arrow_back_24"
@@ -33,9 +36,9 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="32dp"
         android:layout_below="@id/panel_illustration"
         android:layout_centerHorizontal="true"
+        android:layout_margin="32dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -65,11 +68,13 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="32dp">
 
-        <ImageView
+        <ImageButton
+            android:id="@+id/button_previous"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toStartOf="@id/button_check"
+            android:background="?selectableItemBackground"
             android:src="@drawable/ic_baseline_arrow_back_ios_24"
             app:tint="?attr/colorOnBackground" />
 
@@ -93,11 +98,13 @@
         </RelativeLayout>
 
 
-        <ImageView
+        <ImageButton
+            android:id="@+id/button_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@id/button_check"
+            android:background="?selectableItemBackground"
             android:src="@drawable/ic_baseline_arrow_forward_ios_24"
             app:tint="?attr/colorOnBackground" />
 
