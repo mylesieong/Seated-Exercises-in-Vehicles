@@ -44,6 +44,8 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
 
+    implementation 'nl.dionsegijn:konfetti-xml:2.0.2'
+
     implementation files('libs/utils-debug.aar')
 
     testImplementation 'junit:junit:4.+'
