@@ -15,7 +15,5 @@ class ExerciseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_exercise)
-
     }
-
 }
