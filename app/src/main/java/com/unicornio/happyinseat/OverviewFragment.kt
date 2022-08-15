@@ -1,5 +1,6 @@
 package com.unicornio.happyinseat
 
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -30,6 +31,15 @@ class OverviewFragment : Fragment() {
         button_back.setOnClickListener {
             activity?.onBackPressed()
         }
+
+        (image_breath_in_out.drawable as AnimationDrawable).start()
+        (image_neck_roll.drawable as AnimationDrawable).start()
+        (image_shoulder_rotation.drawable as AnimationDrawable).start()
+        (image_wrist_rotation.drawable as AnimationDrawable).start()
+        (image_low_back_stretch.drawable as AnimationDrawable).start()
+        (image_foot_pumps.drawable as AnimationDrawable).start()
+        (image_ankle_rotation.drawable as AnimationDrawable).start()
+        (image_hip_knee_stretch.drawable as AnimationDrawable).start()
     }
 
     companion object {
