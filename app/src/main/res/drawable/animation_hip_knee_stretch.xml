@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+    <item
+        android:drawable="@drawable/ic_hip_knee_stretch1"
+        android:duration="1000" />
+    <item
+        android:drawable="@drawable/ic_hip_knee_stretch2"
+        android:duration="1000" />
+</animation-list>

@@ -73,7 +73,7 @@
                     style="@style/Style.Overview.SubTitle1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="7" />
+                    android:text="8" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
 
@@ -125,240 +125,301 @@
 
     </RelativeLayout>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/panel_header"
-        android:orientation="vertical">
+        android:layout_below="@id/panel_header">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/text_move_title"
-                style="@style/Style.Overview.SubTitle1.Dark"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Foot Bumps"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:padding="16dp">
 
-            <TextView
-                android:id="@+id/text_move_instruction"
-                style="@style/Style.Overview.Description.Dark"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/text_move_title"
+                    style="@style/Style.Overview.SubTitle1.Dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Breath in and breath out"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_move_instruction"
+                    style="@style/Style.Overview.Description.Dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Repeat 10 times"
+                    app:layout_constraintStart_toStartOf="@id/text_move_title"
+                    app:layout_constraintTop_toBottomOf="@id/text_move_title" />
+
+                <ImageView
+                    android:id="@+id/image_breath_in_out"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="?attr/colorSurface"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/animation_breath"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Repeat 10 times"
-                app:layout_constraintStart_toStartOf="@id/text_move_title"
-                app:layout_constraintTop_toBottomOf="@id/text_move_title" />
+                android:padding="16dp">
 
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="60dp"
-                android:src="@drawable/shape_circle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/text_move_title"
+                    style="@style/Style.Overview.SubTitle1.Dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Neck roll"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp">
+                <TextView
+                    android:id="@+id/text_move_instruction"
+                    style="@style/Style.Overview.Description.Dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Repeat 10 times"
+                    app:layout_constraintStart_toStartOf="@id/text_move_title"
+                    app:layout_constraintTop_toBottomOf="@id/text_move_title" />
 
-            <TextView
-                android:id="@+id/text_move_title"
-                style="@style/Style.Overview.SubTitle1.Dark"
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/image_neck_roll"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="?attr/colorSurface"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/animation_neck_roll"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Foot Bumps"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:padding="16dp">
 
-            <TextView
-                android:id="@+id/text_move_instruction"
-                style="@style/Style.Overview.Description.Dark"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/text_move_title"
+                    style="@style/Style.Overview.SubTitle1.Dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Shoulder rotation"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_move_instruction"
+                    style="@style/Style.Overview.Description.Dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Repeat 10 times"
+                    app:layout_constraintStart_toStartOf="@id/text_move_title"
+                    app:layout_constraintTop_toBottomOf="@id/text_move_title" />
+
+                <ImageView
+                    android:id="@+id/image_shoulder_rotation"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="?attr/colorSurface"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/animation_shoulder_rotation"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Repeat 10 times"
-                app:layout_constraintStart_toStartOf="@id/text_move_title"
-                app:layout_constraintTop_toBottomOf="@id/text_move_title" />
+                android:padding="16dp">
 
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="60dp"
-                android:src="@drawable/shape_circle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/text_move_title"
+                    style="@style/Style.Overview.SubTitle1.Dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Wrist rotation"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp">
+                <TextView
+                    android:id="@+id/text_move_instruction"
+                    style="@style/Style.Overview.Description.Dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Repeat 10 times"
+                    app:layout_constraintStart_toStartOf="@id/text_move_title"
+                    app:layout_constraintTop_toBottomOf="@id/text_move_title" />
 
-            <TextView
-                android:id="@+id/text_move_title"
-                style="@style/Style.Overview.SubTitle1.Dark"
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/image_wrist_rotation"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="?attr/colorSurface"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/animation_wrist_rotation"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Foot Bumps"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:padding="16dp">
 
-            <TextView
-                android:id="@+id/text_move_instruction"
-                style="@style/Style.Overview.Description.Dark"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/text_move_title"
+                    style="@style/Style.Overview.SubTitle1.Dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Low back stretch"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_move_instruction"
+                    style="@style/Style.Overview.Description.Dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Repeat 10 times"
+                    app:layout_constraintStart_toStartOf="@id/text_move_title"
+                    app:layout_constraintTop_toBottomOf="@id/text_move_title" />
+
+                <ImageView
+                    android:id="@+id/image_low_back_stretch"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="?attr/colorSurface"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/animation_low_back_stretch"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Repeat 10 times"
-                app:layout_constraintStart_toStartOf="@id/text_move_title"
-                app:layout_constraintTop_toBottomOf="@id/text_move_title" />
+                android:padding="16dp">
 
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="60dp"
-                android:src="@drawable/shape_circle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/text_move_title"
+                    style="@style/Style.Overview.SubTitle1.Dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Foot pumps"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp">
+                <TextView
+                    android:id="@+id/text_move_instruction"
+                    style="@style/Style.Overview.Description.Dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Repeat 10 times"
+                    app:layout_constraintStart_toStartOf="@id/text_move_title"
+                    app:layout_constraintTop_toBottomOf="@id/text_move_title" />
 
-            <TextView
-                android:id="@+id/text_move_title"
-                style="@style/Style.Overview.SubTitle1.Dark"
-                android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/image_foot_pumps"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="?attr/colorSurface"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/animation_foot_pumps"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Foot Bumps"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:padding="16dp">
 
-            <TextView
-                android:id="@+id/text_move_instruction"
-                style="@style/Style.Overview.Description.Dark"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/text_move_title"
+                    style="@style/Style.Overview.SubTitle1.Dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ankle rotation"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_move_instruction"
+                    style="@style/Style.Overview.Description.Dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Repeat 10 times"
+                    app:layout_constraintStart_toStartOf="@id/text_move_title"
+                    app:layout_constraintTop_toBottomOf="@id/text_move_title" />
+
+                <ImageView
+                    android:id="@+id/image_ankle_rotation"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="?attr/colorSurface"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/animation_ankle_rotation"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Repeat 10 times"
-                app:layout_constraintStart_toStartOf="@id/text_move_title"
-                app:layout_constraintTop_toBottomOf="@id/text_move_title" />
+                android:padding="16dp">
 
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="60dp"
-                android:src="@drawable/shape_circle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/text_move_title"
+                    style="@style/Style.Overview.SubTitle1.Dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hip and knee stretch"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp">
+                <TextView
+                    android:id="@+id/text_move_instruction"
+                    style="@style/Style.Overview.Description.Dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Repeat 10 times"
+                    app:layout_constraintStart_toStartOf="@id/text_move_title"
+                    app:layout_constraintTop_toBottomOf="@id/text_move_title" />
 
-            <TextView
-                android:id="@+id/text_move_title"
-                style="@style/Style.Overview.SubTitle1.Dark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Foot Bumps"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/text_move_instruction"
-                style="@style/Style.Overview.Description.Dark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Repeat 10 times"
-                app:layout_constraintStart_toStartOf="@id/text_move_title"
-                app:layout_constraintTop_toBottomOf="@id/text_move_title" />
-
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="60dp"
-                android:src="@drawable/shape_circle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp">
-
-            <TextView
-                android:id="@+id/text_move_title"
-                style="@style/Style.Overview.SubTitle1.Dark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Foot Bumps"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/text_move_instruction"
-                style="@style/Style.Overview.Description.Dark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Repeat 10 times"
-                app:layout_constraintStart_toStartOf="@id/text_move_title"
-                app:layout_constraintTop_toBottomOf="@id/text_move_title" />
-
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="60dp"
-                android:src="@drawable/shape_circle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp">
-
-            <TextView
-                android:id="@+id/text_move_title"
-                style="@style/Style.Overview.SubTitle1.Dark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Foot Bumps"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/text_move_instruction"
-                style="@style/Style.Overview.Description.Dark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Repeat 10 times"
-                app:layout_constraintStart_toStartOf="@id/text_move_title"
-                app:layout_constraintTop_toBottomOf="@id/text_move_title" />
-
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="60dp"
-                android:src="@drawable/shape_circle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.appcompat.widget.LinearLayoutCompat>
+                <ImageView
+                    android:id="@+id/image_hip_knee_stretch"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="?attr/colorSurface"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/animation_hip_knee_stretch"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
 
     <Button
-        style="@style/Widget.MaterialComponents.Button"
         android:id="@+id/button_start"
+        style="@style/Widget.MaterialComponents.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
