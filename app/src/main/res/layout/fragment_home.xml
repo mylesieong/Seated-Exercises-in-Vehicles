@@ -132,7 +132,15 @@
                         android:orientation="vertical">
 
                         <TextView
-                            style="@style/TextAppearance.MaterialComponents.Headline6"
+                            style="@style/Style.Home.Tag"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="2dp"
+                            android:background="?attr/colorSecondary"
+                            android:text="coming soon" />
+
+                        <TextView
+                            style="@style/Style.Overview.Headline"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="6dp"
@@ -212,11 +220,19 @@
                         android:orientation="vertical">
 
                         <TextView
-                            style="@style/TextAppearance.MaterialComponents.Headline6"
+                            style="@style/Style.Home.Tag"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="2dp"
+                            android:background="?attr/colorSecondary"
+                            android:text="coming soon" />
+
+                        <TextView
+                            style="@style/Style.Overview.Headline"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="6dp"
-                            android:text="Start a Journey (coming soon)" />
+                            android:text="Start a Journey" />
 
                         <TextView
                             style="@style/TextAppearance.MaterialComponents.Caption"
