@@ -5,10 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.unicornio.happyinseat.helpers.navigateSafely
+import kotlinx.android.synthetic.main.fragment_overview.*
 
 class OverviewFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(
@@ -23,8 +23,12 @@ class OverviewFragment : Fragment() {
     }
 
     private fun setupBehavior(root: View) {
-        root.findViewById<Button>(R.id.button_start).setOnClickListener {
+        button_start.setOnClickListener {
             findNavController().navigateSafely(R.id.action_overviewFragment_to_moveFragment)
+        }
+
+        button_back.setOnClickListener {
+            activity?.onBackPressed()
         }
     }
 

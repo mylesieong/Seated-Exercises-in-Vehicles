@@ -26,13 +26,11 @@ class HomeFragment : Fragment() {
         val buttonRunExercise = root.findViewById<ImageButton>(R.id.button_start_stretching)
         buttonRunExercise.setOnClickListener {
             startActivity(Intent(root.context, ExerciseActivity::class.java))
-            //TODO
         }
 
         val buttonRunCore = root.findViewById<ImageButton>(R.id.button_start_core)
         buttonRunCore.setOnClickListener {
-            startActivity(Intent(root.context, ExerciseActivity::class.java))
-            //TODO
+            Toast.makeText(root.context, "Coming soon", Toast.LENGTH_SHORT).show()
         }
 
         val buttonStartJourney = root.findViewById<ImageButton>(R.id.button_start_journey)
