@@ -1,17 +1,16 @@
-package com.unicornio.happyinseat
+package com.unicornio.happyinseat.fragments
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.unicornio.happyinseat.R
 
-class HistoryFragment : Fragment() {
+class SettingFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(
-        R.layout.fragment_history, container, false
+        R.layout.fragment_setting, container, false
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -26,6 +25,6 @@ class HistoryFragment : Fragment() {
     }
 
     companion object {
-        const val TAG = "HistoryFragment"
+        const val TAG = "SettingFragment"
     }
 }

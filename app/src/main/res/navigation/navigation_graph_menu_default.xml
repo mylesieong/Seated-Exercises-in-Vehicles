@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.unicornio.happyinseat.HomeFragment"
+        android:name="com.unicornio.happyinseat.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.unicornio.happyinseat.HistoryFragment"
+        android:name="com.unicornio.happyinseat.fragments.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
 
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.unicornio.happyinseat.SettingFragment"
+        android:name="com.unicornio.happyinseat.fragments.SettingFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_setting" />
 

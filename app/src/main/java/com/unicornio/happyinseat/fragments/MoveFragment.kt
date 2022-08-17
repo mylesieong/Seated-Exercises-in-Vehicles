@@ -1,4 +1,4 @@
-package com.unicornio.happyinseat
+package com.unicornio.happyinseat.fragments
 
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.unicornio.happyinseat.Exercise
+import com.unicornio.happyinseat.R
+import com.unicornio.happyinseat.STANDARD_STRETCH
 import com.unicornio.happyinseat.helpers.navigateSafely
 import kotlinx.android.synthetic.main.fragment_move.*
 
