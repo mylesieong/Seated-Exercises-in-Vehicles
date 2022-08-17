@@ -38,6 +38,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
             )
         }
+
+//        insertDummyRecordForDebugBuild(this)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

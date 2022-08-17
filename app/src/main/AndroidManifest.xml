@@ -21,6 +21,11 @@
         </activity>
 
         <activity android:name=".activities.ExerciseActivity" />
+
+        <provider
+            android:name="com.unicornio.happyinseat.persistence.Provider"
+            android:authorities="com.unicornio.happyinseat"
+            android:exported="false" />
     </application>
 
 </manifest>

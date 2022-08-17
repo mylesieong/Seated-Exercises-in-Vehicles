@@ -54,6 +54,41 @@ fun indexRecordsByYearAndMonth(records: List<Record>): Map<Utils.YearMonth, List
     Utils.YearMonth(calendar[Calendar.YEAR], calendar[Calendar.MONTH])
 }
 
+fun insertDummyRecordForDebugBuild(context: Context) {
+    if (BuildConfig.DEBUG) {
+        deleteRecords(context)
+
+        val time6DaysAgo = System.currentTimeMillis() - ONE_DAY_MILLIS * 6
+        saveRecord(context, Record(time6DaysAgo, STANDARD_STRETCH))
+        saveRecord(context, Record(time6DaysAgo, STANDARD_STRETCH))
+        saveRecord(context, Record(time6DaysAgo, STANDARD_STRETCH))
+
+        val time5DaysAgo = System.currentTimeMillis() - ONE_DAY_MILLIS * 5
+        saveRecord(context, Record(time5DaysAgo, STANDARD_STRETCH))
+        saveRecord(context, Record(time5DaysAgo, STANDARD_STRETCH))
+        saveRecord(context, Record(time5DaysAgo, STANDARD_STRETCH))
+        saveRecord(context, Record(time5DaysAgo, STANDARD_STRETCH))
+
+        val time3DaysAgo = System.currentTimeMillis() - ONE_DAY_MILLIS * 3
+        saveRecord(context, Record(time3DaysAgo, STANDARD_STRETCH))
+
+        val time2DaysAgo = System.currentTimeMillis() - ONE_DAY_MILLIS * 2
+        saveRecord(context, Record(time2DaysAgo, STANDARD_STRETCH))
+        saveRecord(context, Record(time2DaysAgo, STANDARD_STRETCH))
+        saveRecord(context, Record(time2DaysAgo, STANDARD_STRETCH))
+        saveRecord(context, Record(time2DaysAgo, STANDARD_STRETCH))
+        saveRecord(context, Record(time2DaysAgo, STANDARD_STRETCH))
+
+        val time1DaysAgo = System.currentTimeMillis() - ONE_DAY_MILLIS * 1
+        saveRecord(context, Record(time1DaysAgo, STANDARD_STRETCH))
+        saveRecord(context, Record(time1DaysAgo, STANDARD_STRETCH))
+
+        val time0DaysAgo = System.currentTimeMillis()
+        saveRecord(context, Record(time0DaysAgo, STANDARD_STRETCH))
+        saveRecord(context, Record(time0DaysAgo, STANDARD_STRETCH))
+        saveRecord(context, Record(time0DaysAgo, STANDARD_STRETCH))
+    }
+}
 
 fun Context.colorPrimary(): Int {
     val value = TypedValue()

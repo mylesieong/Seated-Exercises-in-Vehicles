@@ -72,8 +72,6 @@ class HistoryFragment : Fragment() {
         calendarView.setOnDateSelectedListener(object : CalendarView.OnDateSelectedListener {
             override fun onDateSelected(year: Int, month: Int, day: Int) {
                 Log.d(TAG, "onDateSelected: ymd=$year/$month/$day")
-
-                text_header.visibility = View.VISIBLE
                 showRecords(year, month, day)
             }
 
@@ -85,11 +83,13 @@ class HistoryFragment : Fragment() {
                 if (data.isEmpty()) {
                     panel_empty_view.visibility = View.VISIBLE
                     text_header.visibility = View.GONE
+                    panel_records.visibility = View.GONE
                     list_of_records.visibility = View.GONE
 
                 } else {
                     panel_empty_view.visibility = View.GONE
                     text_header.visibility = View.VISIBLE
+                    panel_records.visibility = View.VISIBLE
                     list_of_records.visibility = View.VISIBLE
 
                     fillList(data)

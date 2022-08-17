@@ -111,3 +111,5 @@ val STANDARD_STRETCH = Exercise(
         ANKLE_ROTATION,
     )
 )
+
+const val ONE_DAY_MILLIS: Long = 24 * 60 * 60 * 1000

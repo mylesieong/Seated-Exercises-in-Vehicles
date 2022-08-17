@@ -45,17 +45,22 @@
 
         <TextView
             android:id="@+id/text_header"
+            style="@style/Style.Overview.SubTitle1.Dark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Records"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:visibility="gone" />
 
         <FrameLayout
+            android:id="@+id/panel_records"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/text_header"
+            android:layout_marginTop="8dp"
             android:paddingLeft="24dp"
-            android:paddingRight="24dp">
+            android:paddingRight="24dp"
+            android:visibility="gone">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list_of_records"
