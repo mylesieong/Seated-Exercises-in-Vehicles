@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -29,40 +30,70 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_margin="36dp"
-            android:src="@drawable/ic_pic_stretching" />
+            android:layout_margin="14dp"
+            android:src="@drawable/animation_ankle_rotation" />
     </RelativeLayout>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@id/panel_buttons"
         android:layout_below="@id/panel_illustration"
         android:layout_centerHorizontal="true"
-        android:layout_margin="32dp"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:paddingStart="32dp"
+        android:paddingTop="32dp"
+        android:paddingEnd="32dp">
 
-        <TextView
-            android:id="@+id/text_move_title"
-            style="@style/Style.Overview.Headline.Dark"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Foot Bumps"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/text_move_instruction"
-            style="@style/Style.Overview.SubTitle1.Dark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Repeat 10 times"
-            app:layout_constraintStart_toStartOf="@id/text_move_title"
-            app:layout_constraintTop_toBottomOf="@id/text_move_title" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_description"
+                style="@style/Style.Overview.SubTitle1.Dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Repeat 10 times" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_move_title"
+                    style="@style/Style.Move.Headline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Foobar" />
+
+                <ImageButton
+                    android:id="@+id/button_toggle_instruction"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:background="?selectableItemBackground"
+                    android:src="@drawable/ic_baseline_unfold_more_24"
+                    app:tint="?attr/colorOnBackground" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <TextView
+                android:id="@+id/text_instruction"
+                style="@style/Style.Overview.Description.Dark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="-"
+                tools:text="Foobar\n\n1. Foo\n2. Bar" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
 
     <RelativeLayout
+        android:id="@+id/panel_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

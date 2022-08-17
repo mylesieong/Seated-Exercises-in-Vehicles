@@ -17,6 +17,10 @@
         <item name="android:textColor">?attr/colorOnBackground</item>
     </style>
 
+    <style name="Style.Move.Headline" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textColor">?attr/colorOnBackground</item>
+    </style>
+
     <style name="Style.Overview.Description" parent="TextAppearance.MaterialComponents.Caption" />
 
     <style name="Style.Overview.SubTitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
