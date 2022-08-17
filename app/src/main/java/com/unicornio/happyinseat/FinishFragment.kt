@@ -1,11 +1,13 @@
 package com.unicornio.happyinseat
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.unicornio.toolish.utils.Utils.shotToast
 import kotlinx.android.synthetic.main.fragment_finish.*
 import nl.dionsegijn.konfetti.core.PartyFactory
 import nl.dionsegijn.konfetti.core.Position.Relative
@@ -43,16 +45,21 @@ class FinishFragment : Fragment() {
     }
 
     private fun setupBehavior(root: View) {
-        button_once_more.setOnClickListener { v ->
+        button_back.setOnClickListener {
+            activity?.finishAfterTransition()
+        }
 
+        button_once_more.setOnClickListener {
+            activity?.finishAfterTransition()
+            startActivity(Intent(root.context, ExerciseActivity::class.java))
         }
 
         button_finish.setOnClickListener {
-
+            activity?.finishAfterTransition()
         }
 
         button_start_journey.setOnClickListener {
-
+            activity?.shotToast("Coming soon!")
         }
     }
 
