@@ -1,5 +1,6 @@
 package com.unicornio.happyinseat
 
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -25,6 +26,11 @@ class MoveFragment : Fragment() {
         Log.d(TAG, "onViewCreated")
 
         index = getIndexOfMoves(exercise)
+
+        image_illustration.apply {
+            setImageResource(exercise.moves[index].illustrationId)
+            (drawable as AnimationDrawable).start()
+        }
 
         text_move_title.text = exercise.moves[index].name
         text_description.text = exercise.moves[index].description
