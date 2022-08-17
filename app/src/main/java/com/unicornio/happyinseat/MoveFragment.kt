@@ -40,8 +40,10 @@ class MoveFragment : Fragment() {
 
     private fun setupBehavior(root: View) {
         button_back.setOnClickListener {
-            //TODO add ask user dialog
-            findNavController().navigateUp()
+            askUserWhetherQuit(
+                positiveAction = { findNavController().navigateUp() },
+                negativeAction = {}
+            )
         }
 
         button_expand_instruction.setOnClickListener {
@@ -57,21 +59,55 @@ class MoveFragment : Fragment() {
         }
 
         button_previous.setOnClickListener {
-            findNavController().navigateSafely(
-                R.id.action_moveFragment_to_moveFragment,
-                bundleOf(
-                    EXTRA_KEY_INDEX_OF_MOVE to 1
+            if (index == 0) {
+                askUserWhetherQuit(
+                    positiveAction = { findNavController().navigateUp() },
+                    negativeAction = {}
                 )
-            )
+            } else {
+
+                findNavController().navigateSafely(
+                    R.id.action_moveFragment_to_moveFragment,
+                    bundleOf(
+                        EXTRA_KEY_INDEX_OF_MOVE to index - 1
+                    )
+                )
+            }
         }
 
         button_check.setOnClickListener {
+            if (index == exercise.moves.size - 1) {
+                findNavController().navigateSafely(R.id.action_moveFragment_to_finishFragment)
 
+            } else {
+
+                findNavController().navigateSafely(
+                    R.id.action_moveFragment_to_moveFragment,
+                    bundleOf(
+                        EXTRA_KEY_INDEX_OF_MOVE to index + 1
+                    )
+                )
+            }
         }
 
         button_next.setOnClickListener {
-            findNavController().navigateSafely(R.id.action_moveFragment_to_finishFragment)
+            if (index == exercise.moves.size - 1) {
+                findNavController().navigateSafely(R.id.action_moveFragment_to_finishFragment)
+
+            } else {
+
+                findNavController().navigateSafely(
+                    R.id.action_moveFragment_to_moveFragment,
+                    bundleOf(
+                        EXTRA_KEY_INDEX_OF_MOVE to index + 1
+                    )
+                )
+            }
         }
+    }
+
+    private fun askUserWhetherQuit(positiveAction: () -> Unit, negativeAction: () -> Unit) {
+        //TODO("Not yet implemented")
     }
 
     companion object {
