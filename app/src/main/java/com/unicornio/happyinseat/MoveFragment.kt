@@ -40,7 +40,20 @@ class MoveFragment : Fragment() {
 
     private fun setupBehavior(root: View) {
         button_back.setOnClickListener {
+            //TODO add ask user dialog
             findNavController().navigateUp()
+        }
+
+        button_expand_instruction.setOnClickListener {
+            button_expand_instruction.visibility = View.GONE
+            button_collapse_instruction.visibility = View.VISIBLE
+            text_instruction.visibility = View.VISIBLE
+        }
+
+        button_collapse_instruction.setOnClickListener {
+            button_expand_instruction.visibility = View.VISIBLE
+            button_collapse_instruction.visibility = View.GONE
+            text_instruction.visibility = View.GONE
         }
 
         button_previous.setOnClickListener {
