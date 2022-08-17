@@ -71,13 +71,24 @@
                     android:text="Foobar" />
 
                 <ImageButton
-                    android:id="@+id/button_toggle_instruction"
+                    android:id="@+id/button_expand_instruction"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="8dp"
                     android:background="?selectableItemBackground"
                     android:src="@drawable/ic_baseline_unfold_more_24"
+                    app:tint="?attr/colorOnBackground" />
+
+                <ImageButton
+                    android:id="@+id/button_collapse_instruction"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:background="?selectableItemBackground"
+                    android:src="@drawable/ic_baseline_unfold_less_24"
+                    android:visibility="gone"
                     app:tint="?attr/colorOnBackground" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -88,6 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="-"
+                android:visibility="gone"
                 tools:text="Foobar\n\n1. Foo\n2. Bar" />
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>
