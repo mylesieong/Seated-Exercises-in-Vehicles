@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.unicornio.happyinseat.R
+import com.unicornio.happyinseat.colorSecondary
 import com.unicornio.toolish.utils.Utils.color
 import kotlinx.android.synthetic.main.layout_calendar.view.*
 import java.util.Calendar.*
@@ -193,7 +194,7 @@ class CalendarView(context: Context, attrs: AttributeSet) : FrameLayout(context,
             textView.text = dayBean?.name
 
             if (dayBean?.isToday == true) {
-                textView.setTextColor(color(context, R.attr.colorSecondary))
+                textView.setTextColor(context.colorSecondary())
             }
 
             if (dayBean?.isHighlight == true) {
