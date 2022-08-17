@@ -25,6 +25,16 @@
         <action
             android:id="@+id/action_moveFragment_to_finishFragment"
             app:destination="@id/finishFragment" />
+
+        <action
+            android:id="@+id/action_moveFragment_to_moveFragment"
+            app:destination="@id/moveFragment"
+            app:enterAnim="@animator/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@animator/nav_default_pop_enter_anim"
+            app:popExitAnim="@animator/nav_default_pop_exit_anim"
+            app:popUpTo="@id/moveFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment

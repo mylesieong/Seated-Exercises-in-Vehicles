@@ -6,8 +6,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.unicornio.happyinseat.MoveFragment.Companion.EXTRA_KEY_INDEX_OF_MOVE
 import com.unicornio.happyinseat.helpers.navigateSafely
 import kotlinx.android.synthetic.main.fragment_overview.*
 
@@ -25,7 +27,12 @@ class OverviewFragment : Fragment() {
 
     private fun setupBehavior(root: View) {
         button_start.setOnClickListener {
-            findNavController().navigateSafely(R.id.action_overviewFragment_to_moveFragment)
+            findNavController().navigateSafely(
+                R.id.action_overviewFragment_to_moveFragment,
+                bundleOf(
+                    EXTRA_KEY_INDEX_OF_MOVE to 0
+                )
+            )
         }
 
         button_back.setOnClickListener {
