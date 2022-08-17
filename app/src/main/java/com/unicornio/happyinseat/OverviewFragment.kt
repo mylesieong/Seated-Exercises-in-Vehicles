@@ -36,7 +36,7 @@ class OverviewFragment : Fragment() {
         }
 
         button_back.setOnClickListener {
-            activity?.onBackPressed()
+            activity?.finishAfterTransition()
         }
 
         (image_breath_in_out.drawable as AnimationDrawable).start()
