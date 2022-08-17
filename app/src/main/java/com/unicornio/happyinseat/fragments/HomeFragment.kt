@@ -1,4 +1,4 @@
-package com.unicornio.happyinseat
+package com.unicornio.happyinseat.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.unicornio.happyinseat.activities.ExerciseActivity
+import com.unicornio.happyinseat.R
 
 class HomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(

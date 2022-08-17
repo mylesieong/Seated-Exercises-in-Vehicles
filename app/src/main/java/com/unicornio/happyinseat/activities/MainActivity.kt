@@ -1,4 +1,4 @@
-package com.unicornio.happyinseat
+package com.unicornio.happyinseat.activities
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.navigation.findNavController
 import com.google.android.material.navigation.NavigationView
+import com.unicornio.happyinseat.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {

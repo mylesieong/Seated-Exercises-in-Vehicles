@@ -11,7 +11,7 @@
         android:theme="@style/Theme.HappyInSeat">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ExerciseActivity" />
+        <activity android:name=".activities.ExerciseActivity" />
     </application>
 
 </manifest>
