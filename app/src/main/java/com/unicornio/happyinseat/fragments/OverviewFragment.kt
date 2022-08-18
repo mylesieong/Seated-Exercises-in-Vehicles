@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.unicornio.happyinseat.AnalyticsManager
+import com.unicornio.happyinseat.AnalyticsManager.MY_EVENT_START_EXERCISE_STRETCH
 import com.unicornio.happyinseat.R
 import com.unicornio.happyinseat.fragments.MoveFragment.Companion.EXTRA_KEY_INDEX_OF_MOVE
 import com.unicornio.happyinseat.helpers.navigateSafely
@@ -34,6 +36,8 @@ class OverviewFragment : Fragment() {
                     EXTRA_KEY_INDEX_OF_MOVE to 0
                 )
             )
+
+            AnalyticsManager.logEvent(MY_EVENT_START_EXERCISE_STRETCH)
         }
 
         button_back.setOnClickListener {
