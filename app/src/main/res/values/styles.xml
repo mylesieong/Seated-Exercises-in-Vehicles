@@ -17,6 +17,11 @@
         <item name="android:textColor">?attr/colorOnBackground</item>
     </style>
 
+    <style name="Style.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="titleTextColor">?attr/colorOnSurface</item>
+        <item name="android:background">?attr/colorSurface</item>
+    </style>
+
     <style name="Style.Move.Headline" parent="TextAppearance.MaterialComponents.Headline4">
         <item name="android:textColor">?attr/colorOnBackground</item>
     </style>
