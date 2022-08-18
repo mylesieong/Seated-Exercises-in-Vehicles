@@ -8,16 +8,45 @@
 
     <ImageButton
         android:id="@+id/button_back"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:background="?selectableItemBackground"
+        android:padding="16dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_baseline_arrow_back_24"
         app:tint="?attr/colorOnBackground" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/text_index_of_move"
+            style="@style/Style.Overview.SubTitle1.Dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="1" />
+
+        <TextView
+            style="@style/Style.Overview.SubTitle1.Dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text=" of " />
+
+        <TextView
+            android:id="@+id/text_total_of_move"
+            style="@style/Style.Overview.SubTitle1.Dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="7" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <RelativeLayout
         android:id="@+id/panel_illustration"
