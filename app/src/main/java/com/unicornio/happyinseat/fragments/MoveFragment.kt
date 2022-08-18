@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.unicornio.happyinseat.Exercise
 import com.unicornio.happyinseat.R
 import com.unicornio.happyinseat.STANDARD_STRETCH
@@ -68,13 +69,7 @@ class MoveFragment : Fragment() {
         }
 
         button_previous.setOnClickListener {
-            if (index == 0) {
-                askUserWhetherQuit(
-                    positiveAction = { findNavController().navigateUp() },
-                    negativeAction = {}
-                )
-            } else {
-
+            if (index > 0) {
                 findNavController().navigateSafely(
                     R.id.action_moveFragment_to_moveFragment,
                     bundleOf(
@@ -116,7 +111,19 @@ class MoveFragment : Fragment() {
     }
 
     private fun askUserWhetherQuit(positiveAction: () -> Unit, negativeAction: () -> Unit) {
-        //TODO("Not yet implemented")
+        context?.let {
+            MaterialAlertDialogBuilder(it)
+                .setMessage("Quit exercise?")
+                .setNegativeButton("No") { dialog, _ ->
+                    dialog.dismiss()
+                    negativeAction.invoke()
+                }
+                .setPositiveButton("Yes") { dialog, _ ->
+                    dialog.dismiss()
+                    positiveAction.invoke()
+                }
+                .show()
+        }
     }
 
     companion object {
