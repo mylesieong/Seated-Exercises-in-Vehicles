@@ -42,6 +42,11 @@ class MoveFragment : Fragment() {
         text_description.text = exercise.moves[index].description
         text_instruction.text = exercise.moves[index].instruction
 
+        if (index == 0) {
+            button_previous.alpha = 0.3f
+            button_previous.isEnabled = false
+        }
+
         setupBehavior(view)
     }
 
