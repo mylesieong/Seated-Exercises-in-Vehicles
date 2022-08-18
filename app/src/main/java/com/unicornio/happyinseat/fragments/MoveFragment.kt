@@ -36,6 +36,8 @@ class MoveFragment : Fragment() {
             (drawable as AnimationDrawable).start()
         }
 
+        text_index_of_move.text = (index + 1).toString()
+        text_total_of_move.text = exercise.moves.size.toString()
         text_move_title.text = exercise.moves[index].name
         text_description.text = exercise.moves[index].description
         text_instruction.text = exercise.moves[index].instruction
