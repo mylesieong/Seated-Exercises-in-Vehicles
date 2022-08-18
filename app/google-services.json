@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "622536041606",
+    "project_id": "seated-exercise",
+    "storage_bucket": "seated-exercise.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622536041606:android:8d6823084e4904e6b09d07",
+        "android_client_info": {
+          "package_name": "com.unicornio.happyinseat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "622536041606-9of3km3p4822sth8iois2solvmui4hmh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0YvK3AibJA_urkqdeTzg6RywJu1i0GZ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "622536041606-9of3km3p4822sth8iois2solvmui4hmh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
