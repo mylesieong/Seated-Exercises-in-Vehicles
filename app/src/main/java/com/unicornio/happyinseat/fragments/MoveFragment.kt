@@ -63,6 +63,18 @@ class MoveFragment : Fragment() {
             )
         }
 
+        text_move_title.setOnClickListener {
+            if (button_expand_instruction.visibility == View.VISIBLE) {
+                button_expand_instruction.visibility = View.GONE
+                button_collapse_instruction.visibility = View.VISIBLE
+                text_instruction.visibility = View.VISIBLE
+            } else {
+                button_expand_instruction.visibility = View.VISIBLE
+                button_collapse_instruction.visibility = View.GONE
+                text_instruction.visibility = View.GONE
+            }
+        }
+
         button_expand_instruction.setOnClickListener {
             button_expand_instruction.visibility = View.GONE
             button_collapse_instruction.visibility = View.VISIBLE
