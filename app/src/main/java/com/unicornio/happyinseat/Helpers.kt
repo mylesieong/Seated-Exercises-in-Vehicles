@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import android.util.Log
 import android.util.TypedValue
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.unicornio.happyinseat.persistence.Contract.RecordEntry
 import com.unicornio.happyinseat.persistence.Contract.RecordEntry.CONTENT_URI
 import com.unicornio.happyinseat.persistence.Contract.RecordEntry.fromCursor
@@ -12,6 +13,20 @@ import com.unicornio.toolish.utils.Utils
 import java.util.*
 
 const val TAG = "Helpers"
+
+fun Context.askUserWhetherQuit(positiveAction: () -> Unit, negativeAction: () -> Unit) {
+    MaterialAlertDialogBuilder(this)
+        .setMessage("Quit exercise?")
+        .setNegativeButton("No") { dialog, _ ->
+            dialog.dismiss()
+            negativeAction.invoke()
+        }
+        .setPositiveButton("Yes") { dialog, _ ->
+            dialog.dismiss()
+            positiveAction.invoke()
+        }
+        .show()
+}
 
 fun saveRecord(context: Context, record: Record): Uri? {
     Log.d(TAG, "saveRecord: record=$record")

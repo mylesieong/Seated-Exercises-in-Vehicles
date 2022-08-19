@@ -13,6 +13,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.unicornio.happyinseat.Exercise
 import com.unicornio.happyinseat.R
 import com.unicornio.happyinseat.STANDARD_STRETCH
+import com.unicornio.happyinseat.askUserWhetherQuit
 import com.unicornio.happyinseat.helpers.navigateSafely
 import kotlinx.android.synthetic.main.fragment_move.*
 
@@ -57,7 +58,7 @@ class MoveFragment : Fragment() {
 
     private fun setupBehavior(root: View) {
         button_back.setOnClickListener {
-            askUserWhetherQuit(
+            it.context.askUserWhetherQuit(
                 positiveAction = { findNavController().navigateUp() },
                 negativeAction = {}
             )
@@ -126,22 +127,6 @@ class MoveFragment : Fragment() {
                     )
                 )
             }
-        }
-    }
-
-    private fun askUserWhetherQuit(positiveAction: () -> Unit, negativeAction: () -> Unit) {
-        context?.let {
-            MaterialAlertDialogBuilder(it)
-                .setMessage("Quit exercise?")
-                .setNegativeButton("No") { dialog, _ ->
-                    dialog.dismiss()
-                    negativeAction.invoke()
-                }
-                .setPositiveButton("Yes") { dialog, _ ->
-                    dialog.dismiss()
-                    positiveAction.invoke()
-                }
-                .show()
         }
     }
 
