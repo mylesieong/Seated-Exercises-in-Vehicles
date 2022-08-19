@@ -60,7 +60,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:background="@drawable/shape_rounded_box"
-            android:text="Once more" />
+            android:text="Once more"
+            app:icon="@drawable/ic_baseline_replay_24" />
 
         <Button
             android:id="@+id/button_finish"
@@ -69,7 +70,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
             android:background="@drawable/shape_rounded_box"
-            android:text="Finish" />
+            android:text="Finish"
+            app:icon="@drawable/ic_baseline_home_24" />
 
         <Button
             android:id="@+id/button_start_journey"
@@ -77,7 +79,8 @@
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_rounded_box"
-            android:text="Start Journey" />
+            android:text="Start Journey"
+            app:icon="@drawable/ic_baseline_airline_seat_recline_extra_24" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <nl.dionsegijn.konfetti.xml.KonfettiView
