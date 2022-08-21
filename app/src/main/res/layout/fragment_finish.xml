@@ -45,44 +45,58 @@
             android:src="@drawable/ic_finish" />
     </RelativeLayout>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <RelativeLayout
         android:id="@+id/panel_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/image_finish"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
-        android:orientation="vertical">
+        android:layout_marginTop="24dp">
 
-        <Button
-            android:id="@+id/button_once_more"
-            style="@style/Style.Finish.Button.Secondary"
-            android:layout_width="240dp"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/shape_rounded_box"
-            android:text="Once more"
-            app:icon="@drawable/ic_baseline_replay_24" />
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/button_finish"
-            style="@style/Style.Finish.Button"
-            android:layout_width="240dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:background="@drawable/shape_rounded_box"
-            android:text="Finish"
-            app:icon="@drawable/ic_baseline_home_24" />
+            <Button
+                android:id="@+id/button_once_more"
+                style="@style/Style.Finish.Button.Secondary"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/shape_rounded_box"
+                android:text="Once more"
+                app:icon="@drawable/ic_baseline_replay_24" />
 
-        <Button
-            android:id="@+id/button_start_journey"
-            style="@style/Style.Finish.Button"
-            android:layout_width="240dp"
+            <Button
+                android:id="@+id/button_finish"
+                style="@style/Style.Finish.Button"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/shape_rounded_box"
+                android:text="Finish"
+                app:icon="@drawable/ic_baseline_home_24" />
+
+            <Button
+                android:id="@+id/button_start_journey"
+                style="@style/Style.Finish.Button"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_rounded_box"
+                android:text="Start Journey"
+                app:icon="@drawable/ic_baseline_airline_seat_recline_extra_24" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <ProgressBar xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/loading_bar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_rounded_box"
-            android:text="Start Journey"
-            app:icon="@drawable/ic_baseline_airline_seat_recline_extra_24" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+    </RelativeLayout>
 
     <FrameLayout
         android:id="@+id/panel_banner_ad"

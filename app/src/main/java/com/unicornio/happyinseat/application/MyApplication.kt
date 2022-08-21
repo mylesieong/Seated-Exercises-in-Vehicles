@@ -10,6 +10,8 @@ class MyApplication : Application() {
         super.onCreate()
 
         MobileAds.initialize(this) { }
+        AdManager.preloadFirstAd(this)
+
         AnalyticsManager.setContext(this)
     }
 

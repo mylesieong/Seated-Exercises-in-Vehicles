@@ -59,12 +59,32 @@ class FinishFragment : Fragment() {
         }
 
         button_once_more.setOnClickListener {
-            activity?.finishAfterTransition()
-            startActivity(Intent(root.context, ExerciseActivity::class.java))
+            loading_bar.visibility = View.VISIBLE
+
+            activity?.let {
+                AdManager.loadAndShowInterstitialAdHoweverSilentIfAdsNotReady(
+                    it,
+                    undergoActionIfShowAd = { },
+                    postAction = {
+                        it.finishAfterTransition()
+                        startActivity(Intent(root.context, ExerciseActivity::class.java))
+                    }
+                )
+            }
         }
 
         button_finish.setOnClickListener {
-            activity?.finishAfterTransition()
+            loading_bar.visibility = View.VISIBLE
+
+            activity?.let {
+                AdManager.loadAndShowInterstitialAdHoweverSilentIfAdsNotReady(
+                    it,
+                    undergoActionIfShowAd = { },
+                    postAction = {
+                        it.finishAfterTransition()
+                    }
+                )
+            }
         }
 
         button_start_journey.setOnClickListener {
