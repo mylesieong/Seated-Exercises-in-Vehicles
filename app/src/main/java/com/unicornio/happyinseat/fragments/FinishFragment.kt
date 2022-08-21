@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.unicornio.happyinseat.AdManager
 import com.unicornio.happyinseat.AnalyticsManager
 import com.unicornio.happyinseat.AnalyticsManager.MY_EVENT_FINISH_EXERCISE_STRETCH
 import com.unicornio.happyinseat.R
@@ -29,6 +30,8 @@ class FinishFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "onViewCreated")
+
+        AdManager.loadBannerAd(adView)
 
         setupBehavior(view)
 

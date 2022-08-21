@@ -20,17 +20,27 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField "String", "AD_UNIT_ID_INTERSTITIAL", "\"ca-app-pub-3940256099942544/1033173712\""
+            resValue "string", "AD_UNIT_ID_BANNER", "\"ca-app-pub-3940256099942544/6300978111\""
+        }
+
         release {
             minifyEnabled true
             shrinkResources true
 
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField "String", "AD_UNIT_ID_INTERSTITIAL", "\"ca-app-pub-8609142128036027/2815655749\""
+            resValue "string", "AD_UNIT_ID_BANNER", "\"ca-app-pub-8609142128036027/1694145766\""
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -51,6 +61,8 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:30.3.2')
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    implementation 'com.google.android.gms:play-services-ads:21.1.0'
 
     testImplementation 'junit:junit:4.+'
 

@@ -11,6 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HappyInSeat">
 
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-8609142128036027~9301173042"/>
+
         <activity
             android:name=".activities.MainActivity"
             android:exported="true">
