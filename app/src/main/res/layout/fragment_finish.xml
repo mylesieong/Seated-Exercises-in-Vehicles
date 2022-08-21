@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -17,7 +18,6 @@
         android:scaleType="fitCenter"
         android:src="@drawable/ic_baseline_arrow_back_24"
         app:tint="?attr/colorOnBackground" />
-
 
     <TextView
         android:id="@+id/text_nice_work"
@@ -46,6 +46,7 @@
     </RelativeLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/panel_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/image_finish"
@@ -82,6 +83,25 @@
             android:text="Start Journey"
             app:icon="@drawable/ic_baseline_airline_seat_recline_extra_24" />
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <FrameLayout
+        android:id="@+id/panel_banner_ad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/panel_buttons"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:background="?android:windowBackground">
+
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            ads:adSize="MEDIUM_RECTANGLE"
+            ads:adUnitId="@string/AD_UNIT_ID_BANNER"
+            tools:visibility="visible" />
+    </FrameLayout>
 
     <nl.dionsegijn.konfetti.xml.KonfettiView
         android:id="@+id/konfettiView"
