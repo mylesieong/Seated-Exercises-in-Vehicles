@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.unicornio.happyinseat.activities.ExerciseActivity
 import com.unicornio.happyinseat.R
+import com.unicornio.toolish.utils.Utils.shotToast
 
 class HomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(
@@ -32,12 +33,12 @@ class HomeFragment : Fragment() {
 
         val buttonRunCore = root.findViewById<ImageButton>(R.id.button_start_core)
         buttonRunCore.setOnClickListener {
-            Toast.makeText(root.context, "Coming soon", Toast.LENGTH_SHORT).show()
+            root.context.shotToast("Coming soon")
         }
 
         val buttonStartJourney = root.findViewById<ImageButton>(R.id.button_start_journey)
         buttonStartJourney.setOnClickListener {
-            Toast.makeText(root.context, "Coming soon", Toast.LENGTH_SHORT).show()
+            root.context.shotToast("Coming soon")
         }
     }
 

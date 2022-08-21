@@ -2,11 +2,7 @@
 <resources>
 
     <style name="Style.Home.Tag" parent="TextAppearance.MaterialComponents.Tooltip">
-        <item name="android:background">?attr/colorSecondaryVariant</item>
-        <item name="android:textColor">?attr/colorOnSecondary</item>
         <item name="android:textStyle">italic</item>
-        <item name="android:paddingStart">4dp</item>
-        <item name="android:paddingEnd">4dp</item>
     </style>
 
     <style name="Style.Overview.Headline" parent="TextAppearance.MaterialComponents.Headline6">
