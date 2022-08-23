@@ -260,7 +260,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Repeat 1 time"
+                    android:text="Repeat 10 time"
                     app:layout_constraintStart_toStartOf="@id/text_move_title"
                     app:layout_constraintTop_toBottomOf="@id/text_move_title" />
 

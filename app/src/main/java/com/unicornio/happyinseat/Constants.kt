@@ -40,8 +40,8 @@ val SHOULDER_ROTATION = Move(
 
 val WRIST_ROTATION = Move(
     "Wrist rotation",
-    "Repeat 1 time",
-    "Rotate your wrists in one direction 10 times and then move them in the other.",
+    "Repeat 10 time",
+    "Rotate your wrists in one direction and then move them in the other.",
     R.drawable.animation_wrist_rotation,
     "https://www.youtube.com/watch?v=ZToQJom6fOk"
 )
