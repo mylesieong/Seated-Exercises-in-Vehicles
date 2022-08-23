@@ -9,11 +9,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.unicornio.happyinseat.Exercise
-import com.unicornio.happyinseat.R
-import com.unicornio.happyinseat.STANDARD_STRETCH
-import com.unicornio.happyinseat.askUserWhetherQuit
+import com.unicornio.happyinseat.*
 import com.unicornio.happyinseat.helpers.navigateSafely
 import kotlinx.android.synthetic.main.fragment_move.*
 
@@ -25,6 +21,16 @@ class MoveFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(
         R.layout.fragment_move, container, false
     )
+
+    override fun onResume() {
+        super.onResume()
+        activity?.setKeepScreenOn(true)
+    }
+
+    override fun onStop() {
+        activity?.setKeepScreenOn(false)
+        super.onStop()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
