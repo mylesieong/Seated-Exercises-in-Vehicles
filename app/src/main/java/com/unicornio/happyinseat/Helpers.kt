@@ -1,9 +1,11 @@
 package com.unicornio.happyinseat
 
+import android.app.Activity
 import android.content.Context
 import android.net.Uri
 import android.util.Log
 import android.util.TypedValue
+import android.view.WindowManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.unicornio.happyinseat.persistence.Contract.RecordEntry
 import com.unicornio.happyinseat.persistence.Contract.RecordEntry.CONTENT_URI
@@ -13,6 +15,14 @@ import com.unicornio.toolish.utils.Utils
 import java.util.*
 
 const val TAG = "Helpers"
+
+fun Activity.setKeepScreenOn(isKeepOn: Boolean) {
+    if (isKeepOn) {
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+    } else {
+        window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+    }
+}
 
 fun Context.askUserWhetherQuit(positiveAction: () -> Unit, negativeAction: () -> Unit) {
     MaterialAlertDialogBuilder(this)

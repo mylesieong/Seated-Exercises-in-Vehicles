@@ -141,12 +141,22 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:id="@+id/text_seq_number"
+                    style="@style/Style.Overview.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
                     android:id="@+id/text_move_title"
                     style="@style/Style.Overview.SubTitle1.Dark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="Breath in and breath out"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/text_seq_number"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -176,12 +186,22 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:id="@+id/text_seq_number"
+                    style="@style/Style.Overview.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
                     android:id="@+id/text_move_title"
                     style="@style/Style.Overview.SubTitle1.Dark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="Neck roll"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/text_seq_number"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -211,12 +231,22 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:id="@+id/text_seq_number"
+                    style="@style/Style.Overview.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
                     android:id="@+id/text_move_title"
                     style="@style/Style.Overview.SubTitle1.Dark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="Shoulder rotation"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/text_seq_number"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -246,12 +276,22 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:id="@+id/text_seq_number"
+                    style="@style/Style.Overview.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
                     android:id="@+id/text_move_title"
                     style="@style/Style.Overview.SubTitle1.Dark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="Wrist rotation"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/text_seq_number"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -260,7 +300,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Repeat 1 time"
+                    android:text="Repeat 10 time"
                     app:layout_constraintStart_toStartOf="@id/text_move_title"
                     app:layout_constraintTop_toBottomOf="@id/text_move_title" />
 
@@ -281,12 +321,22 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:id="@+id/text_seq_number"
+                    style="@style/Style.Overview.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
                     android:id="@+id/text_move_title"
                     style="@style/Style.Overview.SubTitle1.Dark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="Low back stretch"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/text_seq_number"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -316,12 +366,22 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:id="@+id/text_seq_number"
+                    style="@style/Style.Overview.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
                     android:id="@+id/text_move_title"
                     style="@style/Style.Overview.SubTitle1.Dark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="Hip and knee stretch"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/text_seq_number"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -351,12 +411,22 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:id="@+id/text_seq_number"
+                    style="@style/Style.Overview.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
                     android:id="@+id/text_move_title"
                     style="@style/Style.Overview.SubTitle1.Dark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="Foot pumps"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/text_seq_number"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -386,12 +456,22 @@
                 android:padding="16dp">
 
                 <TextView
+                    android:id="@+id/text_seq_number"
+                    style="@style/Style.Overview.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
                     android:id="@+id/text_move_title"
                     style="@style/Style.Overview.SubTitle1.Dark"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:text="Ankle rotation"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/text_seq_number"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
