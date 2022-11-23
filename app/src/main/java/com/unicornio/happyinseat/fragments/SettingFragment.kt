@@ -10,15 +10,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.unicornio.happyinseat.R
+import com.unicornio.happyinseat.databinding.FragmentSettingBinding
 import com.unicornio.happyinseat.deleteRecords
 import com.unicornio.toolish.utils.Utils.shotToast
-import kotlinx.android.synthetic.main.fragment_setting.*
 
 class SettingFragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(
-        R.layout.fragment_setting, container, false
-    )
+    private var _binding: FragmentSettingBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentSettingBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -27,8 +30,13 @@ class SettingFragment : Fragment() {
         setupBehavior(view)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun setupBehavior(root: View) {
-        button_remove.setOnClickListener {
+        binding.buttonRemove.setOnClickListener {
             MaterialAlertDialogBuilder(it.context)
                 .setTitle("Are you sure?")
                 .setPositiveButton("Yes") { _, _ ->
@@ -39,7 +47,7 @@ class SettingFragment : Fragment() {
                 .show()
         }
 
-        button_rate.setOnClickListener {
+        binding.buttonRate.setOnClickListener {
             rateApp()
         }
     }

@@ -12,18 +12,27 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.unicornio.happyinseat.R
 import com.unicornio.happyinseat.Record
+import com.unicornio.happyinseat.databinding.FragmentHistoryBinding
 import com.unicornio.happyinseat.indexRecordsByYearAndMonth
 import com.unicornio.happyinseat.loadRecords
 import com.unicornio.happyinseat.view.CalendarView
 import com.unicornio.toolish.utils.Utils
 import com.unicornio.toolish.utils.Utils.isSameDay
-import kotlinx.android.synthetic.main.fragment_history.*
 import java.util.*
 
 class HistoryFragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(
-        R.layout.fragment_history, container, false
-    )
+    private var _binding: FragmentHistoryBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentHistoryBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,14 +71,14 @@ class HistoryFragment : Fragment() {
         val yearNow = now[Calendar.YEAR]
         val monthNow = now[Calendar.MONTH]
 
-        calendarView.setMonthAndYear(monthNow, yearNow)
-        calendarView.setHighlightDictionary(getHighlightDictionary(records, yearNow, monthNow))
+        binding.calendarView.setMonthAndYear(monthNow, yearNow)
+        binding.calendarView.setHighlightDictionary(getHighlightDictionary(records, yearNow, monthNow))
 
-        calendarView.setOnCalendarFlipListener(object : CalendarView.OnCalendarFlipListener {
-            override fun onFlip(year: Int, month: Int) = calendarView.setHighlightDictionary(getHighlightDictionary(records, year, month))
+        binding.calendarView.setOnCalendarFlipListener(object : CalendarView.OnCalendarFlipListener {
+            override fun onFlip(year: Int, month: Int) = binding.calendarView.setHighlightDictionary(getHighlightDictionary(records, year, month))
         })
 
-        calendarView.setOnDateSelectedListener(object : CalendarView.OnDateSelectedListener {
+        binding.calendarView.setOnDateSelectedListener(object : CalendarView.OnDateSelectedListener {
             override fun onDateSelected(year: Int, month: Int, day: Int) {
                 Log.d(TAG, "onDateSelected: ymd=$year/$month/$day")
                 showRecords(year, month, day)
@@ -81,23 +90,23 @@ class HistoryFragment : Fragment() {
                 }
 
                 if (data.isEmpty()) {
-                    panel_empty_view.visibility = View.VISIBLE
-                    text_header.visibility = View.GONE
-                    panel_records.visibility = View.GONE
-                    list_of_records.visibility = View.GONE
+                    binding.panelEmptyView.visibility = View.VISIBLE
+                    binding.textHeader.visibility = View.GONE
+                    binding.panelRecords.visibility = View.GONE
+                    binding.listOfRecords.visibility = View.GONE
 
                 } else {
-                    panel_empty_view.visibility = View.GONE
-                    text_header.visibility = View.VISIBLE
-                    panel_records.visibility = View.VISIBLE
-                    list_of_records.visibility = View.VISIBLE
+                    binding.panelEmptyView.visibility = View.GONE
+                    binding.textHeader.visibility = View.VISIBLE
+                    binding.panelRecords.visibility = View.VISIBLE
+                    binding.listOfRecords.visibility = View.VISIBLE
 
                     fillList(data)
                 }
             }
 
             fun fillList(data: List<Record>) {
-                list_of_records.apply {
+                binding.listOfRecords.apply {
                     adapter = Adapter(requireContext(), data)
                     layoutManager = LinearLayoutManager(requireContext())
                 }

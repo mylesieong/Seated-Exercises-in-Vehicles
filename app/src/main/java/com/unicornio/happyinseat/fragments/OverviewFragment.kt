@@ -1,6 +1,5 @@
 package com.unicornio.happyinseat.fragments
 
-import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,24 +11,33 @@ import androidx.navigation.fragment.findNavController
 import com.unicornio.happyinseat.AnalyticsManager
 import com.unicornio.happyinseat.AnalyticsManager.MY_EVENT_START_EXERCISE_STRETCH
 import com.unicornio.happyinseat.R
+import com.unicornio.happyinseat.databinding.FragmentOverviewBinding
 import com.unicornio.happyinseat.fragments.MoveFragment.Companion.EXTRA_KEY_INDEX_OF_MOVE
 import com.unicornio.happyinseat.helpers.navigateSafely
-import kotlinx.android.synthetic.main.fragment_overview.*
 
 class OverviewFragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(
-        R.layout.fragment_overview, container, false
-    )
+    private var _binding: FragmentOverviewBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentOverviewBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "onViewCreated")
 
-        setupBehavior(view)
+        setupBehavior()
     }
 
-    private fun setupBehavior(root: View) {
-        button_start.setOnClickListener {
+    private fun setupBehavior() {
+        binding.buttonStart.setOnClickListener {
             findNavController().navigateSafely(
                 R.id.action_overviewFragment_to_moveFragment,
                 bundleOf(
@@ -40,18 +48,18 @@ class OverviewFragment : Fragment() {
             AnalyticsManager.logEvent(MY_EVENT_START_EXERCISE_STRETCH)
         }
 
-        button_back.setOnClickListener {
+        binding.buttonBack.setOnClickListener {
             activity?.finishAfterTransition()
         }
 
-        (image_breath_in_out.drawable as AnimationDrawable).start()
-        (image_neck_roll.drawable as AnimationDrawable).start()
-        (image_shoulder_rotation.drawable as AnimationDrawable).start()
-        (image_wrist_rotation.drawable as AnimationDrawable).start()
-        (image_low_back_stretch.drawable as AnimationDrawable).start()
-        (image_foot_pumps.drawable as AnimationDrawable).start()
-        (image_ankle_rotation.drawable as AnimationDrawable).start()
-        (image_hip_knee_stretch.drawable as AnimationDrawable).start()
+//        (binding.imageBreathInOut.drawable as AnimationDrawable).start()
+//        (binding.imageNeckRoll.drawable as AnimationDrawable).start()
+//        (binding.imageShoulderRotation.drawable as AnimationDrawable).start()
+//        (binding.imageWristRotation.drawable as AnimationDrawable).start()
+//        (binding.imageLowBackStretch.drawable as AnimationDrawable).start()
+//        (binding.imageFootPumps.drawable as AnimationDrawable).start()
+//        (binding.imageAnkleRotation.drawable as AnimationDrawable).start()
+//        (binding.imageHipKneeStretch.drawable as AnimationDrawable).start()
     }
 
     companion object {

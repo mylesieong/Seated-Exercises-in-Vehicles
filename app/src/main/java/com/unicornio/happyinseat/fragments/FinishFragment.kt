@@ -10,10 +10,9 @@ import androidx.fragment.app.Fragment
 import com.unicornio.happyinseat.AdManager
 import com.unicornio.happyinseat.AnalyticsManager
 import com.unicornio.happyinseat.AnalyticsManager.MY_EVENT_FINISH_EXERCISE_STRETCH
-import com.unicornio.happyinseat.R
 import com.unicornio.happyinseat.activities.ExerciseActivity
+import com.unicornio.happyinseat.databinding.FragmentFinishBinding
 import com.unicornio.toolish.utils.Utils.shotToast
-import kotlinx.android.synthetic.main.fragment_finish.*
 import nl.dionsegijn.konfetti.core.PartyFactory
 import nl.dionsegijn.konfetti.core.Position.Relative
 import nl.dionsegijn.konfetti.core.emitter.Emitter
@@ -22,16 +21,24 @@ import nl.dionsegijn.konfetti.core.models.Shape
 import java.util.concurrent.TimeUnit
 
 class FinishFragment : Fragment() {
+    private var _binding: FragmentFinishBinding? = null
+    private val binding get() = _binding!!
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(
-        R.layout.fragment_finish, container, false
-    )
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentFinishBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "onViewCreated")
 
-        AdManager.loadBannerAd(adView)
+        AdManager.loadBannerAd(binding.adView)
 
         setupBehavior(view)
 
@@ -42,7 +49,7 @@ class FinishFragment : Fragment() {
 
     private fun explode() {
         val emitterConfig: EmitterConfig = Emitter(100L, TimeUnit.MILLISECONDS).max(100)
-        konfettiView.start(
+        binding.konfettiView.start(
             PartyFactory(emitterConfig)
                 .spread(360)
                 .shapes(Shape.Square, Shape.Circle)
@@ -54,12 +61,12 @@ class FinishFragment : Fragment() {
     }
 
     private fun setupBehavior(root: View) {
-        button_back.setOnClickListener {
+        binding.buttonBack.setOnClickListener {
             activity?.finishAfterTransition()
         }
 
-        button_once_more.setOnClickListener {
-            loading_bar.visibility = View.VISIBLE
+        binding.buttonOnceMore.setOnClickListener {
+            binding.loadingBar.visibility = View.VISIBLE
 
             activity?.let {
                 AdManager.loadAndShowInterstitialAdHoweverSilentIfAdsNotReady(
@@ -73,8 +80,8 @@ class FinishFragment : Fragment() {
             }
         }
 
-        button_finish.setOnClickListener {
-            loading_bar.visibility = View.VISIBLE
+        binding.buttonFinish.setOnClickListener {
+            binding.loadingBar.visibility = View.VISIBLE
 
             activity?.let {
                 AdManager.loadAndShowInterstitialAdHoweverSilentIfAdsNotReady(
@@ -87,7 +94,7 @@ class FinishFragment : Fragment() {
             }
         }
 
-        button_start_journey.setOnClickListener {
+        binding.buttonStartJourney.setOnClickListener {
             activity?.shotToast("Coming soon!")
         }
     }

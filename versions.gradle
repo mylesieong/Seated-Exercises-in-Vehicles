@@ -1,7 +1,7 @@
 ext {
     //Build gradle project
     android_gradle_build_tool = '4.1.2'
-    kotlin_version = '1.6.10'
+    kotlin_version = '1.6.20'
     gms_google_service='4.3.8'
     firebase_crashlytics_gradle ='2.7.1'
 
