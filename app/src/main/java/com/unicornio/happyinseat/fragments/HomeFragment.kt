@@ -6,39 +6,45 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.unicornio.happyinseat.activities.ExerciseActivity
-import com.unicornio.happyinseat.R
+import com.unicornio.happyinseat.databinding.FragmentHomeBinding
 import com.unicornio.toolish.utils.Utils.shotToast
 
 class HomeFragment : Fragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(
-        R.layout.fragment_home, container, false
-    )
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d(TAG, "onViewCreated")
 
-        setupBehavior(view)
+        setupBehavior()
     }
 
-    private fun setupBehavior(root: View) {
-        val buttonRunExercise = root.findViewById<ImageButton>(R.id.button_start_stretching)
-        buttonRunExercise.setOnClickListener {
-            startActivity(Intent(root.context, ExerciseActivity::class.java))
+    private fun setupBehavior() {
+        binding.buttonStartStretching.setOnClickListener {
+            context?.let {
+                startActivity(Intent(it, ExerciseActivity::class.java))
+            }
         }
 
-        val buttonRunCore = root.findViewById<ImageButton>(R.id.button_start_core)
-        buttonRunCore.setOnClickListener {
-            root.context.shotToast("Coming soon")
+        binding.buttonStartCore.setOnClickListener {
+            context?.shotToast("Coming soon")
         }
 
-        val buttonStartJourney = root.findViewById<ImageButton>(R.id.button_start_journey)
-        buttonStartJourney.setOnClickListener {
-            root.context.shotToast("Coming soon")
+        binding.buttonStartJourney.setOnClickListener {
+            context?.shotToast("Coming soon")
         }
     }
 

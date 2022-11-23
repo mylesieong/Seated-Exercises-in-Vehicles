@@ -9,19 +9,22 @@ import androidx.core.view.GravityCompat
 import androidx.navigation.findNavController
 import com.google.android.material.navigation.NavigationView
 import com.unicornio.happyinseat.R
-import kotlinx.android.synthetic.main.activity_main.*
+import com.unicornio.happyinseat.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
 
-        val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.common_open_on_phone, R.string.common_open_on_phone)
+        val toggle = ActionBarDrawerToggle(this, binding.drawerLayout, binding.toolbar, R.string.common_open_on_phone, R.string.common_open_on_phone)
 
-        drawer_layout.addDrawerListener(toggle)
+        binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
         val navigationView = findViewById<View>(R.id.nav_view) as NavigationView
@@ -54,8 +57,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 findNavController(R.id.nav_host_fragment).navigate(R.id.action_settingFragment)
             }
         }
-        drawer_layout.closeDrawer(GravityCompat.START)
+        binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
-
 }
