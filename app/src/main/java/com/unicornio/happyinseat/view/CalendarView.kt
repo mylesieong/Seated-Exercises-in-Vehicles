@@ -18,8 +18,8 @@ class CalendarView(context: Context, attrs: AttributeSet) : FrameLayout(context,
     private var btnPrev: ImageView
     private var btnNext: ImageView
     private var gridView: GridView
-    private var buttonNext: Button
-    private var buttonPrevious: Button
+    private var buttonNext: ImageView
+    private var buttonPrevious: ImageView
 
     /**
      * Note: month starts from 0, aligning to how Calendar handles months
