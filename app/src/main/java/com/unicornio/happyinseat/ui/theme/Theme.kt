@@ -48,6 +48,7 @@ val blue_grey_700 = Color(0x455A64)
 val blue_grey_800 = Color(0x37474F)
 val blue_grey_900 = Color(0x263238)
 
+
 private val DayThemeColorPalette = lightColors(
     primary = amber_400,
     primaryVariant = amber_600,

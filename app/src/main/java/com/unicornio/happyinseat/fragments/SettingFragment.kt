@@ -36,16 +36,17 @@ import com.unicornio.toolish.utils.Utils.shotToast
 
 class SettingFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View = ComposeView(requireContext()).apply {
-        setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-        setContent {
-            ApplicationTheme {
-                Surface {
-                    SettingScreen()
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+        ComposeView(requireContext()).apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+            setContent {
+                ApplicationTheme {
+                    Surface {
+                        SettingScreen()
+                    }
                 }
             }
         }
-    }
 
     @Composable
     fun SettingScreen() {
