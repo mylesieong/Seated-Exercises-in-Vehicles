@@ -55,10 +55,10 @@ private val DayThemeColorPalette = lightColors(
     secondary = blue_300,
     secondaryVariant = blue_500,
     onSecondary = Color.Black,
-    background = Color.Black,
-    onBackground = Color.White,
-    surface = blue_grey_900,
-    onSurface = Color.White,
+    background = Color.White,
+    onBackground = Color.Black,
+    surface = blue_grey_100,
+    onSurface = Color.Black,
     error = Color.Red
 )
 

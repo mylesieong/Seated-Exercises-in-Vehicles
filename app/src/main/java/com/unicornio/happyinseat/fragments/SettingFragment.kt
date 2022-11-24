@@ -2,9 +2,9 @@ package com.unicornio.happyinseat.fragments
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,26 +40,10 @@ class SettingFragment : Fragment() {
         setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
         setContent {
             ApplicationTheme {
-                SettingScreen()
+                Surface {
+                    SettingScreen()
+                }
             }
-        }
-    }
-
-    private fun rateApp() {
-        fun rateIntentForUrl(url: String): Intent {
-            val packageName = requireContext().packageName
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(String.format("%s?id=%s", url, packageName)))
-            val flags = Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_MULTIPLE_TASK or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
-            intent.addFlags(flags)
-            return intent
-        }
-
-        try {
-            val rateIntent = rateIntentForUrl("market://details")
-            startActivity(rateIntent)
-        } catch (e: ActivityNotFoundException) {
-            val rateIntent = rateIntentForUrl("https://play.google.com/store/apps/details")
-            startActivity(rateIntent)
         }
     }
 
@@ -79,9 +63,9 @@ class SettingFragment : Fragment() {
                 )
                 Button(modifier = Modifier.align(TopEnd), colors = ButtonDefaults.buttonColors(backgroundColor = Color.Yellow), onClick = {
                     MaterialAlertDialogBuilder(context).setTitle("Are you sure?").setPositiveButton("Yes") { _, _ ->
-                            deleteRecords(context)
-                            context.shotToast("All records are removed")
-                        }.setNegativeButton("No") { dialog, _ -> dialog.cancel() }.show()
+                        deleteRecords(context)
+                        context.shotToast("All records are removed")
+                    }.setNegativeButton("No") { dialog, _ -> dialog.cancel() }.show()
                 }) {
                     Text(text = "Remove", color = contentColorFor(colors.primary))
                 }
@@ -103,11 +87,36 @@ class SettingFragment : Fragment() {
 
     }
 
+    private fun rateApp() {
+        fun rateIntentForUrl(url: String): Intent {
+            val packageName = requireContext().packageName
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(String.format("%s?id=%s", url, packageName)))
+            val flags = Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_MULTIPLE_TASK or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
+            intent.addFlags(flags)
+            return intent
+        }
+
+        try {
+            val rateIntent = rateIntentForUrl("market://details")
+            startActivity(rateIntent)
+        } catch (e: ActivityNotFoundException) {
+            val rateIntent = rateIntentForUrl("https://play.google.com/store/apps/details")
+            startActivity(rateIntent)
+        }
+    }
+
     @Composable
-    @Preview(showBackground = true)
+    @Preview(name = "Light Mode")
+    @Preview(
+        uiMode = Configuration.UI_MODE_NIGHT_YES,
+        showBackground = true,
+        name = "Dark Mode"
+    )
     fun SettingScreenPreview() {
         ApplicationTheme {
-            SettingScreen()
+            Surface {
+                SettingScreen()
+            }
         }
     }
 
