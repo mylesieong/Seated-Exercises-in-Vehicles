@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -23,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import com.unicornio.happyinseat.R
+import com.unicornio.happyinseat.STANDARD_STRETCH
 import com.unicornio.happyinseat.ui.theme.ApplicationTheme
 
 class OverviewFragment : Fragment() {
@@ -42,7 +45,14 @@ class OverviewFragment : Fragment() {
     fun OverviewScreen() {
         Column(modifier = Modifier.fillMaxSize()) {
             Header()
-            //TODO content
+
+            LazyColumn(modifier = Modifier.fillMaxSize()) {
+                STANDARD_STRETCH.moves.mapIndexed { i, move ->
+                    item {
+                        MoveListItem(seq = i + 1, name = move.name, description = move.description, resource = R.drawable.ic_baseline_insert_comment_24)
+                    }
+                }
+            }
         }
     }
 
@@ -67,9 +77,7 @@ class OverviewFragment : Fragment() {
 
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
-                    text = "In Seat/ Stretching",
-                    modifier = Modifier.padding(top = 24.dp),
-                    style = MaterialTheme.typography.h6
+                    text = "In Seat/ Stretching", modifier = Modifier.padding(top = 24.dp), style = MaterialTheme.typography.h6
                 )
 
                 Text(
@@ -78,7 +86,11 @@ class OverviewFragment : Fragment() {
                     style = MaterialTheme.typography.caption
                 )
 
-                Row(modifier = Modifier.fillMaxWidth().padding(bottom = 24.dp)) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 24.dp)
+                ) {
                     Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
                         statisticCard(name = "Moves", value = "6")
                     }
@@ -103,10 +115,37 @@ class OverviewFragment : Fragment() {
     }
 
     @Composable
+    fun MoveListItem(seq: Int, name: String, description: String, resource: Int) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Row(
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(text = seq.toString(), style = MaterialTheme.typography.caption)
+                Spacer(modifier = Modifier.width(8.dp))
+
+                Column {
+                    Text(text = name, style = MaterialTheme.typography.subtitle1)
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(text = description, style = MaterialTheme.typography.caption)
+                }
+            }
+            Image(
+                painter = painterResource(id = resource),
+                contentDescription = null,
+                modifier = Modifier
+                    .height(80.dp)
+                    .width(80.dp)
+            )
+        }
+    }
+
+    @Composable
     @Preview(name = "Light Mode")
-    @Preview(
-        uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, name = "Dark Mode"
-    )
+    @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, name = "Dark Mode")
     fun OverviewScreenPreview() {
         ApplicationTheme {
             Surface {
