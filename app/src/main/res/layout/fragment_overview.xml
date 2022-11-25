@@ -182,19 +182,18 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                android:id="@+id/foobar2"-->
 <!--                android:layout_width="match_parent"-->
 <!--                android:layout_height="wrap_content"-->
 <!--                android:padding="16dp">-->
 
-<!--&lt;!&ndash;                <TextView&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:id="@+id/text_seq_number"&ndash;&gt;-->
-<!--&lt;!&ndash;                    style="@style/Style.Overview.Caption"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_width="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;                    android:text="2"&ndash;&gt;-->
-<!--&lt;!&ndash;                    app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                    app:layout_constraintTop_toTopOf="parent" />&ndash;&gt;-->
+<!--                <TextView-->
+<!--                    android:id="@+id/text_seq_number"-->
+<!--                    style="@style/Style.Overview.Caption"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="2"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
 <!--                <TextView-->
 <!--                    android:id="@+id/text_move_title"-->
