@@ -7,12 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,9 +22,15 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import com.unicornio.happyinseat.AnalyticsManager
+import com.unicornio.happyinseat.AnalyticsManager.MY_EVENT_START_EXERCISE_STRETCH
 import com.unicornio.happyinseat.R
 import com.unicornio.happyinseat.STANDARD_STRETCH
+import com.unicornio.happyinseat.fragments.MoveFragment.Companion.EXTRA_KEY_INDEX_OF_MOVE
+import com.unicornio.happyinseat.helpers.navigateSafely
 import com.unicornio.happyinseat.ui.theme.ApplicationTheme
 
 class OverviewFragment : Fragment() {
@@ -43,15 +48,27 @@ class OverviewFragment : Fragment() {
 
     @Composable
     fun OverviewScreen() {
-        Column(modifier = Modifier.fillMaxSize()) {
-            Header()
+        Box(modifier = Modifier.fillMaxSize()) {
 
             LazyColumn(modifier = Modifier.fillMaxSize()) {
+                item {
+                    Header()
+                }
+
                 STANDARD_STRETCH.moves.mapIndexed { i, move ->
                     item {
                         MoveListItem(seq = i + 1, name = move.name, description = move.description, resource = R.drawable.ic_baseline_insert_comment_24)
                     }
                 }
+            }
+
+            Button(modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(32.dp),
+                shape = RoundedCornerShape(50),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Yellow),
+                onClick = { startExercise() }) {
+                Text(text = "Start", modifier = Modifier.padding(horizontal = 48.dp))
             }
         }
     }
@@ -69,10 +86,10 @@ class OverviewFragment : Fragment() {
                 modifier = Modifier
                     .padding(16.dp)
                     .width(24.dp)
-                    .height(24.dp),
-                colorFilter = tint(Color.Black),
-                painter = painterResource(id = R.drawable.ic_baseline_arrow_back_24),
-                contentDescription = null
+                    .height(24.dp)
+                    .clickable {
+                        activity?.finishAfterTransition()
+                    }, colorFilter = tint(Color.Black), painter = painterResource(id = R.drawable.ic_baseline_arrow_back_24), contentDescription = null
             )
 
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -134,9 +151,7 @@ class OverviewFragment : Fragment() {
                 }
             }
             Image(
-                painter = painterResource(id = resource),
-                contentDescription = null,
-                modifier = Modifier
+                painter = painterResource(id = resource), contentDescription = null, modifier = Modifier
                     .height(80.dp)
                     .width(80.dp)
             )
@@ -154,30 +169,13 @@ class OverviewFragment : Fragment() {
         }
     }
 
-    private fun setupBehavior() {
-//        binding.buttonStart.setOnClickListener {
-//            findNavController().navigateSafely(
-//                R.id.action_overviewFragment_to_moveFragment,
-//                bundleOf(
-//                    EXTRA_KEY_INDEX_OF_MOVE to 0
-//                )
-//            )
-//
-//            AnalyticsManager.logEvent(MY_EVENT_START_EXERCISE_STRETCH)
-//        }
-//
-//        binding.buttonBack.setOnClickListener {
-//            activity?.finishAfterTransition()
-//        }
-
-//        (binding.imageBreathInOut.drawable as AnimationDrawable).start()
-//        (binding.imageNeckRoll.drawable as AnimationDrawable).start()
-//        (binding.imageShoulderRotation.drawable as AnimationDrawable).start()
-//        (binding.imageWristRotation.drawable as AnimationDrawable).start()
-//        (binding.imageLowBackStretch.drawable as AnimationDrawable).start()
-//        (binding.imageFootPumps.drawable as AnimationDrawable).start()
-//        (binding.imageAnkleRotation.drawable as AnimationDrawable).start()
-//        (binding.imageHipKneeStretch.drawable as AnimationDrawable).start()
+    private fun startExercise() {
+        findNavController(this).navigateSafely(
+            R.id.action_overviewFragment_to_moveFragment, bundleOf(
+                EXTRA_KEY_INDEX_OF_MOVE to 0
+            )
+        )
+        AnalyticsManager.logEvent(MY_EVENT_START_EXERCISE_STRETCH)
     }
 
     companion object {
