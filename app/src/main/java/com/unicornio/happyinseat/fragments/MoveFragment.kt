@@ -1,34 +1,230 @@
 package com.unicornio.happyinseat.fragments
 
-import android.graphics.drawable.AnimationDrawable
+import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.BottomCenter
+import androidx.compose.ui.Alignment.Companion.Center
+import androidx.compose.ui.Alignment.Companion.CenterVertically
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.unicornio.happyinseat.*
-import com.unicornio.happyinseat.databinding.FragmentMoveBinding
+import com.unicornio.happyinseat.R
 import com.unicornio.happyinseat.helpers.navigateSafely
+import com.unicornio.happyinseat.ui.theme.ApplicationTheme
 
 class MoveFragment : Fragment() {
 
-    private var exercise: Exercise = STANDARD_STRETCH
-    private var index: Int = 0
-
-    private var _binding: FragmentMoveBinding? = null
-    private val binding get() = _binding!!
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentMoveBinding.inflate(inflater, container, false)
-        return binding.root
+        return ComposeView(requireContext()).apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+            setContent {
+                ApplicationTheme {
+                    Surface {
+                        MoveScreen(getIndex(), getExercise())
+                    }
+                }
+            }
+        }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun getIndex(): Int {
+        return arguments?.getInt(EXTRA_KEY_INDEX_OF_MOVE) ?: 0
+    }
+
+    private fun getExercise(): Exercise {
+        return STANDARD_STRETCH   //TODO this is a hard code
+    }
+
+    @Composable
+    fun MoveScreen(index: Int, exercise: Exercise) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            MoveInformation(index, exercise)
+            MoveControl(index, exercise, Modifier.align(BottomCenter))
+        }
+    }
+
+    @Composable
+    fun MoveInformation(index: Int, exercise: Exercise) {
+        val context = LocalView.current.context
+        val move = exercise.moves[index]
+        var isExpanded by remember { mutableStateOf(false) }
+
+        Column {
+            Box(modifier = Modifier.fillMaxWidth()) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_baseline_arrow_back_24), contentDescription = null, modifier = Modifier
+                        .height(56.dp)
+                        .width(56.dp)
+                        .padding(16.dp)
+                        .clickable {
+                            context.askUserWhetherQuit(positiveAction = { findNavController().navigateUp() }, negativeAction = {})
+                        }
+                )
+                Row(
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .padding(16.dp)
+                ) {
+                    Text(text = "${index + 1}", style = MaterialTheme.typography.caption, fontSize = 16.sp)
+                    Text(text = " of ", style = MaterialTheme.typography.subtitle1)
+                    Text(text = "${exercise.moves.size}", style = MaterialTheme.typography.subtitle1)
+                }
+            }
+
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.LightGray)
+            ) {
+                Image(
+                    //TODO change to use move illustration
+                    painter = painterResource(id = R.drawable.ic_baseline_insert_comment_24),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .height(164.dp)
+                        .width(164.dp)
+                        .padding(16.dp)
+                        .align(Center)
+                )
+            }
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(32.dp)
+            ) {
+
+                Text(text = move.description, style = MaterialTheme.typography.subtitle1)
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Row(modifier = Modifier.clickable {
+                    isExpanded = !isExpanded
+                }) {
+                    Text(text = move.name, style = MaterialTheme.typography.h4)
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Image(
+                        painter = painterResource(id = if (isExpanded) R.drawable.ic_baseline_unfold_less_24 else R.drawable.ic_baseline_unfold_more_24),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .align(CenterVertically)
+                            .height(20.dp)
+                            .width(20.dp)
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                if (isExpanded) {
+                    Text(text = move.instruction, style = MaterialTheme.typography.caption)
+                }
+            }
+        }
+    }
+
+    @Composable
+    fun MoveControl(index: Int, exercise: Exercise, modifier: Modifier) {
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(32.dp), verticalAlignment = CenterVertically
+        ) {
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .clickable {
+                        if (index > 0) {
+                            findNavController().navigateSafely(
+                                R.id.action_moveFragment_to_moveFragment, bundleOf(
+                                    EXTRA_KEY_INDEX_OF_MOVE to index - 1
+                                )
+                            )
+                        }
+                    }
+                    .alpha(if (index == 0) 0.3f else 1f)
+            ) {
+                Image(painter = painterResource(id = R.drawable.ic_baseline_arrow_back_ios_24), contentDescription = null, modifier = Modifier.align(Center))
+            }
+
+            Box(
+                modifier = Modifier
+                    .width(64.dp)
+                    .height(64.dp)
+                    .clip(CircleShape)
+                    .background(Color.Blue)
+                    .clickable {
+                        if (index == exercise.moves.size - 1) {
+                            findNavController().navigateSafely(R.id.action_moveFragment_to_finishFragment)
+                        } else {
+                            findNavController().navigateSafely(
+                                R.id.action_moveFragment_to_moveFragment, bundleOf(
+                                    EXTRA_KEY_INDEX_OF_MOVE to index + 1
+                                )
+                            )
+                        }
+                    }
+            ) {
+                Image(painter = painterResource(id = R.drawable.ic_baseline_check_24), contentDescription = null, modifier = Modifier.align(Center))
+            }
+
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .clickable {
+                        if (index == exercise.moves.size - 1) {
+                            findNavController().navigateSafely(R.id.action_moveFragment_to_finishFragment)
+
+                        } else {
+
+                            findNavController().navigateSafely(
+                                R.id.action_moveFragment_to_moveFragment, bundleOf(
+                                    EXTRA_KEY_INDEX_OF_MOVE to index + 1
+                                )
+                            )
+                        }
+                    }
+            ) {
+                Image(painter = painterResource(id = R.drawable.ic_baseline_arrow_forward_ios_24), contentDescription = null, modifier = Modifier.align(Center))
+            }
+        }
+    }
+
+    @Composable
+    @Preview(name = "Light Mode")
+    @Preview(
+        uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, name = "Dark Mode"
+    )
+    fun MoveScreenPreview() {
+        ApplicationTheme {
+            Surface {
+                MoveScreen(1, STANDARD_STRETCH)
+            }
+        }
     }
 
     override fun onResume() {
@@ -39,112 +235,6 @@ class MoveFragment : Fragment() {
     override fun onStop() {
         activity?.setKeepScreenOn(false)
         super.onStop()
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        Log.d(TAG, "onViewCreated")
-
-        index = getIndexOfMoves(exercise)
-
-        binding.imageIllustration.apply {
-            setImageResource(exercise.moves[index].illustrationId)
-            (drawable as AnimationDrawable).start()
-        }
-
-        binding.textIndexOfMove.text = (index + 1).toString()
-        binding.textTotalOfMove.text = exercise.moves.size.toString()
-        binding.textMoveTitle.text = exercise.moves[index].name
-        binding.textDescription.text = exercise.moves[index].description
-        binding.textInstruction.text = exercise.moves[index].instruction
-
-        if (index == 0) {
-            binding.buttonPrevious.apply {
-                alpha = 0.3f
-                isEnabled = false
-            }
-        }
-
-        setupBehavior(view)
-    }
-
-    private fun getIndexOfMoves(exercise: Exercise): Int {
-        val i = arguments?.getInt(EXTRA_KEY_INDEX_OF_MOVE) ?: 0
-        return if (i >= exercise.moves.size) exercise.moves.size - 1 else i
-    }
-
-    private fun setupBehavior(root: View) {
-        binding.buttonBack.setOnClickListener {
-            it.context.askUserWhetherQuit(
-                positiveAction = { findNavController().navigateUp() },
-                negativeAction = {}
-            )
-        }
-
-        binding.textMoveTitle.setOnClickListener {
-            if (binding.buttonExpandInstruction.visibility == View.VISIBLE) {
-                binding.buttonExpandInstruction.visibility = View.GONE
-                binding.buttonCollapseInstruction.visibility = View.VISIBLE
-                binding.textInstruction.visibility = View.VISIBLE
-            } else {
-                binding.buttonExpandInstruction.visibility = View.VISIBLE
-                binding.buttonCollapseInstruction.visibility = View.GONE
-                binding.textInstruction.visibility = View.GONE
-            }
-        }
-
-        binding.buttonExpandInstruction.setOnClickListener {
-            binding.buttonExpandInstruction.visibility = View.GONE
-            binding.buttonCollapseInstruction.visibility = View.VISIBLE
-            binding.textInstruction.visibility = View.VISIBLE
-        }
-
-        binding.buttonExpandInstruction.setOnClickListener {
-            binding.buttonExpandInstruction.visibility = View.VISIBLE
-            binding.buttonCollapseInstruction.visibility = View.GONE
-            binding.textInstruction.visibility = View.GONE
-        }
-
-        binding.buttonPrevious.setOnClickListener {
-            if (index > 0) {
-                findNavController().navigateSafely(
-                    R.id.action_moveFragment_to_moveFragment,
-                    bundleOf(
-                        EXTRA_KEY_INDEX_OF_MOVE to index - 1
-                    )
-                )
-            }
-        }
-
-        binding.buttonCheck.setOnClickListener {
-            if (index == exercise.moves.size - 1) {
-                findNavController().navigateSafely(R.id.action_moveFragment_to_finishFragment)
-
-            } else {
-
-                findNavController().navigateSafely(
-                    R.id.action_moveFragment_to_moveFragment,
-                    bundleOf(
-                        EXTRA_KEY_INDEX_OF_MOVE to index + 1
-                    )
-                )
-            }
-        }
-
-        binding.buttonNext.setOnClickListener {
-            if (index == exercise.moves.size - 1) {
-                findNavController().navigateSafely(R.id.action_moveFragment_to_finishFragment)
-
-            } else {
-
-                findNavController().navigateSafely(
-                    R.id.action_moveFragment_to_moveFragment,
-                    bundleOf(
-                        EXTRA_KEY_INDEX_OF_MOVE to index + 1
-                    )
-                )
-            }
-        }
     }
 
     companion object {
