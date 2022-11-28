@@ -1,5 +1,6 @@
 package com.unicornio.happyinseat.fragments
 
+import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -149,6 +150,8 @@ class MoveFragment : Fragment() {
 
     @Composable
     fun MoveControl(index: Int, exercise: Exercise, modifier: Modifier) {
+        val context = LocalView.current.context
+
         Row(
             modifier = modifier
                 .fillMaxWidth()
@@ -158,13 +161,7 @@ class MoveFragment : Fragment() {
                 modifier = Modifier
                     .weight(1f)
                     .clickable {
-                        if (index > 0) {
-                            findNavController().navigateSafely(
-                                R.id.action_moveFragment_to_moveFragment, bundleOf(
-                                    EXTRA_KEY_INDEX_OF_MOVE to index - 1
-                                )
-                            )
-                        }
+                        goToPreviousMove(index)
                     }
                     .alpha(if (index == 0) 0.3f else 1f)
             ) {
@@ -178,15 +175,7 @@ class MoveFragment : Fragment() {
                     .clip(CircleShape)
                     .background(Color.Blue)
                     .clickable {
-                        if (index == exercise.moves.size - 1) {
-                            findNavController().navigateSafely(R.id.action_moveFragment_to_finishFragment)
-                        } else {
-                            findNavController().navigateSafely(
-                                R.id.action_moveFragment_to_moveFragment, bundleOf(
-                                    EXTRA_KEY_INDEX_OF_MOVE to index + 1
-                                )
-                            )
-                        }
+                        goToNextMove(context, index, exercise)
                     }
             ) {
                 Image(painter = painterResource(id = R.drawable.ic_baseline_check_24), contentDescription = null, modifier = Modifier.align(Center))
@@ -196,21 +185,35 @@ class MoveFragment : Fragment() {
                 modifier = Modifier
                     .weight(1f)
                     .clickable {
-                        if (index == exercise.moves.size - 1) {
-                            findNavController().navigateSafely(R.id.action_moveFragment_to_finishFragment)
-
-                        } else {
-
-                            findNavController().navigateSafely(
-                                R.id.action_moveFragment_to_moveFragment, bundleOf(
-                                    EXTRA_KEY_INDEX_OF_MOVE to index + 1
-                                )
-                            )
-                        }
+                        goToNextMove(context, index, exercise)
                     }
             ) {
                 Image(painter = painterResource(id = R.drawable.ic_baseline_arrow_forward_ios_24), contentDescription = null, modifier = Modifier.align(Center))
             }
+        }
+    }
+
+    private fun goToPreviousMove(index: Int) {
+        if (index > 0) {
+            findNavController().navigateSafely(
+                R.id.action_moveFragment_to_moveFragment, bundleOf(
+                    EXTRA_KEY_INDEX_OF_MOVE to index - 1
+                )
+            )
+        }
+    }
+
+    private fun goToNextMove(context: Context, index: Int, exercise: Exercise) {
+        if (index == exercise.moves.size - 1) {
+            saveRecord(context, Record(System.currentTimeMillis(), exercise))
+
+            findNavController().navigateSafely(R.id.action_moveFragment_to_finishFragment)
+
+        } else {
+            findNavController().navigateSafely(
+                R.id.action_moveFragment_to_moveFragment,
+                bundleOf(EXTRA_KEY_INDEX_OF_MOVE to index + 1)
+            )
         }
     }
 

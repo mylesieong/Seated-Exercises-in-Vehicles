@@ -34,11 +34,6 @@ class HistoryFragment : Fragment() {
         _binding = null
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        Log.d(TAG, "onViewCreated")
-    }
-
     override fun onResume() {
         super.onResume()
         val records = loadRecords(requireContext())
