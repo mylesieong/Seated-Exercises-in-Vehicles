@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import com.google.android.material.navigation.NavigationView
 import com.unicornio.happyinseat.R
 import com.unicornio.happyinseat.databinding.ActivityMainBinding
+import com.unicornio.happyinseat.insertDummyRecordForDebugBuild
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding: ActivityMainBinding
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             )
         }
 
-//        insertDummyRecordForDebugBuild(this)
+        insertDummyRecordForDebugBuild(this)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

@@ -6,13 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.annotation.Nullable
 import com.unicornio.happyinseat.R
 import com.unicornio.happyinseat.colorSecondary
 import com.unicornio.happyinseat.colorSecondaryVariant
 import com.unicornio.toolish.utils.Utils.color
 import java.util.Calendar.*
 
-class CalendarView(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
+class CalendarView(context: Context, @Nullable attrs: AttributeSet?) : FrameLayout(context, attrs) {
 
     private var textMonth: TextView
     private var btnPrev: ImageView
