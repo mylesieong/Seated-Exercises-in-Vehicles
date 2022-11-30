@@ -2,6 +2,7 @@ package com.unicornio.happyinseat.activities
 
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavBackStackEntry
@@ -11,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.unicornio.happyinseat.AdManager
+import com.unicornio.happyinseat.askUserWhetherQuit
 import com.unicornio.happyinseat.screens.FinishScreen
 import com.unicornio.happyinseat.screens.MoveScreen
 import com.unicornio.happyinseat.screens.OverviewScreen
@@ -20,6 +22,45 @@ class ExerciseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
+
+            BackHandler(
+                enabled = true,
+                onBack = {
+                    when (navController.currentBackStackEntry?.destination?.route) {
+                        "overview" -> {
+                            finishAfterTransition()
+                        }
+                        "move/{moveIndex}" -> {
+                            askUserWhetherQuit(
+                                positiveAction = {
+                                    navController.navigate("overview") {
+                                        popUpTo("overview") {
+                                            inclusive = true
+                                        }
+                                    }
+                                },
+                                negativeAction = {}
+                            )
+                        }
+                        "finish" -> {
+                            AdManager.loadAndShowInterstitialAdHoweverSilentIfAdsNotReady(
+                                this,
+                                undergoActionIfShowAd = { },
+                                postAction = {
+                                    navController.navigate("overview") {
+                                        popUpTo("overview") {
+                                            inclusive = true
+                                        }
+                                    }
+                                }
+                            )
+                        }
+                        null -> {
+                            finishAfterTransition()
+                        }
+                    }
+                }
+            )
 
             NavHost(
                 navController = navController,
