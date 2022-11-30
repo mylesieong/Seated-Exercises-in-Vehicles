@@ -146,8 +146,6 @@ fun MoveListItem(seq: Int, name: String, description: String, resource: Int) {
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, name = "Dark Mode")
 fun OverviewScreenPreview() {
     ApplicationTheme {
-        Surface {
             OverviewScreen({}, {})
-        }
     }
 }

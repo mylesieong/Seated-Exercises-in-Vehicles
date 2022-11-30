@@ -153,8 +153,6 @@ fun RecordItem(context: Context, record: Record) {
 @Preview(name = "Night mode", uiMode = UI_MODE_NIGHT_YES, showBackground = true)
 fun HistoryScreenPreview() {
     ApplicationTheme {
-        Surface {
             HistoryScreen()
-        }
     }
 }
