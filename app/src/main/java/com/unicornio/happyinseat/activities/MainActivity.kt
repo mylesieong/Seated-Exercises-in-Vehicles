@@ -16,7 +16,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -31,14 +30,14 @@ import com.unicornio.happyinseat.ui.theme.ApplicationTheme
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
+private const val TAG = "MainActivity"
+
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ApplicationTheme {
-                Surface {
-                    MainScreen()
-                }
+                MainScreen()
             }
         }
     }
@@ -65,7 +64,7 @@ fun MainScreen() {
     ModalDrawer(
         drawerState = drawerState,
         gesturesEnabled = true,
-        drawerBackgroundColor = Color.Black,
+        drawerBackgroundColor = MaterialTheme.colors.surface,
         drawerContent = {
             Column(modifier = Modifier.padding(horizontal = 24.dp)) {
                 Spacer(modifier = Modifier.height(100.dp))
@@ -73,7 +72,7 @@ fun MainScreen() {
                 Box(
                     modifier = Modifier
                         .clip(CircleShape)
-                        .background(Color.Yellow)
+                        .background(MaterialTheme.colors.primary)
                         .padding(16.dp)
                 ) {
                     Image(
@@ -185,8 +184,6 @@ private fun MyTopAppBar(title: String, openDrawer: () -> Job) {
 @Composable
 fun MainScreenPreview() {
     ApplicationTheme {
-        Surface {
-            MainScreen()
-        }
+        MainScreen()
     }
 }

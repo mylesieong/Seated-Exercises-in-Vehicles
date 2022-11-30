@@ -1,13 +1,10 @@
 package com.unicornio.happyinseat.activities
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -25,9 +22,7 @@ class ExerciseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ApplicationTheme {
-                Surface {
-                    ExerciseScreen()
-                }
+                ExerciseScreen()
             }
         }
     }

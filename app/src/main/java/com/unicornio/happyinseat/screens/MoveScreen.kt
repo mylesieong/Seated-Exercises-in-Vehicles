@@ -79,7 +79,7 @@ fun MoveInformation(index: Int, exercise: Exercise, onExit: () -> Unit) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color.LightGray)
+                .background(MaterialTheme.colors.surface)
         ) {
             Image(
                 //TODO change to use move illustration
@@ -168,7 +168,7 @@ fun MoveControl(index: Int, exercise: Exercise, modifier: Modifier, onNavigateTo
                 .width(64.dp)
                 .height(64.dp)
                 .clip(CircleShape)
-                .background(Color.Blue)
+                .background(MaterialTheme.colors.secondary)
                 .clickable {
                     goToNextMove(context, index, exercise)
                 }
@@ -195,8 +195,6 @@ fun MoveControl(index: Int, exercise: Exercise, modifier: Modifier, onNavigateTo
 )
 fun MoveScreenPreview() {
     ApplicationTheme {
-        Surface {
             MoveScreen(1, {}, {}, {})
-        }
     }
 }
