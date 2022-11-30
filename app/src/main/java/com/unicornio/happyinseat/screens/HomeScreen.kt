@@ -46,6 +46,7 @@ fun HomeScreen() {
         ExerciseCard(
             "In Seat/ Stretching",
             R.drawable.ic_pic_stretching,
+            MaterialTheme.colors.primary,
             listOf(
                 "- 7 moves",
                 "- Head, shoulder, arm, torso and leg",
@@ -62,6 +63,7 @@ fun HomeScreen() {
         ExerciseCard(
             "In Seat/ Core Exercise",
             R.drawable.ic_pic_core,
+            MaterialTheme.colors.primary,
             listOf(
                 "- 6 moves",
                 "- Takes around 10 min",
@@ -78,6 +80,7 @@ fun HomeScreen() {
         ExerciseCard(
             "Start a Journey",
             R.drawable.ic_pic_journey,
+            MaterialTheme.colors.secondary,
             listOf(
                 "Arrange stretching and core exercise throughout your journey to reduce the risk of neck pain, back pain and deep vein thrombosis"
             ),
@@ -92,14 +95,21 @@ fun HomeScreen() {
 }
 
 @Composable
-private fun ExerciseCard(title: String, resId: Int, descriptions: List<String>, action: (Context) -> Unit, isAvailable: Boolean) {
+private fun ExerciseCard(
+    title: String,
+    resId: Int,
+    backgroundColor: Color,
+    descriptions: List<String>,
+    action: (Context) -> Unit,
+    isAvailable: Boolean
+) {
     val context = LocalView.current.context
 
-    Column {
+    Column(Modifier.background(MaterialTheme.colors.surface)) {
         Box(
             Modifier
                 .fillMaxWidth()
-                .background(Color.LightGray)
+                .background(backgroundColor)
         ) {
             Image(
                 painter = painterResource(id = resId), contentDescription = null,
@@ -110,9 +120,8 @@ private fun ExerciseCard(title: String, resId: Int, descriptions: List<String>, 
         }
 
         Row(
-            Modifier
+            modifier = Modifier
                 .fillMaxWidth()
-                .background(Color.White)
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -140,9 +149,9 @@ private fun ExerciseCard(title: String, resId: Int, descriptions: List<String>, 
                 modifier = Modifier
                     .clip(CircleShape)
                     .alpha(if (isAvailable) 1f else 0.4f)
-                    .background(Color.DarkGray)
+                    .background(MaterialTheme.colors.onSurface)
             ) {
-                Icon(Icons.Filled.ArrowForward, contentDescription = null, tint = Color.White)
+                Icon(Icons.Filled.ArrowForward, contentDescription = null, tint = MaterialTheme.colors.surface)
             }
         }
     }

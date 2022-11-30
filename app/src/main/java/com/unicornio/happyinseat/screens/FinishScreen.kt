@@ -6,17 +6,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Button
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter.Companion.tint
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -41,6 +38,7 @@ import java.util.concurrent.TimeUnit
 @Composable
 fun FinishScreen(onExit: () -> Unit, onOnceMore: () -> Unit, onFinish: () -> Unit) {
     val context = LocalView.current.context
+    var showLoadingBar by remember { mutableStateOf(false) }
 
     Box {
         Image(painter = painterResource(id = R.drawable.ic_baseline_arrow_back_24), contentDescription = null,
@@ -57,7 +55,7 @@ fun FinishScreen(onExit: () -> Unit, onOnceMore: () -> Unit, onFinish: () -> Uni
             Box(
                 modifier = Modifier
                     .clip(CircleShape)
-                    .background(Color.White)
+                    .background(MaterialTheme.colors.surface)
                     .padding(16.dp)
             ) {
                 Image(
@@ -70,11 +68,13 @@ fun FinishScreen(onExit: () -> Unit, onOnceMore: () -> Unit, onFinish: () -> Uni
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            Button(onClick = {
-//                    binding.loadingBar.visibility = View.VISIBLE
-                onOnceMore.invoke()
-
-            }) {
+            Button(
+                onClick = {
+                    showLoadingBar = true
+                    onOnceMore.invoke()
+                },
+                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary)
+            ) {
                 Row(
                     modifier = Modifier.width(240.dp),
                     verticalAlignment = Alignment.CenterVertically
@@ -82,6 +82,7 @@ fun FinishScreen(onExit: () -> Unit, onOnceMore: () -> Unit, onFinish: () -> Uni
                     Image(
                         painter = painterResource(id = R.drawable.ic_baseline_replay_24),
                         contentDescription = null,
+                        colorFilter = tint(MaterialTheme.colors.onPrimary),
                         modifier = Modifier
                             .padding(8.dp)
                             .height(24.dp)
@@ -99,12 +100,13 @@ fun FinishScreen(onExit: () -> Unit, onOnceMore: () -> Unit, onFinish: () -> Uni
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            Button(onClick = {
-//                    binding.loadingBar.visibility = View.VISIBLE
-
-                onFinish.invoke()
-
-            }) {
+            Button(
+                onClick = {
+                    showLoadingBar = true
+                    onFinish.invoke()
+                },
+                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primaryVariant)
+            ) {
                 Row(
                     modifier = Modifier.width(240.dp),
                     verticalAlignment = Alignment.CenterVertically
@@ -112,6 +114,7 @@ fun FinishScreen(onExit: () -> Unit, onOnceMore: () -> Unit, onFinish: () -> Uni
                     Image(
                         painter = painterResource(id = R.drawable.ic_baseline_home_24),
                         contentDescription = null,
+                        colorFilter = tint(MaterialTheme.colors.onPrimary),
                         modifier = Modifier
                             .padding(8.dp)
                             .height(24.dp)
@@ -129,9 +132,12 @@ fun FinishScreen(onExit: () -> Unit, onOnceMore: () -> Unit, onFinish: () -> Uni
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            Button(onClick = {
-                context.shotToast("Coming soon!")
-            }) {
+            Button(
+                onClick = {
+                    context.shotToast("Coming soon!")
+                },
+                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primaryVariant)
+            ) {
                 Row(
                     modifier = Modifier.width(240.dp),
                     verticalAlignment = Alignment.CenterVertically
@@ -139,6 +145,7 @@ fun FinishScreen(onExit: () -> Unit, onOnceMore: () -> Unit, onFinish: () -> Uni
                     Image(
                         painter = painterResource(id = R.drawable.ic_baseline_airline_seat_recline_extra_24),
                         contentDescription = null,
+                        colorFilter = tint(MaterialTheme.colors.onPrimary),
                         modifier = Modifier
                             .padding(8.dp)
                             .height(24.dp)
@@ -159,6 +166,7 @@ fun FinishScreen(onExit: () -> Unit, onOnceMore: () -> Unit, onFinish: () -> Uni
             val bannerUnitId = stringResource(id = R.string.AD_UNIT_ID_BANNER)
 
             AndroidView(
+                modifier = Modifier.weight(1f),
                 factory = { context ->
                     AdView(context).apply {
                         setAdSize(AdSize.MEDIUM_RECTANGLE)
@@ -167,11 +175,13 @@ fun FinishScreen(onExit: () -> Unit, onOnceMore: () -> Unit, onFinish: () -> Uni
                         AdManager.loadBannerAd(it)
                     }
                 },
-                update = { view -> Unit }
+                update = {}
             )
         }
 
-        CircularProgressIndicator(modifier = Modifier.align(Center)) //TODO check if this will work
+        if (showLoadingBar) {
+            CircularProgressIndicator(modifier = Modifier.align(Center))
+        }
     }
 
     AndroidView(
