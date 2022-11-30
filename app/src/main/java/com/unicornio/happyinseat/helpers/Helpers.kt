@@ -4,6 +4,9 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
+import androidx.navigation.NavBackStackEntry
+import com.unicornio.happyinseat.activities.ExerciseActivity
 
 fun rateApp(context: Context) {
     fun rateIntentForUrl(url: String): Intent {
@@ -23,3 +26,4 @@ fun rateApp(context: Context) {
         context.startActivity(rateIntent)
     }
 }
+
