@@ -1,6 +1,8 @@
 package com.unicornio.happyinseat.screens
 
 import android.content.res.Configuration
+import android.graphics.drawable.AnimationDrawable
+import android.widget.ImageView
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -12,10 +14,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter.Companion.tint
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
 import com.unicornio.happyinseat.AnalyticsManager
 import com.unicornio.happyinseat.AnalyticsManager.MY_EVENT_START_EXERCISE_STRETCH
 import com.unicornio.happyinseat.R
@@ -39,7 +43,12 @@ fun OverviewScreen(onExit: () -> Unit, onNavigateToMove: () -> Unit) {
 
             STANDARD_STRETCH.moves.mapIndexed { i, move ->
                 item {
-                    MoveListItem(seq = i + 1, name = move.name, description = move.description, resource = R.drawable.ic_baseline_insert_comment_24)
+                    MoveListItem(
+                        seq = i + 1,
+                        name = move.name,
+                        description = move.description,
+                        resource = move.illustrationId
+                    )
                 }
             }
         }
@@ -128,6 +137,8 @@ fun StatisticCard(name: String, value: String) {
 
 @Composable
 fun MoveListItem(seq: Int, name: String, description: String, resource: Int) {
+    val context = LocalView.current.context
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -146,10 +157,19 @@ fun MoveListItem(seq: Int, name: String, description: String, resource: Int) {
                 Text(text = description, style = MaterialTheme.typography.caption)
             }
         }
-        Image(
-            painter = painterResource(id = resource), contentDescription = null, modifier = Modifier
+
+        AndroidView(
+            modifier = Modifier
+                .background(MaterialTheme.colors.surface)
                 .height(80.dp)
-                .width(80.dp)
+                .width(80.dp),
+            factory = {
+                ImageView(context).apply {
+                    setImageResource(resource)
+                    (drawable as AnimationDrawable).start()
+                }
+            },
+            update = {}
         )
     }
 }
