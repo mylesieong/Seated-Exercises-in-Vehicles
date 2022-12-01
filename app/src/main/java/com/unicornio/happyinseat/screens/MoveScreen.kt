@@ -2,6 +2,8 @@ package com.unicornio.happyinseat.screens
 
 import android.content.Context
 import android.content.res.Configuration
+import android.graphics.drawable.AnimationDrawable
+import android.widget.ImageView
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -23,6 +25,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
 import com.unicornio.happyinseat.*
 import com.unicornio.happyinseat.R
 import com.unicornio.happyinseat.ui.theme.ApplicationTheme
@@ -80,15 +83,19 @@ fun MoveInformation(index: Int, exercise: Exercise, onExit: () -> Unit) {
                 .fillMaxWidth()
                 .background(MaterialTheme.colors.surface)
         ) {
-            Image(
-                //TODO change to use move illustration
-                painter = painterResource(id = R.drawable.ic_baseline_insert_comment_24),
-                contentDescription = null,
+
+            AndroidView(
                 modifier = Modifier
-                    .height(164.dp)
-                    .width(164.dp)
+                    .wrapContentSize()
                     .padding(16.dp)
-                    .align(Center)
+                    .align(Center),
+                factory = {
+                    ImageView(context).apply {
+                        setImageResource(exercise.moves[index].illustrationId)
+                        (drawable as AnimationDrawable).start()
+                    }
+                },
+                update = {}
             )
         }
 
