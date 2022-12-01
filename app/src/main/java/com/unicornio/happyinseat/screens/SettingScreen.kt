@@ -3,13 +3,12 @@ package com.unicornio.happyinseat.screens
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment.Companion.TopEnd
 import androidx.compose.ui.Alignment.Companion.TopStart
 import androidx.compose.ui.Modifier
@@ -18,7 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.unicornio.happyinseat.ComposeAlertDialog
 import com.unicornio.happyinseat.R
 import com.unicornio.happyinseat.deleteRecords
 import com.unicornio.happyinseat.helpers.rateApp
@@ -34,6 +33,26 @@ fun SettingScreen() {
             .fillMaxWidth()
             .padding(24.dp)
     ) {
+
+        val openDialog = remember { mutableStateOf(false) }
+
+        if (openDialog.value) {
+            ComposeAlertDialog(
+                title = "Are you sure",
+                description = "Remove all records",
+                onPositive = {
+                    deleteRecords(context)
+                    context.shotToast("All records are removed")
+                    openDialog.value = false
+                },
+                onNegative = {
+                    openDialog.value = false
+                },
+                onDismiss = {
+                    openDialog.value = false
+                })
+        }
+
         Text(
             text = "General",
             color = contentColorFor(colors.background),
@@ -49,12 +68,7 @@ fun SettingScreen() {
             Button(
                 modifier = Modifier.align(TopEnd),
                 colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primary),
-                onClick = {
-                    MaterialAlertDialogBuilder(context).setTitle("Are you sure?").setPositiveButton("Yes") { _, _ ->
-                        deleteRecords(context)
-                        context.shotToast("All records are removed")
-                    }.setNegativeButton("No") { dialog, _ -> dialog.cancel() }.show()
-                }
+                onClick = { openDialog.value = true }
             ) {
                 Text(text = "Remove", color = contentColorFor(colors.primary))
             }

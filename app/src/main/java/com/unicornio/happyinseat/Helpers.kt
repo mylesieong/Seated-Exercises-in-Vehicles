@@ -6,15 +6,76 @@ import android.net.Uri
 import android.util.Log
 import android.util.TypedValue
 import android.view.WindowManager
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.AlertDialog
+import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.unicornio.happyinseat.persistence.Contract.RecordEntry
 import com.unicornio.happyinseat.persistence.Contract.RecordEntry.CONTENT_URI
 import com.unicornio.happyinseat.persistence.Contract.RecordEntry.fromCursor
 import com.unicornio.happyinseat.persistence.Contract.RecordEntry.toContentValues
+import com.unicornio.happyinseat.ui.theme.ApplicationTheme
 import com.unicornio.toolish.utils.Utils
 import java.util.*
 
 const val TAG = "Helpers"
+
+@Composable
+fun ComposeAlertDialog(
+    title: String,
+    description: String,
+    onPositive: () -> Unit,
+    onNegative: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        title = {
+            Text(text = title, style = MaterialTheme.typography.h6)
+        },
+        text = {
+            Text(text = description, style = MaterialTheme.typography.body1)
+        },
+        buttons = {
+            Row {
+                Spacer(modifier = Modifier.weight(1f))
+                Text(
+                    text = "NO",
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier
+                        .clickable { onNegative.invoke() }
+                        .padding(horizontal = 36.dp, vertical = 24.dp)
+                )
+                Text(
+                    text = "YES",
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colors.secondary,
+                    modifier = Modifier
+                        .clickable { onPositive.invoke() }
+                        .padding(horizontal = 36.dp, vertical = 24.dp)
+                )
+            }
+        },
+        onDismissRequest = onDismiss
+    )
+}
+
+@Composable
+@Preview
+fun ComposeAlertDialogPreview() {
+    ApplicationTheme {
+        ComposeAlertDialog("title", "description", {}, {}, {})
+    }
+}
 
 fun Activity.setKeepScreenOn(isKeepOn: Boolean) {
     if (isKeepOn) {

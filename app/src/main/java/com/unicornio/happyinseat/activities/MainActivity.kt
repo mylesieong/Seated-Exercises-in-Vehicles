@@ -122,7 +122,7 @@ fun MyDrawer(navController: NavHostController, closeDrawer: () -> Job) {
 
         Spacer(Modifier.height(24.dp))
 
-        MenuItem("home", R.drawable.ic_baseline_home_24) {
+        MenuItem("Home", R.drawable.ic_baseline_home_24) {
             navController.navigate("home") {
                 popUpTo("home") {
                     inclusive = true
@@ -132,7 +132,7 @@ fun MyDrawer(navController: NavHostController, closeDrawer: () -> Job) {
             closeDrawer.invoke()
         }
 
-        MenuItem("history", R.drawable.ic_baseline_history_24) {
+        MenuItem("History", R.drawable.ic_baseline_history_24) {
             navController.navigate("history") {
                 popUpTo("history") {
                     inclusive = true
@@ -142,7 +142,7 @@ fun MyDrawer(navController: NavHostController, closeDrawer: () -> Job) {
             closeDrawer.invoke()
         }
 
-        MenuItem("setting", R.drawable.ic_baseline_settings_24) {
+        MenuItem("Setting", R.drawable.ic_baseline_settings_24) {
             navController.navigate("setting") {
                 popUpTo("setting") {
                     inclusive = true
