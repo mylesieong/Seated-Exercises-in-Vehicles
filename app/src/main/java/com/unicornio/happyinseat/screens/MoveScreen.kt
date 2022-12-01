@@ -36,13 +36,13 @@ fun MoveScreen(moveIndex: Int?, onExit: () -> Unit, onNavigateToMove: (Int) -> U
     Box(modifier = Modifier.fillMaxSize()) {
         MoveInformation(
             moveIndex ?: 0,
-            STANDARD_STRETCH,
+            com.unicornio.happyinseat.model.STANDARD_STRETCH,
             onExit
         )
 
         MoveControl(
             moveIndex ?: 0,
-            STANDARD_STRETCH,
+            com.unicornio.happyinseat.model.STANDARD_STRETCH,
             Modifier.align(BottomCenter),
             onNavigateToMove,
             onNavigateToFinish
@@ -51,7 +51,7 @@ fun MoveScreen(moveIndex: Int?, onExit: () -> Unit, onNavigateToMove: (Int) -> U
 }
 
 @Composable
-fun MoveInformation(index: Int, exercise: Exercise, onExit: () -> Unit) {
+fun MoveInformation(index: Int, exercise: com.unicornio.happyinseat.model.Exercise, onExit: () -> Unit) {
     val context = LocalView.current.context
     val move = exercise.moves[index]
     var isExpanded by remember { mutableStateOf(false) }
@@ -158,16 +158,16 @@ fun MoveInformation(index: Int, exercise: Exercise, onExit: () -> Unit) {
 }
 
 @Composable
-fun MoveControl(index: Int, exercise: Exercise, modifier: Modifier, onNavigateToMove: (Int) -> Unit, onNavigateToFinish: () -> Unit) {
+fun MoveControl(index: Int, exercise: com.unicornio.happyinseat.model.Exercise, modifier: Modifier, onNavigateToMove: (Int) -> Unit, onNavigateToFinish: () -> Unit) {
     fun goToPreviousMove(index: Int) {
         if (index > 0) {
             onNavigateToMove.invoke(index - 1)
         }
     }
 
-    fun goToNextMove(context: Context, index: Int, exercise: Exercise) {
+    fun goToNextMove(context: Context, index: Int, exercise: com.unicornio.happyinseat.model.Exercise) {
         if (index == exercise.moves.size - 1) {
-            saveRecord(context, Record(System.currentTimeMillis(), exercise))
+            saveRecord(context, com.unicornio.happyinseat.model.Record(System.currentTimeMillis(), exercise))
             onNavigateToFinish.invoke()
 
         } else {

@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.unicornio.happyinseat.ComposeAlertDialog
 import com.unicornio.happyinseat.R
 import com.unicornio.happyinseat.deleteRecords
-import com.unicornio.happyinseat.helpers.rateApp
+import com.unicornio.happyinseat.rateApp
 import com.unicornio.happyinseat.ui.theme.ApplicationTheme
 import com.unicornio.toolish.utils.Utils.shotToast
 
