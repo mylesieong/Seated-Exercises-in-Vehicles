@@ -6,9 +6,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -18,7 +18,6 @@ import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -120,8 +119,16 @@ fun MoveInformation(index: Int, exercise: Exercise, onExit: () -> Unit) {
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            if (isExpanded) {
-                Text(text = move.instruction, style = MaterialTheme.typography.caption)
+            LazyColumn {
+                if (isExpanded) {
+                    item {
+                        Text(text = move.instruction, style = MaterialTheme.typography.body1)
+                    }
+
+                    item {
+                        Spacer(modifier = Modifier.height(100.dp))
+                    }
+                }
             }
         }
     }
@@ -195,6 +202,6 @@ fun MoveControl(index: Int, exercise: Exercise, modifier: Modifier, onNavigateTo
 )
 fun MoveScreenPreview() {
     ApplicationTheme {
-            MoveScreen(1, {}, {}, {})
+        MoveScreen(1, {}, {}, {})
     }
 }
