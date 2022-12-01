@@ -169,6 +169,7 @@ private fun MyTopAppBar(title: String, openDrawer: () -> Job) {
         title = {
             Text(text = title)
         },
+        backgroundColor = MaterialTheme.colors.surface,
         navigationIcon = {
             IconButton(onClick = {
                 openDrawer.invoke()
