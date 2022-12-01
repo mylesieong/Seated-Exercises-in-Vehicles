@@ -1,4 +1,4 @@
-package com.unicornio.happyinseat.fragments
+package com.unicornio.happyinseat.screens
 
 import android.content.Context
 import android.content.Intent
