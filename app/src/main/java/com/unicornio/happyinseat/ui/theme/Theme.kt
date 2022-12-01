@@ -1,12 +1,13 @@
 package com.unicornio.happyinseat.ui.theme
 
-import android.util.Log
+import android.graphics.LightingColorFilter
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 val amber_50 = Color(0xFFFFF8E1)
 val amber_100 = Color(0xFFFFECB3)
@@ -80,16 +81,16 @@ private val DarkThemeColorPalette = darkColors(
 
 @Composable
 fun ApplicationTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-    val colors = if (darkTheme) {
-        Log.d(TAG, "ApplicationTheme: using dark theme")
-        DarkThemeColorPalette
+    val systemUiController = rememberSystemUiController()
+
+    if (darkTheme) {
+        systemUiController.setSystemBarsColor(color = DarkThemeColorPalette.primaryVariant)
     } else {
-        Log.d(TAG, "ApplicationTheme: using day theme")
-        DayThemeColorPalette
+        systemUiController.setSystemBarsColor(color = DayThemeColorPalette.primaryVariant)
     }
 
     MaterialTheme(
-        colors = colors,
+        colors = if (darkTheme) DarkThemeColorPalette else DayThemeColorPalette,
         content = content
     )
 }
