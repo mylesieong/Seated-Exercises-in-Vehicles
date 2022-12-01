@@ -60,7 +60,7 @@ fun MainScreen() {
 
     val closeDrawer = {
         scope.launch {
-            drawerState.open()
+            drawerState.close()
         }
     }
 
