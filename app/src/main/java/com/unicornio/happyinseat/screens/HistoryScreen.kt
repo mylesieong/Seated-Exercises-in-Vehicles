@@ -116,20 +116,21 @@ fun Calender(recordsShared: SnapshotStateList<Record>, monthNow: Int, yearNow: I
 }
 
 @Composable
-private fun RecordList(context: Context, recordsShared: SnapshotStateList<Record>) {
-    LazyColumn(Modifier.fillMaxWidth()) {
-        item {
-            Text(text = "Records", Modifier.fillMaxWidth(), textAlign = TextAlign.Center, style = MaterialTheme.typography.subtitle1)
-        }
+fun RecordList(context: Context, recordsShared: SnapshotStateList<Record>) {
+    Text(text = "Records", Modifier.fillMaxWidth(), textAlign = TextAlign.Center, style = MaterialTheme.typography.subtitle1)
 
-        item {
-            Spacer(modifier = Modifier.height(8.dp))
-        }
+    Spacer(modifier = Modifier.height(8.dp))
+
+    LazyColumn(Modifier.fillMaxWidth()) {
 
         recordsShared.map {
             item {
                 RecordItem(context, it)
             }
+        }
+
+        item {
+            Spacer(modifier = Modifier.height(60.dp))
         }
     }
 }
