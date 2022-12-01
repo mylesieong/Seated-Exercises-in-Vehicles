@@ -126,7 +126,7 @@ fun MoveInformation(index: Int, exercise: Exercise, onExit: () -> Unit) {
                     }
 
                     item {
-                        Spacer(modifier = Modifier.height(100.dp))
+                        Spacer(modifier = Modifier.height(180.dp))
                     }
                 }
             }
@@ -157,40 +157,56 @@ fun MoveControl(index: Int, exercise: Exercise, modifier: Modifier, onNavigateTo
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(32.dp), verticalAlignment = CenterVertically
+            .padding(48.dp), verticalAlignment = CenterVertically
     ) {
         Box(
             modifier = Modifier
+                .height(80.dp)
                 .weight(1f)
+                .clip(CircleShape)
+                .alpha(if (index == 0) 0.3f else 1f)
                 .clickable {
                     goToPreviousMove(index)
                 }
-                .alpha(if (index == 0) 0.3f else 1f)
         ) {
-            Image(painter = painterResource(id = R.drawable.ic_baseline_arrow_back_ios_24), contentDescription = null, modifier = Modifier.align(Center))
+            Image(
+                painter = painterResource(id = R.drawable.ic_baseline_arrow_back_ios_24),
+                contentDescription = null,
+                modifier = Modifier.align(Center)
+            )
         }
 
         Box(
             modifier = Modifier
-                .width(64.dp)
-                .height(64.dp)
+                .width(80.dp)
+                .height(80.dp)
                 .clip(CircleShape)
                 .background(MaterialTheme.colors.secondary)
                 .clickable {
                     goToNextMove(context, index, exercise)
                 }
         ) {
-            Image(painter = painterResource(id = R.drawable.ic_baseline_check_24), contentDescription = null, modifier = Modifier.align(Center))
+            Image(
+                painter = painterResource(id = R.drawable.ic_baseline_check_24),
+                contentDescription = null,
+                modifier = Modifier.align(Center)
+            )
         }
 
         Box(
             modifier = Modifier
+                .height(80.dp)
                 .weight(1f)
+                .clip(CircleShape)
                 .clickable {
                     goToNextMove(context, index, exercise)
                 }
         ) {
-            Image(painter = painterResource(id = R.drawable.ic_baseline_arrow_forward_ios_24), contentDescription = null, modifier = Modifier.align(Center))
+            Image(
+                painter = painterResource(id = R.drawable.ic_baseline_arrow_forward_ios_24),
+                contentDescription = null,
+                modifier = Modifier.align(Center)
+            )
         }
     }
 }
