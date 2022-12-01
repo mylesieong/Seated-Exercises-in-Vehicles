@@ -1,4 +1,4 @@
-package com.unicornio.happyinseat.fragments
+package com.unicornio.happyinseat.screens
 
 import android.content.Context
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
@@ -6,7 +6,6 @@ import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
@@ -153,6 +152,6 @@ fun RecordItem(context: Context, record: Record) {
 @Preview(name = "Night mode", uiMode = UI_MODE_NIGHT_YES, showBackground = true)
 fun HistoryScreenPreview() {
     ApplicationTheme {
-            HistoryScreen()
+        HistoryScreen()
     }
 }
