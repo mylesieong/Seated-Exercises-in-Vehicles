@@ -1,4 +1,4 @@
-package com.unicornio.happyinseat.persistence
+package com.unicornio.happyinseat.data
 
 import android.content.ContentResolver
 import android.content.ContentValues
@@ -6,8 +6,8 @@ import android.database.Cursor
 import android.net.Uri
 import android.provider.BaseColumns
 import android.util.Log
-import com.unicornio.happyinseat.Record
-import com.unicornio.happyinseat.STANDARD_STRETCH
+import com.unicornio.happyinseat.model.Record
+import com.unicornio.happyinseat.model.STANDARD_STRETCH
 
 /*
 * This class is an informational class for the database tables, it should not be changed or instantiated at runtime.

@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
-import com.unicornio.happyinseat.Record
+import com.unicornio.happyinseat.model.Record
 import com.unicornio.happyinseat.indexRecordsByYearAndMonth
 import com.unicornio.happyinseat.loadRecords
 import com.unicornio.happyinseat.ui.theme.ApplicationTheme
@@ -39,7 +39,7 @@ fun HistoryScreen() {
     val monthNow = now[Calendar.MONTH]
 
     val recordsShared = remember {
-        mutableStateListOf<Record>().also {
+        mutableStateListOf<com.unicornio.happyinseat.model.Record>().also {
             it.addAll(loadRecords(context, dayNow, monthNow, yearNow))
         }
     }
@@ -53,16 +53,16 @@ fun HistoryScreen() {
     }
 }
 
-private fun loadRecords(context: Context, day: Int, month: Int, year: Int): List<Record> {
+private fun loadRecords(context: Context, day: Int, month: Int, year: Int): List<com.unicornio.happyinseat.model.Record> {
     return loadRecords(context).filter {
         Utils.calender(year, month, day).isSameDay(it.timestamp)
     }
 }
 
 @Composable
-fun Calender(recordsShared: SnapshotStateList<Record>, monthNow: Int, yearNow: Int) {
+fun Calender(recordsShared: SnapshotStateList<com.unicornio.happyinseat.model.Record>, monthNow: Int, yearNow: Int) {
 
-    fun getHighlightDictionary(records: List<Record>, year: Int, month: Int): Map<Int, Float> {
+    fun getHighlightDictionary(records: List<com.unicornio.happyinseat.model.Record>, year: Int, month: Int): Map<Int, Float> {
         val recordsOfGivenYearMonth = indexRecordsByYearAndMonth(records)[Utils.YearMonth(year, month)] ?: emptyList()
         if (recordsOfGivenYearMonth.isEmpty()) {
             Log.d(TAG, "getHighlightDictionary: no records found in given year and month")
@@ -116,7 +116,7 @@ fun Calender(recordsShared: SnapshotStateList<Record>, monthNow: Int, yearNow: I
 }
 
 @Composable
-fun RecordList(context: Context, recordsShared: SnapshotStateList<Record>) {
+fun RecordList(context: Context, recordsShared: SnapshotStateList<com.unicornio.happyinseat.model.Record>) {
     Text(text = "Records", Modifier.fillMaxWidth(), textAlign = TextAlign.Center, style = MaterialTheme.typography.subtitle1)
 
     Spacer(modifier = Modifier.height(8.dp))
@@ -136,7 +136,7 @@ fun RecordList(context: Context, recordsShared: SnapshotStateList<Record>) {
 }
 
 @Composable
-fun RecordItem(context: Context, record: Record) {
+fun RecordItem(context: Context, record: com.unicornio.happyinseat.model.Record) {
     Row(
         Modifier
             .fillMaxWidth()

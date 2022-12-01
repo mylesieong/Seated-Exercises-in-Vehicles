@@ -30,7 +30,7 @@
             android:screenOrientation="portrait" />
 
         <provider
-            android:name="com.unicornio.happyinseat.persistence.Provider"
+            android:name="com.unicornio.happyinseat.data.Provider"
             android:authorities="com.unicornio.happyinseat"
             android:exported="false" />
     </application>

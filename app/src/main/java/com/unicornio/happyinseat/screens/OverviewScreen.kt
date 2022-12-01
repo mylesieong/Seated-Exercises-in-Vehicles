@@ -23,7 +23,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import com.unicornio.happyinseat.AnalyticsManager
 import com.unicornio.happyinseat.AnalyticsManager.MY_EVENT_START_EXERCISE_STRETCH
 import com.unicornio.happyinseat.R
-import com.unicornio.happyinseat.STANDARD_STRETCH
+import com.unicornio.happyinseat.model.STANDARD_STRETCH
 import com.unicornio.happyinseat.ui.theme.ApplicationTheme
 
 @Composable
@@ -41,7 +41,7 @@ fun OverviewScreen(onExit: () -> Unit, onNavigateToMove: () -> Unit) {
                 Header(onExit)
             }
 
-            STANDARD_STRETCH.moves.mapIndexed { i, move ->
+            com.unicornio.happyinseat.model.STANDARD_STRETCH.moves.mapIndexed { i, move ->
                 item {
                     MoveListItem(
                         seq = i + 1,

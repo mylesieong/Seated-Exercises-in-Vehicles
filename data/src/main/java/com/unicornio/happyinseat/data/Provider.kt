@@ -1,4 +1,4 @@
-package com.unicornio.happyinseat.persistence
+package com.unicornio.happyinseat.data
 
 import android.content.ContentProvider
 import android.content.ContentUris
@@ -7,9 +7,9 @@ import android.content.UriMatcher
 import android.database.Cursor
 import android.net.Uri
 import android.util.Log
-import com.unicornio.happyinseat.persistence.Contract.RecordEntry
-import com.unicornio.happyinseat.persistence.Contract.RecordEntry.isValidForInsertion
-import com.unicornio.happyinseat.persistence.Contract.RecordEntry.isValidForUpdate
+import com.unicornio.happyinseat.data.Contract.RecordEntry
+import com.unicornio.happyinseat.data.Contract.RecordEntry.isValidForInsertion
+import com.unicornio.happyinseat.data.Contract.RecordEntry.isValidForUpdate
 
 class Provider : ContentProvider() {
 

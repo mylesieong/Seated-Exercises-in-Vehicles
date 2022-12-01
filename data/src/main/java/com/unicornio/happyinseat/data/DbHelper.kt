@@ -1,9 +1,9 @@
-package com.unicornio.happyinseat.persistence
+package com.unicornio.happyinseat.data
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import com.unicornio.happyinseat.persistence.Contract.RecordEntry
+import com.unicornio.happyinseat.data.Contract.RecordEntry
 
 class DbHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     /**

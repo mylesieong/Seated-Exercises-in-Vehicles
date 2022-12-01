@@ -1,4 +1,4 @@
-package com.unicornio.happyinseat
+package com.unicornio.happyinseat.model
 
 val BREATH = Move(
     "Breath in and out",
