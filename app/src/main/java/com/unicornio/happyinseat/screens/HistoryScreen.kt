@@ -18,13 +18,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
-import com.unicornio.happyinseat.model.Record
+import com.unicornio.happyinseat.data.Record
 import com.unicornio.happyinseat.indexRecordsByYearAndMonth
-import com.unicornio.happyinseat.loadRecords
+import com.unicornio.happyinseat.loadExercises
+import com.unicornio.happyinseat.model.Exercise
 import com.unicornio.happyinseat.ui.theme.ApplicationTheme
 import com.unicornio.happyinseat.view.CalendarView
 import com.unicornio.toolish.utils.Utils
 import com.unicornio.toolish.utils.Utils.isSameDay
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.*
 
 private const val TAG = "HistoryScreen"
@@ -39,7 +42,7 @@ fun HistoryScreen() {
     val monthNow = now[Calendar.MONTH]
 
     val recordsShared = remember {
-        mutableStateListOf<com.unicornio.happyinseat.model.Record>().also {
+        mutableStateListOf<Record>().also {
             it.addAll(loadRecords(context, dayNow, monthNow, yearNow))
         }
     }
@@ -53,23 +56,23 @@ fun HistoryScreen() {
     }
 }
 
-private fun loadRecords(context: Context, day: Int, month: Int, year: Int): List<com.unicornio.happyinseat.model.Record> {
-    return loadRecords(context).filter {
-        Utils.calender(year, month, day).isSameDay(it.timestamp)
+private fun loadRecords(context: Context, day: Int, month: Int, year: Int): List<Record> {
+    return loadExercises(context).filter {
+        Utils.calender(year, month, day).isSameDay(it.first)
     }
 }
 
 @Composable
-fun Calender(recordsShared: SnapshotStateList<com.unicornio.happyinseat.model.Record>, monthNow: Int, yearNow: Int) {
+fun Calender(recordsShared: SnapshotStateList<Record>, monthNow: Int, yearNow: Int) {
 
-    fun getHighlightDictionary(records: List<com.unicornio.happyinseat.model.Record>, year: Int, month: Int): Map<Int, Float> {
+    fun getHighlightDictionary(records: List<Record>, year: Int, month: Int): Map<Int, Float> {
         val recordsOfGivenYearMonth = indexRecordsByYearAndMonth(records)[Utils.YearMonth(year, month)] ?: emptyList()
         if (recordsOfGivenYearMonth.isEmpty()) {
             Log.d(TAG, "getHighlightDictionary: no records found in given year and month")
             return emptyMap()
         }
 
-        val recordsGroupByDay = recordsOfGivenYearMonth.groupBy { Utils.calender(it.timestamp)[Calendar.DAY_OF_MONTH] }
+        val recordsGroupByDay = recordsOfGivenYearMonth.groupBy { Utils.calender(it.first)[Calendar.DAY_OF_MONTH] }
 
         val baseAlpha = 1f
         val mapDayAndAlpha = mutableMapOf<Int, Float>()
@@ -90,7 +93,7 @@ fun Calender(recordsShared: SnapshotStateList<com.unicornio.happyinseat.model.Re
             CalendarView(it, null).apply {
                 setMonthAndYear(monthNow, yearNow)
 
-                val fullRecords = loadRecords(context)
+                val fullRecords = loadExercises(context)
 
                 setHighlightDictionary(getHighlightDictionary(fullRecords, yearNow, monthNow))
 
@@ -116,7 +119,7 @@ fun Calender(recordsShared: SnapshotStateList<com.unicornio.happyinseat.model.Re
 }
 
 @Composable
-fun RecordList(context: Context, recordsShared: SnapshotStateList<com.unicornio.happyinseat.model.Record>) {
+fun RecordList(context: Context, recordsShared: SnapshotStateList<Record>) {
     Text(text = "Records", Modifier.fillMaxWidth(), textAlign = TextAlign.Center, style = MaterialTheme.typography.subtitle1)
 
     Spacer(modifier = Modifier.height(8.dp))
@@ -136,15 +139,15 @@ fun RecordList(context: Context, recordsShared: SnapshotStateList<com.unicornio.
 }
 
 @Composable
-fun RecordItem(context: Context, record: com.unicornio.happyinseat.model.Record) {
+fun RecordItem(context: Context, record: Pair<Long, Exercise>) {
     Row(
         Modifier
             .fillMaxWidth()
             .padding(horizontal = 24.dp, vertical = 4.dp)
     ) {
-        val datetime = Utils.toDateString(context, record.timestamp, true)
+        val datetime = Utils.toDateString(context, record.first, true)
         Text(text = datetime, style = MaterialTheme.typography.body2, fontSize = 12.sp, modifier = Modifier.weight(1f))
-        Text(text = record.exercise.name, style = MaterialTheme.typography.body2, fontSize = 12.sp)
+        Text(text = record.second.name, style = MaterialTheme.typography.body2, fontSize = 12.sp)
     }
 }
 

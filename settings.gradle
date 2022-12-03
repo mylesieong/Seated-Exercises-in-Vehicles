@@ -8,5 +8,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "SeatedExerciseInVehicles"
 include ':app'
-include ':data'
+include ':repository'
 include ':model'
+include ':database'
