@@ -20,10 +20,10 @@ class Provider : ContentProvider() {
 
     override fun query(uri: Uri, projection: Array<String>?, selection: String?, selectionArgs: Array<String>?, sortOrder: String?): Cursor? {
         val cursor = when (sUriMatcher.match(uri)) {
-            RECORD_ALL -> toCursor(db.exerciseDao().getAll())
+            RECORD_ALL -> db.exerciseDao().getAll()
             else -> throw IllegalArgumentException("Cannot query unknown URI $uri")
         }
-        cursor?.setNotificationUri(context?.contentResolver, uri)
+        cursor.setNotificationUri(context?.contentResolver, uri)
         return cursor
     }
 
