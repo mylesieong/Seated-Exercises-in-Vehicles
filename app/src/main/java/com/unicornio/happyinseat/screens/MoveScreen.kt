@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.unicornio.happyinseat.*
 import com.unicornio.happyinseat.R
+import com.unicornio.happyinseat.model.Exercise
 import com.unicornio.happyinseat.ui.theme.ApplicationTheme
 
 @Composable
@@ -165,9 +166,9 @@ fun MoveControl(index: Int, exercise: com.unicornio.happyinseat.model.Exercise, 
         }
     }
 
-    fun goToNextMove(context: Context, index: Int, exercise: com.unicornio.happyinseat.model.Exercise) {
+    fun goToNextMove(context: Context, index: Int, exercise: Exercise) {
         if (index == exercise.moves.size - 1) {
-            saveRecord(context, com.unicornio.happyinseat.model.Record(System.currentTimeMillis(), exercise))
+            saveExercise(context, System.currentTimeMillis(), exercise)
             onNavigateToFinish.invoke()
 
         } else {

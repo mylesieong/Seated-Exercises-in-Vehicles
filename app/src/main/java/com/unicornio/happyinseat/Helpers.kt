@@ -9,7 +9,9 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.WindowManager
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -19,10 +21,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.unicornio.happyinseat.data.Contract.RecordEntry
-import com.unicornio.happyinseat.data.Contract.RecordEntry.CONTENT_URI
-import com.unicornio.happyinseat.data.Contract.RecordEntry.fromCursor
-import com.unicornio.happyinseat.data.Contract.RecordEntry.toContentValues
+import com.unicornio.happyinseat.data.Provider
+import com.unicornio.happyinseat.data.Provider.Companion.RECORDS_CONTENT_URI
+import com.unicornio.happyinseat.data.Record
+import com.unicornio.happyinseat.data.fromCursorTakeOne
+import com.unicornio.happyinseat.data.toContentValues
+import com.unicornio.happyinseat.model.Exercise
+import com.unicornio.happyinseat.model.ONE_DAY_MILLIS
+import com.unicornio.happyinseat.model.STANDARD_STRETCH
 import com.unicornio.happyinseat.ui.theme.ApplicationTheme
 import com.unicornio.toolish.utils.Utils
 import java.util.*
@@ -103,44 +109,39 @@ fun Activity.setKeepScreenOn(isKeepOn: Boolean) {
     }
 }
 
-fun saveRecord(context: Context, record: Record): Uri? {
-    Log.d(TAG, "saveRecord: record=$record")
-    return context.contentResolver.insert(CONTENT_URI, toContentValues(record))
+fun saveExercise(context: Context, timestamp:Long, exercise: Exercise): Uri? {
+    return context.contentResolver.insert(RECORDS_CONTENT_URI, toContentValues(timestamp, exercise))
 }
 
-fun loadRecords(context: Context, exercise: com.unicornio.happyinseat.model.Exercise? = null): List<com.unicornio.happyinseat.model.Record> {
-    val uri = CONTENT_URI
-    val projection = arrayOf(
-        RecordEntry.ID,
-        RecordEntry.COLUMN_TIMESTAMP,
-        RecordEntry.COLUMN_EXERCISE_NAME
-    )
+fun loadExercises(context: Context, exercise: Exercise? = null): List<Record> {
+    val uri = RECORDS_CONTENT_URI
 
-    val fullRecords = context.contentResolver.query(uri, projection, null, null, null)?.let { cursor ->
+    val fullRecords = context.contentResolver.query(uri, null, null, null, null)?.let { cursor ->
         (1..cursor.count).mapNotNull {
             cursor.moveToNext()
-            fromCursor(cursor)
+            fromCursorTakeOne(cursor)
         }
     }
         ?: emptyList()
 
-    val result = if (exercise == null) fullRecords else fullRecords.filter { it.exercise == exercise }
+    val result = if (exercise == null) fullRecords else fullRecords.filter { it.second == exercise }
+
     return result.also {
-        Log.d(TAG, "loadRecords: ${result.size} record(s) loaded.")
+        Log.d(TAG, "loadRecords: ${result.size} Exercise(s) loaded.")
     }
 }
 
-fun getLatestRecord(context: Context): com.unicornio.happyinseat.model.Record? {
-    val fullRecords = loadRecords(context).sortedBy { it.timestamp }
+fun getLatestRecord(context: Context): Record? {
+    val fullRecords = loadExercises(context).sortedBy { it.first }
     return if (fullRecords.isNotEmpty()) fullRecords.last() else null
 }
 
 fun deleteRecords(context: Context) {
-    context.contentResolver.delete(CONTENT_URI, null, null)
+    context.contentResolver.delete(RECORDS_CONTENT_URI, null, null)
 }
 
-fun indexRecordsByYearAndMonth(records: List<com.unicornio.happyinseat.model.Record>): Map<Utils.YearMonth, List<com.unicornio.happyinseat.model.Record>> = records.groupBy {
-    val calendar = Utils.calender(it.timestamp)
+fun indexRecordsByYearAndMonth(records: List<Record>): Map<Utils.YearMonth, List<Record>> = records.groupBy {
+    val calendar = Utils.calender(it.first)
     Utils.YearMonth(calendar[Calendar.YEAR], calendar[Calendar.MONTH])
 }
 
@@ -148,35 +149,35 @@ fun insertDummyRecordForDebugBuild(context: Context) {
     if (BuildConfig.DEBUG) {
         deleteRecords(context)
 
-        val time6DaysAgo = System.currentTimeMillis() - com.unicornio.happyinseat.model.ONE_DAY_MILLIS * 6
-        saveRecord(context, com.unicornio.happyinseat.model.Record(time6DaysAgo, com.unicornio.happyinseat.model.STANDARD_STRETCH))
-        saveRecord(context, com.unicornio.happyinseat.model.Record(time6DaysAgo, com.unicornio.happyinseat.model.STANDARD_STRETCH))
-        saveRecord(context, com.unicornio.happyinseat.model.Record(time6DaysAgo, com.unicornio.happyinseat.model.STANDARD_STRETCH))
+        val time6DaysAgo = System.currentTimeMillis() - ONE_DAY_MILLIS * 6
+        saveExercise(context, time6DaysAgo, STANDARD_STRETCH)
+        saveExercise(context, time6DaysAgo, STANDARD_STRETCH)
+        saveExercise(context, time6DaysAgo, STANDARD_STRETCH)
 
-        val time5DaysAgo = System.currentTimeMillis() - com.unicornio.happyinseat.model.ONE_DAY_MILLIS * 5
-        saveRecord(context, com.unicornio.happyinseat.model.Record(time5DaysAgo, com.unicornio.happyinseat.model.STANDARD_STRETCH))
-        saveRecord(context, com.unicornio.happyinseat.model.Record(time5DaysAgo, com.unicornio.happyinseat.model.STANDARD_STRETCH))
-        saveRecord(context, com.unicornio.happyinseat.model.Record(time5DaysAgo, com.unicornio.happyinseat.model.STANDARD_STRETCH))
-        saveRecord(context, com.unicornio.happyinseat.model.Record(time5DaysAgo, com.unicornio.happyinseat.model.STANDARD_STRETCH))
+        val time5DaysAgo = System.currentTimeMillis() - ONE_DAY_MILLIS * 5
+        saveExercise(context, time5DaysAgo, STANDARD_STRETCH)
+        saveExercise(context, time5DaysAgo, STANDARD_STRETCH)
+        saveExercise(context, time5DaysAgo, STANDARD_STRETCH)
+        saveExercise(context, time5DaysAgo, STANDARD_STRETCH)
 
-        val time3DaysAgo = System.currentTimeMillis() - com.unicornio.happyinseat.model.ONE_DAY_MILLIS * 3
-        saveRecord(context, com.unicornio.happyinseat.model.Record(time3DaysAgo, com.unicornio.happyinseat.model.STANDARD_STRETCH))
+        val time3DaysAgo = System.currentTimeMillis() - ONE_DAY_MILLIS * 3
+        saveExercise(context, time3DaysAgo, STANDARD_STRETCH)
 
-        val time2DaysAgo = System.currentTimeMillis() - com.unicornio.happyinseat.model.ONE_DAY_MILLIS * 2
-        saveRecord(context, com.unicornio.happyinseat.model.Record(time2DaysAgo, com.unicornio.happyinseat.model.STANDARD_STRETCH))
-        saveRecord(context, com.unicornio.happyinseat.model.Record(time2DaysAgo, com.unicornio.happyinseat.model.STANDARD_STRETCH))
-        saveRecord(context, com.unicornio.happyinseat.model.Record(time2DaysAgo, com.unicornio.happyinseat.model.STANDARD_STRETCH))
-        saveRecord(context, com.unicornio.happyinseat.model.Record(time2DaysAgo, com.unicornio.happyinseat.model.STANDARD_STRETCH))
-        saveRecord(context, com.unicornio.happyinseat.model.Record(time2DaysAgo, com.unicornio.happyinseat.model.STANDARD_STRETCH))
+        val time2DaysAgo = System.currentTimeMillis() - ONE_DAY_MILLIS * 2
+        saveExercise(context, time2DaysAgo, STANDARD_STRETCH)
+        saveExercise(context, time2DaysAgo, STANDARD_STRETCH)
+        saveExercise(context, time2DaysAgo, STANDARD_STRETCH)
+        saveExercise(context, time2DaysAgo, STANDARD_STRETCH)
+        saveExercise(context, time2DaysAgo, STANDARD_STRETCH)
 
-        val time1DaysAgo = System.currentTimeMillis() - com.unicornio.happyinseat.model.ONE_DAY_MILLIS * 1
-        saveRecord(context, com.unicornio.happyinseat.model.Record(time1DaysAgo, com.unicornio.happyinseat.model.STANDARD_STRETCH))
-        saveRecord(context, com.unicornio.happyinseat.model.Record(time1DaysAgo, com.unicornio.happyinseat.model.STANDARD_STRETCH))
+        val time1DaysAgo = System.currentTimeMillis() - ONE_DAY_MILLIS * 1
+        saveExercise(context, time1DaysAgo, STANDARD_STRETCH)
+        saveExercise(context, time1DaysAgo, STANDARD_STRETCH)
 
         val time0DaysAgo = System.currentTimeMillis()
-        saveRecord(context, com.unicornio.happyinseat.model.Record(time0DaysAgo, com.unicornio.happyinseat.model.STANDARD_STRETCH))
-        saveRecord(context, com.unicornio.happyinseat.model.Record(time0DaysAgo, com.unicornio.happyinseat.model.STANDARD_STRETCH))
-        saveRecord(context, com.unicornio.happyinseat.model.Record(time0DaysAgo, com.unicornio.happyinseat.model.STANDARD_STRETCH))
+        saveExercise(context, time0DaysAgo, STANDARD_STRETCH)
+        saveExercise(context, time0DaysAgo, STANDARD_STRETCH)
+        saveExercise(context, time0DaysAgo, STANDARD_STRETCH)
     }
 }
 
