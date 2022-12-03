@@ -24,7 +24,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.unicornio.happyinseat.data.Provider
 import com.unicornio.happyinseat.data.Provider.Companion.RECORDS_CONTENT_URI
 import com.unicornio.happyinseat.data.Record
-import com.unicornio.happyinseat.data.fromCursorTakeOne
 import com.unicornio.happyinseat.data.toContentValues
 import com.unicornio.happyinseat.model.Exercise
 import com.unicornio.happyinseat.model.ONE_DAY_MILLIS
@@ -111,29 +110,6 @@ fun Activity.setKeepScreenOn(isKeepOn: Boolean) {
 
 fun saveExercise(context: Context, timestamp:Long, exercise: Exercise): Uri? {
     return context.contentResolver.insert(RECORDS_CONTENT_URI, toContentValues(timestamp, exercise))
-}
-
-fun loadExercises(context: Context, exercise: Exercise? = null): List<Record> {
-    val uri = RECORDS_CONTENT_URI
-
-    val fullRecords = context.contentResolver.query(uri, null, null, null, null)?.let { cursor ->
-        (1..cursor.count).mapNotNull {
-            cursor.moveToNext()
-            fromCursorTakeOne(cursor)
-        }
-    }
-        ?: emptyList()
-
-    val result = if (exercise == null) fullRecords else fullRecords.filter { it.second == exercise }
-
-    return result.also {
-        Log.d(TAG, "loadRecords: ${result.size} Exercise(s) loaded.")
-    }
-}
-
-fun getLatestRecord(context: Context): Record? {
-    val fullRecords = loadExercises(context).sortedBy { it.first }
-    return if (fullRecords.isNotEmpty()) fullRecords.last() else null
 }
 
 fun deleteRecords(context: Context) {

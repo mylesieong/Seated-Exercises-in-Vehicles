@@ -1,16 +1,12 @@
 package com.unicornio.happyinseat.screens
 
-import android.content.Context
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.style.TextAlign
@@ -18,12 +14,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.unicornio.happyinseat.data.Record
 import com.unicornio.happyinseat.indexRecordsByYearAndMonth
-import com.unicornio.happyinseat.loadExercises
-import com.unicornio.happyinseat.model.Exercise
 import com.unicornio.happyinseat.ui.theme.ApplicationTheme
 import com.unicornio.happyinseat.view.CalendarView
+import com.unicornio.happyinseat.viewmodels.RecordFetchViewModel
 import com.unicornio.toolish.utils.Utils
 import com.unicornio.toolish.utils.Utils.isSameDay
 import kotlinx.coroutines.GlobalScope
@@ -33,37 +29,29 @@ import java.util.*
 private const val TAG = "HistoryScreen"
 
 @Composable
-fun HistoryScreen() {
-    val context = LocalView.current.context
+fun HistoryScreen(viewModel: RecordFetchViewModel = viewModel()) {
+    val uiState by viewModel.uiState.collectAsState()
 
-    val now = Utils.calender()
-    val dayNow = now[Calendar.DAY_OF_MONTH]
-    val yearNow = now[Calendar.YEAR]
-    val monthNow = now[Calendar.MONTH]
-
-    val recordsShared = remember {
-        mutableStateListOf<Record>().also {
-            it.addAll(loadRecords(context, dayNow, monthNow, yearNow))
-        }
-    }
+    val dayPicked = remember { mutableStateOf<Int?>(null) }
+    val monthPicked = remember { mutableStateOf<Int?>(null) }
+    val yearPicked = remember { mutableStateOf<Int?>(null) }
 
     Column(Modifier.fillMaxSize()) {
-        Calender(recordsShared, monthNow, yearNow)
-
-        if (recordsShared.isNotEmpty()) {
-            RecordList(context, recordsShared)
-        }
+        Calender(uiState.records, yearPicked, monthPicked, dayPicked)
+        RecordList(uiState.records, yearPicked, monthPicked, dayPicked)
     }
 }
 
-private fun loadRecords(context: Context, day: Int, month: Int, year: Int): List<Record> {
-    return loadExercises(context).filter {
-        Utils.calender(year, month, day).isSameDay(it.first)
+private fun List<Record>.filter(year: Int?, month: Int?, day: Int?): List<Record> {
+    if (year == null || month == null || day == null) {
+        return emptyList()
     }
+
+    return filter { Utils.calender(year, month, day).isSameDay(it.first) }
 }
 
 @Composable
-fun Calender(recordsShared: SnapshotStateList<Record>, monthNow: Int, yearNow: Int) {
+fun Calender(records: List<Record>, yearPicked: MutableState<Int?>, monthPicked: MutableState<Int?>, dayPicked: MutableState<Int?>) {
 
     fun getHighlightDictionary(records: List<Record>, year: Int, month: Int): Map<Int, Float> {
         val recordsOfGivenYearMonth = indexRecordsByYearAndMonth(records)[Utils.YearMonth(year, month)] ?: emptyList()
@@ -85,6 +73,10 @@ fun Calender(recordsShared: SnapshotStateList<Record>, monthNow: Int, yearNow: I
         }
     }
 
+    val (yearNow, monthNow) = Utils.calender().let {
+        Pair(it[Calendar.YEAR], it[Calendar.MONTH])
+    }
+
     AndroidView(
         modifier = Modifier
             .fillMaxWidth()
@@ -93,22 +85,20 @@ fun Calender(recordsShared: SnapshotStateList<Record>, monthNow: Int, yearNow: I
             CalendarView(it, null).apply {
                 setMonthAndYear(monthNow, yearNow)
 
-                val fullRecords = loadExercises(context)
-
-                setHighlightDictionary(getHighlightDictionary(fullRecords, yearNow, monthNow))
+                setHighlightDictionary(getHighlightDictionary(records, yearNow, monthNow))
 
                 setOnCalendarFlipListener(object : CalendarView.OnCalendarFlipListener {
                     override fun onFlip(year: Int, month: Int) {
-                        setHighlightDictionary(getHighlightDictionary(fullRecords, year, month))
+                        setHighlightDictionary(getHighlightDictionary(records, year, month))
                     }
                 })
 
                 setOnDateSelectedListener(object : CalendarView.OnDateSelectedListener {
                     override fun onDateSelected(year: Int, month: Int, day: Int) {
                         Log.d(TAG, "onDateSelected: ymd=$year/$month/$day")
-                        val list = loadRecords(context, day, month, year)
-                        recordsShared.clear()
-                        recordsShared.addAll(list)
+                        yearPicked.value = year
+                        monthPicked.value = month
+                        dayPicked.value = day
                     }
                 })
             }
@@ -119,27 +109,32 @@ fun Calender(recordsShared: SnapshotStateList<Record>, monthNow: Int, yearNow: I
 }
 
 @Composable
-fun RecordList(context: Context, recordsShared: SnapshotStateList<Record>) {
-    Text(text = "Records", Modifier.fillMaxWidth(), textAlign = TextAlign.Center, style = MaterialTheme.typography.subtitle1)
+fun RecordList(records: List<Record>, yearPicked: MutableState<Int?>, monthPicked: MutableState<Int?>, dayPicked: MutableState<Int?>) {
+    val recordsToShow = records.filter(yearPicked.value, monthPicked.value, dayPicked.value)
 
-    Spacer(modifier = Modifier.height(8.dp))
+    if (recordsToShow.isNotEmpty()) {
+        Text(text = "Records", Modifier.fillMaxWidth(), textAlign = TextAlign.Center, style = MaterialTheme.typography.subtitle1)
 
-    LazyColumn(Modifier.fillMaxWidth()) {
+        Spacer(modifier = Modifier.height(8.dp))
 
-        recordsShared.map {
-            item {
-                RecordItem(context, it)
+        LazyColumn(Modifier.fillMaxWidth()) {
+            recordsToShow.map {
+                item {
+                    RecordItem(it)
+                }
             }
-        }
 
-        item {
-            Spacer(modifier = Modifier.height(60.dp))
+            item {
+                Spacer(modifier = Modifier.height(60.dp))
+            }
         }
     }
 }
 
 @Composable
-fun RecordItem(context: Context, record: Pair<Long, Exercise>) {
+fun RecordItem(record: Record) {
+    val context = LocalView.current.context
+
     Row(
         Modifier
             .fillMaxWidth()
