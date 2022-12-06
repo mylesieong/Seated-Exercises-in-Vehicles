@@ -85,8 +85,6 @@ fun Calender(records: List<Record>, yearPicked: MutableState<Int?>, monthPicked:
             CalendarView(it, null).apply {
                 setMonthAndYear(monthNow, yearNow)
 
-                setHighlightDictionary(getHighlightDictionary(records, yearNow, monthNow))
-
                 setOnCalendarFlipListener(object : CalendarView.OnCalendarFlipListener {
                     override fun onFlip(year: Int, month: Int) {
                         setHighlightDictionary(getHighlightDictionary(records, year, month))
@@ -104,7 +102,9 @@ fun Calender(records: List<Record>, yearPicked: MutableState<Int?>, monthPicked:
             }
 
         },
-        update = { }
+        update = {
+            it.setHighlightDictionary(getHighlightDictionary(records, yearNow, monthNow))
+        }
     )
 }
 

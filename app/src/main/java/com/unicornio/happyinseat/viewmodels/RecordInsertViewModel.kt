@@ -12,13 +12,14 @@ import com.unicornio.happyinseat.deleteRecords
 import com.unicornio.happyinseat.model.Exercise
 import com.unicornio.happyinseat.model.ONE_DAY_MILLIS
 import com.unicornio.happyinseat.model.STANDARD_STRETCH
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class RecordInsertViewModel(application: Application) : AndroidViewModel(application) {
 
     fun saveExercise(context: Context, timestamp: Long, exercise: Exercise) {
         Log.d(TAG, "saveExercise: exercise=$exercise")
-        viewModelScope.launch {
+        viewModelScope.launch (Dispatchers.IO) {
             context.contentResolver.insert(Provider.RECORDS_CONTENT_URI, toContentValues(timestamp, exercise))
         }
     }

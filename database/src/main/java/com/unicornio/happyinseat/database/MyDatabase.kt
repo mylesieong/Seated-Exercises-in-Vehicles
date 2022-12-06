@@ -18,7 +18,6 @@ abstract class MyDatabase : RoomDatabase() {
 
         fun getInstance(context: Context): MyDatabase = database ?: Room
             .databaseBuilder(context, MyDatabase::class.java, DB_FILE_NAME)
-            .allowMainThreadQueries()   //TODO remove this, but it will break content provider in where no database access is allowed and its only on main thread
             .addMigrations(MIGRATION_1_2)
             .build()
             .also {
