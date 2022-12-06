@@ -26,13 +26,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
-import com.unicornio.happyinseat.*
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.unicornio.happyinseat.R
+import com.unicornio.happyinseat.askUserWhetherQuit
 import com.unicornio.happyinseat.model.Exercise
 import com.unicornio.happyinseat.ui.theme.ApplicationTheme
+import com.unicornio.happyinseat.viewmodels.RecordInsertViewModel
 
 @Composable
-fun MoveScreen(moveIndex: Int?, onExit: () -> Unit, onNavigateToMove: (Int) -> Unit, onNavigateToFinish: () -> Unit) {
+fun MoveScreen(
+    moveIndex: Int?,
+    onExit: () -> Unit,
+    onNavigateToMove: (Int) -> Unit,
+    onNavigateToFinish: () -> Unit
+) {
     //TODO add dynamic exercise when there is more types
     Box(modifier = Modifier.fillMaxSize()) {
         MoveInformation(
@@ -52,7 +59,7 @@ fun MoveScreen(moveIndex: Int?, onExit: () -> Unit, onNavigateToMove: (Int) -> U
 }
 
 @Composable
-fun MoveInformation(index: Int, exercise: com.unicornio.happyinseat.model.Exercise, onExit: () -> Unit) {
+fun MoveInformation(index: Int, exercise: Exercise, onExit: () -> Unit) {
     val context = LocalView.current.context
     val move = exercise.moves[index]
     var isExpanded by remember { mutableStateOf(false) }
@@ -159,7 +166,14 @@ fun MoveInformation(index: Int, exercise: com.unicornio.happyinseat.model.Exerci
 }
 
 @Composable
-fun MoveControl(index: Int, exercise: com.unicornio.happyinseat.model.Exercise, modifier: Modifier, onNavigateToMove: (Int) -> Unit, onNavigateToFinish: () -> Unit) {
+fun MoveControl(
+    index: Int,
+    exercise: Exercise,
+    modifier: Modifier,
+    onNavigateToMove: (Int) -> Unit,
+    onNavigateToFinish: () -> Unit,
+    viewModel: RecordInsertViewModel = viewModel(),
+) {
     fun goToPreviousMove(index: Int) {
         if (index > 0) {
             onNavigateToMove.invoke(index - 1)
@@ -168,7 +182,7 @@ fun MoveControl(index: Int, exercise: com.unicornio.happyinseat.model.Exercise, 
 
     fun goToNextMove(context: Context, index: Int, exercise: Exercise) {
         if (index == exercise.moves.size - 1) {
-            saveExercise(context, System.currentTimeMillis(), exercise)
+            viewModel.saveExercise(context, System.currentTimeMillis(), exercise)
             onNavigateToFinish.invoke()
 
         } else {
@@ -242,6 +256,6 @@ fun MoveControl(index: Int, exercise: com.unicornio.happyinseat.model.Exercise, 
 )
 fun MoveScreenPreview() {
     ApplicationTheme {
-        MoveScreen(1, {}, {}, {})
+        MoveScreen(moveIndex = 1, onNavigateToFinish = {}, onExit = {}, onNavigateToMove = {})
     }
 }
