@@ -10,6 +10,7 @@ import com.unicornio.happyinseat.data.Provider
 import com.unicornio.happyinseat.data.Record
 import com.unicornio.happyinseat.data.fromCursorTakeOne
 import com.unicornio.happyinseat.model.Exercise
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -25,7 +26,7 @@ class RecordFetchViewModel(application: Application) : AndroidViewModel(applicat
     val uiState = _uiState.asStateFlow()
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             _uiState.update { currentState ->
                 currentState.copy(
                     records = loadExercises(application)
