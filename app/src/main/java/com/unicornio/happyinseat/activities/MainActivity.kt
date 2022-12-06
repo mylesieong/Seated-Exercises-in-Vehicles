@@ -25,7 +25,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.unicornio.happyinseat.R
-import com.unicornio.happyinseat.insertDummyRecordForDebugBuild
 import com.unicornio.happyinseat.screens.HistoryScreen
 import com.unicornio.happyinseat.screens.HomeScreen
 import com.unicornio.happyinseat.screens.SettingScreen

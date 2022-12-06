@@ -24,7 +24,7 @@ fun fromContentValues(contentValues: ContentValues): ExerciseRecord? {
         return null
     }
 
-    return ExerciseRecord(-1, contentValues.getAsLong(COLUMN_TIMESTAMP), contentValues.getAsString(COLUMN_EXERCISE_NAME))
+    return ExerciseRecord(null, contentValues.getAsLong(COLUMN_TIMESTAMP), contentValues.getAsString(COLUMN_EXERCISE_NAME))
 }
 
 fun toContentValues(timestamp: Long, exercise: Exercise) = ContentValues().apply {

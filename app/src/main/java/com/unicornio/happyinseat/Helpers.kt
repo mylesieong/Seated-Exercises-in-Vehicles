@@ -108,10 +108,6 @@ fun Activity.setKeepScreenOn(isKeepOn: Boolean) {
     }
 }
 
-fun saveExercise(context: Context, timestamp:Long, exercise: Exercise): Uri? {
-    return context.contentResolver.insert(RECORDS_CONTENT_URI, toContentValues(timestamp, exercise))
-}
-
 fun deleteRecords(context: Context) {
     context.contentResolver.delete(RECORDS_CONTENT_URI, null, null)
 }
@@ -119,42 +115,6 @@ fun deleteRecords(context: Context) {
 fun indexRecordsByYearAndMonth(records: List<Record>): Map<Utils.YearMonth, List<Record>> = records.groupBy {
     val calendar = Utils.calender(it.first)
     Utils.YearMonth(calendar[Calendar.YEAR], calendar[Calendar.MONTH])
-}
-
-fun insertDummyRecordForDebugBuild(context: Context) {
-    if (BuildConfig.DEBUG) {
-        deleteRecords(context)
-
-        val time6DaysAgo = System.currentTimeMillis() - ONE_DAY_MILLIS * 6
-        saveExercise(context, time6DaysAgo, STANDARD_STRETCH)
-        saveExercise(context, time6DaysAgo, STANDARD_STRETCH)
-        saveExercise(context, time6DaysAgo, STANDARD_STRETCH)
-
-        val time5DaysAgo = System.currentTimeMillis() - ONE_DAY_MILLIS * 5
-        saveExercise(context, time5DaysAgo, STANDARD_STRETCH)
-        saveExercise(context, time5DaysAgo, STANDARD_STRETCH)
-        saveExercise(context, time5DaysAgo, STANDARD_STRETCH)
-        saveExercise(context, time5DaysAgo, STANDARD_STRETCH)
-
-        val time3DaysAgo = System.currentTimeMillis() - ONE_DAY_MILLIS * 3
-        saveExercise(context, time3DaysAgo, STANDARD_STRETCH)
-
-        val time2DaysAgo = System.currentTimeMillis() - ONE_DAY_MILLIS * 2
-        saveExercise(context, time2DaysAgo, STANDARD_STRETCH)
-        saveExercise(context, time2DaysAgo, STANDARD_STRETCH)
-        saveExercise(context, time2DaysAgo, STANDARD_STRETCH)
-        saveExercise(context, time2DaysAgo, STANDARD_STRETCH)
-        saveExercise(context, time2DaysAgo, STANDARD_STRETCH)
-
-        val time1DaysAgo = System.currentTimeMillis() - ONE_DAY_MILLIS * 1
-        saveExercise(context, time1DaysAgo, STANDARD_STRETCH)
-        saveExercise(context, time1DaysAgo, STANDARD_STRETCH)
-
-        val time0DaysAgo = System.currentTimeMillis()
-        saveExercise(context, time0DaysAgo, STANDARD_STRETCH)
-        saveExercise(context, time0DaysAgo, STANDARD_STRETCH)
-        saveExercise(context, time0DaysAgo, STANDARD_STRETCH)
-    }
 }
 
 fun Context.colorPrimary(): Int {
