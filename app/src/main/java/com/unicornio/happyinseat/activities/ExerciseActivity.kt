@@ -5,13 +5,15 @@ import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.unicornio.happyinseat.AdManager
-import com.unicornio.happyinseat.askUserWhetherQuit
+import com.unicornio.happyinseat.ComposeAlertDialog
 import com.unicornio.happyinseat.screens.FinishScreen
 import com.unicornio.happyinseat.screens.MoveScreen
 import com.unicornio.happyinseat.screens.OverviewScreen
@@ -38,6 +40,28 @@ class ExerciseActivity : AppCompatActivity() {
     private fun ExerciseScreen() {
         val navController = rememberNavController()
 
+        val openDialog = remember { mutableStateOf(false) }
+
+        if (openDialog.value) {
+            ComposeAlertDialog(
+                title = "Exit",
+                description = "Leave current exercise",
+                onPositive = {
+                    navController.navigate("overview") {
+                        popUpTo("overview") {
+                            inclusive = true
+                        }
+                    }
+                    openDialog.value = false
+                },
+                onNegative = {
+                    openDialog.value = false
+                },
+                onDismiss = {
+                    openDialog.value = false
+                })
+        }
+
         BackHandler(
             enabled = true,
             onBack = {
@@ -46,16 +70,7 @@ class ExerciseActivity : AppCompatActivity() {
                         finishAfterTransition()
                     }
                     "move/{moveIndex}" -> {
-                        askUserWhetherQuit(
-                            positiveAction = {
-                                navController.navigate("overview") {
-                                    popUpTo("overview") {
-                                        inclusive = true
-                                    }
-                                }
-                            },
-                            negativeAction = {}
-                        )
+                        openDialog.value = true
                     }
                     "finish" -> {
                         AdManager.loadAndShowInterstitialAdHoweverSilentIfAdsNotReady(
