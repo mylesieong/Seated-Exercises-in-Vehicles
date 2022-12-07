@@ -1,9 +1,9 @@
 package com.unicornio.happyinseat.screens
 
 import android.content.res.Configuration
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.runtime.Composable
@@ -12,6 +12,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment.Companion.TopEnd
 import androidx.compose.ui.Alignment.Companion.TopStart
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -56,39 +58,58 @@ fun SettingScreen() {
         Text(
             text = "General",
             color = contentColorFor(colors.background),
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.subtitle1
         )
 
         Box(modifier = Modifier.fillMaxWidth()) {
             Text(
                 text = "Remove all records",
                 color = contentColorFor(colors.background),
-                modifier = Modifier.align(TopStart)
+                modifier = Modifier.align(TopStart),
+                style = MaterialTheme.typography.body1
             )
             Button(
                 modifier = Modifier.align(TopEnd),
-                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primary),
+                colors = ButtonDefaults.buttonColors(backgroundColor = colors.primary),
                 onClick = { openDialog.value = true }
             ) {
                 Text(text = "Remove", color = contentColorFor(colors.primary))
             }
         }
 
+        Spacer(modifier = Modifier.height(12.dp))
+
         Text(
             text = "About",
             color = contentColorFor(colors.background),
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.subtitle1
         )
 
         Box(modifier = Modifier.fillMaxWidth()) {
             Text(
-                text = "Rate and feedback", color = contentColorFor(colors.background), modifier = Modifier.align(TopStart)
+                text = "Rate and feedback",
+                color = contentColorFor(colors.background),
+                modifier = Modifier.align(TopStart),
+                style = MaterialTheme.typography.body1
             )
-            Image(painter = painterResource(id = R.drawable.ic_baseline_insert_comment_24), contentDescription = null, modifier = Modifier
-                .align(TopEnd)
-                .clickable {
+            IconButton(
+                modifier = Modifier
+                    .align(TopEnd)
+                    .clip(CircleShape)
+                    .background(colors.primary),
+                onClick = {
                     rateApp(context)
-                })
+                }
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_baseline_insert_comment_24),
+                    contentDescription = null,
+                    tint = colors.onPrimary
+                )
+            }
+
         }
     }
 
