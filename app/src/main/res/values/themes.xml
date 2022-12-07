@@ -1,9 +1,17 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <style name="Theme.HappyInSeat" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/md_purple_500</item>
-        <item name="colorPrimaryDark">@color/md_purple_700</item>
-        <item name="colorAccent">@color/md_teal_200</item>
+        <!--        TODO these can safely remove but keep here for calendarView because its still using the color from the native SDK,
+              ok to remove below when its converted to compose in the future-->
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/md_amber_400</item>
+        <item name="colorPrimaryVariant">@color/md_amber_600</item>
+        <item name="colorOnPrimary">@color/black</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/md_blue_300</item>
+        <item name="colorSecondaryVariant">@color/md_blue_500</item>
+        <item name="colorOnSecondary">@color/black</item>
     </style>
 
 </resources>
