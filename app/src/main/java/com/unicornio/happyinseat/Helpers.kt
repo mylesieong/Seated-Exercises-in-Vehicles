@@ -108,10 +108,6 @@ fun Activity.setKeepScreenOn(isKeepOn: Boolean) {
     }
 }
 
-fun deleteRecords(context: Context) {
-    context.contentResolver.delete(RECORDS_CONTENT_URI, null, null)
-}
-
 fun indexRecordsByYearAndMonth(records: List<Record>): Map<Utils.YearMonth, List<Record>> = records.groupBy {
     val calendar = Utils.calender(it.first)
     Utils.YearMonth(calendar[Calendar.YEAR], calendar[Calendar.MONTH])
