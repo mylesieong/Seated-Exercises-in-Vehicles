@@ -85,20 +85,6 @@ fun Activity.setKeepScreenOn(isKeepOn: Boolean) {
     }
 }
 
-fun Context.askUserWhetherQuit(positiveAction: () -> Unit, negativeAction: () -> Unit) {
-    MaterialAlertDialogBuilder(this)
-        .setMessage("Quit exercise?")
-        .setNegativeButton("No") { dialog, _ ->
-            dialog.dismiss()
-            negativeAction.invoke()
-        }
-        .setPositiveButton("Yes") { dialog, _ ->
-            dialog.dismiss()
-            positiveAction.invoke()
-        }
-        .show()
-}
-
 fun saveRecord(context: Context, record: Record): Uri? {
     Log.d(TAG, "saveRecord: record=$record")
     return context.contentResolver.insert(CONTENT_URI, toContentValues(record))

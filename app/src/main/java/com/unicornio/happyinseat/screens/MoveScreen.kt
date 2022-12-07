@@ -56,6 +56,24 @@ fun MoveInformation(index: Int, exercise: Exercise, onExit: () -> Unit) {
     val move = exercise.moves[index]
     var isExpanded by remember { mutableStateOf(false) }
 
+    val openDialog = remember { mutableStateOf(false) }
+
+    if (openDialog.value) {
+        ComposeAlertDialog(
+            title = "Exit",
+            description = "Leave current exercise",
+            onPositive = {
+                onExit.invoke()
+                openDialog.value = false
+            },
+            onNegative = {
+                openDialog.value = false
+            },
+            onDismiss = {
+                openDialog.value = false
+            })
+    }
+
     Column {
         Box(modifier = Modifier.fillMaxWidth()) {
             Image(
@@ -63,9 +81,7 @@ fun MoveInformation(index: Int, exercise: Exercise, onExit: () -> Unit) {
                     .height(56.dp)
                     .width(56.dp)
                     .padding(16.dp)
-                    .clickable {
-                        context.askUserWhetherQuit(positiveAction = { onExit.invoke() }, negativeAction = {})
-                    }
+                    .clickable { openDialog.value = true }
             )
             Row(
                 modifier = Modifier
