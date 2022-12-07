@@ -4,6 +4,12 @@ import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.runtime.Composable
@@ -19,15 +25,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.unicornio.happyinseat.ComposeAlertDialog
 import com.unicornio.happyinseat.R
-import com.unicornio.happyinseat.deleteRecords
 import com.unicornio.happyinseat.rateApp
 import com.unicornio.happyinseat.ui.theme.ApplicationTheme
+import com.unicornio.happyinseat.viewmodels.RecordDeleteViewModel
 import com.unicornio.toolish.utils.Utils.shotToast
 
 @Composable
-fun SettingScreen() {
+fun SettingScreen(viewModel: RecordDeleteViewModel = viewModel()) {
     val context = LocalView.current.context
 
     Column(
@@ -43,8 +50,9 @@ fun SettingScreen() {
                 title = "Are you sure",
                 description = "Remove all records",
                 onPositive = {
-                    deleteRecords(context)
-                    context.shotToast("All records are removed")
+                    viewModel.deleteExercise {
+                        context.shotToast("$it records are removed")
+                    }
                     openDialog.value = false
                 },
                 onNegative = {

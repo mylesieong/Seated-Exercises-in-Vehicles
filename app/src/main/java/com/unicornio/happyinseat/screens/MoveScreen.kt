@@ -27,8 +27,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.unicornio.happyinseat.ComposeAlertDialog
 import com.unicornio.happyinseat.R
-import com.unicornio.happyinseat.askUserWhetherQuit
 import com.unicornio.happyinseat.model.Exercise
 import com.unicornio.happyinseat.ui.theme.ApplicationTheme
 import com.unicornio.happyinseat.viewmodels.RecordInsertViewModel
