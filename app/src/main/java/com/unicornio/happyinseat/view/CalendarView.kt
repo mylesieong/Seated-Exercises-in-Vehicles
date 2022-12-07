@@ -6,19 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.annotation.Nullable
 import com.unicornio.happyinseat.R
 import com.unicornio.happyinseat.colorSecondary
 import com.unicornio.happyinseat.colorSecondaryVariant
 import com.unicornio.toolish.utils.Utils.color
-import kotlinx.android.synthetic.main.layout_calendar.view.*
 import java.util.Calendar.*
 
-class CalendarView(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
+class CalendarView(context: Context, @Nullable attrs: AttributeSet?) : FrameLayout(context, attrs) {
 
     private var textMonth: TextView
     private var btnPrev: ImageView
     private var btnNext: ImageView
     private var gridView: GridView
+    private var buttonNext: ImageView
+    private var buttonPrevious: ImageView
 
     /**
      * Note: month starts from 0, aligning to how Calendar handles months
@@ -63,8 +65,10 @@ class CalendarView(context: Context, attrs: AttributeSet) : FrameLayout(context,
         btnPrev = findViewById(R.id.button_previous)
         btnNext = findViewById(R.id.button_next)
         gridView = findViewById(R.id.grid)
+        buttonNext = findViewById(R.id.button_next)
+        buttonPrevious = findViewById(R.id.button_previous)
 
-        button_next.setOnClickListener {
+        buttonNext.setOnClickListener {
             if (month == DECEMBER) {
                 month = JANUARY
                 year++
@@ -74,7 +78,7 @@ class CalendarView(context: Context, attrs: AttributeSet) : FrameLayout(context,
             flipListener?.onFlip(year, month)
         }
 
-        button_previous.setOnClickListener {
+        buttonPrevious.setOnClickListener {
             if (month == JANUARY) {
                 month = DECEMBER
                 year--

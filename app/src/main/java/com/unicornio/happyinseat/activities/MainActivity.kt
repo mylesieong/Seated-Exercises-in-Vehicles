@@ -1,61 +1,223 @@
 package com.unicornio.happyinseat.activities
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Bundle
-import android.view.MenuItem
-import android.view.View
-import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
-import androidx.navigation.findNavController
-import com.google.android.material.navigation.NavigationView
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.unicornio.happyinseat.R
-import kotlinx.android.synthetic.main.activity_main.*
+import com.unicornio.happyinseat.screens.HistoryScreen
+import com.unicornio.happyinseat.screens.HomeScreen
+import com.unicornio.happyinseat.screens.SettingScreen
+import com.unicornio.happyinseat.ui.theme.ApplicationTheme
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+private const val TAG = "MainActivity"
+
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        setContentView(R.layout.activity_main)
-
-        setSupportActionBar(toolbar)
-
-        val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.common_open_on_phone, R.string.common_open_on_phone)
-
-        drawer_layout.addDrawerListener(toggle)
-        toggle.syncState()
-
-        val navigationView = findViewById<View>(R.id.nav_view) as NavigationView
-        navigationView.setNavigationItemSelectedListener(this)
-        navigationView.setCheckedItem(R.id.menu_nav_home)
-
-        findNavController(R.id.nav_host_fragment).addOnDestinationChangedListener { controller, destination, bundle ->
-            navigationView.setCheckedItem(
-                when (destination.label) {
-                    "fragment_home" -> R.id.menu_nav_home
-                    "fragment_history" -> R.id.menu_nav_history
-                    "fragment_setting" -> R.id.menu_nav_setting
-                    else -> R.id.menu_nav_home
-                }
-            )
+        setContent {
+            ApplicationTheme {
+                MainScreen()
+            }
         }
 
 //        insertDummyRecordForDebugBuild(this)
     }
+}
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.menu_nav_home -> {
-                findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeFragment)
-            }
-            R.id.menu_nav_history -> {
-                findNavController(R.id.nav_host_fragment).navigate(R.id.action_historyFragment)
-            }
-            R.id.menu_nav_setting -> {
-                findNavController(R.id.nav_host_fragment).navigate(R.id.action_settingFragment)
-            }
+@Composable
+fun MainScreen() {
+    val navController = rememberNavController()
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
+
+    val scope = rememberCoroutineScope()
+    val openDrawer = {
+        scope.launch {
+            drawerState.open()
         }
-        drawer_layout.closeDrawer(GravityCompat.START)
-        return true
     }
 
+    val closeDrawer = {
+        scope.launch {
+            drawerState.close()
+        }
+    }
+
+    ModalDrawer(
+        drawerState = drawerState,
+        gesturesEnabled = true,
+        drawerBackgroundColor = MaterialTheme.colors.surface,
+        drawerContent = {
+            MyDrawer(navController, closeDrawer)
+        }
+    ) {
+        NavHost(
+            navController = navController,
+            startDestination = "home"
+        ) {
+            composable("home") {
+                Column(Modifier.fillMaxSize()) {
+                    MyTopAppBar("Home", openDrawer)
+                    HomeScreen()
+                }
+            }
+
+            composable("history") {
+                Column(Modifier.fillMaxSize()) {
+                    MyTopAppBar("History", openDrawer)
+                    HistoryScreen()
+                }
+            }
+
+            composable("setting") {
+                Column(Modifier.fillMaxSize()) {
+                    MyTopAppBar("Setting", openDrawer)
+                    SettingScreen()
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun MyDrawer(navController: NavHostController, closeDrawer: () -> Job) {
+    Column {
+        Spacer(modifier = Modifier.height(100.dp))
+
+        Box(
+            modifier = Modifier
+                .padding(start = 16.dp)
+                .clip(CircleShape)
+                .background(MaterialTheme.colors.primary)
+                .padding(16.dp)
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_logo_foreground), contentDescription = null,
+                modifier = Modifier
+                    .height(64.dp)
+                    .width(64.dp)
+            )
+        }
+
+        Spacer(Modifier.height(24.dp))
+
+        MenuItem("Home", R.drawable.ic_baseline_home_24) {
+            navController.navigate("home") {
+                popUpTo("home") {
+                    inclusive = true
+                }
+            }
+
+            closeDrawer.invoke()
+        }
+
+        MenuItem("History", R.drawable.ic_baseline_history_24) {
+            navController.navigate("history") {
+                popUpTo("history") {
+                    inclusive = true
+                }
+            }
+
+            closeDrawer.invoke()
+        }
+
+        MenuItem("Setting", R.drawable.ic_baseline_settings_24) {
+            navController.navigate("setting") {
+                popUpTo("setting") {
+                    inclusive = true
+                }
+            }
+
+            closeDrawer.invoke()
+        }
+
+    }
+}
+
+@Composable
+@Preview
+fun MyDrawerPreview() {
+    val context = LocalView.current.context
+    ApplicationTheme {
+        MyDrawer(navController = NavHostController(context)) {
+            GlobalScope.launch {}
+        }
+    }
+}
+
+@Composable
+fun MenuItem(title: String, iconResId: Int, onClick: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick.invoke() }
+            .padding(12.dp)
+    ) {
+        Spacer(modifier = Modifier.width(8.dp))
+        Image(painter = painterResource(id = iconResId), contentDescription = null)
+        Spacer(modifier = Modifier.width(12.dp))
+        Text(
+            text = title,
+            style = MaterialTheme.typography.subtitle1,
+        )
+    }
+}
+
+@Composable
+@Preview
+fun MenuItemPreview() {
+    ApplicationTheme {
+        Surface {
+            MenuItem(title = "title", iconResId = R.drawable.ic_baseline_home_24) {}
+        }
+    }
+}
+
+@Composable
+private fun MyTopAppBar(title: String, openDrawer: () -> Job) {
+    TopAppBar(
+        title = {
+            Text(text = title)
+        },
+        backgroundColor = MaterialTheme.colors.surface,
+        navigationIcon = {
+            IconButton(onClick = {
+                openDrawer.invoke()
+            }) {
+                Icon(Icons.Filled.Menu, contentDescription = null)
+            }
+        },
+    )
+}
+
+@Preview(name = "Day mode")
+@Preview(name = "Night mode", uiMode = UI_MODE_NIGHT_YES, showBackground = true)
+@Composable
+fun MainScreenPreview() {
+    ApplicationTheme {
+        MainScreen()
+    }
 }
