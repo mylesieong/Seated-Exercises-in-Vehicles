@@ -15,6 +15,7 @@ import com.unicornio.happyinseat.askUserWhetherQuit
 import com.unicornio.happyinseat.screens.FinishScreen
 import com.unicornio.happyinseat.screens.MoveScreen
 import com.unicornio.happyinseat.screens.OverviewScreen
+import com.unicornio.happyinseat.setKeepScreenOn
 import com.unicornio.happyinseat.ui.theme.ApplicationTheme
 
 class ExerciseActivity : AppCompatActivity() {
@@ -25,6 +26,12 @@ class ExerciseActivity : AppCompatActivity() {
                 ExerciseScreen()
             }
         }
+        setKeepScreenOn(true)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        setKeepScreenOn(false)
     }
 
     @Composable
