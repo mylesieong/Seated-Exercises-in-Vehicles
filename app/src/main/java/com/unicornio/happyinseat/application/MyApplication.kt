@@ -1,18 +1,18 @@
 package com.unicornio.happyinseat.application
 
 import android.app.Application
-import com.google.android.gms.ads.MobileAds
-import com.unicornio.happyinseat.AdManager
-import com.unicornio.happyinseat.AnalyticsManager
+import dagger.hilt.android.HiltAndroidApp
+import javax.inject.Inject
 
+@HiltAndroidApp
 class MyApplication : Application() {
+
+    @Inject
+    lateinit var readySteps: ExternalManagersReadySteps
+
     override fun onCreate() {
         super.onCreate()
-
-        MobileAds.initialize(this) { }
-        AdManager.preloadFirstAd(this)
-
-        AnalyticsManager.setContext(this)
+        readySteps.run()
     }
 
     companion object {

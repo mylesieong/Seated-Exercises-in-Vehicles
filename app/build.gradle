@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
+    id 'kotlin-kapt'
+    id "com.google.dagger.hilt.android"
 }
 
 Properties properties = new Properties()
@@ -64,6 +66,10 @@ android {
         kotlinCompilerExtensionVersion = "1.1.1"
     }
 
+    kapt {
+        correctErrorTypes true
+    }
+
     namespace 'com.unicornio.happyinseat'
 }
 
@@ -87,6 +93,9 @@ dependencies {
     implementation "androidx.compose.ui:ui:$compose_ui_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
     implementation "androidx.compose.material:material:$compose_ui_version"
+
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
 
     implementation project(':repository')
     implementation project(":model")
