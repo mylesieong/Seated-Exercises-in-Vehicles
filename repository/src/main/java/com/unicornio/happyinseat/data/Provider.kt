@@ -7,6 +7,7 @@ import android.util.Log
 import com.unicornio.happyinseat.database.ExerciseRecord
 import com.unicornio.happyinseat.database.MyDatabase
 import com.unicornio.happyinseat.database.MyDatabase.Companion.getInstance
+import com.unicornio.happyinseat.database.TABLE_NAME
 
 class Provider : ContentProvider() {
     private lateinit var db: MyDatabase
@@ -71,8 +72,8 @@ class Provider : ContentProvider() {
 
     override fun getType(uri: Uri): String {
         return when (val match = sUriMatcher.match(uri)) {
-            RECORD_ALL -> "${ContentResolver.CURSOR_DIR_BASE_TYPE}/$CONTENT_AUTHORITY/${com.unicornio.happyinseat.database.TABLE_NAME}"
-            RECORD_BY_ID -> "${ContentResolver.CURSOR_ITEM_BASE_TYPE}/$CONTENT_AUTHORITY/${com.unicornio.happyinseat.database.TABLE_NAME}"
+            RECORD_ALL -> "${ContentResolver.CURSOR_DIR_BASE_TYPE}/$CONTENT_AUTHORITY/$TABLE_NAME"
+            RECORD_BY_ID -> "${ContentResolver.CURSOR_ITEM_BASE_TYPE}/$CONTENT_AUTHORITY/$TABLE_NAME"
             else -> throw IllegalStateException("Unknown URI $uri with match $match")
         }
     }
@@ -83,13 +84,13 @@ class Provider : ContentProvider() {
         private const val RECORD_BY_ID = 101
 
         private val sUriMatcher = UriMatcher(UriMatcher.NO_MATCH).apply {
-            addURI(CONTENT_AUTHORITY, com.unicornio.happyinseat.database.TABLE_NAME, RECORD_ALL)
-            addURI(CONTENT_AUTHORITY, "${com.unicornio.happyinseat.database.TABLE_NAME}/#", RECORD_BY_ID)
+            addURI(CONTENT_AUTHORITY, TABLE_NAME, RECORD_ALL)
+            addURI(CONTENT_AUTHORITY, "$TABLE_NAME/#", RECORD_BY_ID)
         }
 
         private const val CONTENT_AUTHORITY = "com.unicornio.happyinseat"
         private val BASE_CONTENT_URI: Uri = Uri.parse("content://${CONTENT_AUTHORITY}")
 
-        val RECORDS_CONTENT_URI: Uri = Uri.withAppendedPath(BASE_CONTENT_URI, com.unicornio.happyinseat.database.TABLE_NAME)
+        val RECORDS_CONTENT_URI: Uri = Uri.withAppendedPath(BASE_CONTENT_URI, TABLE_NAME)
     }
 }
