@@ -7,8 +7,11 @@ _Its the core value of the product_
 ## Customer Segmentation
 _The targeted customers of the product_
 * Office workers (Persona: Claire)
+  * Core user story: As Claire, I want to have a scheduled stretching session throughout the day, so that I can ease my back pain
 * People with long commutes (Persona: David)
+  * Core user story: As David, I want to access to some seat-friendly core exercises, so that I make most of my long commute time
 * People who travels (Persona: Vanessa)
+  * Core user story: As Vanessa, I want to do in-seat stretching in low key, so that I can ease my back pain while not looking weird to others on plane
 
 ## Features
 _Describe what the product can do from a technical perspective_
@@ -28,12 +31,6 @@ _Describe what the product can do from a technical perspective_
 * Manage records
     * test case: When [Open app]>[Navigate to setting], user can see a reset button with clear description
     * test case: When [Open app]>[Navigate to setting]>[click on reset], user can clear all records
-
-## User story
-_Describe what the product can do from a user's point of view_
-* As Claire, I want to have a scheduled stretching session throughout the day, so that I can ease my back pain
-* As David, I want to access to some seat-friendly core exercises, so that I make most of my long commute time
-* As Vanessa, I want to do in- seat stretching in low key, so that I can ease my back pain while not looking weird to others on plane
 
 ## UX Flow & Design Notes
 * _See figma_
