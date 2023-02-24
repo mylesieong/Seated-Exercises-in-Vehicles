@@ -41,7 +41,7 @@ fun OverviewScreen(onExit: () -> Unit, onNavigateToMove: () -> Unit) {
                 Header(onExit)
             }
 
-            com.unicornio.happyinseat.model.STANDARD_STRETCH.moves.mapIndexed { i, move ->
+            STANDARD_STRETCH.moves.mapIndexed { i, move ->
                 item {
                     MoveListItem(
                         seq = i + 1,
