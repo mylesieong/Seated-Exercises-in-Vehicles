@@ -20,7 +20,7 @@ export default function NavBar() {
         <View style={styles.bar}></View>
       </Pressable>
 
-      <Text style={styles.text}>Relief in Seat</Text>
+      <Text style={styles.text}>Home</Text>
     </View>
   )
 }
@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
     fontWeight: 600,
     fontSize: 16,
     lineHeight: 19,
-    alignItems: 'center',
     marginLeft: 20,
   },
   bar: {
