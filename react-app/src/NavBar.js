@@ -7,6 +7,7 @@ import {
   Alert,
 } from 'react-native'
 import React from 'react'
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default function NavBar() {
   return (
@@ -15,9 +16,7 @@ export default function NavBar() {
         onPress={() => Alert.alert('This is a recall function.')}
         style={styles.button}
       >
-        <View style={styles.bar}></View>
-        <View style={styles.bar}></View>
-        <View style={styles.bar}></View>
+        <FontAwesome name='bars' style={styles.icon} />
       </Pressable>
 
       <Text style={styles.text}>Home</Text>
@@ -31,7 +30,7 @@ const styles = StyleSheet.create({
     height: 52,
     width: Dimensions.get('window').width,
     alignItems: 'center',
-    backgroundColor: '#263238',
+    backgroundColor: '#D0D7DD',
   },
   button: {
     height: 24,
@@ -42,16 +41,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   text: {
-    color: '#FFFFFF',
+    color: 'black',
     fontStyle: 'normal',
     fontWeight: 600,
     fontSize: 16,
     lineHeight: 19,
     marginLeft: 20,
   },
-  bar: {
-    backgroundColor: '#FFFFFF',
-    height: 2,
-    width: 18,
+  icon: {
+    color: 'black',
   },
 })
