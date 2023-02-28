@@ -7,9 +7,11 @@ import {
   Alert,
 } from 'react-native'
 import React from 'react'
+import { useRoute } from '@react-navigation/native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default function NavBar() {
+  const route = useRoute();
   return (
     <View style={styles.container}>
       <Pressable
@@ -19,7 +21,7 @@ export default function NavBar() {
         <FontAwesome name='bars' style={styles.icon} />
       </Pressable>
 
-      <Text style={styles.text}>Home</Text>
+      <Text style={styles.text}>{route.name}</Text>
     </View>
   )
 }
