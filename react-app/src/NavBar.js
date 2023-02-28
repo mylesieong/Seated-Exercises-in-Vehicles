@@ -28,7 +28,6 @@ export default function NavBar() {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    // flex: 1,
     height: 52,
     width: Dimensions.get('window').width,
     alignItems: 'center',
@@ -44,7 +43,6 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#FFFFFF',
-    // fontFamily: 'Inter',
     fontStyle: 'normal',
     fontWeight: 600,
     fontSize: 16,
