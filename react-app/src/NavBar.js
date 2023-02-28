@@ -1,21 +1,11 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Pressable,
-  Dimensions,
-  Alert,
-} from 'react-native'
+import { StyleSheet, Text, View, Pressable, Dimensions, Alert } from 'react-native'
 import React from 'react'
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 export default function NavBar() {
   return (
     <View style={styles.container}>
-      <Pressable
-        onPress={() => Alert.alert('This is a recall function.')}
-        style={styles.button}
-      >
+      <Pressable onPress={() => Alert.alert('This is a recall function.')} style={styles.button}>
         <FontAwesome name='bars' style={styles.icon} />
       </Pressable>
 
@@ -30,7 +20,7 @@ const styles = StyleSheet.create({
     height: 52,
     width: Dimensions.get('window').width,
     alignItems: 'center',
-    backgroundColor: '#D0D7DD',
+    backgroundColor: '#D0D7DD'
   },
   button: {
     height: 24,
@@ -38,7 +28,7 @@ const styles = StyleSheet.create({
     margin: 14,
     paddingHorizontal: 3,
     paddingVertical: 6,
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   text: {
     color: 'black',
@@ -46,9 +36,9 @@ const styles = StyleSheet.create({
     fontWeight: 600,
     fontSize: 16,
     lineHeight: 19,
-    marginLeft: 20,
+    marginLeft: 20
   },
   icon: {
-    color: 'black',
-  },
+    color: 'black'
+  }
 })
