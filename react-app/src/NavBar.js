@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Pressable,
-  Dimensions,
-} from 'react-native'
+import { StyleSheet, Text, View, Pressable, Dimensions, } from 'react-native'
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useRoute } from '@react-navigation/native';
