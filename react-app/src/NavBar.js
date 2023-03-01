@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     height: 52,
     width: Dimensions.get('window').width,
     alignItems: 'center',
-    backgroundColor: '#D0D7DD',
+    backgroundColor: '#D0D7DD'
   },
   button: {
     height: 24,
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     margin: 14,
     paddingHorizontal: 3,
     paddingVertical: 6,
-    justifyContent: 'space-between',
+    justifyContent: 'space-between'
   },
   text: {
     color: 'black',
@@ -51,9 +51,9 @@ const styles = StyleSheet.create({
     fontWeight: 600,
     fontSize: 16,
     lineHeight: 19,
-    marginLeft: 20,
+    marginLeft: 20
   },
   icon: {
-    color: 'black',
-  },
+    color: 'black'
+  }
 })
