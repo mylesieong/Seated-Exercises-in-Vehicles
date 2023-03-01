@@ -10,6 +10,7 @@ export default function SideMenu({ setShowMenu }) {
 
     return (
         <View style={styles.container}>
+            <Button title="Home" onPress={() => handlePress('Home')} />
             <Button title="Setting" onPress={() => handlePress('Setting')} />
             <Button title="History" onPress={() => handlePress('History')} />
         </View>
