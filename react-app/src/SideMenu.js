@@ -20,22 +20,21 @@ export default function SideMenu({ setShowMenu }) {
 const styles = StyleSheet.create({
     container: {
         position: 'absolute',
-        top: 10,
         left: 0,
         zIndex: 10,
         backgroundColor: '#D0D7DD',
-        width: '60%',
+        width: '70%',
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
-            height: 6,
+            height: 12,
         },
-        shadowOpacity: 0.39,
-        shadowRadius: 8.30,
+        shadowOpacity: 0.58,
+        shadowRadius: 16.00,
 
-        elevation: 13,
+        elevation: 24,
     }
 })
