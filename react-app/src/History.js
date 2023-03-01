@@ -18,7 +18,6 @@ export default function History() {
   }
   return (
     <View style={styles.container}>
-      <StatusBar style='auto' />
       <NavBar setShowMenu={setShowMenu} />
       {showMenu && <SideMenu setShowMenu={setShowMenu} />}
       <View style={styles.calendar}>
@@ -45,12 +44,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch'
   },
   calendar: {
-    // to reviewers
-    // position: 'absolute',
-    marginTop: 50,
-    // right: 0,
-    // bottom: 0,
-    // left: 0,
+    marginTop: 90,
     ...StyleSheet.absoluteFillObject,
     padding: 10
   },

@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, View, Button } from 'react-native'
 import NavBar from './NavBar.js'
 import { useState } from 'react'
@@ -9,7 +8,6 @@ export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
       <NavBar setShowMenu={setShowMenu} />
-      <StatusBar style='auto' />
       {showMenu && <SideMenu setShowMenu={setShowMenu} />}
     </View>
   )
