@@ -1,19 +1,19 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import { Calendar } from "react-native-calendars";
+import { StatusBar } from 'expo-status-bar'
+import { StyleSheet, Text, View } from 'react-native'
+import { Calendar } from 'react-native-calendars'
 
 export default function History() {
   // marked the days
   const marked = {
-    "2023-02-18": { selected: true },
-    "2023-02-19": { selected: true },
-    "2023-02-23": { selected: true },
-    "2023-03-12": { selected: true },
-    "2023-03-14": { selected: true },
-  };
+    '2023-02-18': { selected: true },
+    '2023-02-19': { selected: true },
+    '2023-02-23': { selected: true },
+    '2023-03-12': { selected: true },
+    '2023-03-14': { selected: true }
+  }
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
+      <StatusBar style='auto' />
       <View style={styles.calendar}>
         {/* Calendar */}
         <Calendar markedDates={marked} />
@@ -25,17 +25,17 @@ export default function History() {
         </View>
       </View>
     </View>
-  );
+  )
 }
 
 // Css
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    alignSelf: "stretch",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    alignSelf: 'stretch'
   },
   calendar: {
     // to reviewers
@@ -45,32 +45,32 @@ const styles = StyleSheet.create({
     // bottom: 0,
     // left: 0,
     ...StyleSheet.absoluteFillObject,
-    padding: 10,
+    padding: 10
   },
   title: {
     margin: 15,
     fontSize: 15,
-    fontWeight: "bold",
-    textAlign: "center",
-    color: "#34495e",
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#34495e'
   },
   recordInfo: {
-    justifyContent: "center",
-    flexDirection: "row",
+    justifyContent: 'center',
+    flexDirection: 'row'
   },
   recordDate: {
     margin: 9,
     paddingRight: 18,
     fontSize: 12,
-    fontWeight: "bold",
-    textAlign: "left",
-    color: "#34495e",
+    fontWeight: 'bold',
+    textAlign: 'left',
+    color: '#34495e'
   },
   recordText: {
     margin: 9,
     fontSize: 12,
-    fontWeight: "bold",
-    textAlign: "right",
-    color: "#34495e",
-  },
-});
+    fontWeight: 'bold',
+    textAlign: 'right',
+    color: '#34495e'
+  }
+})
