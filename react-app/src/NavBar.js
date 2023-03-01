@@ -22,28 +22,23 @@ export default function NavBar({ setShowMenu }) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    height: 52,
+    height: 100,
     width: Dimensions.get('window').width,
-    alignItems: 'center',
-    backgroundColor: '#D0D7DD'
-  },
-  button: {
-    height: 24,
-    width: 24,
-    margin: 14,
-    paddingHorizontal: 3,
-    paddingVertical: 6,
-    justifyContent: 'space-between'
+    alignItems: 'flex-end',
+    backgroundColor: '#D0D7DD',
+    paddingHorizontal: 20,
+    paddingVertical: 12,
   },
   text: {
     color: 'black',
     fontStyle: 'normal',
     fontWeight: 600,
-    fontSize: 16,
+    fontSize: 20,
     lineHeight: 19,
-    marginLeft: 20
+    marginLeft: 30
   },
   icon: {
-    color: 'black'
+    color: 'black',
+    fontSize: 20,
   }
 })
