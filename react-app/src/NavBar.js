@@ -4,24 +4,27 @@ import {
   View,
   Pressable,
   Dimensions,
-  Alert,
 } from 'react-native'
 import React from 'react'
+import { useState, useEffect } from 'react';
 import { useRoute } from '@react-navigation/native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import SideMenu from './SideMenu';
 
-export default function NavBar() {
+export default function NavBar({ navigation }) {
   const route = useRoute();
+  const [showMenu, setShowMenu] = useState(false);
+
   return (
     <View style={styles.container}>
       <Pressable
-        onPress={() => Alert.alert('This is a recall function.')}
+        onPress={() => setShowMenu(true)}
         style={styles.button}
       >
         <FontAwesome name='bars' style={styles.icon} />
       </Pressable>
-
       <Text style={styles.text}>{route.name}</Text>
+      {showMenu && <SideMenu navigation={navigation} />}
     </View>
   )
 }
