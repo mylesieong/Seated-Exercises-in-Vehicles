@@ -11,7 +11,7 @@ import { useRoute } from '@react-navigation/native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import SideMenu from './SideMenu';
 
-export default function NavBar({ navigation }) {
+export default function NavBar({ }) {
   const route = useRoute();
   const [showMenu, setShowMenu] = useState(false);
 
@@ -24,7 +24,7 @@ export default function NavBar({ navigation }) {
         <FontAwesome name='bars' style={styles.icon} />
       </Pressable>
       <Text style={styles.text}>{route.name}</Text>
-      {showMenu && <SideMenu navigation={navigation} />}
+      {showMenu && <SideMenu />}
     </View>
   )
 }
