@@ -7,8 +7,6 @@ export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
       <NavBar />
-      <Button title='Setting' onPress={() => navigation.navigate('Setting')} />
-      <Button title='History' onPress={() => navigation.navigate('History')} />
       <StatusBar style='auto' />
     </View>
   )

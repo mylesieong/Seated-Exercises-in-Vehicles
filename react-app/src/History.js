@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, Text, View } from 'react-native'
 import { Calendar } from 'react-native-calendars'
+import NavBar from './NavBar.js'
 
 export default function History() {
   // marked the days
@@ -14,6 +15,7 @@ export default function History() {
   return (
     <View style={styles.container}>
       <StatusBar style='auto' />
+      <NavBar />
       <View style={styles.calendar}>
         {/* Calendar */}
         <Calendar markedDates={marked} />
