@@ -1,12 +1,15 @@
 import { StatusBar } from 'expo-status-bar'
 import { useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native'
 import { Calendar } from 'react-native-calendars'
 import NavBar from './NavBar.js'
 import SideMenu from './SideMenu.js'
 
 export default function History() {
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(false)
+  const handlePress = () => {
+    setShowMenu(false)
+  }
 
   // marked the days
   const marked = {
@@ -17,20 +20,22 @@ export default function History() {
     '2023-03-14': { selected: true }
   }
   return (
-    <View style={styles.container}>
-      <NavBar setShowMenu={setShowMenu} />
-      {showMenu && <SideMenu setShowMenu={setShowMenu} />}
-      <View style={styles.calendar}>
-        {/* Calendar */}
-        <Calendar markedDates={marked} />
-        {/* Text of the record */}
-        <Text style={styles.title}>Records</Text>
-        <View style={styles.recordInfo}>
-          <Text style={styles.recordDate}>2023年2月23日</Text>
-          <Text style={styles.recordText}>Standard stretching</Text>
+    <TouchableWithoutFeedback onPress={handlePress}>
+      <View style={styles.container}>
+        <NavBar setShowMenu={setShowMenu} />
+        {showMenu && <SideMenu setShowMenu={setShowMenu} />}
+        <View style={styles.calendar}>
+          {/* Calendar */}
+          <Calendar markedDates={marked} />
+          {/* Text of the record */}
+          <Text style={styles.title}>Records</Text>
+          <View style={styles.recordInfo}>
+            <Text style={styles.recordDate}>2023年2月23日</Text>
+            <Text style={styles.recordText}>Standard stretching</Text>
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   )
 }
 

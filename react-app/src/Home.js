@@ -1,15 +1,21 @@
-import { StyleSheet, View, Button } from 'react-native'
+import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native'
 import NavBar from './NavBar.js'
 import { useState } from 'react'
 import SideMenu from './SideMenu.js'
 
-export default function Home({ navigation }) {
-  const [showMenu, setShowMenu] = useState(false);
+export default function Home({}) {
+  const [showMenu, setShowMenu] = useState(false)
+  const handlePress = () => {
+    setShowMenu(false)
+  }
+
   return (
-    <View style={styles.container}>
-      <NavBar setShowMenu={setShowMenu} />
-      {showMenu && <SideMenu setShowMenu={setShowMenu} />}
-    </View>
+    <TouchableWithoutFeedback onPress={handlePress}>
+      <View style={styles.container}>
+        <NavBar setShowMenu={setShowMenu} />
+        {showMenu && <SideMenu setShowMenu={setShowMenu} />}
+      </View>
+    </TouchableWithoutFeedback>
   )
 }
 
