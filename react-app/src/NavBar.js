@@ -1,17 +1,14 @@
-import { StyleSheet, Text, View, Pressable, Dimensions, } from 'react-native'
+import { StyleSheet, Text, View, Pressable, Dimensions } from 'react-native'
 import React from 'react'
-import { useRoute } from '@react-navigation/native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { useRoute } from '@react-navigation/native'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 export default function NavBar({ setShowMenu }) {
-  const route = useRoute();
+  const route = useRoute()
 
   return (
     <View style={styles.container}>
-      <Pressable
-        onPress={() => setShowMenu(true)}
-        style={styles.button}
-      >
+      <Pressable onPress={() => setShowMenu(true)} style={styles.button}>
         <FontAwesome name='bars' style={styles.icon} />
       </Pressable>
       <Text style={styles.text}>{route.name}</Text>
@@ -26,8 +23,7 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
     alignItems: 'flex-end',
     backgroundColor: '#D0D7DD',
-    paddingHorizontal: 20,
-    paddingVertical: 12,
+    paddingHorizontal: 20
   },
   text: {
     color: 'black',
@@ -35,10 +31,12 @@ const styles = StyleSheet.create({
     fontWeight: 600,
     fontSize: 20,
     lineHeight: 19,
-    marginLeft: 30
+    marginLeft: 30,
+    paddingVertical: 12
   },
   icon: {
     color: 'black',
     fontSize: 20,
+    paddingVertical: 12
   }
 })
