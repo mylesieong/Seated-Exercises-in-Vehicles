@@ -1,4 +1,4 @@
-name: RN Android Build
+name: React Native npm aduit
 
 on:
   workflow_dispatch:
@@ -13,10 +13,5 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: cd ReactNativeBare/android && npm install
-      - run: cd ReactNativeBare/android && chmod +x ./gradlew
-      - run: cd ReactNativeBare/android && ./gradlew assembleDebug --no-daemon
-      - uses: actions/upload-artifact@v1
-        with:
-          name: saved_artifact
-          path: ReactNativeBare/android/app/build/outputs/apk/debug/app-debug.apk
+      - run: cd react-app && npm install
+      - run: cd react-app && npm audit 
