@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import { StyleSheet, View, Pressable, Text, TouchableWithoutFeedback } from 'react-native'
+import React from 'react'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 export default function SideMenu({ setShowMenu }) {
