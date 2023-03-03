@@ -20,13 +20,13 @@ export default function SideMenu({ setShowMenu }) {
           <FontAwesome name='home' style={styles.icon} />
           <Text style={styles.text}>Home</Text>
         </Pressable>
-        <Pressable style={styles.page} onPress={() => handlePress('Setting')}>
-          <FontAwesome name='cog' style={styles.icon} />
-          <Text style={styles.text}>Setting</Text>
-        </Pressable>
         <Pressable style={styles.page} onPress={() => handlePress('History')}>
           <FontAwesome name='history' style={styles.icon} />
           <Text style={styles.text}>History</Text>
+        </Pressable>
+        <Pressable style={styles.page} onPress={() => handlePress('Setting')}>
+          <FontAwesome name='cog' style={styles.icon} />
+          <Text style={styles.text}>Setting</Text>
         </Pressable>
       </View>
     </TouchableWithoutFeedback>
