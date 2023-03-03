@@ -4,13 +4,15 @@ import NavBar from './NavBar.js'
 import React from 'react'
 import { DUMMY_DATA } from '../data/DummyData'
 import { SvgXml } from 'react-native-svg'
+import ClockIcon from '../assets/icons/clock.svg'
+import ArrowIcon from '../assets/icons/arrow-right.svg'
 
 // Component of the card
 function Card({ title, description, image, available, type }) {
   return (
     <View style={styles.cardContainer}>
       <ImageInCard image={image} type={type} style={styles.imageContainer} />
-      <View>
+      <View style={styles.cardLowerPart}>
         <TextInCard title={title} description={description} available={available} />
         <Press></Press>
       </View>
@@ -38,7 +40,11 @@ function ImageInCard({ image, type }) {
 function TextInCard({ title, description, available }) {
   return (
     <View style={styles.textContainer}>
-      {!available && <Text style={styles.status}>coming soon</Text>}
+      {!available && (
+        <Text style={styles.status}>
+          <ClockIcon width={16} height={16} /> coming soon
+        </Text>
+      )}
       <Text style={[styles.textTitle, !available && styles.unavailable]}>{title}</Text>
       {description?.map((value, index) => (
         <Text key={index} style={!available && styles.unavailable}>
@@ -52,7 +58,11 @@ function TextInCard({ title, description, available }) {
 
 // Component of the button in the card
 function Press() {
-  return <Pressable></Pressable>
+  return (
+    <Pressable style={styles.button}>
+      <ArrowIcon height={20} width={20} />
+    </Pressable>
+  )
 }
 
 export default function Home() {
@@ -109,8 +119,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#64B5F6'
   },
   textContainer: {
-    backgroundColor: '#cfd8dc',
-    padding: 17
+    padding: 17,
+    width: 300
   },
   textTitle: {
     fontWeight: 600,
@@ -119,9 +129,26 @@ const styles = StyleSheet.create({
     marginBottom: 6
   },
   status: {
-    lineHeight: 16
+    lineHeight: 16,
+    marginBottom: 10
   },
   unavailable: {
     color: '#878d8f'
+  },
+  cardLowerPart: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#cfd8dc'
+  },
+  button: {
+    justifyContent: 'center',
+    width: 48,
+    height: 48,
+    backgroundColor: '#000',
+    marginRight: 14,
+    borderRadius: '50%',
+    alignItems: 'center'
   }
 })
