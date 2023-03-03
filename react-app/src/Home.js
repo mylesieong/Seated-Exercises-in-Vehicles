@@ -26,7 +26,7 @@ function ImageInCard({ image, type }) {
     <View
       style={[
         styles.imageContainer,
-        type == 'standalone' ? styles.standaloneCardImage : styles.journeyCardImage
+        type == 'standalone' ? styles.standaloneCardColor : styles.journeyCardColor
       ]}
     >
       <View style={styles.svgContainer}>
@@ -65,6 +65,7 @@ function Press() {
   )
 }
 
+// Render the page
 export default function Home() {
   return (
     <View style={styles.container}>
@@ -112,15 +113,14 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%'
   },
-  standaloneCardImage: {
+  standaloneCardColor: {
     backgroundColor: '#FFCA28'
   },
-  journeyCardImage: {
+  journeyCardColor: {
     backgroundColor: '#64B5F6'
   },
   textContainer: {
-    padding: 17,
-    width: 300
+    width: 250
   },
   textTitle: {
     fontWeight: 600,
@@ -140,14 +140,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#cfd8dc'
+    backgroundColor: '#cfd8dc',
+    padding: 17
   },
   button: {
     justifyContent: 'center',
     width: 48,
     height: 48,
     backgroundColor: '#000',
-    marginRight: 14,
     borderRadius: '50%',
     alignItems: 'center'
   }
