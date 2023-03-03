@@ -13,7 +13,7 @@ function Card({ title, description, image, available, type }) {
       <ImageInCard image={image} type={type} style={styles.imageContainer} />
       <View style={styles.cardLowerPart}>
         <TextInCard title={title} description={description} available={available} />
-        <PressButton></PressButton>
+        <ButtonInCard></ButtonInCard>
       </View>
     </View>
   )
@@ -53,7 +53,7 @@ function TextInCard({ title, description, available }) {
   )
 }
 
-function PressButton() {
+function ButtonInCard() {
   return (
     <Pressable style={styles.button}>
       <ArrowIcon height={20} width={20} />
