@@ -79,6 +79,8 @@ export default function Home() {
               type={item.type}
             />
           )}
+          showsVerticalScrollIndicator={false}
+          style={{ marginBottom: 52 }}
         />
       </View>
     </View>
@@ -115,7 +117,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#64B5F6'
   },
   textContainer: {
-    width: 250
+    width: 250,
+    borderWidth: 2
   },
   textTitle: {
     fontWeight: 600,
