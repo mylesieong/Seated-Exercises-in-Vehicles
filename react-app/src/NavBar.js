@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Pressable, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, Pressable, Dimensions, Platform } from 'react-native'
 import React from 'react'
 import { useRoute } from '@react-navigation/native'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
@@ -19,7 +19,14 @@ export default function NavBar({ setShowMenu }) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    height: 100,
+    ...Platform.select({
+      ios: {
+        height: 100
+      },
+      android: {
+        height: 80
+      }
+    }),
     width: Dimensions.get('window').width,
     alignItems: 'flex-end',
     backgroundColor: '#D0D7DD',
