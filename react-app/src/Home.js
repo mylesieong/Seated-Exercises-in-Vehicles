@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList, Text, Pressable } from 'react-native'
+import { StyleSheet, View, FlatList, Text, Pressable, TouchableWithoutFeedback } from 'react-native'
 import NavBar from './NavBar.js'
 import React, { useState } from 'react'
 import { DUMMY_DATA } from '../data/DummyData'
@@ -68,10 +68,10 @@ export default function Home() {
   }
 
   return (
-    <View style={styles.container}>
-      <NavBar setShowMenu={setShowMenu} />
-      {showMenu && <SideMenu setShowMenu={setShowMenu} />}
-      <Pressable onPress={handlePress}>
+    <TouchableWithoutFeedback onPress={handlePress}>
+      <View style={styles.container}>
+        <NavBar setShowMenu={setShowMenu} />
+        {showMenu && <SideMenu setShowMenu={setShowMenu} />}
         <View style={styles.flatListContainer}>
           <FlatList
             data={DUMMY_DATA}
@@ -89,8 +89,8 @@ export default function Home() {
             style={{ marginBottom: 52 }}
           />
         </View>
-      </Pressable>
-    </View>
+      </View>
+    </TouchableWithoutFeedback>
   )
 }
 
