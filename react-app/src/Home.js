@@ -7,20 +7,18 @@ import { SvgXml } from 'react-native-svg'
 import ClockIcon from '../assets/icons/clock.svg'
 import ArrowIcon from '../assets/icons/arrow-right.svg'
 
-// Component of the card
 function Card({ title, description, image, available, type }) {
   return (
     <View style={styles.cardContainer}>
       <ImageInCard image={image} type={type} style={styles.imageContainer} />
       <View style={styles.cardLowerPart}>
         <TextInCard title={title} description={description} available={available} />
-        <Press></Press>
+        <PressButton></PressButton>
       </View>
     </View>
   )
 }
 
-// Component of the image in the card
 function ImageInCard({ image, type }) {
   return (
     <View
@@ -36,7 +34,6 @@ function ImageInCard({ image, type }) {
   )
 }
 
-// Component of the text in the card
 function TextInCard({ title, description, available }) {
   return (
     <View style={styles.textContainer}>
@@ -56,8 +53,7 @@ function TextInCard({ title, description, available }) {
   )
 }
 
-// Component of the button in the card
-function Press() {
+function PressButton() {
   return (
     <Pressable style={styles.button}>
       <ArrowIcon height={20} width={20} />
@@ -65,7 +61,6 @@ function Press() {
   )
 }
 
-// Render the page
 export default function Home() {
   return (
     <View style={styles.container}>
