@@ -1,11 +1,11 @@
-import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, View, FlatList, Text, Pressable } from 'react-native'
 import NavBar from './NavBar.js'
-import React from 'react'
+import React, { useState } from 'react'
 import { DUMMY_DATA } from '../data/DummyData'
 import { SvgXml } from 'react-native-svg'
 import ClockIcon from '../assets/icons/clock.svg'
 import ArrowIcon from '../assets/icons/arrow-right.svg'
+import SideMenu from './SideMenu.js'
 
 function Card({ title, description, image, available, type }) {
   return (
@@ -62,10 +62,12 @@ function ButtonInCard() {
 }
 
 export default function Home() {
+  const [showMenu, setShowMenu] = useState(false)
+
   return (
     <View style={styles.container}>
-      <NavBar />
-      <StatusBar style='auto' />
+      <NavBar setShowMenu={setShowMenu} />
+      {showMenu && <SideMenu setShowMenu={setShowMenu} />}
       <View style={styles.flatListContainer}>
         <FlatList
           data={DUMMY_DATA}

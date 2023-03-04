@@ -1,14 +1,15 @@
-import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import NavBar from './NavBar.js'
+import SideMenu from './SideMenu.js'
 
+export default function Setting({}) {
+  const [showMenu, setShowMenu] = useState(false)
 
-export default function Setting() {
   return (
     <View style={styles.container}>
-      <NavBar />
-      <StatusBar style='auto' />
+      <NavBar setShowMenu={setShowMenu} />
+      {showMenu && <SideMenu setShowMenu={setShowMenu} />}
     </View>
   )
 }

@@ -1,9 +1,12 @@
-import { StatusBar } from 'expo-status-bar'
+import { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Calendar } from 'react-native-calendars'
 import NavBar from './NavBar.js'
+import SideMenu from './SideMenu.js'
 
 export default function History() {
+  const [showMenu, setShowMenu] = useState(false)
+
   // marked the days
   const marked = {
     '2023-02-18': { selected: true },
@@ -14,8 +17,8 @@ export default function History() {
   }
   return (
     <View style={styles.container}>
-      <StatusBar style='auto' />
-      <NavBar />
+      <NavBar setShowMenu={setShowMenu} />
+      {showMenu && <SideMenu setShowMenu={setShowMenu} />}
       <View style={styles.calendar}>
         {/* Calendar */}
         <Calendar markedDates={marked} />
@@ -40,12 +43,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch'
   },
   calendar: {
-    // to reviewers
-    // position: 'absolute',
-    // top: 0,
-    // right: 0,
-    // bottom: 0,
-    // left: 0,
+    marginTop: 90,
     ...StyleSheet.absoluteFillObject,
     padding: 10
   },
