@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native'
 import { StyleSheet, View, Pressable, Text, TouchableWithoutFeedback } from 'react-native'
 import React from 'react'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import MainIcon from '../assets/icons/frame-16.svg'
 
 export default function SideMenu({ setShowMenu }) {
   const navigation = useNavigation()
@@ -17,6 +18,7 @@ export default function SideMenu({ setShowMenu }) {
     <TouchableWithoutFeedback onPress={handleScreenPress}>
       <View style={styles.container}>
         <View style={styles.content}>
+          <MainIcon width='150' height='150' />
           <Pressable style={styles.page} onPress={() => handlePress('Home')}>
             <FontAwesome name='home' style={styles.icon} />
             <Text style={styles.text}>Home</Text>
