@@ -119,8 +119,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#64B5F6'
   },
   textContainer: {
-    width: 250,
-    borderWidth: 2
+    width: 250
   },
   textTitle: {
     fontWeight: 600,
