@@ -15,19 +15,21 @@ export default function SideMenu({ setShowMenu }) {
 
   return (
     <TouchableWithoutFeedback onPress={handleScreenPress}>
-      <View style={styles.container} onPress={handleScreenPress}>
-        <Pressable style={styles.page} onPress={() => handlePress('Home')}>
-          <FontAwesome name='home' style={styles.icon} />
-          <Text style={styles.text}>Home</Text>
-        </Pressable>
-        <Pressable style={styles.page} onPress={() => handlePress('History')}>
-          <FontAwesome name='history' style={styles.icon} />
-          <Text style={styles.text}>History</Text>
-        </Pressable>
-        <Pressable style={styles.page} onPress={() => handlePress('Setting')}>
-          <FontAwesome name='cog' style={styles.icon} />
-          <Text style={styles.text}>Setting</Text>
-        </Pressable>
+      <View style={styles.container}>
+        <View style={styles.content}>
+          <Pressable style={styles.page} onPress={() => handlePress('Home')}>
+            <FontAwesome name='home' style={styles.icon} />
+            <Text style={styles.text}>Home</Text>
+          </Pressable>
+          <Pressable style={styles.page} onPress={() => handlePress('History')}>
+            <FontAwesome name='history' style={styles.icon} />
+            <Text style={styles.text}>History</Text>
+          </Pressable>
+          <Pressable style={styles.page} onPress={() => handlePress('Setting')}>
+            <FontAwesome name='cog' style={styles.icon} />
+            <Text style={styles.text}>Setting</Text>
+          </Pressable>
+        </View>
       </View>
     </TouchableWithoutFeedback>
   )
@@ -35,6 +37,15 @@ export default function SideMenu({ setShowMenu }) {
 
 const styles = StyleSheet.create({
   container: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    zIndex: 10,
+    backgroundColor: 'rgba(0,0,0,0.5)'
+  },
+  content: {
     position: 'absolute',
     left: 0,
     zIndex: 10,

@@ -1,4 +1,4 @@
-import { StyleSheet, View, FlatList, Text, Pressable, TouchableWithoutFeedback } from 'react-native'
+import { StyleSheet, View, FlatList, Text, Pressable } from 'react-native'
 import NavBar from './NavBar.js'
 import React, { useState } from 'react'
 import { DUMMY_DATA } from '../data/DummyData'
@@ -63,34 +63,29 @@ function ButtonInCard() {
 
 export default function Home() {
   const [showMenu, setShowMenu] = useState(false)
-  const handlePress = () => {
-    setShowMenu(false)
-  }
 
   return (
-    <TouchableWithoutFeedback onPress={handlePress}>
-      <View style={styles.container}>
-        <NavBar setShowMenu={setShowMenu} />
-        {showMenu && <SideMenu setShowMenu={setShowMenu} />}
-        <View style={styles.flatListContainer}>
-          <FlatList
-            data={DUMMY_DATA}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }) => (
-              <Card
-                title={item.title}
-                description={item.description}
-                image={item.image}
-                available={item.available}
-                type={item.type}
-              />
-            )}
-            showsVerticalScrollIndicator={false}
-            style={{ marginBottom: 52 }}
-          />
-        </View>
+    <View style={styles.container}>
+      <NavBar setShowMenu={setShowMenu} />
+      {showMenu && <SideMenu setShowMenu={setShowMenu} />}
+      <View style={styles.flatListContainer}>
+        <FlatList
+          data={DUMMY_DATA}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <Card
+              title={item.title}
+              description={item.description}
+              image={item.image}
+              available={item.available}
+              type={item.type}
+            />
+          )}
+          showsVerticalScrollIndicator={false}
+          style={{ marginBottom: 52 }}
+        />
       </View>
-    </TouchableWithoutFeedback>
+    </View>
   )
 }
 
