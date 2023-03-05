@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import React, { useState } from 'react'
 import NavBar from './NavBar.js'
 import SideMenu from './SideMenu.js'
@@ -10,6 +10,7 @@ export default function Setting({}) {
     <View style={styles.container}>
       <NavBar setShowMenu={setShowMenu} />
       {showMenu && <SideMenu setShowMenu={setShowMenu} />}
+      <Text>Coming soon ... </Text>
     </View>
   )
 }

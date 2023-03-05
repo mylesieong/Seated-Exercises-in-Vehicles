@@ -19,6 +19,8 @@ export default function History() {
     <View style={styles.container}>
       <NavBar setShowMenu={setShowMenu} />
       {showMenu && <SideMenu setShowMenu={setShowMenu} />}
+      <Text>Coming soon ... </Text>
+
       <View style={styles.calendar}>
         {/* Calendar */}
         <Calendar markedDates={marked} />
@@ -43,7 +45,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch'
   },
   calendar: {
-    marginTop: 90,
+    marginTop: 110,
     ...StyleSheet.absoluteFillObject,
     padding: 10
   },
