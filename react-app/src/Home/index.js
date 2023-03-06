@@ -1,6 +1,6 @@
 import { StyleSheet, View, FlatList } from 'react-native'
 import React, { useState } from 'react'
-import { DUMMY_DATA } from '../../data/DummyData'
+import { DUMMY_FUNCTION_DATA } from '../../data/DummyFunctionData'
 import NavBar from '../NavBar.js'
 import SideMenu from '../SideMenu'
 import Card from './Card'
@@ -14,7 +14,7 @@ export default function Home() {
       {showMenu && <SideMenu setShowMenu={setShowMenu} />}
       <View style={styles.flatListContainer}>
         <FlatList
-          data={DUMMY_DATA}
+          data={DUMMY_FUNCTION_DATA}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <Card
@@ -23,6 +23,7 @@ export default function Home() {
               image={item.image}
               available={item.available}
               type={item.type}
+              screen={item.screen}
             />
           )}
           showsVerticalScrollIndicator={false}
@@ -36,9 +37,10 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   flatListContainer: {
-    padding: 20
-  }
+    padding: 20,
+    marginBottom: 50,
+  },
 })

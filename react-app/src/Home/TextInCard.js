@@ -23,19 +23,19 @@ export default function TextInCard({ title, description, available }) {
 
 const styles = StyleSheet.create({
   textContainer: {
-    width: 250
+    flex: 1,
   },
   textTitle: {
     fontWeight: 600,
     fontSize: 16,
     lineHeight: 19,
-    marginBottom: 6
+    marginBottom: 6,
   },
   status: {
     lineHeight: 16,
-    marginBottom: 10
+    marginBottom: 10,
   },
   unavailable: {
-    color: '#878d8f'
-  }
+    color: '#878d8f',
+  },
 })
