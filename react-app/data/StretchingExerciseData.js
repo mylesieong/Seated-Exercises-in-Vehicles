@@ -1,7 +1,4 @@
-// This is a dummy database, can be replaced by a real database from backend in the future.
-// That will be an easy way to maintain the data.
-
-export const DUMMY_STRETCHING_EXERCISE_DATA = [
+export const STRETCHING_EXERCISE_DATA = [
   {
     id: 1,
     title: 'Breath in and out',

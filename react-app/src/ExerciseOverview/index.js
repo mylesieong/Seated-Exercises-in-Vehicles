@@ -3,7 +3,7 @@ import React from 'react'
 import Summary from './Summary'
 import ExerciseCard from './ExerciseCard'
 import StartExerciseButton from '../Utilities/StartExerciseButton'
-import { DUMMY_STRETCHING_EXERCISE_DATA } from '../../data/DummyStretchingExerciseData'
+import { STRETCHING_EXERCISE_DATA } from '../../data/StretchingExerciseData'
 
 export default function ExerciseOverview() {
   return (
@@ -11,12 +11,12 @@ export default function ExerciseOverview() {
       <SafeAreaView />
       <SafeAreaView style={styles.lowerWrapper}>
         <Summary
-          moves={DUMMY_STRETCHING_EXERCISE_DATA.length}
+          moves={STRETCHING_EXERCISE_DATA.length}
           time={`10 mins`}
           format={`Sitting`}
         ></Summary>
         <FlatList
-          data={DUMMY_STRETCHING_EXERCISE_DATA}
+          data={STRETCHING_EXERCISE_DATA}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <ExerciseCard
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   upperWrapper: {
     flex: 1,
     backgroundColor: '#ffca28',
-    paddingTop: 25,
+    paddingTop: 35,
   },
   lowerWrapper: {
     backgroundColor: '#ffffff',
