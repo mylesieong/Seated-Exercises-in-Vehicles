@@ -97,6 +97,7 @@ export default function App() {
         </Stack.Screen>
         <Stack.Screen name='In Seat/ Stretching' component={ExerciseOverview} />
         <Stack.Screen name='Exercise Steps' component={ExerciseSteps} />
+        <Stack.Screen name='Finish' component={Finish} />
       </Stack.Navigator>
     </NavigationContainer>
   )

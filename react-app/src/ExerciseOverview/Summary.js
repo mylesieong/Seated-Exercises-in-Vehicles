@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import GoBackButton from '../Utilities/GoBackButton'
+import { useNavigation } from '@react-navigation/native'
 
 export default function Summary({ moves, time, format }) {
+  const navigation = useNavigation()
   return (
     <View style={styles.container}>
-      <GoBackButton />
+      <GoBackButton onPress={() => navigation.navigate('Home')} />
       <Text style={styles.title}>In Seat/ Stretching</Text>
       <Text style={styles.description}>
         When travel a long trip in a confined seat, stretching will help reduce neck pain and back
