@@ -7,7 +7,6 @@ import History from './src/History'
 import ExerciseOverview from './src/ExerciseOverview'
 import ExerciseSteps from './src/ExerciseSteps'
 import { useEffect, useState } from 'react'
-
 const Stack = createNativeStackNavigator()
 import * as SQLite from 'expo-sqlite'
 
@@ -22,58 +21,60 @@ function openDatabase() {
     }
   }
 
-  const db = SQLite.openDatabase('db.db')
+  const db = SQLite.openDatabase('Record')
   return db
 }
 
 const db = openDatabase()
 
 export default function App() {
-  const [debugMessage, setDebugMessage] = useState('debug2')
+  const [debugMessage, setDebugMessage] = useState('debug')
 
   useEffect(() => {
     db.transaction(
       (tx) => {
-        // setDebugMessage('in tx2')
-
+        // create a table
         tx.executeSql(
-          `create table if not exists sample_table (id integer primary key not null, name text);`,
+          `create table if not exists Record (id integer primary key not null AUTOINCREMENT, timestamp integer not null, exercise_name text not null);`,
           [],
           () => {
             setDebugMessage('create table success')
           },
           () => {
-            setDebugMessage('create table faile')
+            setDebugMessage('create table failed')
             return false
           }
         )
 
-        tx.executeSql(
-          `insert into sample_table (name) values (?);`,
-          ['foobar'],
-          () => {
-            setDebugMessage('insert success')
-          },
-          (tx, error) => {
-            setDebugMessage('insert faile' + error)
-            return false
-          }
-        )
+        // insert data into database
+        // tx.executeSql(
+        //   `insert into Record (timestamp, exercise_name) values (?,?);`,
+        //   [20280225, 'stretchW'],
+        //   () => {
+        //     setDebugMessage('insert success')
+        //   },
+        //   (tx, error) => {
+        //     setDebugMessage('insert failed' + error)
+        //     return false
+        //   }
+        // )
 
+        // select data from database
         tx.executeSql(
-          `select * from sample_table;`,
+          `select * from Record;`,
           [],
           (_, { rows }) => {
-            setDebugMessage('select result:' + JSON.stringify(rows._array))
+            setDebugMessage(rows._array)
           },
           (tx, error) => {
-            setDebugMessage('select faile' + error)
+            setDebugMessage('select failed' + error)
             return false
           }
         )
       },
+
       (error) => {
-        // setDebugMessage('tx failed')
+        setDebugMessage('tx failed' + error)
       },
       () => {
         // setDebugMessage('tx success')
