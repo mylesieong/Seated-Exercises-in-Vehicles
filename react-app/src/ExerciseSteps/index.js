@@ -18,7 +18,7 @@ export default function ExerciseSteps() {
         <Header step={step} totalStep={totalStep} />
         <Image image={image} />
         <Info title={title} description={description} instruction={instruction} />
-        <ExerciseNav step={step} setStep={setStep}></ExerciseNav>
+        <ExerciseNav step={step} setStep={setStep} totalStep={totalStep}></ExerciseNav>
       </SafeAreaView>
     </View>
   )
