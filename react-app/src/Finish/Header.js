@@ -12,7 +12,7 @@ export default function Header() {
           navigation.navigate('In Seat/ Stretching')
         }}
       />
-      <Text style={styles.headerText}>Nice work!</Text>
+      <Text style={styles.headerText}> Nice work!</Text>
     </View>
   )
 }
@@ -21,11 +21,12 @@ const styles = StyleSheet.create({
   header: {
     height: 60,
     flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    justifyContent: 'center',
+    alignItems: 'flex-end',
   },
   headerText: {
+    fontWeight: 500,
     marginRight: 20,
-    fontSize: 18,
+    fontSize: 20,
   },
 })
