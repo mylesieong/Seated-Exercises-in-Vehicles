@@ -22,7 +22,7 @@ function openDatabase() {
     }
   }
 
-  const db = SQLite.openDatabase('Record')
+  const db = SQLite.openDatabase('shelter.db')
   return db
 }
 
@@ -36,29 +36,29 @@ export default function App() {
       (tx) => {
         // create a table
         tx.executeSql(
-          `create table if not exists Record (id integer primary key not null AUTOINCREMENT, timestamp integer not null, exercise_name text not null);`,
+          `create table if not exists Record (id integer primary key AUTOINCREMENT, timestamp integer not null, exercise_name text not null);`,
           [],
           () => {
             setDebugMessage('create table success')
           },
-          () => {
-            setDebugMessage('create table failed')
+          (tx, error) => {
+            setDebugMessage('create table failed' + error)
             return false
           }
         )
 
         // insert data into database
-        // tx.executeSql(
-        //   `insert into Record (timestamp, exercise_name) values (?,?);`,
-        //   [20280225, 'stretchW'],
-        //   () => {
-        //     setDebugMessage('insert success')
-        //   },
-        //   (tx, error) => {
-        //     setDebugMessage('insert failed' + error)
-        //     return false
-        //   }
-        // )
+        tx.executeSql(
+          `insert into Record (timestamp, exercise_name) values (?,?);`,
+          [20280225, 'stretchW'],
+          () => {
+            setDebugMessage('insert success')
+          },
+          (tx, error) => {
+            setDebugMessage('insert failed' + error)
+            return false
+          }
+        )
 
         // select data from database
         tx.executeSql(
