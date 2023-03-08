@@ -1,18 +1,30 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, SafeAreaView, View } from 'react-native'
 import React from 'react'
+import Header from './Header'
+import Image from './Image'
+import Buttons from './Buttons'
 
 export default function Finish() {
   return (
-    <View style={styles.container}>
-      <Text>Finish page is coming...</Text>
+    <View style={styles.upperWrapper}>
+      <SafeAreaView />
+      <SafeAreaView style={styles.lowerWrapper}>
+        <Header />
+        <Image />
+        <Buttons />
+      </SafeAreaView>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
+  upperWrapper: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: '#ffca28',
+    paddingTop: 35,
+  },
+  lowerWrapper: {
+    backgroundColor: '#ffffff',
+    flex: 1,
   },
 })
