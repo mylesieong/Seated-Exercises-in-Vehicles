@@ -6,6 +6,7 @@ import Setting from './src/Setting'
 import History from './src/History'
 import ExerciseOverview from './src/ExerciseOverview'
 import ExerciseSteps from './src/ExerciseSteps'
+import { Platform } from 'react-native'
 import { useEffect, useState } from 'react'
 const Stack = createNativeStackNavigator()
 import * as SQLite from 'expo-sqlite'
@@ -91,7 +92,9 @@ export default function App() {
       >
         <Stack.Screen name='Home' component={Home} />
         <Stack.Screen name='Setting' component={Setting} />
-        <Stack.Screen name='History' component={History} />
+        <Stack.Screen name='History'>
+          {(props) => <History {...props} debugMessage={debugMessage} />}
+        </Stack.Screen>
         <Stack.Screen name='In Seat/ Stretching' component={ExerciseOverview} />
         <Stack.Screen name='Exercise Steps' component={ExerciseSteps} />
       </Stack.Navigator>
