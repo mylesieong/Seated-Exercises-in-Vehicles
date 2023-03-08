@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Home from './src/Home'
@@ -7,9 +7,10 @@ import History from './src/History'
 import ExerciseOverview from './src/ExerciseOverview'
 import ExerciseSteps from './src/ExerciseSteps'
 import { Platform } from 'react-native'
-import { useEffect, useState } from 'react'
-const Stack = createNativeStackNavigator()
+import Finish from './src/Finish'
 import * as SQLite from 'expo-sqlite'
+
+const Stack = createNativeStackNavigator()
 
 function openDatabase() {
   if (Platform.OS === 'web') {
@@ -97,6 +98,7 @@ export default function App() {
         </Stack.Screen>
         <Stack.Screen name='In Seat/ Stretching' component={ExerciseOverview} />
         <Stack.Screen name='Exercise Steps' component={ExerciseSteps} />
+        <Stack.Screen name='Finish' component={Finish} />
       </Stack.Navigator>
     </NavigationContainer>
   )
