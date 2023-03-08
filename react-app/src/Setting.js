@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import NavBar from './NavBar.js'
 import SideMenu from './SideMenu.js'
 
-export default function Setting({}) {
+export default function Setting() {
   const [showMenu, setShowMenu] = useState(false)
 
   return (
@@ -18,8 +18,8 @@ export default function Setting({}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffff',
     alignItems: 'flex-start',
-    justifyContent: 'flex-start'
-  }
+    justifyContent: 'flex-start',
+  },
 })

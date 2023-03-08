@@ -2,7 +2,7 @@ import { FlatList, StyleSheet, SafeAreaView, View } from 'react-native'
 import React from 'react'
 import Summary from './Summary'
 import ExerciseCard from './ExerciseCard'
-import StartExerciseButton from '../Utilities/StartExerciseButton'
+import StartExerciseButton from './StartExerciseButton'
 import { STRETCHING_EXERCISE_DATA } from '../../data/StretchingExerciseData'
 
 export default function ExerciseOverview() {

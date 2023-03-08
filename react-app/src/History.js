@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, FlatList } from 'react-native'
 import { Calendar } from 'react-native-calendars'
 import NavBar from './NavBar.js'
 import SideMenu from './SideMenu.js'
-import * as React from 'react'
 
 export default function History({ debugMessage }) {
   const [showMenu, setShowMenu] = useState(false)
@@ -38,7 +37,7 @@ export default function History({ debugMessage }) {
     '2023-02-19': { selected: true },
     '2023-02-23': { selected: true },
     '2023-03-12': { selected: true },
-    '2023-03-14': { selected: true }
+    '2023-03-14': { selected: true },
   }
 
   return (
@@ -81,23 +80,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    alignSelf: 'stretch'
+    alignSelf: 'stretch',
   },
   calendar: {
     marginTop: 110,
     ...StyleSheet.absoluteFillObject,
-    padding: 10
+    padding: 10,
   },
   title: {
     margin: 15,
     fontSize: 15,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#34495e'
+    color: '#34495e',
   },
   recordInfo: {
     justifyContent: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   recordDate: {
     margin: 9,
@@ -105,13 +104,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: 'bold',
     textAlign: 'left',
-    color: '#34495e'
+    color: '#34495e',
   },
   recordText: {
     margin: 9,
     fontSize: 12,
     fontWeight: 'bold',
     textAlign: 'right',
-    color: '#34495e'
-  }
+    color: '#34495e',
+  },
 })

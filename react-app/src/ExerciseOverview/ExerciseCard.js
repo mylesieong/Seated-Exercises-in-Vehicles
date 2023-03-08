@@ -14,7 +14,7 @@ export default function ExerciseCard({ id, title, description, image }) {
         <Text style={styles.description}>{description}</Text>
       </View>
       <View style={styles.image}>
-        {!image == `` && <SvgXml width='100%' height='100%' xml={image} />}
+        {image !== `` && <SvgXml width='100%' height='100%' xml={image} />}
       </View>
     </View>
   )
