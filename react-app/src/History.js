@@ -1,11 +1,36 @@
-import { useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { useState, useEffect } from 'react'
+import { StyleSheet, Text, View, FlatList } from 'react-native'
 import { Calendar } from 'react-native-calendars'
 import NavBar from './NavBar.js'
 import SideMenu from './SideMenu.js'
+import * as React from 'react'
 
-export default function History() {
+export default function History({ debugMessage }) {
   const [showMenu, setShowMenu] = useState(false)
+  const [debugMessageHistory, setDebugMessageHistory] = useState('')
+
+  if (__DEV__) {
+    useEffect(() => {
+      alert(debugMessage)
+      setDebugMessageHistory('select result:' + JSON.stringify(debugMessage))
+    }, [debugMessage])
+  }
+
+  // format for a date
+  const FormatDate = ({ timestamp, format }) => {
+    const str_date = timestamp.toString()
+    const year = str_date.substring(0, 4)
+    var month = str_date.substring(4, 6)
+    // to avoid such as 01 or 02 etc for month
+    if (month.substring(0, 1) == 0) {
+      month = month.substring(1, 2)
+    }
+    const day = str_date.substring(6, 8)
+    format = format.replace(/YYYY/, year)
+    format = format.replace(/MM/, month)
+    format = format.replace(/DD/, day)
+    return <Text style={styles.recordDate}>{format}</Text>
+  }
 
   // marked the days
   const marked = {
@@ -15,6 +40,7 @@ export default function History() {
     '2023-03-12': { selected: true },
     '2023-03-14': { selected: true }
   }
+
   return (
     <View style={styles.container}>
       <NavBar setShowMenu={setShowMenu} />
@@ -26,10 +52,23 @@ export default function History() {
         <Calendar markedDates={marked} />
         {/* Text of the record */}
         <Text style={styles.title}>Records</Text>
-        <View style={styles.recordInfo}>
-          <Text style={styles.recordDate}>2023年2月23日</Text>
-          <Text style={styles.recordText}>Standard stretching</Text>
-        </View>
+        <FlatList
+          data={debugMessage}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <View style={styles.recordInfo}>
+              <FormatDate timestamp={item.timestamp} format='YYYY年MM月DD日' />
+              <Text style={styles.recordText}>{item.exercise_name} </Text>
+            </View>
+          )}
+        />
+        {/* debug */}
+        {__DEV__ && (
+          <Text style={styles.recordInfo} selectable={true}>
+            {' '}
+            {debugMessageHistory}{' '}
+          </Text>
+        )}
       </View>
     </View>
   )
@@ -62,7 +101,7 @@ const styles = StyleSheet.create({
   },
   recordDate: {
     margin: 9,
-    paddingRight: 18,
+    paddingRight: 20,
     fontSize: 12,
     fontWeight: 'bold',
     textAlign: 'left',
