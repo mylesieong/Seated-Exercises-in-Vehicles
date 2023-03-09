@@ -1,8 +1,16 @@
 import { useNavigation } from '@react-navigation/native'
-import { StyleSheet, View, Pressable, Text, TouchableWithoutFeedback } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  Pressable,
+  Text,
+  TouchableWithoutFeedback,
+  Appearance,
+} from 'react-native'
 import React from 'react'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import MainIcon from '../assets/icons/frame-16.svg'
+import ThemeColor from './Utilities/ThemeColor'
 
 export default function SideMenu({ setShowMenu }) {
   const navigation = useNavigation()
@@ -37,6 +45,8 @@ export default function SideMenu({ setShowMenu }) {
   )
 }
 
+const colorScheme = Appearance.getColorScheme()
+
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
@@ -45,13 +55,13 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     zIndex: 10,
-    backgroundColor: 'rgba(0,0,0,0.5)'
+    backgroundColor: 'rgba(0,0,0,0.5)',
   },
   content: {
     position: 'absolute',
     left: 0,
     zIndex: 10,
-    backgroundColor: '#D0D7DD',
+    backgroundColor: ThemeColor.componentColor[colorScheme],
     width: '70%',
     height: '100%',
     justifyContent: 'center',
@@ -59,26 +69,27 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 12
+      height: 12,
     },
     shadowOpacity: 0.58,
     shadowRadius: 16.0,
 
     elevation: 24,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
   },
   page: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 20,
-    color: 'black'
   },
   icon: {
     paddingHorizontal: 20,
-    fontSize: 20
+    fontSize: 20,
+    color: ThemeColor.textColor[colorScheme],
   },
   text: {
-    fontSize: 20
-  }
+    fontSize: 20,
+    color: ThemeColor.textColor[colorScheme],
+  },
 })

@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View, Pressable, Dimensions, Platform } from 'react-native'
+import { StyleSheet, Text, View, Pressable, Dimensions, Platform, Appearance } from 'react-native'
 import React from 'react'
 import { useRoute } from '@react-navigation/native'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import ThemeColor from './Utilities/ThemeColor'
 
 export default function NavBar({ setShowMenu }) {
   const route = useRoute()
@@ -16,34 +17,36 @@ export default function NavBar({ setShowMenu }) {
   )
 }
 
+const colorScheme = Appearance.getColorScheme()
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     ...Platform.select({
       ios: {
-        height: 100
+        height: 100,
       },
       android: {
-        height: 80
-      }
+        height: 80,
+      },
     }),
     width: Dimensions.get('window').width,
     alignItems: 'flex-end',
-    backgroundColor: '#D0D7DD',
-    paddingHorizontal: 20
+    backgroundColor: ThemeColor.componentColor[colorScheme],
+    paddingHorizontal: 20,
   },
   text: {
-    color: 'black',
+    color: ThemeColor.textColor[colorScheme],
     fontStyle: 'normal',
     fontWeight: 600,
     fontSize: 20,
     lineHeight: 19,
     marginLeft: 30,
-    paddingVertical: 12
+    paddingVertical: 12,
   },
   icon: {
-    color: 'black',
+    color: ThemeColor.textColor[colorScheme],
     fontSize: 20,
-    paddingVertical: 12
-  }
+    paddingVertical: 12,
+  },
 })
