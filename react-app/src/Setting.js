@@ -1,7 +1,8 @@
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, Appearance } from 'react-native'
 import React, { useState } from 'react'
 import NavBar from './NavBar.js'
 import SideMenu from './SideMenu.js'
+import ThemeColor from './Utilities/ThemeColor.js'
 
 export default function Setting() {
   const [showMenu, setShowMenu] = useState(false)
@@ -15,10 +16,12 @@ export default function Setting() {
   )
 }
 
+const colorScheme = Appearance.getColorScheme()
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: ThemeColor.backgroundColor[colorScheme],
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
   },

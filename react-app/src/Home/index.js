@@ -1,9 +1,10 @@
-import { StyleSheet, View, FlatList } from 'react-native'
+import { StyleSheet, View, FlatList, Appearance } from 'react-native'
 import React, { useState } from 'react'
 import { DUMMY_FUNCTION_DATA } from '../../data/DummyFunctionData'
 import NavBar from '../NavBar.js'
 import SideMenu from '../SideMenu'
 import Card from './Card'
+import ThemeColor from '../Utilities/ThemeColor'
 
 export default function Home() {
   const [showMenu, setShowMenu] = useState(false)
@@ -34,10 +35,12 @@ export default function Home() {
   )
 }
 
+const colorScheme = Appearance.getColorScheme()
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: ThemeColor.backgroundColor[colorScheme],
   },
   flatListContainer: {
     padding: 20,
