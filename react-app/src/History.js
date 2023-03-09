@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, FlatList } from 'react-native'
 import { Calendar } from 'react-native-calendars'
@@ -7,13 +8,14 @@ import SideMenu from './SideMenu.js'
 export default function History({ debugMessage }) {
   const [showMenu, setShowMenu] = useState(false)
   const [debugMessageHistory, setDebugMessageHistory] = useState('')
+  const defaultSetting = { selected: true }
 
-  if (__DEV__) {
-    useEffect(() => {
-      alert(debugMessage)
-      setDebugMessageHistory('select result:' + JSON.stringify(debugMessage))
-    }, [debugMessage])
-  }
+  // if (__DEV__) {
+  //   useEffect(() => {
+  //     // alert(debugMessage)
+  //     setDebugMessageHistory('select result:' + JSON.stringify(debugMessage))
+  //   }, [debugMessage])
+  // }
 
   // format for a date
   const FormatDate = ({ timestamp, format }) => {
@@ -31,13 +33,30 @@ export default function History({ debugMessage }) {
     return <Text style={styles.recordDate}>{format}</Text>
   }
 
-  // marked the days
-  const marked = {
-    '2023-02-18': { selected: true },
-    '2023-02-19': { selected: true },
-    '2023-02-23': { selected: true },
-    '2023-03-12': { selected: true },
-    '2023-03-14': { selected: true },
+  const test = ({ day }) => {
+    alert
+    return { [day]: defaultSetting }
+  }
+  // marked the days user did
+  const markedDays = () => {
+    var markedDaysObj = {}
+    debugMessage.forEach(function (value) {
+      var markedDay = FormatForCalender(value.timestamp, 'yyyy-mm-dd')
+      markedDaysObj[markedDay] = defaultSetting
+    })
+    return markedDaysObj
+  }
+
+  // format for calender
+  const FormatForCalender = (timestamp, format) => {
+    const str_date = timestamp.toString()
+    const year = str_date.substring(0, 4)
+    const month = str_date.substring(4, 6)
+    const day = str_date.substring(6, 8)
+    format = format.replace(/yyyy/, year)
+    format = format.replace(/mm/, month)
+    format = format.replace(/dd/, day)
+    return format
   }
 
   return (
@@ -48,7 +67,12 @@ export default function History({ debugMessage }) {
 
       <View style={styles.calendar}>
         {/* Calendar */}
-        <Calendar markedDates={marked} />
+        <Calendar
+          markedDates={markedDays()}
+          onDayPress={(day) => {
+            test(day)
+          }}
+        />
         {/* Text of the record */}
         <Text style={styles.title}>Records</Text>
         <FlatList
@@ -57,6 +81,7 @@ export default function History({ debugMessage }) {
           renderItem={({ item }) => (
             <View style={styles.recordInfo}>
               <FormatDate timestamp={item.timestamp} format='YYYY年MM月DD日' />
+              {/* <FormatForCalender timestamp={item.timestamp} format="'yyyy-mm-dd'" /> */}
               <Text style={styles.recordText}>{item.exercise_name} </Text>
             </View>
           )}
