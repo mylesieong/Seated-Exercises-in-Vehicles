@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'flex-end',
+    zIndex: 2,
   },
   headerText: {
     fontWeight: 500,
