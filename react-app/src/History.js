@@ -4,10 +4,44 @@ import { Calendar } from 'react-native-calendars'
 import NavBar from './NavBar.js'
 import SideMenu from './SideMenu.js'
 import ThemeColor from './Utilities/ThemeColor.js'
+import moment from 'moment'
+import * as SQLite from 'expo-sqlite'
 
 export default function History({ debugMessage }) {
   const [showMenu, setShowMenu] = useState(false)
   const [debugMessageHistory, setDebugMessageHistory] = useState('')
+  const styleCalSetting = { selected: true }
+  const initialDay = moment().format('YYYY-MM-DD')
+  const [records, setRecords] = useState([])
+  const [selected, setSelected] = useState(initialDay)
+  const [historyData, setHistoryData] = useState([])
+  const db = SQLite.openDatabase('shelter.db')
+
+  useEffect(() => {
+    db.transaction(
+      (tx) => {
+        tx.executeSql(
+          `SELECT * FROM Record;`,
+          [],
+          (_, { rows }) => {
+            setRecords(rows._array)
+          },
+          (tx, error) => {
+            setDebugMessageHistory('select failed' + error)
+            return false
+          }
+        )
+      },
+      (error) => {
+        setDebugMessageHistory('tx failed' + error)
+      }
+    )
+  }, [])
+
+  useEffect(() => {
+    const tmpSpecificData = records.filter((record) => selected === record.timestamp)
+    setHistoryData(tmpSpecificData)
+  }, [selected])
 
   if (__DEV__) {
     useEffect(() => {
@@ -16,59 +50,55 @@ export default function History({ debugMessage }) {
     }, [debugMessage])
   }
 
-  // format for a date
-  const FormatDate = ({ timestamp, format }) => {
-    const str_date = timestamp.toString()
-    const year = str_date.substring(0, 4)
-    var month = str_date.substring(4, 6)
-    // to avoid such as 01 or 02 etc for month
-    if (month.substring(0, 1) == 0) {
-      month = month.substring(1, 2)
-    }
-    const day = str_date.substring(6, 8)
-    format = format.replace(/YYYY/, year)
-    format = format.replace(/MM/, month)
-    format = format.replace(/DD/, day)
-    return <Text style={styles.recordDate}>{format}</Text>
+  // for the day user select
+  const selectedDay = (date) => {
+    setSelected(date.dateString)
   }
 
-  // marked the days
-  const marked = {
-    '2023-02-18': { selected: true },
-    '2023-02-19': { selected: true },
-    '2023-02-23': { selected: true },
-    '2023-03-12': { selected: true },
-    '2023-03-14': { selected: true },
+  // to mark the days user has histories
+  const markedDays = () => {
+    const markedDaysObj = {}
+    markedDaysObj[selected] = styleCalSetting
+    records.forEach(function (value) {
+      const markedDay = value.timestamp
+      markedDaysObj[markedDay] = styleCalSetting
+    })
+    return markedDaysObj
+  }
+
+  // format for view ('YYYY年MM月DD日')
+  const FormatDate = ({ timestamp }) => {
+    const splitDate = timestamp.split('-')
+    const dateStr = splitDate[0] + '年' + splitDate[1] + '月' + splitDate[2] + '日'
+    return dateStr
   }
 
   return (
     <View style={styles.container}>
       <NavBar setShowMenu={setShowMenu} />
       {showMenu && <SideMenu setShowMenu={setShowMenu} />}
-      <Text>Coming soon ... </Text>
-
       <View style={styles.calendar}>
         {/* Calendar */}
-        <Calendar markedDates={marked} />
+        <Calendar
+          current={initialDay}
+          markedDates={markedDays(selected)}
+          onDayPress={(day) => {
+            selectedDay(day)
+          }}
+        />
         {/* Text of the record */}
         <Text style={styles.title}>Records</Text>
         <FlatList
-          data={debugMessage}
-          keyExtractor={(item) => item.id.toString()}
+          data={historyData}
           renderItem={({ item }) => (
             <View style={styles.recordInfo}>
-              <FormatDate timestamp={item.timestamp} format='YYYY年MM月DD日' />
-              <Text style={styles.recordText}>{item.exercise_name} </Text>
+              <Text style={styles.recordText}>
+                <FormatDate timestamp={item.timestamp} />
+              </Text>
+              <Text style={styles.recordDate}>{item.exercise_name}</Text>
             </View>
           )}
         />
-        {/* debug */}
-        {__DEV__ && (
-          <Text style={styles.recordInfo} selectable={true}>
-            {' '}
-            {debugMessageHistory}{' '}
-          </Text>
-        )}
       </View>
     </View>
   )

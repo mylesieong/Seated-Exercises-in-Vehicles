@@ -37,13 +37,39 @@ export default function App() {
       (tx) => {
         // create a table
         tx.executeSql(
-          `create table if not exists Record (id integer primary key AUTOINCREMENT, timestamp integer not null, exercise_name text not null);`,
+          `create table if not exists Record (id integer primary key AUTOINCREMENT, timestamp string not null, exercise_name text not null);`,
           [],
           () => {
             setDebugMessage('create table success')
           },
           (tx, error) => {
             setDebugMessage('create table failed' + error)
+            return false
+          }
+        )
+
+        // insert data into database
+        tx.executeSql(
+          `insert into Record (timestamp, exercise_name) values (?,?);`,
+          ['2023-02-25', 'stretchW'],
+          () => {
+            setDebugMessage('insert success')
+          },
+          (tx, error) => {
+            setDebugMessage('insert failed' + error)
+            return false
+          }
+        )
+
+        // select data from database
+        tx.executeSql(
+          `select * from Record;`,
+          [],
+          (_, { rows }) => {
+            setDebugMessage(rows._array)
+          },
+          (tx, error) => {
+            setDebugMessage('select failed' + error)
             return false
           }
         )
