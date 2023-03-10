@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { SvgXml } from 'react-native-svg'
+import ExerciseImage from '../Utilities/ExerciseImage'
 
 export default function ExerciseCard({ id, title, description, image }) {
   return (
@@ -13,9 +13,7 @@ export default function ExerciseCard({ id, title, description, image }) {
 
         <Text style={styles.description}>{description}</Text>
       </View>
-      <View style={styles.image}>
-        {image !== `` && <SvgXml width='100%' height='100%' xml={image} />}
-      </View>
+      <ExerciseImage image={image} containerHeight={64} containerWidth={64} />
     </View>
   )
 }
@@ -39,10 +37,5 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: 500,
     height: 30,
-  },
-  image: {
-    width: 64,
-    height: 64,
-    backgroundColor: '#d9d9d9',
   },
 })

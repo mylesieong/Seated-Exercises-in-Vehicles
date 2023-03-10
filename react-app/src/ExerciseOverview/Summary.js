@@ -1,14 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import GoBackButton from '../Utilities/GoBackButton'
-import { useNavigation } from '@react-navigation/native'
 
 export default function Summary({ moves, time, format }) {
-  const navigation = useNavigation()
   return (
     <View style={styles.container}>
-      <GoBackButton onPress={() => navigation.navigate('Home')} />
-      <Text style={styles.title}>In Seat/ Stretching</Text>
       <Text style={styles.description}>
         When travel a long trip in a confined seat, stretching will help reduce neck pain and back
         pain, improve the blood circulation as long as lower the risk of DVT(Deep Vein Thrombosis).
@@ -33,17 +28,9 @@ export default function Summary({ moves, time, format }) {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingBottom: 20,
     backgroundColor: '#ffca28',
-  },
-  title: {
-    fontStyle: 'normal',
-    fontWeight: 600,
-    fontSize: 20,
-    lineHeight: 19,
-    color: '#000000',
-    textAlign: 'center',
-    marginVertical: 4,
   },
   description: {
     fontStyle: 'normal',
@@ -51,7 +38,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 16,
     alignItems: 'center',
-    marginVertical: 30,
+    marginVertical: 25,
   },
   bottomPart: {
     flexDirection: 'row',
