@@ -1,8 +1,9 @@
-import { StyleSheet, SafeAreaView, View } from 'react-native'
+import { StyleSheet, SafeAreaView, View, Dimensions } from 'react-native'
 import React from 'react'
 import Header from './Header'
 import Image from './Image'
 import Buttons from './Buttons'
+import Lottie from 'lottie-react-native'
 import { useEffect, useState } from 'react'
 import * as SQLite from 'expo-sqlite'
 
@@ -41,6 +42,13 @@ export default function Finish() {
         <Header />
         <Image />
         <Buttons />
+        <Lottie
+          source={require('../../assets/animation/62717-confetti.json')}
+          autoPlay
+          loop
+          style={styles.animation}
+          resizeMode='cover'
+        />
       </SafeAreaView>
     </View>
   )
@@ -55,5 +63,12 @@ const styles = StyleSheet.create({
   lowerWrapper: {
     backgroundColor: '#ffffff',
     flex: 1,
+  },
+  animation: {
+    position: 'absolute',
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+    flex: 1,
+    top: 0,
   },
 })
