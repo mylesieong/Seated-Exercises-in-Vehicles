@@ -1,23 +1,67 @@
-/* eslint-disable quotes */
 import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, FlatList } from 'react-native'
 import { Calendar } from 'react-native-calendars'
 import NavBar from './NavBar.js'
 import SideMenu from './SideMenu.js'
+import moment from 'moment'
 
 export default function History({ debugMessage }) {
   const [showMenu, setShowMenu] = useState(false)
   const [debugMessageHistory, setDebugMessageHistory] = useState('')
-  const defaultSetting = { selected: true }
+  const styleCalSetting = { selected: true }
+  const initialDay = moment().format('YYYY-MM-DD')
+  const [selected, setSelected] = useState(initialDay)
+  const [historyData, setHistoryData] = useState([])
 
-  // if (__DEV__) {
-  //   useEffect(() => {
-  //     // alert(debugMessage)
-  //     setDebugMessageHistory('select result:' + JSON.stringify(debugMessage))
-  //   }, [debugMessage])
-  // }
+  if (__DEV__) {
+    useEffect(() => {
+      alert(debugMessage)
+      setDebugMessageHistory('select result:' + JSON.stringify(debugMessage))
+    }, [debugMessage])
+  }
 
-  // format for a date
+  // for the day user select
+  const selectedDay = (date) => {
+    // initialize
+    setHistoryData('')
+    setSelected(date.dateString)
+    var tmpSpecificData = []
+    debugMessage.forEach(function (value) {
+      if (date.dateString == FormatForCalender(value.timestamp, 'yyyy-mm-dd')) {
+        var data = Object.assign({
+          timestamp: value.timestamp,
+          exercise_name: value.exercise_name,
+        })
+        tmpSpecificData.push(data)
+      }
+    })
+    setHistoryData(tmpSpecificData)
+  }
+
+  // to mark the days user has histories
+  const markedDays = () => {
+    var markedDaysObj = {}
+    markedDaysObj[selected] = styleCalSetting
+    debugMessage.forEach(function (value) {
+      var markedDay = FormatForCalender(value.timestamp, 'yyyy-mm-dd')
+      markedDaysObj[markedDay] = styleCalSetting
+    })
+    return markedDaysObj
+  }
+
+  // format for setting of calender ('yyyy-mm-dd')
+  const FormatForCalender = (timestamp, format) => {
+    const str_date = timestamp.toString()
+    const year = str_date.substring(0, 4)
+    const month = str_date.substring(4, 6)
+    const day = str_date.substring(6, 8)
+    format = format.replace(/yyyy/, year)
+    format = format.replace(/mm/, month)
+    format = format.replace(/dd/, day)
+    return format
+  }
+
+  // format for view ('YYYY年MM月DD日')
   const FormatDate = ({ timestamp, format }) => {
     const str_date = timestamp.toString()
     const year = str_date.substring(0, 4)
@@ -30,32 +74,6 @@ export default function History({ debugMessage }) {
     format = format.replace(/YYYY/, year)
     format = format.replace(/MM/, month)
     format = format.replace(/DD/, day)
-    return <Text style={styles.recordDate}>{format}</Text>
-  }
-
-  const test = ({ day }) => {
-    alert
-    return { [day]: defaultSetting }
-  }
-  // marked the days user did
-  const markedDays = () => {
-    var markedDaysObj = {}
-    debugMessage.forEach(function (value) {
-      var markedDay = FormatForCalender(value.timestamp, 'yyyy-mm-dd')
-      markedDaysObj[markedDay] = defaultSetting
-    })
-    return markedDaysObj
-  }
-
-  // format for calender
-  const FormatForCalender = (timestamp, format) => {
-    const str_date = timestamp.toString()
-    const year = str_date.substring(0, 4)
-    const month = str_date.substring(4, 6)
-    const day = str_date.substring(6, 8)
-    format = format.replace(/yyyy/, year)
-    format = format.replace(/mm/, month)
-    format = format.replace(/dd/, day)
     return format
   }
 
@@ -68,21 +86,22 @@ export default function History({ debugMessage }) {
       <View style={styles.calendar}>
         {/* Calendar */}
         <Calendar
-          markedDates={markedDays()}
+          current={initialDay}
+          markedDates={markedDays(selected)}
           onDayPress={(day) => {
-            test(day)
+            selectedDay(day)
           }}
         />
         {/* Text of the record */}
         <Text style={styles.title}>Records</Text>
         <FlatList
-          data={debugMessage}
-          keyExtractor={(item) => item.id.toString()}
+          data={historyData}
           renderItem={({ item }) => (
             <View style={styles.recordInfo}>
-              <FormatDate timestamp={item.timestamp} format='YYYY年MM月DD日' />
-              {/* <FormatForCalender timestamp={item.timestamp} format="'yyyy-mm-dd'" /> */}
-              <Text style={styles.recordText}>{item.exercise_name} </Text>
+              <Text style={styles.recordText}>
+                <FormatDate timestamp={item.timestamp} format='YYYY年MM月DD日' />
+              </Text>
+              <Text style={styles.recordDate}>{item.exercise_name}</Text>
             </View>
           )}
         />
