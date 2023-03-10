@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Appearance } from 'react-native'
 import { Calendar } from 'react-native-calendars'
 import NavBar from './NavBar.js'
 import SideMenu from './SideMenu.js'
+import ThemeColor from './Utilities/ThemeColor.js'
 import moment from 'moment'
 
 export default function History({ debugMessage }) {
@@ -118,10 +119,12 @@ export default function History({ debugMessage }) {
 }
 
 // Css
+const colorScheme = Appearance.getColorScheme()
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: ThemeColor.backgroundColor[colorScheme],
     alignItems: 'center',
     justifyContent: 'flex-start',
     alignSelf: 'stretch',
@@ -136,7 +139,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#34495e',
+    color: ThemeColor.textColor[colorScheme],
   },
   recordInfo: {
     justifyContent: 'center',
@@ -155,6 +158,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: 'bold',
     textAlign: 'right',
-    color: '#34495e',
+    color: ThemeColor.textColor[colorScheme],
   },
 })
