@@ -77,8 +77,6 @@ export default function History({ debugMessage }) {
     <View style={styles.container}>
       <NavBar setShowMenu={setShowMenu} />
       {showMenu && <SideMenu setShowMenu={setShowMenu} />}
-      <Text>Coming soon ... </Text>
-
       <View style={styles.calendar}>
         {/* Calendar */}
         <Calendar
