@@ -47,33 +47,20 @@ export default function App() {
             return false
           }
         )
-
-        // insert data into database
-        tx.executeSql(
-          `insert into Record (timestamp, exercise_name) values (?,?);`,
-          [20280225, 'stretchW'],
-          () => {
-            setDebugMessage('insert success')
-          },
-          (tx, error) => {
-            setDebugMessage('insert failed' + error)
-            return false
-          }
-        )
-
-        // select data from database
-        tx.executeSql(
-          `select * from Record;`,
-          [],
-          (_, { rows }) => {
-            setDebugMessage(rows._array)
-          },
-          (tx, error) => {
-            setDebugMessage('select failed' + error)
-            return false
-          }
-        )
       },
+
+      //   // insert data into database
+      //   tx.executeSql(
+      //     `insert into Record (timestamp, exercise_name) values (?,?);`,
+      //     [20280225, 'stretchW'],
+      //     () => {
+      //       setDebugMessage('insert success')
+      //     },
+      //     (tx, error) => {
+      //       setDebugMessage('insert failed' + error)
+      //       return false
+      //     }
+      //   )
 
       (error) => {
         setDebugMessage('tx failed' + error)
@@ -92,13 +79,20 @@ export default function App() {
         }}
       >
         <Stack.Screen name='Home' component={Home} />
-        <Stack.Screen name='Setting' component={Setting} />
+        <Stack.Screen name='Setting'>{(props) => <Setting {...props} db={db} />}</Stack.Screen>
         <Stack.Screen name='History'>
-          {(props) => <History {...props} debugMessage={debugMessage} />}
+          {(props) => (
+            <History
+              {...props}
+              debugMessage={debugMessage}
+              db={db}
+              setDebugMessage={setDebugMessage}
+            />
+          )}
         </Stack.Screen>
         <Stack.Screen name='In Seat/ Stretching' component={ExerciseOverview} />
         <Stack.Screen name='Exercise Steps' component={ExerciseSteps} />
-        <Stack.Screen name='Finish' component={Finish} />
+        <Stack.Screen name='Finish'>{(props) => <Finish {...props} db={db} />}</Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   )
