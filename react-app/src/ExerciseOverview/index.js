@@ -1,5 +1,6 @@
 import { FlatList, StyleSheet, SafeAreaView, View } from 'react-native'
 import React from 'react'
+import Header from './Header'
 import Summary from './Summary'
 import ExerciseCard from './ExerciseCard'
 import StartExerciseButton from './StartExerciseButton'
@@ -10,6 +11,7 @@ export default function ExerciseOverview() {
     <View style={styles.upperWrapper}>
       <SafeAreaView />
       <SafeAreaView style={styles.lowerWrapper}>
+        <Header />
         <Summary
           moves={STRETCHING_EXERCISE_DATA.length}
           time={`10 mins`}
