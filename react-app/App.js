@@ -47,52 +47,10 @@ export default function App() {
             return false
           }
         )
-
-        // insert data into database
-        tx.executeSql(
-          `insert into Record (timestamp, exercise_name) values (?,?);`,
-          ['2023-02-25', 'stretchW'],
-          () => {
-            setDebugMessage('insert success')
-          },
-          (tx, error) => {
-            setDebugMessage('insert failed' + error)
-            return false
-          }
-        )
-
-        // select data from database
-        tx.executeSql(
-          `select * from Record;`,
-          [],
-          (_, { rows }) => {
-            setDebugMessage(rows._array)
-          },
-          (tx, error) => {
-            setDebugMessage('select failed' + error)
-            return false
-          }
-        )
       },
-
-      //   // insert data into database
-      //   tx.executeSql(
-      //     `insert into Record (timestamp, exercise_name) values (?,?);`,
-      //     [20280225, 'stretchW'],
-      //     () => {
-      //       setDebugMessage('insert success')
-      //     },
-      //     (tx, error) => {
-      //       setDebugMessage('insert failed' + error)
-      //       return false
-      //     }
-      //   )
 
       (error) => {
         setDebugMessage('tx failed' + error)
-      },
-      () => {
-        // setDebugMessage('tx success')
       }
     )
   }, [])
