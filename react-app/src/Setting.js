@@ -3,10 +3,12 @@ import React, { useState, useEffect } from 'react'
 import NavBar from './NavBar.js'
 import SideMenu from './SideMenu.js'
 import ThemeColor from './Utilities/ThemeColor.js'
+import { useNavigation } from '@react-navigation/native'
 
 export default function Setting({ db }) {
   const [showMenu, setShowMenu] = useState(false)
   const [debugMessage, setDebugMessage] = useState('')
+  const navigation = useNavigation()
 
   const clearRecords = () => {
     db.transaction(
@@ -17,6 +19,7 @@ export default function Setting({ db }) {
           (_, rows) => {
             setDebugMessage('drop table success')
             alert('All records have been removed')
+            navigation.navigate('Home')
           },
           (_, error) => {
             setDebugMessage('select failed' + error)
