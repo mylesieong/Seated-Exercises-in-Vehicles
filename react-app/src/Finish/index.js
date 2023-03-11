@@ -7,8 +7,7 @@ import Lottie from 'lottie-react-native'
 import { useEffect, useState } from 'react'
 import * as SQLite from 'expo-sqlite'
 
-export default function Finish() {
-  const db = SQLite.openDatabase('shelter.db')
+export default function Finish({ db }) {
   const [debugMessage, setDebugMessage] = useState('')
 
   useEffect(() => {
