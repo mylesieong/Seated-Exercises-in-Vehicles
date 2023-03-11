@@ -4,8 +4,36 @@ import Header from './Header'
 import Image from './Image'
 import Buttons from './Buttons'
 import Lottie from 'lottie-react-native'
+import { useEffect, useState } from 'react'
+import * as SQLite from 'expo-sqlite'
 
-export default function Finish() {
+export default function Finish({ db }) {
+  const [debugMessage, setDebugMessage] = useState('')
+
+  useEffect(() => {
+    const timestamp = new Date().getTime()
+    db.transaction(
+      (tx) => {
+        tx.executeSql(
+          `insert into Record (timestamp, exercise_name) values (?,?);`,
+          [timestamp, 'stretchW'],
+          () => {
+            setDebugMessage('insert success')
+            if (__DEV__) alert(debugMessage)
+          },
+          (tx, error) => {
+            setDebugMessage('insert failed' + error)
+            if (__DEV__) alert(debugMessage)
+            return false
+          }
+        )
+      },
+      (error) => {
+        setDebugMessage('tx failed' + error)
+      }
+    )
+  }, [])
+
   return (
     <View style={styles.upperWrapper}>
       <SafeAreaView />
