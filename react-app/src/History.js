@@ -13,12 +13,10 @@ const toYYYYMMDD = (timestamp) => {
   let month = '' + (date.getMonth() + 1)
   let day = '' + date.getDate()
 
-  if (month.length < 2) 
-    month = '0' + month
-  if (day.length < 2) 
-    day = '0' + day
+  if (month.length < 2) month = '0' + month
+  if (day.length < 2) day = '0' + day
 
-  return [year, month, day].join('-');
+  return [year, month, day].join('-')
 }
 
 export default function History({ debugMessage }) {
@@ -27,7 +25,7 @@ export default function History({ debugMessage }) {
   const styleCalSetting = { selected: true }
   const initialDay = moment().format('YYYY-MM-DD')
   const [records, setRecords] = useState([])
-  const [selected, setSelected] = useState(initialDay)
+  const [selected, setSelected] = useState('')
   const [historyData, setHistoryData] = useState([])
   const db = SQLite.openDatabase('shelter.db')
 
@@ -52,6 +50,11 @@ export default function History({ debugMessage }) {
     )
   }, [])
 
+  useEffect(() => {
+    const tmpSpecificData = records.filter((record) => selected === toYYYYMMDD(record.timestamp))
+    setHistoryData(tmpSpecificData)
+  }, [selected])
+
   if (__DEV__) {
     useEffect(() => {
       alert(debugMessage)
@@ -62,8 +65,6 @@ export default function History({ debugMessage }) {
   // for the day user select
   const selectedDay = (date) => {
     setSelected(date.dateString)
-    const tmpSpecificData = records.filter((record) => selected === toYYYYMMDD(record.timestamp))
-    setHistoryData(tmpSpecificData)
   }
 
   // to mark the days user has histories
