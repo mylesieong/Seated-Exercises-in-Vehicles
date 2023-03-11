@@ -7,6 +7,20 @@ import ThemeColor from './Utilities/ThemeColor.js'
 import moment from 'moment'
 import * as SQLite from 'expo-sqlite'
 
+const toYYYYMMDD = (timestamp) => {
+  const date = new Date(timestamp)
+  const year = date.getFullYear()
+  let month = '' + (date.getMonth() + 1)
+  let day = '' + date.getDate()
+
+  if (month.length < 2) 
+    month = '0' + month
+  if (day.length < 2) 
+    day = '0' + day
+
+  return [year, month, day].join('-');
+}
+
 export default function History({ debugMessage }) {
   const [showMenu, setShowMenu] = useState(false)
   const [debugMessageHistory, setDebugMessageHistory] = useState('')
@@ -38,11 +52,6 @@ export default function History({ debugMessage }) {
     )
   }, [])
 
-  useEffect(() => {
-    const tmpSpecificData = records.filter((record) => selected === record.timestamp)
-    setHistoryData(tmpSpecificData)
-  }, [selected])
-
   if (__DEV__) {
     useEffect(() => {
       alert(debugMessage)
@@ -53,6 +62,8 @@ export default function History({ debugMessage }) {
   // for the day user select
   const selectedDay = (date) => {
     setSelected(date.dateString)
+    const tmpSpecificData = records.filter((record) => selected === toYYYYMMDD(record.timestamp))
+    setHistoryData(tmpSpecificData)
   }
 
   // to mark the days user has histories
@@ -68,7 +79,7 @@ export default function History({ debugMessage }) {
 
   // format for view ('YYYY年MM月DD日')
   const FormatDate = ({ timestamp }) => {
-    const splitDate = timestamp.split('-')
+    const splitDate = toYYYYMMDD(timestamp).split('-')
     const dateStr = splitDate[0] + '年' + splitDate[1] + '月' + splitDate[2] + '日'
     return dateStr
   }

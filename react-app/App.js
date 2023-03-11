@@ -37,7 +37,7 @@ export default function App() {
       (tx) => {
         // create a table
         tx.executeSql(
-          `create table if not exists Record (id integer primary key AUTOINCREMENT, timestamp string not null, exercise_name text not null);`,
+          `create table if not exists Record (_id integer primary key AUTOINCREMENT, timestamp integer not null, exercise_name text not null);`,
           [],
           () => {
             setDebugMessage('create table success')
