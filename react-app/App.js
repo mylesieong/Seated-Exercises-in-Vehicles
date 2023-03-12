@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Home from './src/Home'
@@ -26,33 +26,27 @@ function openDatabase() {
   const db = SQLite.openDatabase('shelter.db')
   return db
 }
-
 const db = openDatabase()
 
+__DEV__ &&
+  db.transaction((tx) => {
+    // create a table
+    tx.executeSql(`drop table if exists record`)
+  })
+__DEV__ &&
+  db.transaction((tx) => {
+    // create a table
+    tx.executeSql(`drop table if exists Record`)
+  })
+
 export default function App() {
-  const [debugMessage, setDebugMessage] = useState('debug')
-
   useEffect(() => {
-    db.transaction(
-      (tx) => {
-        // create a table
-        tx.executeSql(
-          `create table if not exists Record (_id integer primary key AUTOINCREMENT, timestamp integer not null, exercise_name text not null);`,
-          [],
-          () => {
-            setDebugMessage('create table success')
-          },
-          (tx, error) => {
-            setDebugMessage('create table failed' + error)
-            return false
-          }
-        )
-      },
-
-      (error) => {
-        setDebugMessage('tx failed' + error)
-      }
-    )
+    db.transaction((tx) => {
+      // create a table
+      tx.executeSql(
+        `create table if not exists Record (_id integer primary key AUTOINCREMENT, timestamp integer not null, exercise_name text not null);`
+      )
+    })
   }, [])
 
   return (
@@ -63,19 +57,10 @@ export default function App() {
         }}
       >
         <Stack.Screen name='Home' component={Home} />
-        <Stack.Screen name='Setting'>{(props) => <Setting {...props} db={db} />}</Stack.Screen>
-        <Stack.Screen name='History'>
-          {(props) => (
-            <History
-              {...props}
-              debugMessage={debugMessage}
-              db={db}
-              setDebugMessage={setDebugMessage}
-            />
-          )}
-        </Stack.Screen>
+        <Stack.Screen name='Setting'>{() => <Setting db={db} />}</Stack.Screen>
+        <Stack.Screen name='History'>{() => <History db={db} />}</Stack.Screen>
         <Stack.Screen name='In Seat/ Stretching' component={ExerciseOverview} />
-        <Stack.Screen name='Exercise Steps' component={ExerciseSteps} />
+        <Stack.Screen name='Exercise Steps'>{() => <ExerciseSteps db={db} />}</Stack.Screen>
         <Stack.Screen name='Finish' component={Finish} />
       </Stack.Navigator>
     </NavigationContainer>
