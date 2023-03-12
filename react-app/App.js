@@ -31,11 +31,6 @@ const db = openDatabase()
 __DEV__ &&
   db.transaction((tx) => {
     // create a table
-    tx.executeSql(`drop table if exists record`)
-  })
-__DEV__ &&
-  db.transaction((tx) => {
-    // create a table
     tx.executeSql(`drop table if exists Record`)
   })
 
