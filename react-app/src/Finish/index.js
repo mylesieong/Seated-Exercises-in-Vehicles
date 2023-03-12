@@ -5,7 +5,6 @@ import Image from './Image'
 import Buttons from './Buttons'
 import Lottie from 'lottie-react-native'
 import { useEffect, useState } from 'react'
-import * as SQLite from 'expo-sqlite'
 
 export default function Finish({ db }) {
   const [debugMessage, setDebugMessage] = useState('')
@@ -40,7 +39,6 @@ export default function Finish({ db }) {
       <SafeAreaView style={styles.lowerWrapper}>
         <Header />
         <Image />
-        <Buttons />
         <Lottie
           source={require('../../assets/animation/62717-confetti.json')}
           autoPlay
@@ -48,6 +46,7 @@ export default function Finish({ db }) {
           style={styles.animation}
           resizeMode='cover'
         />
+        <Buttons />
       </SafeAreaView>
     </View>
   )
