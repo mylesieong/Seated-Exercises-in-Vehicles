@@ -37,7 +37,7 @@ export default function History({ db }) {
         setRecords(result)
       })
     })
-    const localDay = new Date().setUTCHours(0, 0, 0, 0) + 7 * 60 * 60 * 1000
+    const localDay = new Date().setUTCHours(0, 0, 0, 0)
     db.transaction((tx) => {
       tx.executeSql(
         'select timestamp, exercise_name from Record where timestamp between ? and ? order by timestamp',
