@@ -52,6 +52,5 @@ const styles = StyleSheet.create({
   },
   flatListContainer: {
     padding: 20,
-    marginBottom: 50,
   },
 })

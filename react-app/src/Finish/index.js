@@ -1,36 +1,22 @@
-import { StyleSheet, SafeAreaView, View, Dimensions } from 'react-native'
+import { StyleSheet, SafeAreaView, View, Dimensions, BackHandler } from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 import Header from './Header'
 import Image from './Image'
 import Buttons from './Buttons'
 import Lottie from 'lottie-react-native'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
-export default function Finish({ db }) {
-  const [debugMessage, setDebugMessage] = useState('')
+export default function Finish() {
+  const navigation = useNavigation()
 
   useEffect(() => {
-    const timestamp = new Date().getTime()
-    db.transaction(
-      (tx) => {
-        tx.executeSql(
-          `insert into Record (timestamp, exercise_name) values (?,?);`,
-          [timestamp, 'stretchW'],
-          () => {
-            setDebugMessage('insert success')
-            if (__DEV__) alert(debugMessage)
-          },
-          (tx, error) => {
-            setDebugMessage('insert failed' + error)
-            if (__DEV__) alert(debugMessage)
-            return false
-          }
-        )
-      },
-      (error) => {
-        setDebugMessage('tx failed' + error)
-      }
-    )
+    const backAction = () => {
+      navigation.navigate('In Seat/ Stretching')
+      return true
+    }
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction)
+    return () => backHandler.remove()
   }, [])
 
   return (
