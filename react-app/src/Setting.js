@@ -3,10 +3,12 @@ import React, { useState, useEffect } from 'react'
 import NavBar from './NavBar.js'
 import SideMenu from './SideMenu.js'
 import ThemeColor from './Utilities/ThemeColor.js'
+import { useNavigation } from '@react-navigation/native'
 
 export default function Setting({ db }) {
   const [showMenu, setShowMenu] = useState(false)
   const [debugMessage, setDebugMessage] = useState('')
+  const navigation = useNavigation()
   const removeRecordsAlert = () => {
     Alert.alert('Remove all records', 'Once you delete all records, it cannot be undone', [
       {
@@ -27,6 +29,7 @@ export default function Setting({ db }) {
           (_, rows) => {
             setDebugMessage('drop table success')
             alert('All records have been removed')
+            navigation.navigate('Home')
           },
           (_, error) => {
             setDebugMessage('select failed' + error)
@@ -46,9 +49,7 @@ export default function Setting({ db }) {
     <View style={styles.container}>
       <NavBar setShowMenu={setShowMenu} />
       {showMenu && <SideMenu setShowMenu={setShowMenu} />}
-      <View style={styles.line}>
-        <Text style={styles.text}>General</Text>
-      </View>
+      <Text style={styles.title}>General</Text>
       <View style={styles.line}>
         <Text style={styles.text}>Remove all records</Text>
         <Pressable style={styles.button} onPress={removeRecordsAlert}>
@@ -68,9 +69,16 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
   },
+  title: {
+    color: ThemeColor.textColor[colorScheme],
+    fontSize: 18,
+    fontWeight: 'bold',
+    paddingTop: 20,
+    paddingLeft: 10,
+  },
   text: {
     color: ThemeColor.textColor[colorScheme],
-    fontSize: 20,
+    fontSize: 18,
   },
   line: {
     flexDirection: 'row',
