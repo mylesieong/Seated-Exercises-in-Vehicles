@@ -9,7 +9,7 @@ export default function NavBar({ setShowMenu }) {
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => setShowMenu(true)} style={styles.button}>
+      <Pressable onPress={() => setShowMenu(true)}>
         <FontAwesome name='bars' style={styles.icon} />
       </Pressable>
       <Text style={styles.text}>{route.name}</Text>
