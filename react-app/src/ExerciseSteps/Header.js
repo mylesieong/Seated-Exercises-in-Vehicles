@@ -34,7 +34,7 @@ export default function Header({ step, totalStep }) {
 
 const styles = StyleSheet.create({
   header: {
-    height: 60,
+    height: 50,
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',

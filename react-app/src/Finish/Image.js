@@ -1,4 +1,4 @@
-import { StyleSheet, View, Dimensions } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import HappyMan from '../../assets/exercises_image/happy-man.svg'
 
@@ -27,12 +27,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#d0d7dd',
     borderRadius: 200,
-  },
-  animation: {
-    position: 'absolute',
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
-    flex: 1,
-    top: 0,
   },
 })
