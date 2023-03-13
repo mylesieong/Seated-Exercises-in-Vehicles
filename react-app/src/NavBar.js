@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Pressable, Dimensions, Platform, Appearance } from 'react-native'
+import { StyleSheet, Text, View, Pressable, Dimensions, Appearance } from 'react-native'
 import React from 'react'
 import { useRoute } from '@react-navigation/native'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
@@ -22,16 +22,9 @@ const colorScheme = Appearance.getColorScheme()
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    ...Platform.select({
-      ios: {
-        height: 100,
-      },
-      android: {
-        height: 80,
-      },
-    }),
+    height: 50,
     width: Dimensions.get('window').width,
-    alignItems: 'flex-end',
+    alignItems: 'center',
     backgroundColor: ThemeColor.componentColor[colorScheme],
     paddingHorizontal: 20,
   },
@@ -40,7 +33,7 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: 600,
     fontSize: 20,
-    lineHeight: 19,
+    lineHeight: 25,
     marginLeft: 30,
     paddingVertical: 12,
   },

@@ -6,7 +6,7 @@ import ExerciseImage from '../Utilities/ExerciseImage'
 import Info from './Info'
 import ExerciseNav from './ExerciseNav'
 
-export default function ExerciseSteps() {
+export default function ExerciseSteps({ db }) {
   const [step, setStep] = useState(1)
   const totalStep = STRETCHING_EXERCISE_DATA.length
   const { title, description, instruction, image } = STRETCHING_EXERCISE_DATA[step - 1]
@@ -18,7 +18,7 @@ export default function ExerciseSteps() {
         <Header step={step} totalStep={totalStep} />
         <ExerciseImage image={image} imageWidth={'85%'} ImageHeight={'85%'} containerHeight={270} />
         <Info title={title} description={description} instruction={instruction} />
-        <ExerciseNav step={step} setStep={setStep} totalStep={totalStep}></ExerciseNav>
+        <ExerciseNav step={step} setStep={setStep} totalStep={totalStep} db={db}></ExerciseNav>
       </SafeAreaView>
     </View>
   )

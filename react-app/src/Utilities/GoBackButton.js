@@ -13,7 +13,7 @@ export default function GoBackButton({ onPress }) {
 const styles = StyleSheet.create({
   goBackButton: {
     position: 'absolute',
-    top: 12,
+    top: 7,
     left: 20,
   },
 })
