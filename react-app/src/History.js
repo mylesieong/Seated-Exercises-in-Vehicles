@@ -70,13 +70,12 @@ export default function History({ db }) {
           <Calendar
             markedDates={{ ...records, ...selected }}
             onDayPress={(day) => {
-              const localDay = day.timestamp + 7 * 60 * 60 * 1000
-              // 7 * 60 * 60 * 1000 is the time difference between Vancouver time to UTC. Should consider not hard coded in the future.
+              const localTimestamp = day.timestamp + new Date().getTimezoneOffset() * 60 * 1000
               setSelected({ [day.dateString]: { selected: true } })
               db.transaction((tx) => {
                 tx.executeSql(
                   'select timestamp, exercise_name from Record where timestamp between ? and ? order by timestamp',
-                  [localDay, localDay + 24 * 60 * 60 * 1000 - 1],
+                  [localTimestamp, localTimestamp + 24 * 60 * 60 * 1000 - 1],
                   (_, { rows }) => {
                     setRecordsOfSelected(rows._array)
                   }
@@ -93,18 +92,22 @@ export default function History({ db }) {
           />
           {__DEV__ && (
             <Button
-              title='PRESS TO ADD RANDOM DATA'
+              title='PRESS TO ADD 100 RANDOM DATA'
               color='#841584'
               onPress={() => {
-                db.transaction((tx) => {
-                  const randomTimeInMarch = Math.floor(
-                    Math.random() * (1680307200000 - 1677628800000) + 1677628800000
-                  )
-                  tx.executeSql('insert into Record (exercise_name, timestamp) values (?, ?)', [
-                    'just for testing',
-                    randomTimeInMarch,
-                  ])
-                })
+                Array(100)
+                  .fill(1)
+                  .forEach(() => {
+                    db.transaction((tx) => {
+                      const randomTimeInMarch = Math.floor(
+                        Math.random() * (1680307200000 - 1677628800000) + 1677628800000
+                      )
+                      tx.executeSql('insert into Record (exercise_name, timestamp) values (?, ?)', [
+                        'just for testing',
+                        randomTimeInMarch,
+                      ])
+                    })
+                  })
                 db.transaction((tx) => {
                   tx.executeSql('select * from Record', [], (_, { rows }) => {
                     let result = rows._array.reduce(
@@ -117,6 +120,15 @@ export default function History({ db }) {
                     setRecords(result)
                   })
                 })
+              }}
+            />
+          )}
+          {__DEV__ && (
+            <Button
+              title='Check current time'
+              color='#005408'
+              onPress={() => {
+                console.log(Math.round(new Date().getTime() / 1000))
               }}
             />
           )}
