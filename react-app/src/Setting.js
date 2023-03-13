@@ -28,8 +28,6 @@ export default function Setting({ db }) {
           [],
           (_, rows) => {
             setDebugMessage('drop table success')
-            alert('All records have been removed')
-            navigation.navigate('Home')
           },
           (_, error) => {
             setDebugMessage('select failed' + error)
