@@ -2,7 +2,7 @@
   "expo": {
     "name": "Seated Exercise in Vehicles",
     "slug": "react-app",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -13,16 +13,31 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.myles.ieong.reactapp",
+      "runtimeVersion": {
+        "policy": "sdkVersion"
+      }
     },
     "android": {
+      "versionCode": 6,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "runtimeVersion": "1.0.0",
+      "package": "com.unicornio.happyinseat"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "282a8a7b-710b-4ada-ab32-79a503e810fb"
+      }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/282a8a7b-710b-4ada-ab32-79a503e810fb"
     }
   }
 }
