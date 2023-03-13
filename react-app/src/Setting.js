@@ -1,14 +1,22 @@
-import { StyleSheet, View, Text, Appearance, Pressable } from 'react-native'
+import { StyleSheet, View, Text, Appearance, Pressable, Alert } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import NavBar from './NavBar.js'
 import SideMenu from './SideMenu.js'
 import ThemeColor from './Utilities/ThemeColor.js'
-import { useNavigation } from '@react-navigation/native'
 
 export default function Setting({ db }) {
   const [showMenu, setShowMenu] = useState(false)
   const [debugMessage, setDebugMessage] = useState('')
-  const navigation = useNavigation()
+  const removeRecordsAlert = () => {
+    Alert.alert('Remove all records', 'Once you delete all records, it cannot be undone', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      { text: 'OK', onPress: () => clearRecords() },
+    ])
+  }
 
   const clearRecords = () => {
     db.transaction(
@@ -19,7 +27,6 @@ export default function Setting({ db }) {
           (_, rows) => {
             setDebugMessage('drop table success')
             alert('All records have been removed')
-            navigation.navigate('Home')
           },
           (_, error) => {
             setDebugMessage('select failed' + error)
@@ -44,7 +51,7 @@ export default function Setting({ db }) {
       </View>
       <View style={styles.line}>
         <Text style={styles.text}>Remove all records</Text>
-        <Pressable style={styles.button} onPress={clearRecords}>
+        <Pressable style={styles.button} onPress={removeRecordsAlert}>
           <Text style={styles.text}>Remove</Text>
         </Pressable>
       </View>
