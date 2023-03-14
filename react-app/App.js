@@ -66,8 +66,8 @@ export default function App() {
         </Stack.Screen>
         <Stack.Screen name='History'>{() => <History db={db} reset={reset} />}</Stack.Screen>
         <Stack.Screen name='In Seat/ Stretching' component={ExerciseOverview} />
-        <Stack.Screen name='Exercise Steps'>{() => <ExerciseSteps db={db} />}</Stack.Screen>
-        <Stack.Screen name='Finish' component={Finish} />
+        <Stack.Screen name='Exercise Steps'>{() => <ExerciseSteps />}</Stack.Screen>
+        <Stack.Screen name='Finish'>{() => <Finish db={db} />}</Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   )

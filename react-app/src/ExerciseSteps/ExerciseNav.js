@@ -1,28 +1,21 @@
 import { StyleSheet, View, Dimensions, Pressable } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import React, { useEffect } from 'react'
+import React from 'react'
 import ArrowLeftIcon from '../../assets/icons/arrow-tiny-left.svg'
 import ArrowRightIcon from '../../assets/icons/arrow-tiny-right.svg'
 import TickIcon from '../../assets/icons/tick.svg'
 
-export default function ExerciseNav({ step, setStep, totalStep, db }) {
+export default function ExerciseNav({ step, setStep, totalStep }) {
   const navigation = useNavigation()
   const prevStep = () => {
     step !== 1 && setStep(step - 1)
   }
   const nextStep = () => {
-    step == totalStep ? navigation.navigate('Finish') : setStep(step + 1)
+    step == totalStep
+      ? navigation.navigate('Finish', { exerciseName: 'Standard stretching' })
+      : setStep(step + 1)
   }
 
-  useEffect(() => {
-    return db.transaction((tx) => {
-      tx.executeSql(
-        'insert into Record (exercise_name, timestamp) values (?, ?)',
-        ['Standard stretching', new Date().getTime()],
-        () => {}
-      )
-    })
-  }, [])
   return (
     <View style={styles.container}>
       <Pressable style={step == 1 && styles.unusable} onPress={prevStep}>
