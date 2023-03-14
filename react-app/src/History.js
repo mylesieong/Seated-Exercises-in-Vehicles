@@ -26,10 +26,10 @@ const formatDate = (timestamp) => {
   const day = date.getDate()
   const hour = date.getHours()
   const minute = date.getMinutes() > 9 ? date.getMinutes() : `0${date.getMinutes()}`
-  return `${year}年${month}月${day}日 ${hour}:${minute}`
+  return `${year}-${month}-${day} ${hour}:${minute}`
 }
 
-export default function History({ db,reset }) {
+export default function History({ db, reset }) {
   const [showMenu, setShowMenu] = useState(false)
   const [records, setRecords] = useState({})
   const today = toYYYYMMDD(new Date().getTime())
@@ -61,7 +61,7 @@ export default function History({ db,reset }) {
     })
   }, [reset])
 
-return (
+  return (
     <PageTemplate>
       <NavBar setShowMenu={setShowMenu} />
       {showMenu && <SideMenu setShowMenu={setShowMenu} />}
