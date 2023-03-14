@@ -18,7 +18,7 @@ const toYYYYMMDD = (timestamp) => {
   return [year, month, day].join('-')
 }
 
-// format for view ('YYYY年MM月DD日 HH:MM')
+// format for view ('YYYY-MM-DD HH:MM')
 const formatDate = (timestamp) => {
   const date = new Date(timestamp)
   const year = date.getFullYear()
@@ -81,6 +81,9 @@ export default function History({ db, reset }) {
               )
             })
           }}
+          onMonthChange={() => {
+            setRecordsOfSelected([])
+          }}
           hideExtraDays={true}
           theme={{
             calendarBackground: ThemeColor.backgroundColor[colorScheme],
@@ -88,6 +91,17 @@ export default function History({ db, reset }) {
             arrowColor: ThemeColor.textColor[colorScheme],
             monthTextColor: ThemeColor.textColor[colorScheme],
           }}
+        />
+        {/* Text of the record */}
+        <Text style={[styles.title, !recordsOfSelected[0] && styles.hide]}>Records</Text>
+        <FlatList
+          data={recordsOfSelected}
+          renderItem={({ item }) => (
+            <View style={styles.recordInfo}>
+              <Text style={styles.recordText}>{formatDate(item.timestamp)}</Text>
+              <Text style={styles.recordText}>{item.exercise_name}</Text>
+            </View>
+          )}
         />
         {__DEV__ && (
           <Button
@@ -124,24 +138,13 @@ export default function History({ db, reset }) {
         )}
         {__DEV__ && (
           <Button
-            title='Check current time'
+            title='console log'
             color='#005408'
             onPress={() => {
-              console.log(Math.round(new Date().getTime() / 1000))
+              console.log(recordsOfSelected)
             }}
           />
         )}
-        {/* Text of the record */}
-        <Text style={styles.title}>Records</Text>
-        <FlatList
-          data={recordsOfSelected}
-          renderItem={({ item }) => (
-            <View style={styles.recordInfo}>
-              <Text style={styles.recordText}>{formatDate(item.timestamp)}</Text>
-              <Text style={styles.recordText}>{item.exercise_name}</Text>
-            </View>
-          )}
-        />
       </View>
     </PageTemplate>
   )
@@ -162,6 +165,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     color: ThemeColor.textColor[colorScheme],
+  },
+  hide: {
+    display: 'none',
   },
   recordInfo: {
     justifyContent: 'space-between',
