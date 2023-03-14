@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions, BackHandler } from 'react-native'
 import React from 'react'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import Header from './Header'
 import Image from './Image'
 import Buttons from './Buttons'
@@ -8,10 +8,17 @@ import Lottie from 'lottie-react-native'
 import { useEffect } from 'react'
 import PageTemplate from '../Utilities/PageTemplate'
 
-export default function Finish() {
+export default function Finish({ db }) {
   const navigation = useNavigation()
+  const route = useRoute()
 
   useEffect(() => {
+    db.transaction((tx) => {
+      tx.executeSql('insert into Record (exercise_name, timestamp) values (?, ?)', [
+        route.params.exerciseName,
+        new Date().getTime(),
+      ])
+    })
     const backAction = () => {
       navigation.navigate('In Seat/ Stretching')
       return true

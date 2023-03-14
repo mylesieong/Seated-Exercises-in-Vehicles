@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Home from './src/Home'
@@ -44,6 +44,8 @@ export default function App() {
     })
   }, [])
 
+  const [reset, resetTrigger] = useState(false)
+
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -52,11 +54,20 @@ export default function App() {
         }}
       >
         <Stack.Screen name='Home' component={Home} />
-        <Stack.Screen name='Setting'>{() => <Setting db={db} />}</Stack.Screen>
-        <Stack.Screen name='History'>{() => <History db={db} />}</Stack.Screen>
+        <Stack.Screen name='Setting'>
+          {() => (
+            <Setting
+              db={db}
+              resetTrigger={() => {
+                resetTrigger(!reset)
+              }}
+            />
+          )}
+        </Stack.Screen>
+        <Stack.Screen name='History'>{() => <History db={db} reset={reset} />}</Stack.Screen>
         <Stack.Screen name='In Seat/ Stretching' component={ExerciseOverview} />
-        <Stack.Screen name='Exercise Steps'>{() => <ExerciseSteps db={db} />}</Stack.Screen>
-        <Stack.Screen name='Finish' component={Finish} />
+        <Stack.Screen name='Exercise Steps'>{() => <ExerciseSteps />}</Stack.Screen>
+        <Stack.Screen name='Finish'>{() => <Finish db={db} />}</Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   )

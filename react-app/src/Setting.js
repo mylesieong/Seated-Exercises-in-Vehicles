@@ -5,13 +5,12 @@ import SideMenu from './SideMenu.js'
 import ThemeColor from './Utilities/ThemeColor.js'
 import PageTemplate from './Utilities/PageTemplate.js'
 
-export default function Setting({ db }) {
+export default function Setting({ db, resetTrigger }) {
   const [showMenu, setShowMenu] = useState(false)
   const removeRecordsAlert = () => {
     Alert.alert('Remove all records', 'Once you delete all records, it cannot be undone', [
       {
         text: 'Cancel',
-        onPress: () => console.log('Cancel Pressed'),
         style: 'cancel',
       },
       { text: 'OK', onPress: () => clearRecords() },
@@ -20,7 +19,7 @@ export default function Setting({ db }) {
 
   const clearRecords = () => {
     db.transaction((tx) => {
-      tx.executeSql(`DELETE FROM Record;`)
+      tx.executeSql(`DELETE FROM Record;`), [], resetTrigger()
     })
   }
 

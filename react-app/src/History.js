@@ -26,10 +26,10 @@ const formatDate = (timestamp) => {
   const day = date.getDate()
   const hour = date.getHours()
   const minute = date.getMinutes() > 9 ? date.getMinutes() : `0${date.getMinutes()}`
-  return `${year}年${month}月${day}日 ${hour}:${minute}`
+  return `${year}-${month}-${day} ${hour}:${minute}`
 }
 
-export default function History({ db }) {
+export default function History({ db, reset }) {
   const [showMenu, setShowMenu] = useState(false)
   const [records, setRecords] = useState({})
   const today = toYYYYMMDD(new Date().getTime())
@@ -49,17 +49,17 @@ export default function History({ db }) {
         setRecords(result)
       })
     })
-    const localDay = new Date().setUTCHours(0, 0, 0, 0)
+    const localStartOfDay = new Date().setHours(0, 0, 0, 0)
     db.transaction((tx) => {
       tx.executeSql(
         'select timestamp, exercise_name from Record where timestamp between ? and ? order by timestamp',
-        [localDay, localDay + 24 * 60 * 60 * 1000 - 1],
+        [localStartOfDay, localStartOfDay + 24 * 60 * 60 * 1000 - 1],
         (_, { rows }) => {
           setRecordsOfSelected(rows._array)
         }
       )
     })
-  }, [])
+  }, [reset])
 
   return (
     <PageTemplate>
@@ -69,13 +69,12 @@ export default function History({ db }) {
         <Calendar
           markedDates={{ ...records, ...selected }}
           onDayPress={(day) => {
-            const localDay = day.timestamp + 7 * 60 * 60 * 1000
-            // 7 * 60 * 60 * 1000 is the time difference between Vancouver time to UTC. Should consider not hard coded in the future.
+            const localTimestamp = day.timestamp + new Date().getTimezoneOffset() * 60 * 1000
             setSelected({ [day.dateString]: { selected: true } })
             db.transaction((tx) => {
               tx.executeSql(
                 'select timestamp, exercise_name from Record where timestamp between ? and ? order by timestamp',
-                [localDay, localDay + 24 * 60 * 60 * 1000 - 1],
+                [localTimestamp, localTimestamp + 24 * 60 * 60 * 1000 - 1],
                 (_, { rows }) => {
                   setRecordsOfSelected(rows._array)
                 }
