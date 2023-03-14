@@ -9,6 +9,7 @@ export default function ExerciseImage({
   ImageHeight,
   containerWidth,
   containerHeight,
+  containerRadius,
 }) {
   const [step, setStep] = useState(0)
   useEffect(() => {
@@ -21,7 +22,16 @@ export default function ExerciseImage({
   }, [])
 
   return (
-    <View style={[styles.container, { width: containerWidth, height: containerHeight }]}>
+    <View
+      style={[
+        styles.container,
+        {
+          width: containerWidth,
+          height: containerHeight,
+          borderRadius: containerRadius ? containerRadius : 0,
+        },
+      ]}
+    >
       {image[0] !== `` && (
         <SvgXml
           width={imageWidth ? imageWidth : '100%'}
