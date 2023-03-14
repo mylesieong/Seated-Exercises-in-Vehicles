@@ -1,14 +1,12 @@
 import { StyleSheet, View, Text, Appearance, Pressable, Alert } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import NavBar from './NavBar.js'
 import SideMenu from './SideMenu.js'
 import ThemeColor from './Utilities/ThemeColor.js'
-import { useNavigation } from '@react-navigation/native'
+import PageTemplate from './Utilities/PageTemplate.js'
 
 export default function Setting({ db }) {
   const [showMenu, setShowMenu] = useState(false)
-  const [debugMessage, setDebugMessage] = useState('')
-  const navigation = useNavigation()
   const removeRecordsAlert = () => {
     Alert.alert('Remove all records', 'Once you delete all records, it cannot be undone', [
       {
@@ -21,30 +19,13 @@ export default function Setting({ db }) {
   }
 
   const clearRecords = () => {
-    db.transaction(
-      (tx) => {
-        tx.executeSql(
-          `DELETE FROM Record;`,
-          [],
-          (_, rows) => {
-            setDebugMessage('drop table success')
-          },
-          (_, error) => {
-            setDebugMessage('select failed' + error)
-            if (__DEV__) alert(error)
-            return false
-          }
-        )
-      },
-      (error) => {
-        setDebugMessage('tx failed' + error)
-        if (__DEV__) alert(error)
-      }
-    )
+    db.transaction((tx) => {
+      tx.executeSql(`DELETE FROM Record;`)
+    })
   }
 
   return (
-    <View style={styles.container}>
+    <PageTemplate>
       <NavBar setShowMenu={setShowMenu} />
       {showMenu && <SideMenu setShowMenu={setShowMenu} />}
       <Text style={styles.title}>General</Text>
@@ -54,19 +35,13 @@ export default function Setting({ db }) {
           <Text style={styles.text}>Remove</Text>
         </Pressable>
       </View>
-    </View>
+    </PageTemplate>
   )
 }
 
 const colorScheme = Appearance.getColorScheme()
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: ThemeColor.backgroundColor[colorScheme],
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-  },
   title: {
     color: ThemeColor.textColor[colorScheme],
     fontSize: 18,

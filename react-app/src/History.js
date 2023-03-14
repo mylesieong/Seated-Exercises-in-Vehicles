@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, FlatList, Appearance, SafeAreaView, Button } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Appearance, Button } from 'react-native'
 import { Calendar } from 'react-native-calendars'
 import NavBar from './NavBar.js'
 import SideMenu from './SideMenu.js'
 import ThemeColor from './Utilities/ThemeColor.js'
+import PageTemplate from './Utilities/PageTemplate.js'
 
 const toYYYYMMDD = (timestamp) => {
   const date = new Date(timestamp)
@@ -15,6 +16,17 @@ const toYYYYMMDD = (timestamp) => {
   if (day.length < 2) day = '0' + day
 
   return [year, month, day].join('-')
+}
+
+// format for view ('YYYY年MM月DD日 HH:MM')
+const formatDate = (timestamp) => {
+  const date = new Date(timestamp)
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hour = date.getHours()
+  const minute = date.getMinutes() > 9 ? date.getMinutes() : `0${date.getMinutes()}`
+  return `${year}年${month}月${day}日 ${hour}:${minute}`
 }
 
 export default function History({ db }) {
@@ -47,105 +59,92 @@ export default function History({ db }) {
         }
       )
     })
-  }, [records])
-
-  // format for view ('YYYY年MM月DD日 HH:MM')
-  const formatDate = (timestamp) => {
-    const date = new Date(timestamp)
-    const year = date.getFullYear()
-    const month = date.getMonth() + 1
-    const day = date.getDate()
-    const hour = date.getHours()
-    const minute = date.getMinutes() > 9 ? date.getMinutes() : `0${date.getMinutes()}`
-    return `${year}年${month}月${day}日 ${hour}:${minute}`
-  }
+  }, [])
 
   return (
-    <View style={styles.upperWrapper}>
-      <SafeAreaView />
-      <SafeAreaView style={styles.lowerWrapper}>
-        <NavBar setShowMenu={setShowMenu} />
-        {showMenu && <SideMenu setShowMenu={setShowMenu} />}
-        <View style={styles.calendar}>
-          <Calendar
-            markedDates={{ ...records, ...selected }}
-            onDayPress={(day) => {
-              const localTimestamp = day.timestamp + new Date().getTimezoneOffset() * 60 * 1000
-              setSelected({ [day.dateString]: { selected: true } })
-              db.transaction((tx) => {
-                tx.executeSql(
-                  'select timestamp, exercise_name from Record where timestamp between ? and ? order by timestamp',
-                  [localTimestamp, localTimestamp + 24 * 60 * 60 * 1000 - 1],
-                  (_, { rows }) => {
-                    setRecordsOfSelected(rows._array)
-                  }
-                )
-              })
-            }}
-            hideExtraDays={true}
-            theme={{
-              calendarBackground: ThemeColor.backgroundColor[colorScheme],
-              dayTextColor: ThemeColor.textColor[colorScheme],
-              arrowColor: ThemeColor.textColor[colorScheme],
-              monthTextColor: ThemeColor.textColor[colorScheme],
-            }}
-          />
-          {__DEV__ && (
-            <Button
-              title='PRESS TO ADD 100 RANDOM DATA'
-              color='#841584'
-              onPress={() => {
-                Array(100)
-                  .fill(1)
-                  .forEach(() => {
-                    db.transaction((tx) => {
-                      const randomTimeInMarch = Math.floor(
-                        Math.random() * (1680307200000 - 1677628800000) + 1677628800000
-                      )
-                      tx.executeSql('insert into Record (exercise_name, timestamp) values (?, ?)', [
-                        'just for testing',
-                        randomTimeInMarch,
-                      ])
-                    })
-                  })
-                db.transaction((tx) => {
-                  tx.executeSql('select * from Record', [], (_, { rows }) => {
-                    let result = rows._array.reduce(
-                      (previous, current) => ({
-                        ...previous,
-                        [toYYYYMMDD(current.timestamp)]: { marked: true },
-                      }),
-                      {}
+    <PageTemplate>
+      <NavBar setShowMenu={setShowMenu} />
+      {showMenu && <SideMenu setShowMenu={setShowMenu} />}
+      <View style={styles.calendar}>
+        <Calendar
+          markedDates={{ ...records, ...selected }}
+          onDayPress={(day) => {
+            const localDay = day.timestamp + 7 * 60 * 60 * 1000
+            // 7 * 60 * 60 * 1000 is the time difference between Vancouver time to UTC. Should consider not hard coded in the future.
+            setSelected({ [day.dateString]: { selected: true } })
+            db.transaction((tx) => {
+              tx.executeSql(
+                'select timestamp, exercise_name from Record where timestamp between ? and ? order by timestamp',
+                [localDay, localDay + 24 * 60 * 60 * 1000 - 1],
+                (_, { rows }) => {
+                  setRecordsOfSelected(rows._array)
+                }
+              )
+            })
+          }}
+          hideExtraDays={true}
+          theme={{
+            calendarBackground: ThemeColor.backgroundColor[colorScheme],
+            dayTextColor: ThemeColor.textColor[colorScheme],
+            arrowColor: ThemeColor.textColor[colorScheme],
+            monthTextColor: ThemeColor.textColor[colorScheme],
+          }}
+        />
+        {__DEV__ && (
+          <Button
+            title='PRESS TO ADD 100 RANDOM DATA'
+            color='#841584'
+            onPress={() => {
+              Array(100)
+                .fill(1)
+                .forEach(() => {
+                  db.transaction((tx) => {
+                    const randomTimeInMarch = Math.floor(
+                      Math.random() * (1680307200000 - 1677628800000) + 1677628800000
                     )
-                    setRecords(result)
+                    tx.executeSql('insert into Record (exercise_name, timestamp) values (?, ?)', [
+                      'just for testing',
+                      randomTimeInMarch,
+                    ])
                   })
                 })
-              }}
-            />
-          )}
-          {__DEV__ && (
-            <Button
-              title='Check current time'
-              color='#005408'
-              onPress={() => {
-                console.log(Math.round(new Date().getTime() / 1000))
-              }}
-            />
-          )}
-          {/* Text of the record */}
-          <Text style={styles.title}>Records</Text>
-          <FlatList
-            data={recordsOfSelected}
-            renderItem={({ item }) => (
-              <View style={styles.recordInfo}>
-                <Text style={styles.recordText}>{formatDate(item.timestamp)}</Text>
-                <Text style={styles.recordText}>{item.exercise_name}</Text>
-              </View>
-            )}
+              db.transaction((tx) => {
+                tx.executeSql('select * from Record', [], (_, { rows }) => {
+                  let result = rows._array.reduce(
+                    (previous, current) => ({
+                      ...previous,
+                      [toYYYYMMDD(current.timestamp)]: { marked: true },
+                    }),
+                    {}
+                  )
+                  setRecords(result)
+                })
+              })
+            }}
           />
-        </View>
-      </SafeAreaView>
-    </View>
+        )}
+        {__DEV__ && (
+          <Button
+            title='Check current time'
+            color='#005408'
+            onPress={() => {
+              console.log(Math.round(new Date().getTime() / 1000))
+            }}
+          />
+        )}
+        {/* Text of the record */}
+        <Text style={styles.title}>Records</Text>
+        <FlatList
+          data={recordsOfSelected}
+          renderItem={({ item }) => (
+            <View style={styles.recordInfo}>
+              <Text style={styles.recordText}>{formatDate(item.timestamp)}</Text>
+              <Text style={styles.recordText}>{item.exercise_name}</Text>
+            </View>
+          )}
+        />
+      </View>
+    </PageTemplate>
   )
 }
 
@@ -153,17 +152,6 @@ export default function History({ db }) {
 const colorScheme = Appearance.getColorScheme()
 
 const styles = StyleSheet.create({
-  upperWrapper: {
-    flex: 1,
-    backgroundColor: ThemeColor.componentColor[colorScheme],
-    paddingTop: 35,
-  },
-  lowerWrapper: {
-    flex: 1,
-    backgroundColor: ThemeColor.backgroundColor[colorScheme],
-    alignItems: 'center',
-    alignSelf: 'stretch',
-  },
   calendar: {
     marginTop: 80,
     ...StyleSheet.absoluteFillObject,
