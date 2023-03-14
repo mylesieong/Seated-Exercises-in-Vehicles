@@ -47,7 +47,7 @@ export default function History({ db }) {
         }
       )
     })
-  }, [])
+  }, [records])
 
   // format for view ('YYYY年MM月DD日 HH:MM')
   const formatDate = (timestamp) => {
