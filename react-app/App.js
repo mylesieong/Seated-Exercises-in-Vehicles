@@ -44,7 +44,7 @@ export default function App() {
     })
   }, [])
 
-  const[reset,resetTrigger]=useState(false) 
+  const [reset, resetTrigger] = useState(false)
 
   return (
     <NavigationContainer>
@@ -54,7 +54,16 @@ export default function App() {
         }}
       >
         <Stack.Screen name='Home' component={Home} />
-        <Stack.Screen name='Setting'>{() => <Setting db={db} reset={()=>{resetTrigger(!reset)}} />}</Stack.Screen>
+        <Stack.Screen name='Setting'>
+          {() => (
+            <Setting
+              db={db}
+              resetTrigger={() => {
+                resetTrigger(!reset)
+              }}
+            />
+          )}
+        </Stack.Screen>
         <Stack.Screen name='History'>{() => <History db={db} reset={reset} />}</Stack.Screen>
         <Stack.Screen name='In Seat/ Stretching' component={ExerciseOverview} />
         <Stack.Screen name='Exercise Steps'>{() => <ExerciseSteps db={db} />}</Stack.Screen>
