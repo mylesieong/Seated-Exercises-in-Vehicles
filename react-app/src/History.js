@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, FlatList, Appearance, Button } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Button } from 'react-native'
 import { Calendar } from 'react-native-calendars'
 import NavBar from './NavBar.js'
 import SideMenu from './SideMenu.js'
@@ -86,10 +86,10 @@ export default function History({ db, reset }) {
           }}
           hideExtraDays={true}
           theme={{
-            calendarBackground: ThemeColor.backgroundColor[colorScheme],
-            dayTextColor: ThemeColor.textColor[colorScheme],
-            arrowColor: ThemeColor.textColor[colorScheme],
-            monthTextColor: ThemeColor.textColor[colorScheme],
+            calendarBackground: ThemeColor.backgroundColor,
+            dayTextColor: ThemeColor.textColor,
+            arrowColor: ThemeColor.textColor,
+            monthTextColor: ThemeColor.textColor,
           }}
         />
         {/* Text of the record */}
@@ -151,8 +151,6 @@ export default function History({ db, reset }) {
 }
 
 // Css
-const colorScheme = Appearance.getColorScheme()
-
 const styles = StyleSheet.create({
   calendar: {
     marginTop: 80,
@@ -164,7 +162,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: ThemeColor.textColor[colorScheme],
+    color: ThemeColor.textColor,
   },
   hide: {
     display: 'none',
@@ -178,6 +176,6 @@ const styles = StyleSheet.create({
     margin: 9,
     fontSize: 12,
     fontWeight: 'bold',
-    color: ThemeColor.textColor[colorScheme],
+    color: ThemeColor.textColor,
   },
 })

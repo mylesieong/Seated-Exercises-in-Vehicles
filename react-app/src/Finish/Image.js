@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import HappyMan from '../../assets/exercises_image/happy-man.svg'
-
+import ThemeColor from '../Utilities/ThemeColor'
 
 export default function Image() {
   return (
@@ -9,7 +9,6 @@ export default function Image() {
       <View style={styles.image}>
         <HappyMan />
       </View>
-      
     </View>
   )
 }
@@ -25,7 +24,7 @@ const styles = StyleSheet.create({
     width: 270,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#d0d7dd',
+    backgroundColor: ThemeColor.componentColor,
     borderRadius: 200,
   },
 })

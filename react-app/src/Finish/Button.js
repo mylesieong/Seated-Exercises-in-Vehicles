@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Pressable } from 'react-native'
 import React from 'react'
+import ThemeColor from '../Utilities/ThemeColor'
 
 export default function Button({ onPress, text, children, color }) {
   return (
@@ -33,5 +34,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     fontWeight: 500,
+    color: ThemeColor.textColor,
   },
 })

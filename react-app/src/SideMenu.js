@@ -1,12 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
-import {
-  StyleSheet,
-  View,
-  Pressable,
-  Text,
-  TouchableWithoutFeedback,
-  Appearance,
-} from 'react-native'
+import { StyleSheet, View, Pressable, Text, TouchableWithoutFeedback } from 'react-native'
 import React from 'react'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import MainIcon from '../assets/icons/frame-16.svg'
@@ -45,8 +38,6 @@ export default function SideMenu({ setShowMenu }) {
   )
 }
 
-const colorScheme = Appearance.getColorScheme()
-
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
@@ -61,7 +52,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     zIndex: 10,
-    backgroundColor: ThemeColor.componentColor[colorScheme],
+    backgroundColor: ThemeColor.componentColor,
     width: '70%',
     height: '100%',
     justifyContent: 'center',
@@ -86,10 +77,10 @@ const styles = StyleSheet.create({
   icon: {
     paddingHorizontal: 20,
     fontSize: 20,
-    color: ThemeColor.textColor[colorScheme],
+    color: ThemeColor.textColor,
   },
   text: {
     fontSize: 20,
-    color: ThemeColor.textColor[colorScheme],
+    color: ThemeColor.textColor,
   },
 })

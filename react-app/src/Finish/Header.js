@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import GoBackButton from '../Utilities/GoBackButton'
+import ThemeColor from '../Utilities/ThemeColor'
 
 export default function Header() {
   const navigation = useNavigation()
@@ -29,5 +30,6 @@ const styles = StyleSheet.create({
     fontWeight: 500,
     marginRight: 20,
     fontSize: 20,
+    color: ThemeColor.textColor,
   },
 })
