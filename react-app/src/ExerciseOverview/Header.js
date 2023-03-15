@@ -8,10 +8,7 @@ export default function Header() {
   const navigation = useNavigation()
   return (
     <View style={styles.header}>
-      <GoBackButton
-        onPress={() => navigation.navigate('Home')}
-        color={ThemeColor.backgroundColor}
-      />
+      <GoBackButton onPress={() => navigation.navigate('Home')} color={ThemeColor.textColor} />
       <Text style={styles.title}>In Seat/ Stretching</Text>
     </View>
   )
