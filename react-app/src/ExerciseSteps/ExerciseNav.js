@@ -4,6 +4,7 @@ import React from 'react'
 import ArrowLeftIcon from '../../assets/icons/arrow-tiny-left.svg'
 import ArrowRightIcon from '../../assets/icons/arrow-tiny-right.svg'
 import TickIcon from '../../assets/icons/tick.svg'
+import ThemeColor from '../Utilities/ThemeColor'
 
 export default function ExerciseNav({ step, setStep, totalStep }) {
   const navigation = useNavigation()
@@ -19,13 +20,13 @@ export default function ExerciseNav({ step, setStep, totalStep }) {
   return (
     <View style={styles.container}>
       <Pressable style={step == 1 && styles.unusable} onPress={prevStep}>
-        <ArrowLeftIcon height={35} width={35} />
+        <ArrowLeftIcon height={35} width={35} style={styles.icon} />
       </Pressable>
       <Pressable style={styles.bigButton} onPress={nextStep}>
-        <TickIcon height={35} width={35} />
+        <TickIcon height={35} width={35} style={styles.tickIcon} />
       </Pressable>
       <Pressable onPress={nextStep}>
-        <ArrowRightIcon height={35} width={35} />
+        <ArrowRightIcon height={35} width={35} style={styles.icon} />
       </Pressable>
     </View>
   )
@@ -49,7 +50,13 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#64b5f6',
+    backgroundColor: ThemeColor.bigButtonColor,
     marginHorizontal: 30,
+  },
+  icon: {
+    color: ThemeColor.textColor,
+  },
+  tickIcon: {
+    color: ThemeColor.componentColor,
   },
 })

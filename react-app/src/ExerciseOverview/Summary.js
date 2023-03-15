@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import ThemeColor from '../Utilities/ThemeColor'
 
 export default function Summary({ moves, time, format }) {
   return (
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     alignItems: 'center',
     marginVertical: 25,
+    color: ThemeColor.textColor,
   },
   bottomPart: {
     flexDirection: 'row',
@@ -52,5 +54,6 @@ const styles = StyleSheet.create({
   summary: {
     fontSize: 16,
     lineHeight: 26,
+    color: ThemeColor.textColor,
   },
 })

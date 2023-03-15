@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Appearance, Pressable, Alert } from 'react-native'
+import { StyleSheet, View, Text, Pressable, Alert } from 'react-native'
 import React, { useState } from 'react'
 import NavBar from './NavBar.js'
 import SideMenu from './SideMenu.js'
@@ -38,18 +38,16 @@ export default function Setting({ db, resetTrigger }) {
   )
 }
 
-const colorScheme = Appearance.getColorScheme()
-
 const styles = StyleSheet.create({
   title: {
-    color: ThemeColor.textColor[colorScheme],
+    color: ThemeColor.textColor,
     fontSize: 18,
     fontWeight: 'bold',
     paddingTop: 20,
     paddingLeft: 10,
   },
   text: {
-    color: ThemeColor.textColor[colorScheme],
+    color: ThemeColor.textColor,
     fontSize: 18,
   },
   line: {
@@ -63,7 +61,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#FFCA28',
     borderRadius: 5,
-    color: ThemeColor.textColor[colorScheme],
+    color: ThemeColor.textColor,
     paddingVertical: 10,
     paddingHorizontal: 20,
   },

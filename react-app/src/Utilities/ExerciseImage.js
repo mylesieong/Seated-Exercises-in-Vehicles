@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { SvgXml } from 'react-native-svg'
+import ThemeColor from './ThemeColor'
 
 export default function ExerciseImage({
   image,
@@ -46,6 +47,6 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#d9d9d9',
+    backgroundColor: ThemeColor.componentColor,
   },
 })
