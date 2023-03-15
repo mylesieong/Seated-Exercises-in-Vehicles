@@ -3,6 +3,7 @@ import React from 'react'
 import ImageInCard from './ImageInCard'
 import TextInCard from './TextInCard'
 import ButtonInCard from './ButtonInCard'
+import ThemeColor from '../Utilities/ThemeColor'
 
 export default function Card({ title, description, image, available, type, screen }) {
   return (
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#cfd8dc',
+    backgroundColor: ThemeColor.componentColor,
     padding: 17,
   },
 })

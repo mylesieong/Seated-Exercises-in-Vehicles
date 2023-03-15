@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, Pressable, Dimensions, Platform } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
+import ThemeColor from '../Utilities/ThemeColor'
 
 export default function StartExerciseButton() {
   const navigation = useNavigation()
@@ -54,5 +55,6 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: 500,
     fontSize: 18,
+    color: ThemeColor.textColor,
   },
 })

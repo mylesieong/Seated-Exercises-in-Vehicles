@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, FlatList, Pressable } from 'react-native'
 import React, { useState } from 'react'
 import ArrowUpIcon from '../../assets/icons/arrow-tiny-up.svg'
 import ArrowDownIcon from '../../assets/icons/arrow-tiny-down.svg'
+import ThemeColor from '../Utilities/ThemeColor'
 
 export default function Info({ title, description, instruction }) {
   const [instructionVisible, setInstructionVisible] = useState(false)
@@ -14,8 +15,8 @@ export default function Info({ title, description, instruction }) {
       >
         <Text style={styles.title}>{title}</Text>
         <View style={instructionVisible && styles.switch}>
-          <ArrowUpIcon height={18} width={18} />
-          <ArrowDownIcon height={18} width={18} />
+          <ArrowUpIcon height={18} width={18} style={styles.icon} />
+          <ArrowDownIcon height={18} width={18} style={styles.icon} />
         </View>
       </Pressable>
       <FlatList
@@ -35,6 +36,7 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 18,
+    color: ThemeColor.textColor,
   },
   titleContainer: {
     flexDirection: 'row',
@@ -45,6 +47,7 @@ const styles = StyleSheet.create({
     fontWeight: 500,
     lineHeight: 60,
     marginRight: 20,
+    color: ThemeColor.textColor,
   },
   switch: {
     flexDirection: 'column-reverse',
@@ -56,5 +59,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
     marginBottom: 10,
+    color: ThemeColor.textColor,
+  },
+  icon: {
+    color: ThemeColor.textColor,
   },
 })
