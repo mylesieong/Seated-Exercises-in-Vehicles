@@ -47,27 +47,25 @@ export default function Setting({ db, resetTrigger }) {
 
 const styles = StyleSheet.create({
   container: {
-    color: ThemeColor.textColor[colorScheme],
-    backgroundColor: '#FFFBED',
+    backgroundColor: ThemeColor.componentColor,
     flex: 1,
     width: null,
     height: null,
   },
   title: {
     color: ThemeColor.textColor,
-    fontSize: 18,
+    fontSize: 28,
     fontWeight: 'bold',
     paddingTop: 20,
     paddingLeft: 20,
   },
   buttonLayout: {
-    color: ThemeColor.textColor[colorScheme],
+    backgroundColor: ThemeColor.componentColor,
     padding: 16,
     paddingVertical: 10,
     paddingHorizontal: 20,
   },
   resetButton: {
-    color: ThemeColor.textColor[colorScheme],
     backgroundColor: '#FFF',
     borderRadius: 10,
     height: 70,
@@ -81,14 +79,12 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   resetText: {
-    color: ThemeColor.textColor[colorScheme],
     fontSize: 20,
     fontWeight: 'bold',
     justifyContent: 'center',
     paddingLeft: 15,
   },
   resetRightIcon: {
-    color: ThemeColor.textColor[colorScheme],
     marginLeft: 'auto',
     justifyContent: 'center',
   },
