@@ -25,10 +25,12 @@ export default function ExerciseDetail({ item, setShowDetail }) {
         </View>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.description}>{description}</Text>
-        <FlatList
-          data={instruction}
-          renderItem={({ item }) => <Text style={styles.instruction}>{item}</Text>}
-        />
+        <View style={styles.instructionContainer}>
+          <FlatList
+            data={instruction}
+            renderItem={({ item }) => <Text style={styles.instruction}>{item}</Text>}
+          />
+        </View>
       </View>
     </SafeAreaView>
   )
@@ -95,6 +97,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 10,
     color: ThemeColor.textColor,
+  },
+  instructionContainer: {
+    height: 230,
   },
   instruction: {
     fontWeight: 400,
