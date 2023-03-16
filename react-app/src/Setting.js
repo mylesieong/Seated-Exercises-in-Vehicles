@@ -4,6 +4,8 @@ import NavBar from './NavBar.js'
 import SideMenu from './SideMenu.js'
 import ThemeColor from './Utilities/ThemeColor.js'
 import PageTemplate from './Utilities/PageTemplate.js'
+import ResetIcon from '../assets/icons/reset-icon.svg'
+import ResetRightIcon from '../assets/icons/reset-arrow-right.svg'
 
 export default function Setting({ db, resetTrigger }) {
   const [showMenu, setShowMenu] = useState(false)
@@ -27,42 +29,63 @@ export default function Setting({ db, resetTrigger }) {
     <PageTemplate>
       <NavBar setShowMenu={setShowMenu} />
       {showMenu && <SideMenu setShowMenu={setShowMenu} />}
-      <Text style={styles.title}>General</Text>
-      <View style={styles.line}>
-        <Text style={styles.text}>Remove all records</Text>
-        <Pressable style={styles.button} onPress={removeRecordsAlert}>
-          <Text style={styles.text}>Remove</Text>
-        </Pressable>
+      <View style={styles.container}>
+        <Text style={styles.title}>Setting</Text>
+        <View style={styles.buttonLayout}>
+          <Pressable style={styles.resetButton} onPress={removeRecordsAlert}>
+            <ResetIcon height={20} width={20} />
+            <Text style={styles.resetText}>Reset</Text>
+            <View style={styles.resetRightIcon}>
+              <ResetRightIcon height={20} width={20} />
+            </View>
+          </Pressable>
+        </View>
       </View>
     </PageTemplate>
   )
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: ThemeColor.componentColor,
+    flex: 1,
+    width: null,
+    height: null,
+  },
   title: {
     color: ThemeColor.textColor,
-    fontSize: 18,
+    fontSize: 28,
     fontWeight: 'bold',
     paddingTop: 20,
-    paddingLeft: 10,
+    paddingLeft: 20,
   },
-  text: {
-    color: ThemeColor.textColor,
-    fontSize: 18,
-  },
-  line: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    width: '100%',
-    paddingBottom: 10,
-    paddingHorizontal: 10,
-  },
-  button: {
-    backgroundColor: '#FFCA28',
-    borderRadius: 5,
-    color: ThemeColor.textColor,
+  buttonLayout: {
+    backgroundColor: ThemeColor.componentColor,
+    padding: 16,
     paddingVertical: 10,
     paddingHorizontal: 20,
+  },
+  resetButton: {
+    backgroundColor: '#FFF',
+    borderRadius: 10,
+    height: 70,
+    paddingHorizontal: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 1,
+    shadowRadius: 2,
+    // for android
+    elevation: 2,
+  },
+  resetText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    justifyContent: 'center',
+    paddingLeft: 15,
+  },
+  resetRightIcon: {
+    marginLeft: 'auto',
+    justifyContent: 'center',
   },
 })
