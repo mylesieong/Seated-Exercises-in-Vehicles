@@ -25,8 +25,11 @@ export default function ExerciseNav({ step, setStep, totalStep }) {
       <Pressable style={styles.bigButton} onPress={nextStep}>
         <TickIcon height={100} width={100} style={styles.tickIcon} />
       </Pressable>
-      <Pressable onPress={nextStep}>
-        <ArrowRightIcon height={50} width={50} style={styles.icon} />
+      <Pressable
+        onPress={step != totalStep ? nextStep : null}
+        style={step == totalStep && styles.unusable}
+      >
+        <ArrowRightIcon height={35} width={35} style={styles.icon} />
       </Pressable>
     </View>
   )
