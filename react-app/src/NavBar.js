@@ -1,18 +1,33 @@
 import { StyleSheet, Text, View, Pressable, Dimensions } from 'react-native'
 import React from 'react'
-import { useRoute } from '@react-navigation/native'
+import { TabRouter, useNavigation, useRoute } from '@react-navigation/native'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import ThemeColor from './Utilities/ThemeColor'
+import Calendar from '../assets/icons/calendar.svg'
 
 export default function NavBar({ setShowMenu }) {
+  const navigation = useNavigation()
   const route = useRoute()
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: route.name === 'Home' ? '#FFB300' : ThemeColor.componentColor,
+          justifyContent: route.name === 'Home' && 'space-between',
+        },
+      ]}
+    >
       <Pressable onPress={() => setShowMenu(true)}>
         <FontAwesome name='bars' style={styles.icon} />
       </Pressable>
-      <Text style={styles.text}>{route.name}</Text>
+      {route.name === 'Home' && (
+        <Pressable onPress={() => navigation.navigate('History')}>
+          <Calendar width={30} height={30} />
+        </Pressable>
+      )}
+      {route.name !== 'Home' && <Text style={styles.text}>{route.name}</Text>}
     </View>
   )
 }
@@ -23,7 +38,6 @@ const styles = StyleSheet.create({
     height: 50,
     width: Dimensions.get('window').width,
     alignItems: 'center',
-    backgroundColor: ThemeColor.componentColor,
     paddingHorizontal: 20,
   },
   text: {
@@ -39,5 +53,10 @@ const styles = StyleSheet.create({
     color: ThemeColor.textColor,
     fontSize: 20,
     paddingVertical: 12,
+    paddingHorizontal: 10,
+  },
+  placeholder: {
+    width: 30,
+    height: 30,
   },
 })

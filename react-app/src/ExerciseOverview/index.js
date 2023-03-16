@@ -1,4 +1,4 @@
-import { FlatList, Pressable } from 'react-native'
+import { FlatList, Pressable, View } from 'react-native'
 import React, { useState } from 'react'
 import Header from './Header'
 import Summary from './Summary'
@@ -28,6 +28,7 @@ export default function ExerciseOverview() {
         ></Summary>
       </Pressable>
       <FlatList
+        contentContainerStyle={{ paddingBottom: 50 }}
         data={STRETCHING_EXERCISE_DATA}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (

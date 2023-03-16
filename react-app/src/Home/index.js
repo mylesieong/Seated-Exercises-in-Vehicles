@@ -1,18 +1,22 @@
-import { StyleSheet, View, FlatList } from 'react-native'
+import { StyleSheet, View, FlatList, Text } from 'react-native'
 import React, { useState } from 'react'
 import { DUMMY_FUNCTION_DATA } from '../../data/DummyFunctionData'
 import NavBar from '../NavBar.js'
 import SideMenu from '../SideMenu'
 import Card from './Card'
 import PageTemplate from '../Utilities/PageTemplate'
+import ThemeColor from '../Utilities/ThemeColor'
 
 export default function Home() {
   const [showMenu, setShowMenu] = useState(false)
 
   return (
-    <PageTemplate>
+    <PageTemplate topBarColor={'#FFB300'}>
       <NavBar setShowMenu={setShowMenu} />
       {showMenu && <SideMenu setShowMenu={setShowMenu} />}
+      <View style={styles.greeting}>
+        <Text style={styles.greetingText}>Good Morning</Text>
+      </View>
       <View style={styles.flatListContainer}>
         <FlatList
           data={DUMMY_FUNCTION_DATA}
@@ -28,7 +32,6 @@ export default function Home() {
             />
           )}
           showsVerticalScrollIndicator={false}
-          style={{ marginBottom: 52 }}
         />
       </View>
     </PageTemplate>
@@ -37,6 +40,17 @@ export default function Home() {
 
 const styles = StyleSheet.create({
   flatListContainer: {
+    height: 700,
     padding: 20,
+  },
+  greeting: {
+    height: 100,
+    backgroundColor: '#FFB300',
+  },
+  greetingText: {
+    color: ThemeColor.textColor,
+    fontSize: 25,
+    fontWeight: 'bold',
+    paddingHorizontal: 20,
   },
 })
