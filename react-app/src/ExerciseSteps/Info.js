@@ -1,29 +1,20 @@
 import { StyleSheet, Text, View, FlatList, Pressable } from 'react-native'
 import React, { useState } from 'react'
-import ArrowUpIcon from '../../assets/icons/arrow-tiny-up.svg'
-import ArrowDownIcon from '../../assets/icons/arrow-tiny-down.svg'
 import ThemeColor from '../Utilities/ThemeColor'
+import QuestionMark from '../../assets/icons/questionmark.svg'
 
-export default function Info({ title, description, instruction }) {
-  const [instructionVisible, setInstructionVisible] = useState(false)
+export default function Info({ stepDetail, setShowDetail }) {
+  const { title, description } = stepDetail
+
   return (
     <View style={styles.info}>
       <Text style={styles.description}>{description}</Text>
-      <Pressable
-        style={styles.titleContainer}
-        onPress={() => setInstructionVisible(!instructionVisible)}
-      >
+      <Pressable style={styles.titleContainer} onPress={() => setShowDetail(true)}>
         <Text style={styles.title}>{title}</Text>
-        <View style={instructionVisible && styles.switch}>
-          <ArrowUpIcon height={18} width={18} style={styles.icon} />
-          <ArrowDownIcon height={18} width={18} style={styles.icon} />
+        <View>
+          <QuestionMark height={25} width={25} style={styles.icon} />
         </View>
       </Pressable>
-      <FlatList
-        style={instructionVisible ? styles.instructionContainer : { display: 'none' }}
-        data={instruction}
-        renderItem={({ item }) => <Text style={styles.instruction}>{item}</Text>}
-      />
     </View>
   )
 }
@@ -39,6 +30,7 @@ const styles = StyleSheet.create({
     color: ThemeColor.textColor,
   },
   titleContainer: {
+    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -46,11 +38,8 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: 500,
     lineHeight: 60,
-    marginRight: 20,
+    marginRight: 10,
     color: ThemeColor.textColor,
-  },
-  switch: {
-    flexDirection: 'column-reverse',
   },
   instructionContainer: {
     marginBottom: 15,
