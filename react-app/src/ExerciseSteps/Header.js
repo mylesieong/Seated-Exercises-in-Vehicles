@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View, Alert } from 'react-native'
+import { StyleSheet, Text, Pressable, Alert } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import GoBackButton from '../Utilities/GoBackButton'
 import ThemeColor from '../Utilities/ThemeColor'
 
-export default function Header({ step, totalStep }) {
+export default function Header({ step, totalStep, setShowDetail }) {
   const navigation = useNavigation()
   const goBackOnPress = () => {
     Alert.alert('Exit', 'Leave current exercise?', [
@@ -24,12 +24,12 @@ export default function Header({ step, totalStep }) {
     ])
   }
   return (
-    <View style={styles.header}>
+    <Pressable style={styles.header} onPress={() => setShowDetail(false)}>
       <GoBackButton onPress={goBackOnPress} />
       <Text style={styles.headerText}>
         {step} of {totalStep}
       </Text>
-    </View>
+    </Pressable>
   )
 }
 

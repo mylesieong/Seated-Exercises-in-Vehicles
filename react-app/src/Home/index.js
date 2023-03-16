@@ -11,7 +11,7 @@ export default function Home() {
   const [showMenu, setShowMenu] = useState(false)
 
   return (
-    <PageTemplate topBarColor={'#FFB300'}>
+    <PageTemplate topBarColor={showMenu ? null : '#FFB300'}>
       <NavBar setShowMenu={setShowMenu} />
       {showMenu && <SideMenu setShowMenu={setShowMenu} />}
       <View style={styles.greeting}>
