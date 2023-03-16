@@ -21,6 +21,13 @@ const styles = StyleSheet.create({
   cardContainer: {
     flex: 1,
     marginBottom: 20,
+    overflow: 'hidden',
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.58,
+    shadowRadius: 10,
+    backgroundColor: ThemeColor.componentColor,
+    elevation: 24,
   },
 
   cardLowerPart: {

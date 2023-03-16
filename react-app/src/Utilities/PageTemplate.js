@@ -4,7 +4,12 @@ import ThemeColor from './ThemeColor'
 
 export default function PageTemplate({ topBarColor, children }) {
   return (
-    <View style={[styles.upperWrapper, topBarColor && { backgroundColor: topBarColor }]}>
+    <View
+      style={[
+        styles.upperWrapper,
+        { backgroundColor: topBarColor ? topBarColor : ThemeColor.componentColor },
+      ]}
+    >
       <SafeAreaView />
       <SafeAreaView style={styles.lowerWrapper}>{children}</SafeAreaView>
     </View>
@@ -14,7 +19,6 @@ export default function PageTemplate({ topBarColor, children }) {
 const styles = StyleSheet.create({
   upperWrapper: {
     flex: 1,
-    backgroundColor: ThemeColor.componentColor,
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   lowerWrapper: {
