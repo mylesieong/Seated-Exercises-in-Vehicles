@@ -1,24 +1,25 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Platform } from 'react-native'
 import React from 'react'
 import ThemeColor from '../Utilities/ThemeColor'
 
 export default function Summary({ moves, time, format }) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.description}>
-        When travel a long trip in a confined seat, stretching will help reduce neck pain and back
-        pain, improve the blood circulation as long as lower the risk of DVT(Deep Vein Thrombosis).
+    <View style={[styles.container, styles.shadow]}>
+      <Text style={[styles.textColor, styles.title]}>Stretching</Text>
+      <Text style={[styles.description, styles.textColor]}>
+        Stretching will help reduce neck pain pain and back pain, improve the blood circulation as
+        long as lower the risk of DVT(Deep Vain Thrombosis).
       </Text>
       <View style={styles.bottomPart}>
         {[
           [`Moves`, moves],
-          [`Time`, time],
+          [`Minutes`, time],
           [`Format`, format],
         ].map((item, keys) => {
           return (
             <View key={keys} style={styles.wrapper}>
+              <Text style={[styles.summary_value, styles.textColor]}>{item[1]}</Text>
               <Text style={styles.summary}>{item[0]}</Text>
-              <Text style={[styles.summary, { fontWeight: 500 }]}>{item[1]}</Text>
             </View>
           )
         })}
@@ -29,31 +30,77 @@ export default function Summary({ moves, time, format }) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 20,
-    paddingBottom: 20,
-    backgroundColor: '#ffca28',
+    backgroundColor: '#ffffff',
+    alignSelf: 'center',
+    position: 'absolute',
+    borderRadius: 10,
+    top: 66,
+    marginHorizontal: 15,
+  },
+  title: {
+    fontFamily: 'NotoSansExtraBold',
+    fontWeight: 800,
+    fontSize: 28,
+    lineHeight: 32,
+    alignSelf: 'center',
+    marginTop: 20,
+    marginHorizontal: 20,
+    transform: [{ scaleX: 0.9 }],
+  },
+  textColor: {
+    color: ThemeColor.textColor,
   },
   description: {
-    fontStyle: 'normal',
     fontWeight: 400,
-    fontSize: 14,
-    lineHeight: 16,
+    fontSize: 15,
+    lineHeight: 20,
     alignItems: 'center',
-    marginVertical: 25,
-    color: ThemeColor.textColor,
+    marginHorizontal: 15,
+    marginVertical: 10,
+    transform: [{ scaleX: 0.875 }],
   },
   bottomPart: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
+    paddingHorizontal: 44,
+    marginBottom: 14,
   },
   wrapper: {
     alignItems: 'center',
+    width: 90,
+  },
+  summary_value: {
+    fontSize: 24,
+    lineHeight: 28,
+    fontFamily: 'NotoSansExtraBold',
+    transform: [{ scaleX: 0.875 }],
+    marginBottom: -4,
   },
   summary: {
-    fontSize: 16,
-    lineHeight: 26,
-    color: ThemeColor.textColor,
+    fontSize: 15,
+    lineHeight: 20,
+    fontFamily: 'NotoSans',
+    transform: [{ scaleX: 0.875 }],
+    color: ThemeColor.textGrey,
   },
+  ...Platform.select({
+    ios: {
+      shadow: {
+        shadowColor: '#9A9A9A',
+        shadowOffset: {
+          width: 0,
+          height: 4,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 10,
+      },
+    },
+    android: {
+      shadow: {
+        shadowColor: '#9A9A9A',
+        elevation: 5,
+      },
+    },
+  }),
 })

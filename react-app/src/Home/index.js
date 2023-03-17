@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFB300',
   },
   greetingText: {
-    color: ThemeColor.textColor,
+    color: ThemeColor.titleTextColor,
     fontSize: 25,
     fontWeight: 'bold',
     paddingHorizontal: 20,

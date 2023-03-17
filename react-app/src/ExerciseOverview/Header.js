@@ -8,26 +8,24 @@ export default function Header() {
   const navigation = useNavigation()
   return (
     <View style={styles.header}>
-      <GoBackButton onPress={() => navigation.navigate('Home')} color={ThemeColor.textColor} />
-      <Text style={styles.title}>In Seat/ Stretching</Text>
+      <GoBackButton onPress={() => navigation.navigate('Home')} color={ThemeColor.titleTextColor} />
+      <Text style={styles.title}>Stretching on the Seat</Text>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   header: {
-    height: 50,
-    flexDirection: 'row',
-    justifyContent: 'center',
+    height: 190,
     alignItems: 'center',
-    backgroundColor: '#ffca28',
+    backgroundColor: '#FFB300',
   },
   title: {
-    fontStyle: 'normal',
-    fontWeight: 600,
-    fontSize: 20,
-    lineHeight: 25,
-    color: ThemeColor.textColor,
-    marginVertical: 4,
+    fontSize: 15,
+    lineHeight: 20,
+    color: ThemeColor.titleTextColor,
+    marginTop: 13,
+    fontFamily: 'NotoSansBold',
+    transform: [{ scaleX: 0.875 }],
   },
 })
