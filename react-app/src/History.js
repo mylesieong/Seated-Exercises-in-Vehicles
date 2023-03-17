@@ -181,15 +181,10 @@ const styles = StyleSheet.create({
   },
   calendar: {
     borderWidth: 7,
-    borderColor: '#FFFFFF',
+    borderColor: ThemeColor.backgroundColor,
     borderTopColor: '#FFB300',
     borderRadius: 10,
     marginHorizontal: 20,
-    shadowOffset: { width: 0.5, height: 0.5 },
-    shadowOpacity: 1,
-    shadowRadius: 1,
-    // for android
-    elevation: 1,
   },
   textTitle: {
     padding: 10,
@@ -200,7 +195,7 @@ const styles = StyleSheet.create({
   },
   recordContainer: {
     borderWidth: 3,
-    borderColor: '#FFFFFF',
+    borderColor: ThemeColor.backgroundColor,
     borderBottomColor: '#F5F5F5',
     marginLeft: 20,
     marginRight: 20,
@@ -220,11 +215,13 @@ const styles = StyleSheet.create({
   timeStamp: {
     fontSize: 15,
     textAlign: 'right',
+    color: ThemeColor.textColor,
   },
   exerciseDetail: {
     paddingLeft: 10,
     paddingBottom: 10,
     fontSize: 15,
+    color: ThemeColor.textColor,
   },
   hide: {
     display: 'none',
