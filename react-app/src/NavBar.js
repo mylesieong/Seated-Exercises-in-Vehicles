@@ -15,7 +15,7 @@ export default function NavBar({ setShowMenu }) {
         styles.container,
         {
           backgroundColor: route.name === 'Home' ? '#FFB300' : ThemeColor.componentColor,
-          justifyContent: route.name === 'Home' && 'space-between',
+          justifyContent: route.name === 'Home' ? 'space-between' : 'flex-start',
         },
       ]}
     >
