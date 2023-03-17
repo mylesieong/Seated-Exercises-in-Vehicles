@@ -47,7 +47,7 @@ export default function Setting({ db, resetTrigger }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: ThemeColor.componentColor,
+    backgroundColor: ThemeColor.backgroundColor,
     flex: 1,
     width: null,
     height: null,
@@ -59,17 +59,15 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingLeft: 20,
   },
-  buttonLayout: {
-    backgroundColor: ThemeColor.componentColor,
-    padding: 16,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-  },
+
   resetButton: {
     backgroundColor: '#FFF',
     borderRadius: 10,
     height: 70,
+    paddingVertical: 10,
     paddingHorizontal: 20,
+    marginHorizontal: 20,
+    marginVertical: 10,
     flexDirection: 'row',
     alignItems: 'center',
     shadowOffset: { width: 1, height: 1 },

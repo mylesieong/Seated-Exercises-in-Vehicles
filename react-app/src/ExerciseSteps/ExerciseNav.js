@@ -29,7 +29,7 @@ export default function ExerciseNav({ step, setStep, totalStep }) {
         onPress={step != totalStep ? nextStep : null}
         style={step == totalStep && styles.unusable}
       >
-        <ArrowRightIcon height={35} width={35} style={styles.icon} />
+        <ArrowRightIcon height={50} width={50} style={styles.icon} />
       </Pressable>
     </View>
   )

@@ -63,8 +63,8 @@ export default function History({ db, reset }) {
   }, [reset])
 
   return (
-    <PageTemplate>
-      <NavBar setShowMenu={setShowMenu} />
+    <PageTemplate topBarColor={ThemeColor.backgroundColor}>
+      <NavBar setShowMenu={setShowMenu} navbarColor={ThemeColor.backgroundColor} />
       {showMenu && <SideMenu setShowMenu={setShowMenu} />}
       <View style={styles.container}>
         <View style={styles.calendarContainer}>

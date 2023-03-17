@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   container: {
     width: Dimensions.get('window').width,
     alignItems: 'flex-start',
-    backgroundColor: '#ffffff',
+    backgroundColor: ThemeColor.backgroundColor,
     flexDirection: 'row',
   },
   button: {

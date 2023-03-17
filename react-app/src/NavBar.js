@@ -5,7 +5,7 @@ import Bars from '../assets/icons/bars.svg'
 import ThemeColor from './Utilities/ThemeColor'
 import Calendar from '../assets/icons/calendar.svg'
 
-export default function NavBar({ setShowMenu }) {
+export default function NavBar({ setShowMenu, navbarColor }) {
   const navigation = useNavigation()
   const route = useRoute()
 
@@ -14,13 +14,13 @@ export default function NavBar({ setShowMenu }) {
       style={[
         styles.container,
         {
-          backgroundColor: route.name === 'Home' ? '#FFB300' : ThemeColor.componentColor,
+          backgroundColor: navbarColor ? navbarColor : ThemeColor.componentColor,
           justifyContent: route.name === 'Home' ? 'space-between' : 'flex-start',
         },
       ]}
     >
       <Pressable onPress={() => setShowMenu(true)}>
-        <Bars style={styles.icon} />
+        <Bars fill={route.name === 'History' ? ThemeColor.textColor : 'white'} />
       </Pressable>
       {route.name === 'Home' && (
         <Pressable onPress={() => navigation.navigate('History')}>
