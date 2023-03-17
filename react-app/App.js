@@ -9,23 +9,28 @@ import ExerciseSteps from './src/ExerciseSteps'
 import { Platform } from 'react-native'
 import Finish from './src/Finish'
 import * as SQLite from 'expo-sqlite'
+import * as FileSystem from "expo-file-system"
+import {Asset} from "expo-asset"
 
 const Stack = createNativeStackNavigator()
 
-function openDatabase() {
-  if (Platform.OS === 'web') {
-    return {
-      transaction: () => {
-        return {
-          executeSql: () => {},
-        }
-      },
-    }
+async function openDatabase() {
+  if (!(await FileSystem.getInfoAsync(FileSystem.documentDirectory + 'SQLite')).exists) {
+    await FileSystem.makeDirectoryAsync(FileSystem.documentDirectory + 'SQLite');
+
+    const pathToOldDatabaseFile = 'database/shelter.db' 
+
+    //TODO need to also check if the pathToOldDatabaseFile exist or not
+
+    await FileSystem.downloadAsync(
+      Asset.fromModule(require(pathToOldDatabaseFile)).uri,
+      FileSystem.documentDirectory + 'SQLite/shelter.db'
+    )
   }
 
-  const db = SQLite.openDatabase('shelter.db')
-  return db
+  return SQLite.openDatabase('shelter.db');
 }
+
 const db = openDatabase()
 
 __DEV__ &&
