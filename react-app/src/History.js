@@ -180,11 +180,12 @@ const styles = StyleSheet.create({
     height: 370,
   },
   calendar: {
-    borderWidth: 7,
     borderColor: ThemeColor.backgroundColor,
-    borderTopColor: '#FFB300',
+    backgroundColor: '#FFB300',
     borderRadius: 10,
     marginHorizontal: 20,
+    paddingTop: 6,
+    overflow: 'hidden',
   },
   textTitle: {
     padding: 10,
