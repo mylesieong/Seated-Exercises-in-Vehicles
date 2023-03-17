@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Pressable, Dimensions } from 'react-native'
 import React from 'react'
-import { TabRouter, useNavigation, useRoute } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import ThemeColor from './Utilities/ThemeColor'
 import Calendar from '../assets/icons/calendar.svg'
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   icon: {
-    color: ThemeColor.textColor,
+    color: ThemeColor.titleTextColor,
     fontSize: 20,
     paddingVertical: 12,
     paddingHorizontal: 10,

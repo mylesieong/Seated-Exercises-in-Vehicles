@@ -1,4 +1,4 @@
-import { FlatList, Pressable, View } from 'react-native'
+import { FlatList, Pressable, Platform } from 'react-native'
 import React, { useState } from 'react'
 import Header from './Header'
 import Summary from './Summary'
@@ -18,27 +18,21 @@ export default function ExerciseOverview() {
   }
 
   return (
-    <PageTemplate topBarColor={'#ffca28'}>
-      <Pressable onPress={() => setShowDetail(false)}>
+    <PageTemplate topBarColor={'#FFB300'}>
+      <Pressable style={{ zIndex: 2 }} onPress={() => setShowDetail(false)}>
         <Header />
-        <Summary
-          moves={STRETCHING_EXERCISE_DATA.length}
-          time={`10 mins`}
-          format={`Sitting`}
-        ></Summary>
+        <Summary moves={STRETCHING_EXERCISE_DATA.length} time={`10`} format={`Sitting`}></Summary>
       </Pressable>
       <FlatList
-        contentContainerStyle={{ paddingBottom: 50 }}
+        contentContainerStyle={{
+          paddingTop: Platform.OS === 'android' ? 76 : 90,
+          backgroundColor: '#FFFBED',
+        }}
         data={STRETCHING_EXERCISE_DATA}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <Pressable onPress={() => handlePress(item)}>
-            <ExerciseCard
-              id={item.id}
-              title={item.title}
-              description={item.description}
-              image={item.image}
-            />
+            <ExerciseCard title={item.title} description={item.description} image={item.image} />
           </Pressable>
         )}
       />

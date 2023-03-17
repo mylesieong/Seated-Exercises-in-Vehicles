@@ -9,6 +9,7 @@ import ExerciseSteps from './src/ExerciseSteps'
 import { Platform } from 'react-native'
 import Finish from './src/Finish'
 import * as SQLite from 'expo-sqlite'
+import { useFonts } from 'expo-font'
 
 const Stack = createNativeStackNavigator()
 
@@ -35,6 +36,12 @@ __DEV__ &&
   })
 
 export default function App() {
+  useFonts({
+    NotoSans: require('./assets/fonts/NotoSans-Regular.ttf'),
+    NotoSansBold: require('./assets/fonts/NotoSans-Bold.ttf'),
+    NotoSansExtraBold: require('./assets/fonts/NotoSans-ExtraBold.ttf'),
+  })
+
   useEffect(() => {
     db.transaction((tx) => {
       // create a table

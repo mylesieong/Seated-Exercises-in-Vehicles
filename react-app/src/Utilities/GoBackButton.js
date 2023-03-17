@@ -6,7 +6,7 @@ import ThemeColor from './ThemeColor'
 export default function GoBackButton({ onPress, color }) {
   return (
     <Pressable onPress={onPress} style={styles.goBackButton}>
-      <ArrowLeftIcon height={35} width={35} style={[styles.icon, color && { color: color }]} />
+      <ArrowLeftIcon height={24} width={24} style={[styles.icon, color && { color: color }]} />
     </Pressable>
   )
 }
@@ -14,8 +14,8 @@ export default function GoBackButton({ onPress, color }) {
 const styles = StyleSheet.create({
   goBackButton: {
     position: 'absolute',
-    top: 7,
-    left: 20,
+    top: 11,
+    left: 15,
   },
   icon: {
     color: ThemeColor.textColor,

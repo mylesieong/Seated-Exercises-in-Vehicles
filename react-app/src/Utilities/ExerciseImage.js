@@ -10,6 +10,7 @@ export default function ExerciseImage({
   containerWidth,
   containerHeight,
   containerRadius,
+  backgroundColor,
 }) {
   const [step, setStep] = useState(0)
   useEffect(() => {
@@ -29,6 +30,7 @@ export default function ExerciseImage({
           width: containerWidth,
           height: containerHeight,
           borderRadius: containerRadius ? containerRadius : 0,
+          backgroundColor: backgroundColor ? backgroundColor : ThemeColor.componentColor,
         },
       ]}
     >
@@ -47,6 +49,5 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: ThemeColor.componentColor,
   },
 })

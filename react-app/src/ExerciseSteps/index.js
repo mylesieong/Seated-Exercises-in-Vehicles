@@ -6,7 +6,7 @@ import Info from './Info'
 import ExerciseNav from './ExerciseNav'
 import PageTemplate from '../Utilities/PageTemplate'
 import ExerciseDetail from '../ExerciseOverview/ExerciseDetail'
-import { Pressable, Text } from 'react-native'
+import { Pressable } from 'react-native'
 
 export default function ExerciseSteps() {
   const [step, setStep] = useState(1)
