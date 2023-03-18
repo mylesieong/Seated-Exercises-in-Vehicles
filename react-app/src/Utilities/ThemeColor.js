@@ -4,7 +4,7 @@
 // V1.5 now only have light theme, so hard-coded it for now
 const colorScheme = 'light'
 
-const backgroundColor = colorScheme == 'dark' ? '#1C1B20' : '#FEFEFE'
+const backgroundColor = colorScheme == 'dark' ? '#1C1B20' : '#FFFBED'
 
 const componentColor = colorScheme == 'dark' ? '#465155' : '#D0D7DD'
 

@@ -4,14 +4,17 @@ import ImageInCard from './ImageInCard'
 import TextInCard from './TextInCard'
 import ButtonInCard from './ButtonInCard'
 import ThemeColor from '../Utilities/ThemeColor'
+import { Platform } from 'react-native'
 
 export default function Card({ title, description, image, available, type, screen }) {
   return (
     <View style={styles.cardContainer}>
-      <ImageInCard image={image} type={type} />
-      <View style={styles.cardLowerPart}>
-        <TextInCard title={title} description={description} available={available} />
-        <ButtonInCard available={available} screen={screen}></ButtonInCard>
+      <View style={styles.innerContainer}>
+        <ImageInCard image={image} type={type} />
+        <View style={styles.cardLowerPart}>
+          <TextInCard title={title} description={description} available={available} />
+          <ButtonInCard available={available} screen={screen}></ButtonInCard>
+        </View>
       </View>
     </View>
   )
@@ -20,16 +23,20 @@ export default function Card({ title, description, image, available, type, scree
 const styles = StyleSheet.create({
   cardContainer: {
     flex: 1,
-    marginBottom: 20,
-    overflow: 'hidden',
     borderRadius: 10,
+    padding: 10,
+    backgroundColor: 'transparent',
     shadowColor: '#000',
-    shadowOpacity: 0.58,
-    shadowRadius: 10,
-    backgroundColor: ThemeColor.componentColor,
-    elevation: 24,
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 1,
+    shadowRadius: 2,
   },
-
+  innerContainer: {
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    overflow: 'hidden',
+    elevation: 10,
+  },
   cardLowerPart: {
     flex: 1,
     flexDirection: 'row',

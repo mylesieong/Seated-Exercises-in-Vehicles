@@ -12,7 +12,7 @@ export default function Home() {
 
   return (
     <PageTemplate topBarColor={showMenu ? null : '#FFB300'}>
-      <NavBar setShowMenu={setShowMenu} />
+      <NavBar setShowMenu={setShowMenu} navbarColor='#FFB300' />
       {showMenu && <SideMenu setShowMenu={setShowMenu} />}
       <View style={styles.greeting}>
         <Text style={styles.greetingText}>Good Morning</Text>
