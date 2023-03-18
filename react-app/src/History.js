@@ -106,7 +106,7 @@ export default function History({ db, reset }) {
           <Text style={styles.textTitle}>Exercise Record</Text>
         </View>
         {/* Text of the record */}
-        <View>
+        <View style={styles.recordList}>
           <FlatList
             data={recordsOfSelected}
             renderItem={({ item }) => (
@@ -194,6 +194,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'left',
     color: '#979797',
+  },
+  recordList: {
+    height: 400,
   },
   recordContainer: {
     borderWidth: 3,
