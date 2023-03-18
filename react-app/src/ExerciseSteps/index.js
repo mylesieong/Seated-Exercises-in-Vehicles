@@ -17,7 +17,7 @@ export default function ExerciseSteps() {
   return (
     <PageTemplate>
       <Header step={step} totalStep={totalStep} setShowDetail={setShowDetail} />
-      <Pressable onPress={() => setShowDetail(false)}>
+      <Pressable style={{ maxHeight: '40%' }} onPress={() => setShowDetail(false)}>
         <ExerciseImage
           image={stepDetail.image}
           imageWidth={'85%'}

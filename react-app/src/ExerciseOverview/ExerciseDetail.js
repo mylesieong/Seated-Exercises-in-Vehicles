@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: 'absolute',
-    backgroundColor: ThemeColor.backgroundColor,
     top: 150,
     left: 0,
     height: '100%',
@@ -60,7 +59,7 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     flex: 1,
-    backgroundColor: ThemeColor.backgroundColor,
+    backgroundColor: ThemeColor.contrastColor,
     padding: 20,
     borderRadius: 10,
   },

@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Pressable, Alert } from 'react-native'
+import { StyleSheet, View, Text, Pressable, Alert, StatusBar } from 'react-native'
 import React, { useState } from 'react'
 import NavBar from './NavBar.js'
 import SideMenu from './SideMenu.js'
@@ -26,7 +26,8 @@ export default function Setting({ db, resetTrigger }) {
   }
 
   return (
-    <PageTemplate>
+    <PageTemplate topBarColor={ThemeColor.backgroundColor}>
+      <StatusBar barStyle={ThemeColor.statusbar} />
       <NavBar setShowMenu={setShowMenu} />
       {showMenu && <SideMenu setShowMenu={setShowMenu} />}
       <View style={styles.container}>

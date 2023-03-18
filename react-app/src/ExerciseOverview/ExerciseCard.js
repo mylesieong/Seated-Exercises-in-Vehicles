@@ -25,7 +25,7 @@ export default function ExerciseCard({ title, description, image }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: ThemeColor.backgroundColor,
+    backgroundColor: ThemeColor.contrastColor,
     flex: 1,
     flexDirection: 'row',
     alignItems: 'flex-start',
