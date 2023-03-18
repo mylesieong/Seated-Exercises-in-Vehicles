@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, FlatList, Button } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Button, StatusBar } from 'react-native'
 import { Calendar } from 'react-native-calendars'
 import NavBar from './NavBar.js'
 import SideMenu from './SideMenu.js'
@@ -64,6 +64,7 @@ export default function History({ db, reset }) {
 
   return (
     <PageTemplate topBarColor={ThemeColor.backgroundColor}>
+      <StatusBar barStyle={ThemeColor.statusbar} />
       <NavBar setShowMenu={setShowMenu} navbarColor={ThemeColor.backgroundColor} />
       {showMenu && <SideMenu setShowMenu={setShowMenu} />}
       <View style={styles.container}>
@@ -95,7 +96,7 @@ export default function History({ db, reset }) {
               }}
               hideExtraDays={true}
               theme={{
-                calendarBackground: ThemeColor.backgroundColor,
+                calendarBackground: ThemeColor.contrastColor,
                 dayTextColor: ThemeColor.textColor,
                 arrowColor: ThemeColor.textColor,
                 monthTextColor: ThemeColor.textColor,
@@ -105,7 +106,7 @@ export default function History({ db, reset }) {
           <Text style={styles.textTitle}>Exercise Record</Text>
         </View>
         {/* Text of the record */}
-        <View>
+        <View style={styles.recordList}>
           <FlatList
             data={recordsOfSelected}
             renderItem={({ item }) => (
@@ -194,8 +195,12 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     color: '#979797',
   },
+  recordList: {
+    height: 400,
+  },
   recordContainer: {
     borderWidth: 3,
+    backgroundColor: ThemeColor.contrastColor,
     borderColor: ThemeColor.backgroundColor,
     borderBottomColor: '#F5F5F5',
     marginLeft: 20,

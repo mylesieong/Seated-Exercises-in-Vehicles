@@ -17,6 +17,7 @@ export default function Home() {
       <View style={styles.greeting}>
         <Text style={styles.greetingText}>Good Morning</Text>
       </View>
+      <Text style={styles.title}>Challenge</Text>
       <View style={styles.flatListContainer}>
         <FlatList
           data={DUMMY_FUNCTION_DATA}
@@ -41,11 +42,19 @@ export default function Home() {
 const styles = StyleSheet.create({
   flatListContainer: {
     height: 700,
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingBottom: 100,
   },
   greeting: {
     height: 100,
     backgroundColor: '#FFB300',
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    paddingHorizontal: 25,
+    paddingTop: 20,
+    color: ThemeColor.textColor,
   },
   greetingText: {
     color: ThemeColor.titleTextColor,

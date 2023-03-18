@@ -14,13 +14,13 @@ export default function NavBar({ setShowMenu, navbarColor }) {
       style={[
         styles.container,
         {
-          backgroundColor: navbarColor ? navbarColor : ThemeColor.componentColor,
+          backgroundColor: navbarColor ? navbarColor : ThemeColor.backgroundColor,
           justifyContent: route.name === 'Home' ? 'space-between' : 'flex-start',
         },
       ]}
     >
       <Pressable onPress={() => setShowMenu(true)}>
-        <Bars fill={route.name === 'History' ? ThemeColor.textColor : 'white'} />
+        <Bars fill={route.name !== 'Home' ? ThemeColor.textColor : 'white'} />
       </Pressable>
       {route.name === 'Home' && (
         <Pressable onPress={() => navigation.navigate('History')}>
