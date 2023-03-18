@@ -15,9 +15,15 @@ export default function Summary({ moves, time, format }) {
           [`Moves`, moves],
           [`Minutes`, time],
           [`Format`, format],
-        ].map((item, keys) => {
+        ].map((item, keys, array) => {
           return (
-            <View key={keys} style={styles.wrapper}>
+            <View
+              key={keys}
+              style={[
+                styles.wrapper,
+                keys !== array.length - 1 && { borderRightWidth: 2, borderColor: '#F2F2F2' },
+              ]}
+            >
               <Text style={[styles.summary_value, styles.textColor]}>{item[1]}</Text>
               <Text style={styles.summary}>{item[0]}</Text>
             </View>
@@ -62,13 +68,13 @@ const styles = StyleSheet.create({
   bottomPart: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 44,
+    paddingHorizontal: 25,
     marginBottom: 14,
   },
   wrapper: {
     alignItems: 'center',
-    width: 90,
+    flex: 1,
+    overflow: 'hidden',
   },
   summary_value: {
     fontSize: 24,
