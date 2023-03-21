@@ -22,6 +22,7 @@ export default function Home() {
         <FlatList
           data={DUMMY_FUNCTION_DATA}
           keyExtractor={(item) => item.id.toString()}
+          contentContainerStyle={{ paddingBottom: 20 }}
           renderItem={({ item }) => (
             <Card
               title={item.title}
@@ -41,9 +42,8 @@ export default function Home() {
 
 const styles = StyleSheet.create({
   flatListContainer: {
-    height: 700,
+    flex: 1,
     paddingHorizontal: 20,
-    paddingBottom: 100,
   },
   greeting: {
     height: 100,

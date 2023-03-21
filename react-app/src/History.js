@@ -126,6 +126,7 @@ export default function History({ db, reset }) {
         </Text>
         <View style={[styles.recordList, !recordsOfSelected[0] && styles.hide]}>
           <FlatList
+            contentContainerStyle={{ paddingBottom: 20 }}
             data={recordsOfSelected}
             renderItem={({ item }) => (
               <View style={styles.recordContainer}>

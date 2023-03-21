@@ -19,7 +19,7 @@ export default function ExerciseDetail({ item, setShowDetail }) {
           <ExerciseImage
             image={image}
             containerHeight={260}
-            containerWidth={380}
+            containerWidth={'100%'}
             containerRadius={10}
           />
         </View>
@@ -27,6 +27,7 @@ export default function ExerciseDetail({ item, setShowDetail }) {
         <Text style={styles.description}>{description}</Text>
         <View style={styles.instructionContainer}>
           <FlatList
+            contentContainerStyle={{ paddingBottom: 20 }}
             data={instruction}
             renderItem={({ item }) => <Text style={styles.instruction}>{item}</Text>}
           />
@@ -40,9 +41,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: 'absolute',
-    top: 150,
+    top: '25%',
     left: 0,
-    height: '100%',
+    height: '80%',
     width: '100%',
     zIndex: 10,
     padding: 20,
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
   innerContainer: {
     flex: 1,
     backgroundColor: ThemeColor.contrastColor,
-    padding: 20,
+    padding: '5%',
     borderRadius: 10,
   },
   buttonContainer: {
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
     color: ThemeColor.textColor,
   },
   instructionContainer: {
-    height: 230,
+    flex: 1,
   },
   instruction: {
     fontWeight: 400,
