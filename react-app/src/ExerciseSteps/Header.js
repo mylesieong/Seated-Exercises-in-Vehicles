@@ -1,4 +1,4 @@
-import { StyleSheet, Text, Pressable, Alert, View } from 'react-native'
+import { StyleSheet, Text, Pressable, Alert } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import GoBackButton from '../Utilities/GoBackButton'

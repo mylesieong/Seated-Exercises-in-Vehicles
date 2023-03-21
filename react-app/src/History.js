@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, FlatList, Button, StatusBar } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Button } from 'react-native'
 import { Calendar } from 'react-native-calendars'
-import NavBar from './NavBar.js'
-import SideMenu from './SideMenu.js'
+import Header from './Utilities/Header.js'
 import ThemeColor from './Utilities/ThemeColor.js'
 import PageTemplate from './Utilities/PageTemplate.js'
 
@@ -29,11 +28,19 @@ const formatDate = (timestamp) => {
 }
 
 export default function History({ db, reset }) {
-  const [showMenu, setShowMenu] = useState(false)
   const [records, setRecords] = useState({})
   const today = toYYYYMMDD(new Date().getTime())
   const [selected, setSelected] = useState({
-    [today]: { selected: true, selectedColor: '#FFCD28' },
+    [today]: {
+      selected: true,
+      dots: [{ selectedDotColor: '#FFFFFF' }],
+      customStyles: {
+        container: {
+          borderRadius: 3,
+          backgroundColor: '#FFCD28',
+        },
+      },
+    },
   })
   const [recordsOfSelected, setRecordsOfSelected] = useState([])
 
@@ -43,7 +50,7 @@ export default function History({ db, reset }) {
         let result = rows._array.reduce(
           (previous, current) => ({
             ...previous,
-            [toYYYYMMDD(current.timestamp)]: { marked: true, selectedColor: '#FFCD28' },
+            [toYYYYMMDD(current.timestamp)]: { marked: true, dotColor: '#2196F3' },
           }),
           {}
         )
@@ -64,49 +71,60 @@ export default function History({ db, reset }) {
 
   return (
     <PageTemplate topBarColor={ThemeColor.backgroundColor}>
-      <StatusBar barStyle={ThemeColor.statusbar} />
-      <NavBar setShowMenu={setShowMenu} navbarColor={ThemeColor.backgroundColor} />
-      {showMenu && <SideMenu setShowMenu={setShowMenu} />}
+      <Header navigation={'Home'} height={46}>
+        <Text style={styles.title}>Exercise Record</Text>
+      </Header>
       <View style={styles.container}>
-        <View style={styles.calendarContainer}>
-          <View style={styles.calendar}>
-            <Calendar
-              markedDates={{ ...records, ...selected }}
-              onDayPress={(day) => {
-                const localTimestamp = day.timestamp + new Date().getTimezoneOffset() * 60 * 1000
-                setSelected({
-                  [day.dateString]: {
-                    selected: true,
-                    dotColor: 'blue',
-                    selectedColor: '#FFCD28',
+        <View style={styles.calendar}>
+          <Calendar
+            markingType={'custom'}
+            markedDates={{ ...records, ...selected }}
+            onDayPress={(day) => {
+              const localTimestamp = day.timestamp + new Date().getTimezoneOffset() * 60 * 1000
+              setSelected({
+                [day.dateString]: {
+                  selected: true,
+                  selectedColor: '#FFCD28',
+                  dots: [{ selectedDotColor: '#FFFFFF' }],
+                  customStyles: {
+                    container: {
+                      borderRadius: 3,
+                      backgroundColor: '#FFCD28',
+                    },
                   },
-                })
-                db.transaction((tx) => {
-                  tx.executeSql(
-                    'select timestamp, exercise_name from Record where timestamp between ? and ? order by timestamp',
-                    [localTimestamp, localTimestamp + 24 * 60 * 60 * 1000 - 1],
-                    (_, { rows }) => {
-                      setRecordsOfSelected(rows._array)
-                    }
-                  )
-                })
-              }}
-              onMonthChange={() => {
-                setRecordsOfSelected([])
-              }}
-              hideExtraDays={true}
-              theme={{
-                calendarBackground: ThemeColor.contrastColor,
-                dayTextColor: ThemeColor.textColor,
-                arrowColor: ThemeColor.textColor,
-                monthTextColor: ThemeColor.textColor,
-              }}
-            />
-          </View>
-          <Text style={styles.textTitle}>Exercise Record</Text>
+                },
+              })
+              db.transaction((tx) => {
+                tx.executeSql(
+                  'select timestamp, exercise_name from Record where timestamp between ? and ? order by timestamp',
+                  [localTimestamp, localTimestamp + 24 * 60 * 60 * 1000 - 1],
+                  (_, { rows }) => {
+                    setRecordsOfSelected(rows._array)
+                  }
+                )
+              })
+            }}
+            onMonthChange={() => {
+              setRecordsOfSelected([])
+            }}
+            hideExtraDays={true}
+            theme={{
+              calendarBackground: ThemeColor.contrastColor,
+              dayTextColor: ThemeColor.textColor,
+              arrowColor: ThemeColor.textColor,
+              monthTextColor: ThemeColor.textGrey,
+              textMonthFontFamily: 'NotoSansBold',
+              textMonthFontSize: 15,
+              textDayFontFamily: 'NotoSansBold',
+              textDayHeaderFontFamily: 'NotoSans',
+              selectedDayBackgroundColor: '#FFCD28',
+            }}
+          />
         </View>
-        {/* Text of the record */}
-        <View style={styles.recordList}>
+        <Text style={[styles.textTitle, !recordsOfSelected[0] && styles.hide]}>
+          Exercise Record
+        </Text>
+        <View style={[styles.recordList, !recordsOfSelected[0] && styles.hide]}>
           <FlatList
             data={recordsOfSelected}
             renderItem={({ item }) => (
@@ -118,6 +136,7 @@ export default function History({ db, reset }) {
                 <Text style={styles.exerciseDetail}>
                   {STRETCHING_EXERCISE_DATA.length} Moves, 10 minutes
                 </Text>
+                <View style={styles.bar}></View>
               </View>
             )}
           />
@@ -144,7 +163,7 @@ export default function History({ db, reset }) {
                     let result = rows._array.reduce(
                       (previous, current) => ({
                         ...previous,
-                        [toYYYYMMDD(current.timestamp)]: { marked: true, selectedColor: '#FFCD28' },
+                        [toYYYYMMDD(current.timestamp)]: { marked: true, dotColor: '#2196F3' },
                       }),
                       {}
                     )
@@ -171,14 +190,17 @@ export default function History({ db, reset }) {
 
 // Css
 const styles = StyleSheet.create({
-  container: {
-    ...StyleSheet.absoluteFillObject,
+  title: {
+    fontSize: 20,
+    lineHeight: 24,
+    color: ThemeColor.textColor,
+    marginTop: 12,
+    fontFamily: 'NotoSansExtraBold',
+    transform: [{ scaleX: 0.75 }],
   },
-  calendarContainer: {
-    marginTop: 50,
-    paddingVertical: 10,
-    backgroundColor: '#FFFBED',
-    height: 370,
+  container: {
+    marginTop: 20,
+    flex: 1,
   },
   calendar: {
     borderColor: ThemeColor.backgroundColor,
@@ -189,47 +211,59 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   textTitle: {
-    padding: 10,
+    marginTop: 30,
+    lineHeight: 20,
     fontSize: 15,
-    fontWeight: 'bold',
-    textAlign: 'left',
-    color: '#979797',
+    fontFamily: 'NotoSansBold',
+    transform: [{ scaleX: 0.875 }],
+    color: ThemeColor.textGrey,
   },
   recordList: {
-    height: 400,
+    backgroundColor: '#FFFFFF',
+    flex: 1,
   },
   recordContainer: {
-    borderWidth: 3,
     backgroundColor: ThemeColor.contrastColor,
     borderColor: ThemeColor.backgroundColor,
     borderBottomColor: '#F5F5F5',
-    marginLeft: 20,
-    marginRight: 20,
   },
   recordInfo: {
-    padding: 10,
+    paddingTop: 20,
+    marginBottom: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   exerciseName: {
     fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'left',
+    lineHeight: 20,
+    fontFamily: 'NotoSansExtraBold',
+    transform: [{ scaleX: 0.75 }],
     color: ThemeColor.textColor,
   },
   timeStamp: {
+    paddingRight: 15,
     fontSize: 15,
-    textAlign: 'right',
+    lineHeight: 20,
+    fontFamily: 'NotoSans',
+    transform: [{ scaleX: 0.875 }],
     color: ThemeColor.textColor,
   },
   exerciseDetail: {
-    paddingLeft: 10,
-    paddingBottom: 10,
+    marginLeft: -7.5,
+    marginBottom: 11,
     fontSize: 15,
+    lineHeight: 20,
+    fontFamily: 'NotoSans',
+    transform: [{ scaleX: 0.875 }],
     color: ThemeColor.textColor,
   },
   hide: {
     display: 'none',
+  },
+  bar: {
+    height: 1,
+    backgroundColor: '#F5F5F5',
+    marginHorizontal: 15,
   },
 })

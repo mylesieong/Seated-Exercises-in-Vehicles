@@ -1,14 +1,12 @@
-import { StyleSheet, View, Text, Pressable, Alert, StatusBar } from 'react-native'
-import React, { useState } from 'react'
-import NavBar from './NavBar.js'
-import SideMenu from './SideMenu.js'
+import { StyleSheet, View, Text, Pressable, Alert } from 'react-native'
+import React from 'react'
 import ThemeColor from './Utilities/ThemeColor.js'
 import PageTemplate from './Utilities/PageTemplate.js'
+import Header from './Utilities/Header.js'
 import ResetIcon from '../assets/icons/reset-icon.svg'
 import ResetRightIcon from '../assets/icons/reset-arrow-right.svg'
 
 export default function Setting({ db, resetTrigger }) {
-  const [showMenu, setShowMenu] = useState(false)
   const removeRecordsAlert = () => {
     Alert.alert('Remove all records', 'Once you delete all records, it cannot be undone', [
       {
@@ -27,9 +25,9 @@ export default function Setting({ db, resetTrigger }) {
 
   return (
     <PageTemplate topBarColor={ThemeColor.backgroundColor}>
-      <StatusBar barStyle={ThemeColor.statusbar} />
-      <NavBar setShowMenu={setShowMenu} />
-      {showMenu && <SideMenu setShowMenu={setShowMenu} />}
+      <Header navigation={'Home'} height={46}>
+        <Text style={styles.headerTitle}>Exercise Record</Text>
+      </Header>
       <View style={styles.container}>
         <Text style={styles.title}>Setting</Text>
         <View style={styles.buttonLayout}>
@@ -56,9 +54,11 @@ const styles = StyleSheet.create({
   title: {
     color: ThemeColor.textColor,
     fontSize: 28,
-    fontWeight: 'bold',
+    paddingLeft: 4,
     paddingTop: 20,
-    paddingLeft: 20,
+    lineHeight: 32,
+    fontFamily: 'NotoSansExtraBold',
+    transform: [{ scaleX: 0.9 }],
   },
 
   resetButton: {
@@ -71,20 +71,31 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 1,
-    shadowRadius: 2,
+    shadowOffset: { width: 0, height: -4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 10,
+    shadowColor: '#9A9A9A',
     // for android
-    elevation: 2,
+    elevation: 5,
   },
   resetText: {
     fontSize: 20,
-    fontWeight: 'bold',
-    justifyContent: 'center',
-    paddingLeft: 15,
+    paddingLeft: 10,
+    lineHeight: 24,
+    fontFamily: 'NotoSansExtraBold',
+    transform: [{ scaleX: 0.75 }],
+    color: ThemeColor.textColor,
   },
   resetRightIcon: {
     marginLeft: 'auto',
     justifyContent: 'center',
+  },
+  headerTitle: {
+    fontSize: 20,
+    lineHeight: 24,
+    color: ThemeColor.textColor,
+    marginTop: 12,
+    fontFamily: 'NotoSansExtraBold',
+    transform: [{ scaleX: 0.75 }],
   },
 })
