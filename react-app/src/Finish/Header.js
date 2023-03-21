@@ -20,16 +20,16 @@ export default function Header() {
 
 const styles = StyleSheet.create({
   header: {
-    height: 50,
+    height: 70,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'flex-end',
     zIndex: 2,
   },
   headerText: {
-    fontWeight: 500,
+    fontWeight: 600,
     marginRight: 20,
-    fontSize: 20,
+    fontSize: 28,
     color: ThemeColor.textColor,
   },
 })
