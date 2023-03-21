@@ -126,7 +126,6 @@ export default function History({ db, reset }) {
         </Text>
         <View style={[styles.recordList, !recordsOfSelected[0] && styles.hide]}>
           <FlatList
-            contentContainerStyle={{ paddingBottom: 20 }}
             data={recordsOfSelected}
             renderItem={({ item }) => (
               <View style={styles.recordContainer}>
@@ -141,49 +140,40 @@ export default function History({ db, reset }) {
               </View>
             )}
           />
-          {__DEV__ && (
-            <Button
-              title='PRESS TO ADD 100 RANDOM DATA'
-              color='#841584'
-              onPress={() => {
-                Array(100)
-                  .fill(1)
-                  .forEach(() => {
-                    db.transaction((tx) => {
-                      const randomTimeInMarch = Math.floor(
-                        Math.random() * (1680307200000 - 1677628800000) + 1677628800000
-                      )
-                      tx.executeSql('insert into Record (exercise_name, timestamp) values (?, ?)', [
-                        'just for testing',
-                        randomTimeInMarch,
-                      ])
-                    })
-                  })
-                db.transaction((tx) => {
-                  tx.executeSql('select * from Record', [], (_, { rows }) => {
-                    let result = rows._array.reduce(
-                      (previous, current) => ({
-                        ...previous,
-                        [toYYYYMMDD(current.timestamp)]: { marked: true, dotColor: '#2196F3' },
-                      }),
-                      {}
+        </View>
+        {__DEV__ && (
+          <Button
+            title='PRESS TO ADD 100 RANDOM DATA'
+            color='#841584'
+            onPress={() => {
+              Array(100)
+                .fill(1)
+                .forEach(() => {
+                  db.transaction((tx) => {
+                    const randomTimeInMarch = Math.floor(
+                      Math.random() * (1680307200000 - 1677628800000) + 1677628800000
                     )
-                    setRecords(result)
+                    tx.executeSql('insert into Record (exercise_name, timestamp) values (?, ?)', [
+                      'just for testing',
+                      randomTimeInMarch,
+                    ])
                   })
                 })
-              }}
-            />
-          )}
-          {__DEV__ && (
-            <Button
-              title='console log'
-              color='#005408'
-              onPress={() => {
-                console.log(recordsOfSelected)
-              }}
-            />
-          )}
-        </View>
+              db.transaction((tx) => {
+                tx.executeSql('select * from Record', [], (_, { rows }) => {
+                  let result = rows._array.reduce(
+                    (previous, current) => ({
+                      ...previous,
+                      [toYYYYMMDD(current.timestamp)]: { marked: true, dotColor: '#2196F3' },
+                    }),
+                    {}
+                  )
+                  setRecords(result)
+                })
+              })
+            }}
+          />
+        )}
       </View>
     </PageTemplate>
   )
