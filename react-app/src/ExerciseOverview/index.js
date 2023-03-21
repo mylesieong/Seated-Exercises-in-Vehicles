@@ -10,11 +10,13 @@ import ExerciseDetail from './ExerciseDetail'
 import ThemeColor from '../Utilities/ThemeColor'
 
 export default function ExerciseOverview() {
+  const exerciseData = STRETCHING_EXERCISE_DATA
+  const totalSteps = exerciseData.length
   const [showDetail, setShowDetail] = React.useState(false)
-  const [selectedItem, setSelectedItem] = useState({})
+  const [selectedStep, setSelectedStep] = useState(1)
 
   const handlePress = (item) => {
-    setSelectedItem(item)
+    setSelectedStep(item.id)
     setShowDetail(true)
   }
 
@@ -45,7 +47,14 @@ export default function ExerciseOverview() {
         )}
       />
       <StartExerciseButton />
-      {showDetail && <ExerciseDetail item={selectedItem} setShowDetail={setShowDetail} />}
+      {showDetail && (
+        <ExerciseDetail
+          item={exerciseData[selectedStep - 1]}
+          totalSteps={totalSteps}
+          setSelectedStep={setSelectedStep}
+          setShowDetail={setShowDetail}
+        />
+      )}
     </PageTemplate>
   )
 }

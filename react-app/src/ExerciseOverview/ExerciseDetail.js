@@ -3,18 +3,41 @@ import { StyleSheet, Text, SafeAreaView, View, Pressable, FlatList } from 'react
 import CancelIcon from '../../assets/icons/cancel.svg'
 import ThemeColor from '../Utilities/ThemeColor'
 import ExerciseImage from '../Utilities/ExerciseImage'
+import ArrowBlueRight from '../../assets/icons/arrow-blue-right.svg'
+import ArrowBlueLeft from '../../assets/icons/arrow-blue-left.svg'
+import ArrowGreyRight from '../../assets/icons/arrow-grey-right.svg'
+import ArrowGreyLeft from '../../assets/icons/arrow-grey-left.svg'
 
-export default function ExerciseDetail({ item, setShowDetail }) {
+export default function ExerciseDetail({ item, totalSteps, setSelectedStep, setShowDetail }) {
   const { title, description, instruction, image } = item
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.innerContainer}>
-        <Pressable style={styles.buttonContainer} onPress={() => setShowDetail(false)}>
-          <View style={styles.button}>
-            <CancelIcon />
-            <Text> Close </Text>
+        <View style={styles.buttonContainer}>
+          <View style={styles.arrows}>
+            {item.id === 1 ? (
+              <ArrowGreyLeft />
+            ) : (
+              <Pressable onPress={() => setSelectedStep((prev) => prev - 1)}>
+                <ArrowBlueLeft />
+              </Pressable>
+            )}
+            <Text style={styles.progress}>
+              {item.id}/{totalSteps}
+            </Text>
+            {item.id === totalSteps ? (
+              <ArrowGreyRight />
+            ) : (
+              <Pressable onPress={() => setSelectedStep((prev) => prev + 1)}>
+                <ArrowBlueRight />
+              </Pressable>
+            )}
           </View>
-        </Pressable>
+          <Pressable style={styles.singleButton} onPress={() => setShowDetail(false)}>
+            <CancelIcon />
+            <Text style={styles.closeText}> Close </Text>
+          </Pressable>
+        </View>
         <View style={styles.image}>
           <ExerciseImage
             image={image}
@@ -66,17 +89,32 @@ const styles = StyleSheet.create({
   buttonContainer: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginBottom: 20,
   },
-  button: {
+  arrows: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  progress: {
+    fontWeight: 700,
+    fontSize: 15,
+    paddingHorizontal: 10,
+    color: ThemeColor.textColor,
+  },
+  singleButton: {
     display: 'flex',
     backgroundColor: ThemeColor.componentColor,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 10,
     paddingVertical: 5,
+    paddingHorizontal: 10,
     borderRadius: 10,
+  },
+  closeText: {
+    fontWeight: 600,
+    fontSize: 15,
     color: ThemeColor.textColor,
   },
   image: {
