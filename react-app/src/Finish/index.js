@@ -4,9 +4,12 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import Header from './Header'
 import Image from './Image'
 import Buttons from './Buttons'
+import Info from './Info'
 import Lottie from 'lottie-react-native'
 import { useEffect } from 'react'
 import PageTemplate from '../Utilities/PageTemplate'
+
+import { STRETCHING_EXERCISE_DATA } from '../../data/StretchingExerciseData'
 
 export default function Finish({ db }) {
   const navigation = useNavigation()
@@ -30,6 +33,7 @@ export default function Finish({ db }) {
   return (
     <PageTemplate topBarColor={'#ffca28'}>
       <Header />
+      <Info moves={STRETCHING_EXERCISE_DATA.length} time={`10`} format={`Sitting`}></Info>
       <Image />
       <Lottie
         source={require('../../assets/animation/62717-confetti.json')}

@@ -15,25 +15,21 @@ export default function Button({ onPress, text, children, color }) {
 
 const styles = StyleSheet.create({
   button: {
-    width: 270,
+    width: 150,
     height: 60,
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 8,
     backgroundColor: '#ffb300',
-    borderRadius: 5,
-  },
-  icon: {
-    alignItems: 'center',
-    marginLeft: 30,
+    borderRadius: 10,
   },
   textContainer: {
     flex: 1,
     alignItems: 'center',
   },
   text: {
-    fontSize: 16,
-    fontWeight: 500,
-    color: ThemeColor.textColor,
+    fontSize: 20,
+    fontWeight: 800,
+    color: ThemeColor.contrastColor,
   },
 })
