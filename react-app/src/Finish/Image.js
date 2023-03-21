@@ -6,8 +6,10 @@ import ThemeColor from '../Utilities/ThemeColor'
 export default function Image() {
   return (
     <View style={styles.container}>
-      <View style={styles.image}>
-        <HappyMan />
+      <View style={styles.outline}>
+        <View style={styles.image}>
+          <HappyMan height='70%' width='70%' backgroundColor='#0000FF' />
+        </View>
       </View>
     </View>
   )
@@ -15,16 +17,25 @@ export default function Image() {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: ThemeColor.backgroundColor,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 30,
   },
+  outline: {
+    backgroundColor: ThemeColor.contrastColor,
+    height: 220,
+    width: 310,
+    borderRadius: 200,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   image: {
-    height: 270,
-    width: 270,
+    height: 190,
+    width: 190,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: ThemeColor.componentColor,
-    borderRadius: 200,
+    borderRadius: 360,
   },
 })
