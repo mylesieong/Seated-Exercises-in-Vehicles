@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, FlatList, Pressable } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, Text, View, Pressable } from 'react-native'
+import React from 'react'
 import ThemeColor from '../Utilities/ThemeColor'
 import QuestionMark from '../../assets/icons/questionmark.svg'
 
