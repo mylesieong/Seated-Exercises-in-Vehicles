@@ -16,7 +16,7 @@ export default function Home() {
       <NavBar setShowMenu={setShowMenu} navbarColor='#FFB300' />
       {showMenu && <SideMenu setShowMenu={setShowMenu} />}
       <View style={styles.greeting}>
-        <Greeting style={styles.greeting} />
+        <Greeting />
       </View>
       <Text style={styles.title}>Challenge</Text>
       <View style={styles.flatListContainer}>
