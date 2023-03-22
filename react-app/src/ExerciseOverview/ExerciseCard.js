@@ -15,7 +15,7 @@ export default function ExerciseCard({ title, description, image }) {
           image={image}
           containerHeight={80}
           containerWidth={80}
-          backgroundColor={'#f2f2f2'}
+          backgroundColor={ThemeColor.spacing}
         />
       </View>
       <View style={styles.line}></View>
@@ -25,7 +25,7 @@ export default function ExerciseCard({ title, description, image }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: ThemeColor.contrastColor,
+    backgroundColor: ThemeColor.component,
     flex: 1,
     flexDirection: 'row',
     alignItems: 'flex-start',
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
   text: {
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
   textContainer: {
     flex: 1,
@@ -50,11 +50,11 @@ const styles = StyleSheet.create({
     marginTop: 5,
     transform: [{ scaleX: 0.875 }],
     fontFamily: 'NotoSans',
-    color: ThemeColor.textGrey,
+    color: ThemeColor.textGray,
   },
   line: {
     height: 1,
-    backgroundColor: '#f2f2f2',
+    backgroundColor: ThemeColor.spacing,
     marginHorizontal: 20,
   },
 })

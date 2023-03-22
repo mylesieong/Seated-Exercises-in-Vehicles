@@ -7,6 +7,7 @@ import ExerciseNav from './ExerciseNav'
 import PageTemplate from '../Utilities/PageTemplate'
 import ExerciseDetail from '../ExerciseOverview/ExerciseDetail'
 import { Pressable } from 'react-native'
+import ThemeColor from '../Utilities/ThemeColor'
 
 export default function ExerciseSteps() {
   const [step, setStep] = useState(1)
@@ -15,7 +16,7 @@ export default function ExerciseSteps() {
   const stepDetail = STRETCHING_EXERCISE_DATA[step - 1]
 
   return (
-    <PageTemplate>
+    <PageTemplate topBarColor={ThemeColor.manBackground}>
       <Header step={step} totalStep={totalStep} setShowDetail={setShowDetail} />
       <Pressable style={{ maxHeight: '40%' }} onPress={() => setShowDetail(false)}>
         <ExerciseImage
@@ -23,6 +24,7 @@ export default function ExerciseSteps() {
           imageWidth={'85%'}
           ImageHeight={'85%'}
           containerHeight={400}
+          backgroundColor={ThemeColor.manBackground}
         />
       </Pressable>
       <Info

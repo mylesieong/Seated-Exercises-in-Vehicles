@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   container: {
     width: Dimensions.get('window').width,
     alignItems: 'flex-start',
-    backgroundColor: ThemeColor.backgroundColor,
+    backgroundColor: ThemeColor.tab,
     flexDirection: 'row',
   },
   button: {
@@ -28,14 +28,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ffb300',
+    backgroundColor: ThemeColor.primaryDarker,
     marginTop: 8,
     marginBottom: Platform.OS === 'android' ? 8 : 0,
   },
   ...Platform.select({
     ios: {
       shadow: {
-        shadowColor: '#9A9A9A',
+        shadowColor: ThemeColor.shadow,
         shadowOffset: {
           width: 0,
           height: -4,
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     },
     android: {
       shadow: {
-        shadowColor: '#9A9A9A',
+        shadowColor: ThemeColor.shadow,
         elevation: 5,
       },
     },
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     fontFamily: 'NotoSansExtraBold',
     fontSize: 20,
     lineHeight: 24,
-    color: ThemeColor.titleTextColor,
+    color: ThemeColor.textWhite,
     transform: [{ scaleX: 0.75 }],
   },
 })

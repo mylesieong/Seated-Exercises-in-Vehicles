@@ -21,7 +21,10 @@ export default function Summary({ moves, time, format }) {
               key={keys}
               style={[
                 styles.wrapper,
-                keys !== array.length - 1 && { borderRightWidth: 2, borderColor: '#F2F2F2' },
+                keys !== array.length - 1 && {
+                  borderRightWidth: 2,
+                  borderColor: ThemeColor.spacing,
+                },
               ]}
             >
               <Text style={[styles.summary_value, styles.textColor]}>{item[1]}</Text>
@@ -36,7 +39,7 @@ export default function Summary({ moves, time, format }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ffffff',
+    backgroundColor: ThemeColor.component,
     alignSelf: 'center',
     position: 'absolute',
     borderRadius: 10,
@@ -54,7 +57,7 @@ const styles = StyleSheet.create({
     transform: [{ scaleX: 0.9 }],
   },
   textColor: {
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
   description: {
     fontWeight: 400,
@@ -75,6 +78,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     overflow: 'hidden',
+    maxHeight: 48,
   },
   summary_value: {
     fontSize: 24,
@@ -88,12 +92,12 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     fontFamily: 'NotoSans',
     transform: [{ scaleX: 0.875 }],
-    color: ThemeColor.textGrey,
+    color: ThemeColor.textGray,
   },
   ...Platform.select({
     ios: {
       shadow: {
-        shadowColor: '#9A9A9A',
+        shadowColor: ThemeColor.shadow,
         shadowOffset: {
           width: 0,
           height: 4,
@@ -104,7 +108,7 @@ const styles = StyleSheet.create({
     },
     android: {
       shadow: {
-        shadowColor: '#9A9A9A',
+        shadowColor: ThemeColor.shadow,
         elevation: 5,
       },
     },

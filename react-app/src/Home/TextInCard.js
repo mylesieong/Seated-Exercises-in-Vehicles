@@ -31,20 +31,20 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 19,
     marginBottom: 6,
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
   text: {
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
   status: {
     lineHeight: 16,
     marginBottom: 10,
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
   unavailable: {
     color: '#878d8f',
   },
   icon: {
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
 })

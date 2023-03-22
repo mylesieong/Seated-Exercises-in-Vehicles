@@ -24,18 +24,18 @@ export default function Setting({ db, resetTrigger }) {
   }
 
   return (
-    <PageTemplate topBarColor={ThemeColor.backgroundColor}>
-      <Header navigation={'Home'} height={46}>
+    <PageTemplate topBarColor={ThemeColor.deepBackground} bottomColor={ThemeColor.deepBackground}>
+      <Header navigation={'Home'} height={46} backgroundColor={ThemeColor.deepBackground}>
         <Text style={styles.headerTitle}>Exercise Record</Text>
       </Header>
       <View style={styles.container}>
         <Text style={styles.title}>Setting</Text>
         <View style={styles.buttonLayout}>
           <Pressable style={styles.resetButton} onPress={removeRecordsAlert}>
-            <ResetIcon height={20} width={20} />
+            <ResetIcon height={20} width={20} color={ThemeColor.text} />
             <Text style={styles.resetText}>Reset</Text>
             <View style={styles.resetRightIcon}>
-              <ResetRightIcon height={20} width={20} />
+              <ResetRightIcon height={20} width={20} color={ThemeColor.text} />
             </View>
           </Pressable>
         </View>
@@ -46,13 +46,11 @@ export default function Setting({ db, resetTrigger }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: ThemeColor.backgroundColor,
+    backgroundColor: ThemeColor.deepBackground,
     flex: 1,
-    width: null,
-    height: null,
   },
   title: {
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
     fontSize: 28,
     paddingLeft: 4,
     paddingTop: 20,
@@ -62,7 +60,7 @@ const styles = StyleSheet.create({
   },
 
   resetButton: {
-    backgroundColor: '#FFF',
+    backgroundColor: ThemeColor.component,
     borderRadius: 10,
     height: 70,
     paddingVertical: 10,
@@ -74,7 +72,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: -4 },
     shadowOpacity: 0.25,
     shadowRadius: 10,
-    shadowColor: '#9A9A9A',
+    shadowColor: ThemeColor.shadow,
     // for android
     elevation: 5,
   },
@@ -84,7 +82,7 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     fontFamily: 'NotoSansExtraBold',
     transform: [{ scaleX: 0.75 }],
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
   resetRightIcon: {
     marginLeft: 'auto',
@@ -93,7 +91,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 20,
     lineHeight: 24,
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
     marginTop: 12,
     fontFamily: 'NotoSansExtraBold',
     transform: [{ scaleX: 0.75 }],

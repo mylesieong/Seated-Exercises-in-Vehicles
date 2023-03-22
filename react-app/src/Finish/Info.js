@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 40,
   },
   textColor: {
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
   wrapper: {
     alignItems: 'center',
@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     fontFamily: 'NotoSans',
     transform: [{ scaleX: 0.875 }],
-    color: ThemeColor.textGrey,
+    color: ThemeColor.textGray,
   },
 })

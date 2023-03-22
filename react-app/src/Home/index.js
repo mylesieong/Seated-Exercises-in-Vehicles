@@ -11,8 +11,8 @@ export default function Home() {
   const [showMenu, setShowMenu] = useState(false)
 
   return (
-    <PageTemplate topBarColor={showMenu ? null : '#FFB300'}>
-      <NavBar setShowMenu={setShowMenu} navbarColor='#FFB300' />
+    <PageTemplate>
+      <NavBar setShowMenu={setShowMenu} />
       {showMenu && <SideMenu setShowMenu={setShowMenu} />}
       <View style={styles.greeting}>
         <Text style={styles.greetingText}>Good Morning</Text>
@@ -47,17 +47,17 @@ const styles = StyleSheet.create({
   },
   greeting: {
     height: 100,
-    backgroundColor: '#FFB300',
+    backgroundColor: ThemeColor.primaryDarker,
   },
   title: {
     fontSize: 22,
     fontWeight: 'bold',
     paddingHorizontal: 25,
     paddingTop: 20,
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
   greetingText: {
-    color: ThemeColor.titleTextColor,
+    color: ThemeColor.textWhite,
     fontSize: 25,
     fontWeight: 'bold',
     paddingHorizontal: 20,

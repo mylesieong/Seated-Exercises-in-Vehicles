@@ -18,6 +18,6 @@ const styles = StyleSheet.create({
     left: 15,
   },
   icon: {
-    color: ThemeColor.textColor,
+    color: ThemeColor.textWhite,
   },
 })

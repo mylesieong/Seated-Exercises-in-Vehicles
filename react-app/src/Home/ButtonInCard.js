@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 48,
     height: 48,
-    backgroundColor: ThemeColor.textColor,
+    backgroundColor: ThemeColor.text,
     borderRadius: 50,
     alignItems: 'center',
   },
@@ -36,6 +36,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#878d8f',
   },
   icon: {
-    color: ThemeColor.componentColor,
+    color: ThemeColor.component,
   },
 })

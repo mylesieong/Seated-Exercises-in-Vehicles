@@ -18,7 +18,7 @@ export default function Header({
         styles.header,
         backgroundColor
           ? { backgroundColor: backgroundColor }
-          : { backgroundColor: ThemeColor.backgroundColor },
+          : { backgroundColor: ThemeColor.primaryDarker },
         height && { height: height },
       ]}
     >

@@ -21,6 +21,7 @@ export default function ExerciseDetail({ item, setShowDetail }) {
             containerHeight={260}
             containerWidth={'100%'}
             containerRadius={10}
+            backgroundColor={ThemeColor.manBackground}
           />
         </View>
         <Text style={styles.title}>{title}</Text>
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
     zIndex: 10,
     padding: 20,
     borderRadius: 10,
-    shadowColor: '#000',
+    shadowColor: ThemeColor.shadow,
     shadowOffset: {
       width: 0,
       height: -3,
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     flex: 1,
-    backgroundColor: ThemeColor.contrastColor,
+    backgroundColor: ThemeColor.component,
     padding: '5%',
     borderRadius: 10,
   },
@@ -70,15 +71,29 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     marginBottom: 20,
   },
-  button: {
+  arrows: {
     display: 'flex',
-    backgroundColor: ThemeColor.componentColor,
+    flexDirection: 'row',
+  },
+  progress: {
+    fontWeight: 700,
+    fontSize: 15,
+    paddingHorizontal: 15,
+    color: ThemeColor.text,
+  },
+  singleButton: {
+    display: 'flex',
+    backgroundColor: ThemeColor.spacing,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 10,
-    color: ThemeColor.textColor,
+  },
+  closeText: {
+    fontWeight: 600,
+    fontSize: 15,
+    color: ThemeColor.textBlack,
   },
   image: {
     display: 'flex',
@@ -90,13 +105,13 @@ const styles = StyleSheet.create({
     fontWeight: 700,
     fontSize: 25,
     marginBottom: 10,
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
   description: {
     fontWeight: 500,
     fontSize: 16,
     marginBottom: 10,
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
   instructionContainer: {
     flex: 1,
@@ -105,6 +120,6 @@ const styles = StyleSheet.create({
     fontWeight: 400,
     fontSize: 16,
     marginBottom: 10,
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
 })

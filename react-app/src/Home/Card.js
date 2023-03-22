@@ -4,7 +4,6 @@ import ImageInCard from './ImageInCard'
 import TextInCard from './TextInCard'
 import ButtonInCard from './ButtonInCard'
 import ThemeColor from '../Utilities/ThemeColor'
-import { Platform } from 'react-native'
 
 export default function Card({ title, description, image, available, type, screen }) {
   return (
@@ -42,7 +41,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: ThemeColor.componentColor,
+    backgroundColor: ThemeColor.component,
     padding: 17,
   },
 })

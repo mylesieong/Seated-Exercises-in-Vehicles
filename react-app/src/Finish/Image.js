@@ -8,7 +8,7 @@ export default function Image() {
     <View style={styles.container}>
       <View style={styles.outline}>
         <View style={styles.image}>
-          <HappyMan height='70%' width='70%' backgroundColor='#0000FF' />
+          <HappyMan height='70%' width='70%' backgroundColor={ThemeColor.manBackground} />
         </View>
       </View>
     </View>
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     padding: 30,
   },
   outline: {
-    backgroundColor: ThemeColor.contrastColor,
+    backgroundColor: ThemeColor.textWhite,
     height: 220,
     width: 310,
     borderRadius: 200,
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     width: 190,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: ThemeColor.componentColor,
+    backgroundColor: ThemeColor.manBackground,
     borderRadius: 360,
   },
 })
