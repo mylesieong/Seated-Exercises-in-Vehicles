@@ -3,18 +3,51 @@ import { StyleSheet, Text, SafeAreaView, View, Pressable, FlatList } from 'react
 import CancelIcon from '../../assets/icons/cancel.svg'
 import ThemeColor from '../Utilities/ThemeColor'
 import ExerciseImage from '../Utilities/ExerciseImage'
+import ArrowBlueRight from '../../assets/icons/arrow-blue-right.svg'
+import ArrowBlueLeft from '../../assets/icons/arrow-blue-left.svg'
+import ArrowGreyRight from '../../assets/icons/arrow-grey-right.svg'
+import ArrowGreyLeft from '../../assets/icons/arrow-grey-left.svg'
+import { useRoute } from '@react-navigation/native'
 
-export default function ExerciseDetail({ item, setShowDetail }) {
+export default function ExerciseDetail({ item, totalSteps, setSelectedStep, setShowDetail }) {
   const { title, description, instruction, image } = item
+  const path = useRoute().name
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.innerContainer}>
-        <Pressable style={styles.buttonContainer} onPress={() => setShowDetail(false)}>
-          <View style={styles.button}>
+        <View
+          style={[
+            styles.buttonContainer,
+            { justifyContent: path === 'Exercise Steps' ? 'flex-end' : 'space-between' },
+          ]}
+        >
+          {path !== 'Exercise Steps' && (
+            <View style={styles.arrows}>
+              {item.id === 1 ? (
+                <ArrowGreyLeft />
+              ) : (
+                <Pressable onPress={() => setSelectedStep((prev) => prev - 1)}>
+                  <ArrowBlueLeft />
+                </Pressable>
+              )}
+              <Text style={styles.progress}>
+                {item.id}/{totalSteps}
+              </Text>
+              {item.id === totalSteps ? (
+                <ArrowGreyRight />
+              ) : (
+                <Pressable onPress={() => setSelectedStep((prev) => prev + 1)}>
+                  <ArrowBlueRight />
+                </Pressable>
+              )}
+            </View>
+          )}
+          <Pressable style={styles.singleButton} onPress={() => setShowDetail(false)}>
             <CancelIcon />
-            <Text> Close </Text>
-          </View>
-        </Pressable>
+            <Text style={styles.closeText}> Close </Text>
+          </Pressable>
+        </View>
         <View style={styles.image}>
           <ExerciseImage
             image={image}
@@ -27,7 +60,7 @@ export default function ExerciseDetail({ item, setShowDetail }) {
         <Text style={styles.description}>{description}</Text>
         <View style={styles.instructionContainer}>
           <FlatList
-            contentContainerStyle={{ paddingBottom: 20 }}
+            contentContainerStyle={{ paddingBottom: 30 }}
             data={instruction}
             renderItem={({ item }) => <Text style={styles.instruction}>{item}</Text>}
           />
@@ -41,12 +74,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: 'absolute',
-    top: '25%',
+    top: '10%',
     left: 0,
-    height: '80%',
+    height: '95%',
     width: '100%',
     zIndex: 10,
-    padding: 20,
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: {
@@ -67,17 +99,31 @@ const styles = StyleSheet.create({
   buttonContainer: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    alignItems: 'center',
     marginBottom: 20,
   },
-  button: {
+  arrows: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  progress: {
+    fontWeight: 700,
+    fontSize: 15,
+    paddingHorizontal: 15,
+    color: ThemeColor.textColor,
+  },
+  singleButton: {
     display: 'flex',
     backgroundColor: ThemeColor.componentColor,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 10,
     paddingVertical: 5,
+    paddingHorizontal: 10,
     borderRadius: 10,
+  },
+  closeText: {
+    fontWeight: 600,
+    fontSize: 15,
     color: ThemeColor.textColor,
   },
   image: {
