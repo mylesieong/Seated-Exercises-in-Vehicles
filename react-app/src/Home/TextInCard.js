@@ -3,7 +3,7 @@ import React from 'react'
 import ClockIcon from '../../assets/icons/clock.svg'
 import ThemeColor from '../Utilities/ThemeColor'
 
-export default function TextInCard({ title, description, available }) {
+export default function TextInCard({ description, available }) {
   return (
     <View style={styles.textContainer}>
       {!available && (
@@ -11,11 +11,10 @@ export default function TextInCard({ title, description, available }) {
           <ClockIcon width={16} height={16} style={styles.icon} /> coming soon
         </Text>
       )}
-      <Text style={[styles.textTitle, !available && styles.unavailable]}>{title}</Text>
       {description?.map((value, index) => (
-        <Text key={index} style={!available ? styles.unavailable : styles.text}>
+        <Text key={index} style={!available ? styles.unavailable : styles.text} numberOfLines={3}>
           {' '}
-          - {value}
+          • {value}
         </Text>
       ))}
     </View>
@@ -26,14 +25,8 @@ const styles = StyleSheet.create({
   textContainer: {
     flex: 1,
   },
-  textTitle: {
-    fontWeight: 600,
-    fontSize: 16,
-    lineHeight: 19,
-    marginBottom: 6,
-    color: ThemeColor.textColor,
-  },
   text: {
+    fontSize: 15,
     color: ThemeColor.textColor,
   },
   status: {
@@ -42,6 +35,7 @@ const styles = StyleSheet.create({
     color: ThemeColor.textColor,
   },
   unavailable: {
+    fontSize: 15,
     color: '#878d8f',
   },
   icon: {

@@ -4,7 +4,7 @@
 export const DUMMY_FUNCTION_DATA = [
   {
     id: 1,
-    title: `In Seat/ Stretching`,
+    title: `Stretching`,
     description: [`7 moves`, `Head, shoulder, arm, torso and leg`, `Takes around 10 min`],
     available: true,
     type: `standalone`,
@@ -35,7 +35,7 @@ export const DUMMY_FUNCTION_DATA = [
   },
   {
     id: 2,
-    title: `In Seat/ Core Exercise`,
+    title: `Core Exercise`,
     description: [`6 moves`, `Take around 10 min`, `Might sweat a bit`],
     available: false,
     type: `standalone`,
