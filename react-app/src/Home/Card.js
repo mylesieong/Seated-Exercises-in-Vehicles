@@ -5,14 +5,15 @@ import TextInCard from './TextInCard'
 import ButtonInCard from './ButtonInCard'
 import ThemeColor from '../Utilities/ThemeColor'
 
-export default function Card({ title, description, image, available, type, screen }) {
+export default function Card({ item }) {
+  const { id, title, description, image, available, type } = item
   return (
     <View style={styles.cardContainer}>
       <View style={styles.innerContainer}>
         <ImageInCard image={image} type={type} />
         <View style={styles.cardLowerPart}>
           <TextInCard title={title} description={description} available={available} />
-          <ButtonInCard available={available} screen={screen}></ButtonInCard>
+          <ButtonInCard available={available} id={id} title={title}></ButtonInCard>
         </View>
       </View>
     </View>

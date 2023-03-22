@@ -2,10 +2,10 @@ import { StyleSheet, Text, View, Platform } from 'react-native'
 import React from 'react'
 import ThemeColor from '../Utilities/ThemeColor'
 
-export default function Summary({ moves, time, format }) {
+export default function Summary({ title, moves, time, format }) {
   return (
     <View style={[styles.container, styles.shadow]}>
-      <Text style={[styles.textColor, styles.title]}>Stretching</Text>
+      <Text style={[styles.textColor, styles.title]}>{title}</Text>
       <Text style={[styles.description, styles.textColor]}>
         Stretching will help reduce neck pain pain and back pain, improve the blood circulation as
         long as lower the risk of DVT(Deep Vain Thrombosis).

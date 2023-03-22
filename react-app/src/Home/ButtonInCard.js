@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import ArrowRightIcon from '../../assets/icons/arrow-right.svg'
 import ThemeColor from '../Utilities/ThemeColor'
 
-export default function ButtonInCard({ available, screen }) {
+export default function ButtonInCard({ available, id, title }) {
   const navigation = useNavigation()
 
   return (
@@ -12,7 +12,7 @@ export default function ButtonInCard({ available, screen }) {
       style={[styles.button, !available && styles.unavailable]}
       onPress={
         available
-          ? () => navigation.navigate(screen)
+          ? () => navigation.navigate('ExerciseOverview', { id: id, title: title })
           : () => {
               Alert.alert('Coming soon!')
             }

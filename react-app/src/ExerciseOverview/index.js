@@ -4,14 +4,20 @@ import Header from '../Utilities/Header'
 import Summary from './Summary'
 import ExerciseCard from './ExerciseCard'
 import StartExerciseButton from './StartExerciseButton'
+import { CORE_EXERCISE_DATA } from '../../data/CoreExerciseData'
 import { STRETCHING_EXERCISE_DATA } from '../../data/StretchingExerciseData'
 import PageTemplate from '../Utilities/PageTemplate'
 import ExerciseDetail from './ExerciseDetail'
 import ThemeColor from '../Utilities/ThemeColor'
 
-export default function ExerciseOverview() {
+export default function ExerciseOverview({ route }) {
+  const { id, title } = route.params
   const [showDetail, setShowDetail] = React.useState(false)
   const [selectedItem, setSelectedItem] = useState({})
+  const exercises = { 1: STRETCHING_EXERCISE_DATA, 2: CORE_EXERCISE_DATA }
+  const exercise = exercises[id]
+  const duration = Math.ceil(exercise.reduce((acc, curr) => acc + curr.duration, 0) / 60)
+  console.log(id, title)
 
   const handlePress = (item) => {
     setSelectedItem(item)
@@ -27,15 +33,15 @@ export default function ExerciseOverview() {
           buttonColor={ThemeColor.textWhite}
           height={190}
         >
-          <Text style={styles.title}>Stretching on the Seat</Text>
+          <Text style={styles.title}>{title}</Text>
         </Header>
-        <Summary moves={STRETCHING_EXERCISE_DATA.length} time={`10`} format={`Sitting`}></Summary>
+        <Summary title={title} moves={exercise.length} time={duration} format={`Sitting`}></Summary>
       </Pressable>
       <FlatList
         contentContainerStyle={{
           paddingTop: Platform.OS === 'android' ? 76 : 100,
         }}
-        data={STRETCHING_EXERCISE_DATA}
+        data={exercise}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <Pressable onPress={() => handlePress(item)}>
