@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, Platform } from 'react-native'
 import React from 'react'
 import ThemeColor from '../Utilities/ThemeColor'
+import StartExerciseButton from './StartExerciseButton'
 
 export default function Summary({ moves, time, format }) {
   return (
@@ -30,6 +31,7 @@ export default function Summary({ moves, time, format }) {
           )
         })}
       </View>
+      <StartExerciseButton />
     </View>
   )
 }
@@ -42,6 +44,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     top: 66,
     marginHorizontal: 15,
+    paddingBottom: 10,
   },
   title: {
     fontFamily: 'NotoSansExtraBold',
