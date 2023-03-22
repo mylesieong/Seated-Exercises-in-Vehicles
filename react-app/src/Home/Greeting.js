@@ -20,7 +20,7 @@ export default function Greeting() {
 }
 const styles = StyleSheet.create({
   greetingText: {
-    color: ThemeColor.titleTextColor,
+    color: ThemeColor.textWhite,
     fontSize: 25,
     fontWeight: 'bold',
     paddingHorizontal: 20,

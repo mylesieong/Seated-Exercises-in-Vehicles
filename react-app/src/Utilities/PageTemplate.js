@@ -2,16 +2,34 @@ import { StyleSheet, SafeAreaView, View, Platform, StatusBar } from 'react-nativ
 import React from 'react'
 import ThemeColor from './ThemeColor'
 
-export default function PageTemplate({ topBarColor, children }) {
+export default function PageTemplate({ topBarColor, bottomColor, children, removeIphoneXFooter }) {
   return (
     <View
       style={[
         styles.upperWrapper,
-        { backgroundColor: topBarColor ? topBarColor : ThemeColor.componentColor },
+        { backgroundColor: topBarColor ? topBarColor : ThemeColor.primaryDarker },
       ]}
     >
       <SafeAreaView />
-      <SafeAreaView style={styles.lowerWrapper}>{children}</SafeAreaView>
+      {removeIphoneXFooter ? (
+        <View
+          style={[
+            styles.lowerWrapper,
+            { backgroundColor: bottomColor ? bottomColor : ThemeColor.component },
+          ]}
+        >
+          {children}
+        </View>
+      ) : (
+        <SafeAreaView
+          style={[
+            styles.lowerWrapper,
+            { backgroundColor: bottomColor ? bottomColor : ThemeColor.component },
+          ]}
+        >
+          {children}
+        </SafeAreaView>
+      )}
     </View>
   )
 }
@@ -22,7 +40,6 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   lowerWrapper: {
-    backgroundColor: ThemeColor.backgroundColor,
     flex: 1,
   },
 })

@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     zIndex: 10,
-    backgroundColor: ThemeColor.componentColor,
+    backgroundColor: ThemeColor.component,
     width: '70%',
     height: '100%',
     justifyContent: 'center',
@@ -77,10 +77,10 @@ const styles = StyleSheet.create({
   icon: {
     paddingHorizontal: 20,
     fontSize: 20,
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
   text: {
     fontSize: 20,
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
 })

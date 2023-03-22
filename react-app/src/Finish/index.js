@@ -10,6 +10,7 @@ import { useEffect } from 'react'
 import PageTemplate from '../Utilities/PageTemplate'
 
 import { STRETCHING_EXERCISE_DATA } from '../../data/StretchingExerciseData'
+import ThemeColor from '../Utilities/ThemeColor'
 
 export default function Finish({ db }) {
   const navigation = useNavigation()
@@ -31,7 +32,7 @@ export default function Finish({ db }) {
   }, [])
 
   return (
-    <PageTemplate topBarColor={'#ffca28'}>
+    <PageTemplate topBarColor={ThemeColor.background} bottomColor={ThemeColor.background}>
       <Header />
       <Info moves={STRETCHING_EXERCISE_DATA.length} time={`10`} format={`Sitting`}></Info>
       <Image />

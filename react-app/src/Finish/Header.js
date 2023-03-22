@@ -1,18 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { useNavigation } from '@react-navigation/native'
-import GoBackButton from '../Utilities/GoBackButton'
 import ThemeColor from '../Utilities/ThemeColor'
 
 export default function Header() {
-  const navigation = useNavigation()
   return (
     <View style={styles.header}>
-      <GoBackButton
-        onPress={() => {
-          navigation.navigate('In Seat/ Stretching')
-        }}
-      />
       <Text style={styles.headerText}> Nice work!</Text>
     </View>
   )
@@ -30,6 +22,6 @@ const styles = StyleSheet.create({
     fontWeight: 600,
     marginRight: 20,
     fontSize: 28,
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
 })

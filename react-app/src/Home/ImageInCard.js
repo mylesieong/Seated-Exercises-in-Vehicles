@@ -7,7 +7,7 @@ export default function ImageInCard({ image, type }) {
     <View
       style={[
         styles.imageContainer,
-        type == 'standalone' ? styles.standaloneCardColor : styles.journeyCardColor
+        type == 'standalone' ? styles.standaloneCardColor : styles.journeyCardColor,
       ]}
     >
       <View style={styles.svgContainer}>
@@ -23,16 +23,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: 110,
-    padding: 17
+    padding: 17,
   },
   svgContainer: {
     flex: 1,
-    width: '100%'
+    width: '100%',
   },
   standaloneCardColor: {
-    backgroundColor: '#FFCA28'
+    backgroundColor: '#FFCA28',
   },
   journeyCardColor: {
-    backgroundColor: '#64B5F6'
-  }
+    backgroundColor: '#64B5F6',
+  },
 })

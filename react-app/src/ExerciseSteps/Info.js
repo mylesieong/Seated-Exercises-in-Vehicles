@@ -14,7 +14,7 @@ export default function Info({ step, totalStep, stepDetail, setShowDetail }) {
       <Pressable style={styles.titleContainer} onPress={() => setShowDetail(true)}>
         <Text style={styles.title}>{title}</Text>
         <View>
-          <QuestionMark height={25} width={25} style={styles.icon} />
+          <QuestionMark height={25} width={25} />
         </View>
       </Pressable>
       <Text style={styles.description}>{description}</Text>
@@ -25,8 +25,7 @@ export default function Info({ step, totalStep, stepDetail, setShowDetail }) {
 const styles = StyleSheet.create({
   step: {
     fontSize: 16,
-    backgroundColor: ThemeColor.componentColor,
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
     padding: 15,
     fontWeight: 500,
   },
@@ -36,7 +35,7 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 18,
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
     paddingHorizontal: 25,
   },
   titleContainer: {
@@ -51,18 +50,6 @@ const styles = StyleSheet.create({
     fontWeight: 500,
     lineHeight: 60,
     marginRight: 10,
-    color: ThemeColor.textColor,
-  },
-  instructionContainer: {
-    marginBottom: 15,
-  },
-  instruction: {
-    fontSize: 16,
-    lineHeight: 24,
-    marginBottom: 10,
-    color: ThemeColor.textColor,
-  },
-  icon: {
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
 })

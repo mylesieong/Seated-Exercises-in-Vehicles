@@ -25,23 +25,24 @@ export default function ExerciseOverview({ route }) {
   }
 
   return (
-    <PageTemplate topBarColor={'#FFB300'}>
+    <PageTemplate bottomColor={ThemeColor.deepBackground} removeIphoneXFooter={true}>
       <Pressable style={{ zIndex: 2 }} onPress={() => setShowDetail(false)}>
         <Header
           navigation={'Home'}
-          backgroundColor={'#FFB300'}
-          buttonColor={ThemeColor.titleTextColor}
+          backgroundColor={ThemeColor.primaryDarker}
+          buttonColor={ThemeColor.textWhite}
           height={190}
         >
           <Text style={styles.title}>{title}</Text>
         </Header>
-        <Summary moves={exercise.length} time={duration} format={`Sitting`}></Summary>
+        <Summary moves={exercise.length} time={duration} format={`Sitting`} title={title}></Summary>
       </Pressable>
       <View style={styles.moves}>
         <FlatList
           contentContainerStyle={{
-            paddingTop: Platform.OS === 'android' ? 121 : 135,
-            backgroundColor: '#FFFBED',
+            marginTop: Platform.OS === 'android' ? 136 : 160,
+            borderRadius: 10,
+            overflow: 'hidden',
           }}
           data={exercise}
           keyExtractor={(item) => item.id.toString()}
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 15,
     lineHeight: 20,
-    color: ThemeColor.titleTextColor,
+    color: ThemeColor.textWhite,
     marginTop: 13,
     fontFamily: 'NotoSansBold',
     transform: [{ scaleX: 0.875 }],

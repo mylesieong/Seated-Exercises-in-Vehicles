@@ -23,7 +23,7 @@ export default function ExerciseNav({ step, setStep, totalStep }) {
         <ArrowLeftIcon height={50} width={50} style={styles.icon} />
       </Pressable>
       <Pressable style={styles.bigButton} onPress={nextStep}>
-        <TickIcon height={100} width={100} style={styles.tickIcon} />
+        <TickIcon height={100} width={100} />
       </Pressable>
       <Pressable
         onPress={step != totalStep ? nextStep : null}
@@ -51,9 +51,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
   },
   icon: {
-    color: ThemeColor.textColor,
-  },
-  tickIcon: {
-    color: ThemeColor.componentColor,
+    color: ThemeColor.textGray,
   },
 })
