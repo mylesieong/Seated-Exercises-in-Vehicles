@@ -3,16 +3,21 @@ import React, { useState } from 'react'
 import Header from '../Utilities/Header'
 import Summary from './Summary'
 import ExerciseCard from './ExerciseCard'
+import { CORE_EXERCISE_DATA } from '../../data/CoreExerciseData'
 import { STRETCHING_EXERCISE_DATA } from '../../data/StretchingExerciseData'
 import PageTemplate from '../Utilities/PageTemplate'
 import ExerciseDetail from './ExerciseDetail'
 import ThemeColor from '../Utilities/ThemeColor'
 
-export default function ExerciseOverview() {
-  const exerciseData = STRETCHING_EXERCISE_DATA
-  const totalSteps = exerciseData.length
+export default function ExerciseOverview({ route }) {
+  const { id, title } = route.params
   const [showDetail, setShowDetail] = React.useState(false)
   const [selectedStep, setSelectedStep] = useState(1)
+  const exercises = { 1: STRETCHING_EXERCISE_DATA, 2: CORE_EXERCISE_DATA }
+  const exercise = exercises[id]
+  const duration = Math.ceil(
+    exercise.reduce((accumulation, currentMove) => accumulation + currentMove.duration, 0) / 60
+  )
 
   const handlePress = (item) => {
     setSelectedStep(item.id)
@@ -28,9 +33,9 @@ export default function ExerciseOverview() {
           buttonColor={ThemeColor.titleTextColor}
           height={190}
         >
-          <Text style={styles.title}>Stretching on the Seat</Text>
+          <Text style={styles.title}>{title}</Text>
         </Header>
-        <Summary moves={STRETCHING_EXERCISE_DATA.length} time={`10`} format={`Sitting`}></Summary>
+        <Summary moves={exercise.length} time={duration} format={`Sitting`}></Summary>
       </Pressable>
       <View style={styles.moves}>
         <FlatList
@@ -38,7 +43,7 @@ export default function ExerciseOverview() {
             paddingTop: Platform.OS === 'android' ? 121 : 135,
             backgroundColor: '#FFFBED',
           }}
-          data={STRETCHING_EXERCISE_DATA}
+          data={exercise}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <Pressable onPress={() => handlePress(item)}>
@@ -49,8 +54,8 @@ export default function ExerciseOverview() {
       </View>
       {showDetail && (
         <ExerciseDetail
-          item={exerciseData[selectedStep - 1]}
-          totalSteps={totalSteps}
+          item={exercise[selectedStep - 1]}
+          totalSteps={exercise.length}
           setSelectedStep={setSelectedStep}
           setShowDetail={setShowDetail}
         />

@@ -8,7 +8,6 @@ export const DUMMY_FUNCTION_DATA = [
     description: [`7 moves`, `Head, shoulder, arm, torso and leg`, `Takes around 10 min`],
     available: true,
     type: `standalone`,
-    screen: `In Seat/ Stretching`,
     image: `<svg width="147" height="77" viewBox="0 0 147 77" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M141.449 53.0996L142.976 53.0426C144.2 52.9999 144.632 52.9287 145.108 52.6723C146.231 52.0883 146.822 50.8064 146.966 48.6557C147.038 47.6301 147.009 47.3168 146.75 46.6474C146.159 45.1091 144.33 43.7559 141.982 43.1008C140.959 42.8301 140.44 42.8016 132.014 42.7162L129.943 42.6962L123.14 42.6307H114.573L112.027 42.5926C114.333 42.6314 116.553 43.2968 118.444 45.0066C122.718 48.8715 120.455 52.218 119.112 53.0996H141.449Z" fill="#FFB300"/>
     <path d="M95.4253 52.1461C95.7278 53.0007 96.4517 53.1378 96.7758 53.0996H119.112C120.455 52.218 122.718 48.8715 118.444 45.0066C116.553 43.2968 114.333 42.6314 112.027 42.5926L111.98 42.5919C109.775 42.5629 107.495 43.104 105.353 43.85C101.864 45.0651 97.9694 43.4501 97.0526 39.8713C94.5311 39.8312 92.6718 42.2149 93.3321 44.6488C94.2593 48.0665 95.227 51.5858 95.4253 52.1461Z" fill="#FFB300"/>
@@ -37,7 +36,7 @@ export const DUMMY_FUNCTION_DATA = [
     id: 2,
     title: `Core Exercise`,
     description: [`6 moves`, `Take around 10 min`, `Might sweat a bit`],
-    available: false,
+    available: true,
     type: `standalone`,
     screen: ``,
     image: `<svg width="147" height="77" viewBox="0 0 147 77" fill="none" xmlns="http://www.w3.org/2000/svg">
