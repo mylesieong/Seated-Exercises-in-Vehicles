@@ -20,13 +20,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ffb300',
+    backgroundColor: ThemeColor.primaryDarker,
   },
   text: {
     fontFamily: 'NotoSansExtraBold',
     fontSize: 20,
     lineHeight: 24,
-    color: ThemeColor.titleTextColor,
+    color: ThemeColor.textWhite,
     transform: [{ scaleX: 0.75 }],
   },
 })

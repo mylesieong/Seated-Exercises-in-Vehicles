@@ -33,11 +33,11 @@ export default function History({ db, reset }) {
   const [selected, setSelected] = useState({
     [today]: {
       selected: true,
-      dots: [{ selectedDotColor: '#FFFFFF' }],
+      dots: [{ selectedDotColor: ThemeColor.textWhite }],
       customStyles: {
         container: {
           borderRadius: 3,
-          backgroundColor: '#FFCD28',
+          backgroundColor: ThemeColor.primaryDarker,
         },
       },
     },
@@ -50,7 +50,7 @@ export default function History({ db, reset }) {
         let result = rows._array.reduce(
           (previous, current) => ({
             ...previous,
-            [toYYYYMMDD(current.timestamp)]: { marked: true, dotColor: '#2196F3' },
+            [toYYYYMMDD(current.timestamp)]: { marked: true, dotColor: ThemeColor.secondary },
           }),
           {}
         )
@@ -70,8 +70,16 @@ export default function History({ db, reset }) {
   }, [reset])
 
   return (
-    <PageTemplate topBarColor={ThemeColor.backgroundColor}>
-      <Header navigation={'Home'} height={46}>
+    <PageTemplate
+      topBarColor={ThemeColor.deepBackground}
+      bottomColor={recordsOfSelected[0] ? ThemeColor.component : ThemeColor.deepBackground}
+    >
+      <Header
+        navigation={'Home'}
+        height={46}
+        backgroundColor={ThemeColor.deepBackground}
+        buttonColor={ThemeColor.text}
+      >
         <Text style={styles.title}>Exercise Record</Text>
       </Header>
       <View style={styles.container}>
@@ -84,12 +92,12 @@ export default function History({ db, reset }) {
               setSelected({
                 [day.dateString]: {
                   selected: true,
-                  selectedColor: '#FFCD28',
-                  dots: [{ selectedDotColor: '#FFFFFF' }],
+                  selectedColor: ThemeColor.primaryDarker,
+                  dots: [{ selectedDotColor: ThemeColor.textWhite }],
                   customStyles: {
                     container: {
                       borderRadius: 3,
-                      backgroundColor: '#FFCD28',
+                      backgroundColor: ThemeColor.primaryDarker,
                     },
                   },
                 },
@@ -109,15 +117,15 @@ export default function History({ db, reset }) {
             }}
             hideExtraDays={true}
             theme={{
-              calendarBackground: ThemeColor.contrastColor,
-              dayTextColor: ThemeColor.textColor,
-              arrowColor: ThemeColor.textColor,
-              monthTextColor: ThemeColor.textGrey,
+              calendarBackground: ThemeColor.component,
+              dayTextColor: ThemeColor.text,
+              arrowColor: ThemeColor.text,
+              monthTextColor: ThemeColor.textGray,
               textMonthFontFamily: 'NotoSansBold',
               textMonthFontSize: 15,
               textDayFontFamily: 'NotoSansBold',
               textDayHeaderFontFamily: 'NotoSans',
-              selectedDayBackgroundColor: '#FFCD28',
+              selectedDayBackgroundColor: ThemeColor.primaryDarker,
             }}
           />
         </View>
@@ -126,7 +134,6 @@ export default function History({ db, reset }) {
         </Text>
         <View style={[styles.recordList, !recordsOfSelected[0] && styles.hide]}>
           <FlatList
-            contentContainerStyle={{ paddingBottom: 20 }}
             data={recordsOfSelected}
             renderItem={({ item }) => (
               <View style={styles.recordContainer}>
@@ -141,10 +148,18 @@ export default function History({ db, reset }) {
               </View>
             )}
           />
-          {__DEV__ && (
+        </View>
+        {__DEV__ && (
+          <View
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              width: '100%',
+            }}
+          >
             <Button
               title='PRESS TO ADD 100 RANDOM DATA'
-              color='#841584'
+              color={ThemeColor.secondary}
               onPress={() => {
                 Array(100)
                   .fill(1)
@@ -164,7 +179,10 @@ export default function History({ db, reset }) {
                     let result = rows._array.reduce(
                       (previous, current) => ({
                         ...previous,
-                        [toYYYYMMDD(current.timestamp)]: { marked: true, dotColor: '#2196F3' },
+                        [toYYYYMMDD(current.timestamp)]: {
+                          marked: true,
+                          dotColor: ThemeColor.secondary,
+                        },
                       }),
                       {}
                     )
@@ -173,17 +191,8 @@ export default function History({ db, reset }) {
                 })
               }}
             />
-          )}
-          {__DEV__ && (
-            <Button
-              title='console log'
-              color='#005408'
-              onPress={() => {
-                console.log(recordsOfSelected)
-              }}
-            />
-          )}
-        </View>
+          </View>
+        )}
       </View>
     </PageTemplate>
   )
@@ -194,18 +203,18 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     lineHeight: 24,
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
     marginTop: 12,
     fontFamily: 'NotoSansExtraBold',
     transform: [{ scaleX: 0.75 }],
   },
   container: {
-    marginTop: 20,
+    paddingTop: 20,
     flex: 1,
+    backgroundColor: ThemeColor.deepBackground,
   },
   calendar: {
-    borderColor: ThemeColor.backgroundColor,
-    backgroundColor: '#FFB300',
+    backgroundColor: ThemeColor.primaryDarker,
     borderRadius: 10,
     marginHorizontal: 20,
     paddingTop: 6,
@@ -213,20 +222,19 @@ const styles = StyleSheet.create({
   },
   textTitle: {
     marginTop: 30,
+    marginBottom: 5,
     lineHeight: 20,
     fontSize: 15,
     fontFamily: 'NotoSansBold',
     transform: [{ scaleX: 0.875 }],
-    color: ThemeColor.textGrey,
+    color: ThemeColor.textGray,
   },
   recordList: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: ThemeColor.component,
     flex: 1,
   },
   recordContainer: {
-    backgroundColor: ThemeColor.contrastColor,
-    borderColor: ThemeColor.backgroundColor,
-    borderBottomColor: '#F5F5F5',
+    backgroundColor: ThemeColor.component,
   },
   recordInfo: {
     paddingTop: 20,
@@ -240,7 +248,7 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     fontFamily: 'NotoSansExtraBold',
     transform: [{ scaleX: 0.75 }],
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
   timeStamp: {
     paddingRight: 15,
@@ -248,23 +256,22 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     fontFamily: 'NotoSans',
     transform: [{ scaleX: 0.875 }],
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
   exerciseDetail: {
-    marginLeft: -7.5,
     marginBottom: 11,
     fontSize: 15,
     lineHeight: 20,
     fontFamily: 'NotoSans',
     transform: [{ scaleX: 0.875 }],
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
   hide: {
     display: 'none',
   },
   bar: {
     height: 1,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: ThemeColor.spacing,
     marginHorizontal: 15,
   },
 })

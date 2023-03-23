@@ -27,18 +27,18 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 15,
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
   status: {
     lineHeight: 16,
     marginBottom: 10,
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
   unavailable: {
     fontSize: 15,
-    color: '#878d8f',
+    color: ThemeColor.textGray,
   },
   icon: {
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
 })

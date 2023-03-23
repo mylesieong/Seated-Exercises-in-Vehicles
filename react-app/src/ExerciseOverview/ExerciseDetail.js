@@ -65,6 +65,7 @@ export default function ExerciseDetail({ item, totalSteps, setSelectedStep, setS
             containerHeight={260}
             containerWidth={'100%'}
             containerRadius={10}
+            backgroundColor={ThemeColor.manBackground}
           />
         </View>
         <Text style={styles.title}>{title}</Text>
@@ -95,19 +96,18 @@ const styles = StyleSheet.create({
     width: '100%',
     zIndex: 10,
     borderRadius: 10,
-    shadowColor: '#000',
+    shadowColor: ThemeColor.shadow,
     shadowOffset: {
       width: 0,
-      height: -3,
+      height: -4,
     },
-    shadowOpacity: 0.58,
+    shadowOpacity: 0.25,
     shadowRadius: 10,
-
     elevation: 24,
   },
   innerContainer: {
     flex: 1,
-    backgroundColor: ThemeColor.contrastColor,
+    backgroundColor: ThemeColor.tab,
     padding: '5%',
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
@@ -126,11 +126,11 @@ const styles = StyleSheet.create({
     fontWeight: 700,
     fontSize: 15,
     paddingHorizontal: 15,
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
   singleButton: {
     display: 'flex',
-    backgroundColor: ThemeColor.componentColor,
+    backgroundColor: ThemeColor.spacing,
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 5,
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
   closeText: {
     fontWeight: 600,
     fontSize: 15,
-    color: ThemeColor.textColor,
+    color: ThemeColor.textBlack,
   },
   image: {
     display: 'flex',
@@ -152,13 +152,13 @@ const styles = StyleSheet.create({
     fontWeight: 700,
     fontSize: 25,
     marginBottom: 10,
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
   description: {
     fontWeight: 500,
     fontSize: 16,
     marginBottom: 10,
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
   instructionContainer: {
     flex: 1,
@@ -167,12 +167,12 @@ const styles = StyleSheet.create({
     fontWeight: 400,
     fontSize: 16,
     marginBottom: 10,
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
   startButtonContainer: {
     width: Dimensions.get('window').width,
     alignItems: 'center',
-    backgroundColor: ThemeColor.contrastColor,
+    backgroundColor: ThemeColor.tab,
     flexDirection: 'row',
     paddingBottom: 50,
     paddingTop: 10,
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
   ...Platform.select({
     ios: {
       shadow: {
-        shadowColor: '#9A9A9A',
+        shadowColor: ThemeColor.shadow,
         shadowOffset: {
           width: 0,
           height: -4,
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
     },
     android: {
       shadow: {
-        shadowColor: '#9A9A9A',
+        shadowColor: ThemeColor.shadow,
         elevation: 5,
       },
     },

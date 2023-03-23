@@ -2,6 +2,7 @@ import { StyleSheet, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import Button from './Button'
+import ThemeColor from '../Utilities/ThemeColor'
 
 export default function Buttons() {
   const navigation = useNavigation()
@@ -12,7 +13,7 @@ export default function Buttons() {
           navigation.navigate('In Seat/ Stretching')
         }}
         text='ONCE MORE'
-        color='#64B5F6'
+        color={ThemeColor.secondary}
       ></Button>
       <Button
         onPress={() => {

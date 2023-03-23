@@ -12,8 +12,8 @@ export default function Home() {
   const [showMenu, setShowMenu] = useState(false)
 
   return (
-    <PageTemplate topBarColor={showMenu ? null : '#FFB300'}>
-      <NavBar setShowMenu={setShowMenu} navbarColor='#FFB300' />
+    <PageTemplate bottomColor={ThemeColor.deepBackground} removeIphoneXFooter={true}>
+      <NavBar setShowMenu={setShowMenu} />
       {showMenu && <SideMenu setShowMenu={setShowMenu} />}
       <View style={styles.greeting}>
         <Greeting />
@@ -35,17 +35,16 @@ export default function Home() {
 const styles = StyleSheet.create({
   flatListContainer: {
     flex: 1,
-    paddingHorizontal: 20,
   },
   greeting: {
     height: 100,
-    backgroundColor: '#FFB300',
+    backgroundColor: ThemeColor.primaryDarker,
   },
   title: {
     fontSize: 22,
     fontWeight: 'bold',
     paddingHorizontal: 25,
     paddingTop: 20,
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
   },
 })

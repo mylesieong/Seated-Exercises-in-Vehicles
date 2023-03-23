@@ -38,12 +38,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: ThemeColor.componentColor,
+    backgroundColor: ThemeColor.manBackground,
   },
   title: {
     marginRight: 20,
     fontSize: 25,
-    color: ThemeColor.textColor,
+    color: ThemeColor.textWhite,
     fontWeight: 500,
   },
 })

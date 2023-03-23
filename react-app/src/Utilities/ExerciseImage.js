@@ -30,7 +30,7 @@ export default function ExerciseImage({
           width: containerWidth,
           height: containerHeight,
           borderRadius: containerRadius ? containerRadius : 0,
-          backgroundColor: backgroundColor ? backgroundColor : ThemeColor.componentColor,
+          backgroundColor: backgroundColor ? backgroundColor : ThemeColor.spacing,
         },
       ]}
     >

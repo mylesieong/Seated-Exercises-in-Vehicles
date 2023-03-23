@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 8,
-    backgroundColor: '#ffb300',
+    backgroundColor: ThemeColor.primaryDarker,
     borderRadius: 10,
   },
   textContainer: {
@@ -30,6 +30,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     fontWeight: 800,
-    color: ThemeColor.contrastColor,
+    color: ThemeColor.textWhite,
   },
 })

@@ -14,13 +14,13 @@ export default function NavBar({ setShowMenu, navbarColor }) {
       style={[
         styles.container,
         {
-          backgroundColor: navbarColor ? navbarColor : ThemeColor.backgroundColor,
+          backgroundColor: navbarColor ? navbarColor : ThemeColor.primaryDarker,
           justifyContent: route.name === 'Home' ? 'space-between' : 'flex-start',
         },
       ]}
     >
       <Pressable onPress={() => setShowMenu(true)}>
-        <Bars fill={route.name !== 'Home' ? ThemeColor.textColor : 'white'} />
+        <Bars color={ThemeColor.textWhite} />
       </Pressable>
       {route.name === 'Home' && (
         <Pressable onPress={() => navigation.navigate('History')}>
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   text: {
-    color: ThemeColor.textColor,
+    color: ThemeColor.text,
     fontStyle: 'normal',
     fontWeight: 600,
     fontSize: 20,
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   icon: {
-    color: ThemeColor.titleTextColor,
+    color: ThemeColor.text,
     fontSize: 20,
     paddingVertical: 12,
     paddingHorizontal: 10,
