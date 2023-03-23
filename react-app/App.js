@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Home from './src/Home'
 import Setting from './src/Setting'
 import History from './src/History'
@@ -9,10 +10,9 @@ import ExerciseSteps from './src/ExerciseSteps'
 import { Platform } from 'react-native'
 import Finish from './src/Finish'
 import * as SQLite from 'expo-sqlite'
-import { useFonts } from 'expo-font'
+import * as Font from 'expo-font'
 
-const Stack = createNativeStackNavigator()
-
+// Database setup
 function openDatabase() {
   if (Platform.OS === 'web') {
     return {
@@ -36,12 +36,6 @@ __DEV__ &&
   })
 
 export default function App() {
-  useFonts({
-    NotoSans: require('./assets/fonts/NotoSans-Regular.ttf'),
-    NotoSansBold: require('./assets/fonts/NotoSans-Bold.ttf'),
-    NotoSansExtraBold: require('./assets/fonts/NotoSans-ExtraBold.ttf'),
-  })
-
   useEffect(() => {
     db.transaction((tx) => {
       // create a table
@@ -49,18 +43,47 @@ export default function App() {
         `create table if not exists Record (_id integer primary key AUTOINCREMENT, timestamp integer not null, exercise_name text not null);`
       )
     })
+    loadFontsAsync()
   }, [])
 
   const [reset, resetTrigger] = useState(false)
+  const [fontsLoaded, setFontsLoaded] = useState(false)
 
-  return (
+  // Fonts setup
+  async function loadFontsAsync() {
+    await Font.loadAsync({
+      NotoSans: require('./assets/fonts/NotoSans-Regular.ttf'),
+      NotoSansBold: require('./assets/fonts/NotoSans-Bold.ttf'),
+      NotoSansExtraBold: require('./assets/fonts/NotoSans-ExtraBold.ttf'),
+    })
+    setFontsLoaded(true)
+  }
+
+  // Navigation setup
+  const Stack = createNativeStackNavigator()
+  const Tab = createBottomTabNavigator()
+
+  const HomeStack = () => {
+    return (
+      <Tab.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Tab.Screen name='Home' component={Home} />
+        <Tab.Screen name='Settings' component={Setting} />
+      </Tab.Navigator>
+    )
+  }
+
+  return fontsLoaded ? (
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
         }}
       >
-        <Stack.Screen name='Home' component={Home} />
+        <Stack.Screen name='Home' component={HomeStack} />
         <Stack.Screen name='Setting'>
           {() => (
             <Setting
@@ -77,5 +100,5 @@ export default function App() {
         <Stack.Screen name='Finish'>{() => <Finish db={db} />}</Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
-  )
+  ) : null
 }

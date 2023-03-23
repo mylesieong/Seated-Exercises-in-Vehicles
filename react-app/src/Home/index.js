@@ -1,29 +1,31 @@
-import { StyleSheet, View, FlatList, Text } from 'react-native'
-import React, { useState } from 'react'
+import { StyleSheet, View, FlatList, Dimensions, Pressable } from 'react-native'
+import React from 'react'
+import { useNavigation } from '@react-navigation/native'
 import { DUMMY_FUNCTION_DATA } from '../../data/DummyFunctionData'
-import NavBar from '../NavBar.js'
-import SideMenu from '../SideMenu'
 import Card from './Card'
 import Greeting from './Greeting'
 import PageTemplate from '../Utilities/PageTemplate'
 import ThemeColor from '../Utilities/ThemeColor'
+import Calendar from '../../assets/icons/calendar.svg'
 
 export default function Home() {
-  const [showMenu, setShowMenu] = useState(false)
+  const navigation = useNavigation()
 
   return (
     <PageTemplate bottomColor={ThemeColor.deepBackground} removeIphoneXFooter={true}>
-      <NavBar setShowMenu={setShowMenu} />
-      {showMenu && <SideMenu setShowMenu={setShowMenu} />}
-      <View style={styles.greeting}>
+      <View style={styles.topBox}>
+        <View style={styles.calendarIcon}>
+          <Pressable onPress={() => navigation.navigate('History')}>
+            <Calendar width={30} height={30} />
+          </Pressable>
+        </View>
         <Greeting />
       </View>
-      <Text style={styles.title}>Challenge</Text>
       <View style={styles.flatListContainer}>
         <FlatList
           data={DUMMY_FUNCTION_DATA}
           keyExtractor={(item) => item.id.toString()}
-          contentContainerStyle={{ paddingBottom: 20 }}
+          contentContainerStyle={{ paddingTop: 67, paddingBottom: 200 }}
           renderItem={({ item }) => <Card item={item} />}
           showsVerticalScrollIndicator={false}
         />
@@ -35,16 +37,18 @@ export default function Home() {
 const styles = StyleSheet.create({
   flatListContainer: {
     flex: 1,
+    position: 'absolute',
+    top: 41,
+    width: Dimensions.get('window').width,
   },
-  greeting: {
-    height: 100,
+  topBox: {
     backgroundColor: ThemeColor.primaryDarker,
+    height: 190,
   },
-  title: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    paddingHorizontal: 25,
-    paddingTop: 20,
-    color: ThemeColor.text,
+  calendarIcon: {
+    paddingTop: 13,
+    paddingRight: 18,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
 })
