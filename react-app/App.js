@@ -9,6 +9,7 @@ import ExerciseOverview from './src/ExerciseOverview'
 import ExerciseSteps from './src/ExerciseSteps'
 import { Platform } from 'react-native'
 import Finish from './src/Finish'
+import TabBar from './src/TabBar'
 import * as SQLite from 'expo-sqlite'
 import * as Font from 'expo-font'
 
@@ -69,9 +70,10 @@ export default function App() {
         screenOptions={{
           headerShown: false,
         }}
+        tabBar={(props) => <TabBar {...props} />}
       >
-        <Tab.Screen name='Home' component={Home} />
-        <Tab.Screen name='Settings' component={Setting} />
+        <Tab.Screen name='home' component={Home} />
+        <Tab.Screen name='mine' component={Setting} />
       </Tab.Navigator>
     )
   }
