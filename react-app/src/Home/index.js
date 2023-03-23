@@ -23,16 +23,7 @@ export default function Home() {
           data={DUMMY_FUNCTION_DATA}
           keyExtractor={(item) => item.id.toString()}
           contentContainerStyle={{ paddingBottom: 20 }}
-          renderItem={({ item }) => (
-            <Card
-              title={item.title}
-              description={item.description}
-              image={item.image}
-              available={item.available}
-              type={item.type}
-              screen={item.screen}
-            />
-          )}
+          renderItem={({ item }) => <Card item={item} />}
           showsVerticalScrollIndicator={false}
         />
       </View>

@@ -5,13 +5,14 @@ import TextInCard from './TextInCard'
 import { useNavigation } from '@react-navigation/native'
 import ThemeColor from '../Utilities/ThemeColor'
 
-export default function Card({ title, description, image, available, type, screen }) {
+export default function Card({ item }) {
+  const { id, title, description, image, available } = item
   const navigation = useNavigation()
   return (
     <Pressable
       onPress={
         available
-          ? () => navigation.navigate(screen)
+          ? () => navigation.navigate('ExerciseOverview', { id: id, title: title })
           : () => {
               Alert.alert('Coming soon!')
             }
