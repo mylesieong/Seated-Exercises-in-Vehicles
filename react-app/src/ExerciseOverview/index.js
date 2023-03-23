@@ -5,6 +5,7 @@ import Summary from './Summary'
 import ExerciseCard from './ExerciseCard'
 import { CORE_EXERCISE_DATA } from '../../data/CoreExerciseData'
 import { STRETCHING_EXERCISE_DATA } from '../../data/StretchingExerciseData'
+import { DUMMY_FUNCTION_DATA } from '../../data/DummyFunctionData'
 import PageTemplate from '../Utilities/PageTemplate'
 import ExerciseDetail from './ExerciseDetail'
 import ThemeColor from '../Utilities/ThemeColor'
@@ -15,6 +16,7 @@ export default function ExerciseOverview({ route }) {
   const [selectedStep, setSelectedStep] = useState(1)
   const exercises = { 1: STRETCHING_EXERCISE_DATA, 2: CORE_EXERCISE_DATA }
   const exercise = exercises[id]
+  const summary = DUMMY_FUNCTION_DATA[0].summary
   const duration = Math.ceil(
     exercise.reduce((accumulation, currentMove) => accumulation + currentMove.duration, 0) / 60
   )
@@ -35,7 +37,13 @@ export default function ExerciseOverview({ route }) {
         >
           <Text style={styles.title}>{title}</Text>
         </Header>
-        <Summary moves={exercise.length} time={duration} format={`Sitting`} title={title}></Summary>
+        <Summary
+          moves={exercise.length}
+          time={duration}
+          format={`Sitting`}
+          title={title}
+          summary={summary}
+        ></Summary>
       </Pressable>
       <View style={styles.moves}>
         <FlatList

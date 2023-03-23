@@ -3,14 +3,11 @@ import React from 'react'
 import ThemeColor from '../Utilities/ThemeColor'
 import StartExerciseButton from './StartExerciseButton'
 
-export default function Summary({ title, moves, time, format }) {
+export default function Summary({ title, moves, time, format, summary }) {
   return (
     <View style={[styles.container, styles.shadow]}>
       <Text style={[styles.textColor, styles.title]}>{title}</Text>
-      <Text style={[styles.description, styles.textColor]}>
-        Stretching will help reduce neck pain pain and back pain, improve the blood circulation as
-        long as lower the risk of DVT(Deep Vain Thrombosis).
-      </Text>
+      <Text style={[styles.description, styles.textColor]}>{summary}</Text>
       <View style={styles.bottomPart}>
         {[
           [`Moves`, moves],
@@ -67,7 +64,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 20,
     alignItems: 'center',
-    marginHorizontal: 15,
+    marginHorizontal: 10,
     marginVertical: 10,
     transform: [{ scaleX: 0.875 }],
   },
