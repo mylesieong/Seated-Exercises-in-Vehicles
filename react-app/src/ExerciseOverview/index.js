@@ -16,7 +16,7 @@ export default function ExerciseOverview({ route }) {
   const [selectedStep, setSelectedStep] = useState(1)
   const exercises = { 1: STRETCHING_EXERCISE_DATA, 2: CORE_EXERCISE_DATA }
   const exercise = exercises[id]
-  const summary = DUMMY_FUNCTION_DATA[0].summary
+  const summary = DUMMY_FUNCTION_DATA[id - 1].summary
   const duration = Math.ceil(
     exercise.reduce((accumulation, currentMove) => accumulation + currentMove.duration, 0) / 60
   )
