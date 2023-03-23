@@ -17,9 +17,7 @@ export default function Header({ setShowDetail }) {
       },
       {
         text: 'YES',
-        onPress: () => {
-          navigation.navigate('In Seat/ Stretching')
-        },
+        onPress: () => navigation.goBack(),
       },
     ])
   }

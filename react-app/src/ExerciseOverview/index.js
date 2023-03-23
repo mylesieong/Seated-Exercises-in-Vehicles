@@ -41,6 +41,7 @@ export default function ExerciseOverview({ route }) {
           moves={exercise.length}
           time={duration}
           format={`Sitting`}
+          id={id}
           title={title}
           summary={summary}
         ></Summary>

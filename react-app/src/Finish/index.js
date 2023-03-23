@@ -15,16 +15,17 @@ import ThemeColor from '../Utilities/ThemeColor'
 export default function Finish({ db }) {
   const navigation = useNavigation()
   const route = useRoute()
+  const { id, title } = route.params
 
   useEffect(() => {
     db.transaction((tx) => {
       tx.executeSql('insert into Record (exercise_name, timestamp) values (?, ?)', [
-        route.params.exerciseName,
+        title,
         new Date().getTime(),
       ])
     })
     const backAction = () => {
-      navigation.navigate('In Seat/ Stretching')
+      navigation.goBack()
       return true
     }
     const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction)
@@ -43,7 +44,7 @@ export default function Finish({ db }) {
         style={styles.animation}
         resizeMode='cover'
       />
-      <Buttons />
+      <Buttons id={id} title={title} />
     </PageTemplate>
   )
 }

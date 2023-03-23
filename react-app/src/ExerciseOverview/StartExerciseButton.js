@@ -3,10 +3,13 @@ import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import ThemeColor from '../Utilities/ThemeColor'
 
-export default function StartExerciseButton() {
+export default function StartExerciseButton({ id, title }) {
   const navigation = useNavigation()
   return (
-    <Pressable onPress={() => navigation.navigate('Exercise Steps')} style={styles.button}>
+    <Pressable
+      onPress={() => navigation.navigate('Exercise Steps', { id: id, title: title })}
+      style={styles.button}
+    >
       <Text style={styles.text}>Start</Text>
     </Pressable>
   )
