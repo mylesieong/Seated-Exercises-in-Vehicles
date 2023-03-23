@@ -4,6 +4,7 @@ import { DUMMY_FUNCTION_DATA } from '../../data/DummyFunctionData'
 import NavBar from '../NavBar.js'
 import SideMenu from '../SideMenu'
 import Card from './Card'
+import Greeting from './Greeting'
 import PageTemplate from '../Utilities/PageTemplate'
 import ThemeColor from '../Utilities/ThemeColor'
 
@@ -15,7 +16,7 @@ export default function Home() {
       <NavBar setShowMenu={setShowMenu} navbarColor='#FFB300' />
       {showMenu && <SideMenu setShowMenu={setShowMenu} />}
       <View style={styles.greeting}>
-        <Text style={styles.greetingText}>Good Morning</Text>
+        <Greeting />
       </View>
       <Text style={styles.title}>Challenge</Text>
       <View style={styles.flatListContainer}>
@@ -55,11 +56,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
     paddingTop: 20,
     color: ThemeColor.textColor,
-  },
-  greetingText: {
-    color: ThemeColor.titleTextColor,
-    fontSize: 25,
-    fontWeight: 'bold',
-    paddingHorizontal: 20,
   },
 })
