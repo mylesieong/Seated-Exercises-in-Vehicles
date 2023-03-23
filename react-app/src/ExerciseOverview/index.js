@@ -43,6 +43,7 @@ export default function ExerciseOverview({ route }) {
             marginTop: Platform.OS === 'android' ? 136 : 160,
             borderRadius: 10,
             overflow: 'hidden',
+            paddingBottom: Platform.OS === 'android' ? 135 : 159,
           }}
           data={exercise}
           keyExtractor={(item) => item.id.toString()}
