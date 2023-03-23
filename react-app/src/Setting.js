@@ -26,7 +26,7 @@ export default function Setting({ db, resetTrigger }) {
   return (
     <PageTemplate topBarColor={ThemeColor.deepBackground} bottomColor={ThemeColor.deepBackground}>
       <Header
-        navigation={'Home'}
+        navigation={'home'}
         height={46}
         backgroundColor={ThemeColor.deepBackground}
         buttonColor={ThemeColor.text}
