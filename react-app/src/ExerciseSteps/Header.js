@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import GoBackButton from '../Utilities/GoBackButton'
 import ThemeColor from '../Utilities/ThemeColor'
 
-export default function Header({ setShowDetail }) {
+export default function Header({ title, setShowDetail }) {
   const navigation = useNavigation()
   const goBackOnPress = () => {
     Alert.alert('Exit', 'Leave current exercise?', [
@@ -24,7 +24,7 @@ export default function Header({ setShowDetail }) {
   return (
     <Pressable style={styles.header} onPress={() => setShowDetail(false)}>
       <GoBackButton onPress={goBackOnPress} />
-      <Text style={styles.title}>In Seat/ Stretching</Text>
+      <Text style={styles.title}>{title}</Text>
     </Pressable>
   )
 }

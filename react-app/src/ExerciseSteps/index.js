@@ -18,10 +18,11 @@ export default function ExerciseSteps({ route }) {
   const exercise = exercises[id]
   const totalStep = exercise.length
   const stepDetail = exercise[step - 1]
+  console.log(id, title)
 
   return (
     <PageTemplate topBarColor={ThemeColor.manBackground} bottomColor={ThemeColor.background}>
-      <Header step={step} totalStep={totalStep} setShowDetail={setShowDetail} />
+      <Header step={step} totalStep={totalStep} setShowDetail={setShowDetail} title={title} />
       <Pressable style={{ maxHeight: '40%' }} onPress={() => setShowDetail(false)}>
         <ExerciseImage
           image={stepDetail.image}

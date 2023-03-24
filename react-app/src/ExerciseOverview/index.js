@@ -65,6 +65,8 @@ export default function ExerciseOverview({ route }) {
       </View>
       {showDetail && (
         <ExerciseDetail
+          id={id}
+          title={title}
           item={exercise[selectedStep - 1]}
           totalSteps={exercise.length}
           setSelectedStep={setSelectedStep}

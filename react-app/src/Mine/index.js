@@ -9,12 +9,7 @@ import Setting from '../Setting'
 export default function Mine({ db, setReset, reset }) {
   return (
     <PageTemplate topBarColor={ThemeColor.deepBackground} bottomColor={ThemeColor.deepBackground}>
-      <Header
-        navigation={'Home'}
-        height={46}
-        backgroundColor={ThemeColor.deepBackground}
-        buttonColor={ThemeColor.text}
-      >
+      <Header navigation={'Home'} height={46} backgroundColor={ThemeColor.deepBackground}>
         <Text style={styles.title}>Mine</Text>
       </Header>
       <TodaySummary db={db} reset={reset} />

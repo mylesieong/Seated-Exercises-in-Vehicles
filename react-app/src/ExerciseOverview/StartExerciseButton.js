@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import ThemeColor from '../Utilities/ThemeColor'
 
 export default function StartExerciseButton({ id, title }) {
+  console.log(id, title)
   const navigation = useNavigation()
   return (
     <Pressable
