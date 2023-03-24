@@ -5,6 +5,7 @@ import Header from '../Utilities/Header'
 import ThemeColor from '../Utilities/ThemeColor'
 import TodaySummary from './TodaySummary'
 import Setting from '../Setting'
+import WeekCalendar from './WeekCalendar'
 
 export default function Mine({ db, setReset, reset }) {
   return (
@@ -13,6 +14,7 @@ export default function Mine({ db, setReset, reset }) {
         <Text style={styles.title}>Mine</Text>
       </Header>
       <TodaySummary db={db} reset={reset} />
+      <WeekCalendar db={db} reset={reset} />
       <Setting db={db} setReset={setReset} reset={reset} />
     </PageTemplate>
   )
