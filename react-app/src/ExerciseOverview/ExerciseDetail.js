@@ -19,7 +19,14 @@ import ArrowGreyLeft from '../../assets/icons/arrow-grey-left.svg'
 import { useRoute } from '@react-navigation/native'
 import StartExerciseButton from './StartExerciseButton'
 
-export default function ExerciseDetail({ item, totalSteps, setSelectedStep, setShowDetail }) {
+export default function ExerciseDetail({
+  id,
+  title: exerciseTitle,
+  item,
+  totalSteps,
+  setSelectedStep,
+  setShowDetail,
+}) {
   const { title, description, instruction, image } = item
   const path = useRoute().name
   const hasStarted = path === 'Exercise Steps'
@@ -73,13 +80,14 @@ export default function ExerciseDetail({ item, totalSteps, setSelectedStep, setS
         <View style={styles.instructionContainer}>
           <FlatList
             data={instruction}
+            contentContainerStyle={{ paddingBottom: 30 }}
             renderItem={({ item }) => <Text style={styles.instruction}>{item}</Text>}
           />
         </View>
       </View>
       {!hasStarted && (
         <View style={[styles.startButtonContainer, styles.shadow]}>
-          <StartExerciseButton />
+          <StartExerciseButton id={id} title={exerciseTitle} />
         </View>
       )}
     </SafeAreaView>

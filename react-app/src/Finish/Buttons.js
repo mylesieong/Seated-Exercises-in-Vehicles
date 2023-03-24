@@ -4,13 +4,13 @@ import React from 'react'
 import Button from './Button'
 import ThemeColor from '../Utilities/ThemeColor'
 
-export default function Buttons() {
+export default function Buttons({ id, title }) {
   const navigation = useNavigation()
   return (
     <View style={styles.container}>
       <Button
         onPress={() => {
-          navigation.navigate('In Seat/ Stretching')
+          navigation.navigate('ExerciseOverview', { id: id, title: title })
         }}
         text='ONCE MORE'
         color={ThemeColor.secondary}

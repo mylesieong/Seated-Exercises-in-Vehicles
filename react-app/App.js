@@ -3,8 +3,8 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Home from './src/Home'
-import Setting from './src/Setting'
 import History from './src/History'
+import Mine from './src/Mine'
 import ExerciseOverview from './src/ExerciseOverview'
 import ExerciseSteps from './src/ExerciseSteps'
 import { Platform } from 'react-native'
@@ -46,7 +46,7 @@ export default function App() {
     })
   }, [])
 
-  const [reset, resetTrigger] = useState(false)
+  const [reset, setReset] = useState(false)
 
   // Fonts setup
   useFonts({
@@ -69,14 +69,7 @@ export default function App() {
       >
         <Tab.Screen name='home' component={Home} />
         <Tab.Screen name='mine'>
-          {() => (
-            <Setting
-              db={db}
-              resetTrigger={() => {
-                resetTrigger(!reset)
-              }}
-            />
-          )}
+          {() => <Mine db={db} reset={reset} setReset={setReset} />}
         </Tab.Screen>
       </Tab.Navigator>
     )
@@ -92,8 +85,8 @@ export default function App() {
         <Stack.Screen name='Home' component={HomeStack} />
         <Stack.Screen name='History'>{() => <History db={db} reset={reset} />}</Stack.Screen>
         <Stack.Screen name='ExerciseOverview' component={ExerciseOverview} />
-        <Stack.Screen name='Exercise Steps'>{() => <ExerciseSteps />}</Stack.Screen>
-        <Stack.Screen name='Finish'>{() => <Finish db={db} />}</Stack.Screen>
+        <Stack.Screen name='Exercise Steps' component={ExerciseSteps} />
+        <Stack.Screen name='Finish'>{() => <Finish db={db} setReset={setReset} />}</Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   )

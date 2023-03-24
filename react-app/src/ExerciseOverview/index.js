@@ -41,6 +41,7 @@ export default function ExerciseOverview({ route }) {
           moves={exercise.length}
           time={duration}
           format={`Sitting`}
+          id={id}
           title={title}
           summary={summary}
         ></Summary>
@@ -64,6 +65,8 @@ export default function ExerciseOverview({ route }) {
       </View>
       {showDetail && (
         <ExerciseDetail
+          id={id}
+          title={title}
           item={exercise[selectedStep - 1]}
           totalSteps={exercise.length}
           setSelectedStep={setSelectedStep}

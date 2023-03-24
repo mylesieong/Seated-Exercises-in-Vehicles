@@ -6,15 +6,13 @@ import ArrowRightIcon from '../../assets/icons/arrow-tiny-right.svg'
 import TickIcon from '../../assets/icons/tick.svg'
 import ThemeColor from '../Utilities/ThemeColor'
 
-export default function ExerciseNav({ step, setStep, totalStep }) {
+export default function ExerciseNav({ id, title, step, setStep, totalStep }) {
   const navigation = useNavigation()
   const prevStep = () => {
     step !== 1 && setStep(step - 1)
   }
   const nextStep = () => {
-    step == totalStep
-      ? navigation.navigate('Finish', { exerciseName: 'Standard stretching' })
-      : setStep(step + 1)
+    step == totalStep ? navigation.navigate('Finish', { id: id, title: title }) : setStep(step + 1)
   }
 
   return (

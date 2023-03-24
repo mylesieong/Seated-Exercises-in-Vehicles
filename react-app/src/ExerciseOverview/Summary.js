@@ -3,7 +3,7 @@ import React from 'react'
 import ThemeColor from '../Utilities/ThemeColor'
 import StartExerciseButton from './StartExerciseButton'
 
-export default function Summary({ title, moves, time, format, summary }) {
+export default function Summary({ id, title, moves, time, format, summary }) {
   return (
     <View style={[styles.container, styles.shadow]}>
       <Text style={[styles.textColor, styles.title]}>{title}</Text>
@@ -31,7 +31,7 @@ export default function Summary({ title, moves, time, format, summary }) {
           )
         })}
       </View>
-      <StartExerciseButton />
+      <StartExerciseButton id={id} title={title} />
     </View>
   )
 }
@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     top: 66,
     marginHorizontal: 15,
     paddingBottom: 10,
+    minWidth: '90%',
   },
   title: {
     fontFamily: 'NotoSansExtraBold',
