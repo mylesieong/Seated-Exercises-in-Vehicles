@@ -12,7 +12,7 @@ import PageTemplate from '../Utilities/PageTemplate'
 import { STRETCHING_EXERCISE_DATA } from '../../data/StretchingExerciseData'
 import ThemeColor from '../Utilities/ThemeColor'
 
-export default function Finish({ db }) {
+export default function Finish({ db, setReset }) {
   const navigation = useNavigation()
   const route = useRoute()
   const { id, title } = route.params
@@ -24,6 +24,7 @@ export default function Finish({ db }) {
         new Date().getTime(),
       ])
     })
+    setReset((prev) => !prev)
     const backAction = () => {
       navigation.goBack()
       return true

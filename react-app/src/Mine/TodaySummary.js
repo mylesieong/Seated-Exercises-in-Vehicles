@@ -10,6 +10,8 @@ import TrainingIcon from '../../assets/icons/training.svg'
 export default function TodaySummary({ db, reset }) {
   const [records, setRecords] = useState([])
   const exercises = { Stretching: {}, 'Core Exercise': {} }
+  const [moveTotal, setMoveTotal] = useState(0)
+  const [durationTotal, setDurationTotal] = useState(0)
   exercises['Stretching'].duration = Math.ceil(
     STRETCHING_EXERCISE_DATA.reduce(
       (accumulation, currentMove) => accumulation + currentMove.duration,
@@ -38,20 +40,27 @@ export default function TodaySummary({ db, reset }) {
     })
   }, [reset])
 
-  const moveTotal =
-    records.length > 0
-      ? records.reduce((total, record) => {
-          return total + exercises[record.exercise_name] ? exercises[record.exercise_name] : 0
-        }, 0)
-      : 0
-  const durationTotal =
-    records.length > 0
-      ? records.reduce((total, record) => {
-          return total + exercises[record.exercise_name]
-            ? exercises[record.exercise_name]?.duration
-            : 0
-        }, 0)
-      : 0
+  useEffect(() => {
+    const moveTotal =
+      records.length > 0
+        ? records.reduce((total, record) => {
+            return (
+              total + (exercises[record.exercise_name] ? exercises[record.exercise_name].moves : 0)
+            )
+          }, 0)
+        : 0
+    const durationTotal =
+      records.length > 0
+        ? records.reduce((total, record) => {
+            return (
+              total +
+              (exercises[record.exercise_name] ? exercises[record.exercise_name]?.duration : 0)
+            )
+          }, 0)
+        : 0
+    setMoveTotal(moveTotal)
+    setDurationTotal(durationTotal)
+  }, [records])
 
   return (
     <PageTemplate topBarColor={ThemeColor.deepBackground} bottomColor={ThemeColor.deepBackground}>
