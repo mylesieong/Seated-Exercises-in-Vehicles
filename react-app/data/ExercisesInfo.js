@@ -2,7 +2,7 @@ export const EXERCISES_INFO = [
   {
     id: 1,
     title: `Stretching`,
-    description: [`7 moves`, `Head, shoulder, arm, torso and leg`, `Takes around 10 min`],
+    description: [`8 moves`, `Head, shoulder, arm, torso and leg`, `Takes around 10 min`],
     available: true,
     type: `standalone`,
     screen: `In Seat/ Stretching`,
@@ -34,7 +34,7 @@ export const EXERCISES_INFO = [
   {
     id: 2,
     title: `Core Exercise`,
-    description: [`6 moves`, `Take around 10 min`, `Might sweat a bit`],
+    description: [`9 moves`, `Take around 10 min`, `Might sweat a bit`],
     available: true,
     type: `standalone`,
     screen: ``,

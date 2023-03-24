@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Pressable, Alert } from 'react-native'
+import { StyleSheet, View, Text, Pressable } from 'react-native'
 import React from 'react'
 import HomeMan from '../../assets/exercises_image/home-man'
 import TextInCard from './TextInCard'
@@ -6,18 +6,10 @@ import { useNavigation } from '@react-navigation/native'
 import ThemeColor from '../Utilities/ThemeColor'
 
 export default function Card({ item }) {
-  const { id, title, description, image, available } = item
+  const { id, title, description, image } = item
   const navigation = useNavigation()
   return (
-    <Pressable
-      onPress={
-        available
-          ? () => navigation.navigate('ExerciseOverview', { id: id, title: title })
-          : () => {
-              Alert.alert('Coming soon!')
-            }
-      }
-    >
+    <Pressable onPress={() => navigation.navigate('ExerciseOverview', { id: id, title: title })}>
       <View style={styles.cardContainer}>
         <View style={styles.innerContainer}>
           {/* upper part */}
@@ -36,7 +28,7 @@ export default function Card({ item }) {
           </View>
           {/* lower part */}
           <View style={styles.cardLowerPart}>
-            <TextInCard description={description} available={available} />
+            <TextInCard description={description} />
           </View>
         </View>
       </View>
