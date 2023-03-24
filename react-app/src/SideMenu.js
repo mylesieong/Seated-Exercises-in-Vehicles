@@ -32,6 +32,9 @@ export default function SideMenu({ setShowMenu }) {
             <FontAwesome name='cog' style={styles.icon} />
             <Text style={styles.text}>Setting</Text>
           </Pressable>
+          <Pressable style={styles.page} onPress={() => handlePress('Mine')}>
+            <Text style={styles.text}>Mine</Text>
+          </Pressable>
         </View>
       </View>
     </TouchableWithoutFeedback>
