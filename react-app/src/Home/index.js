@@ -1,7 +1,7 @@
 import { StyleSheet, View, FlatList, Dimensions, Pressable } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { DUMMY_FUNCTION_DATA } from '../../data/DummyFunctionData'
+import { EXERCISES_INFO } from '../../data/ExercisesInfo'
 import Card from './Card'
 import Greeting from './Greeting'
 import PageTemplate from '../Utilities/PageTemplate'
@@ -23,7 +23,7 @@ export default function Home() {
       </View>
       <View style={styles.flatListContainer}>
         <FlatList
-          data={DUMMY_FUNCTION_DATA}
+          data={EXERCISES_INFO}
           keyExtractor={(item) => item.id.toString()}
           contentContainerStyle={{ paddingTop: 67, paddingBottom: 200 }}
           renderItem={({ item }) => <Card item={item} />}
