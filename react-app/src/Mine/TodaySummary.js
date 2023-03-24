@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import PageTemplate from '../Utilities/PageTemplate'
 import ThemeColor from '../Utilities/ThemeColor'
 import { CORE_EXERCISE_DATA } from '../../data/CoreExerciseData'
 import { STRETCHING_EXERCISE_DATA } from '../../data/StretchingExerciseData'
@@ -63,7 +62,7 @@ export default function TodaySummary({ db, reset }) {
   }, [records])
 
   return (
-    <PageTemplate topBarColor={ThemeColor.deepBackground} bottomColor={ThemeColor.deepBackground}>
+    <View style={{ flex: 1 }}>
       <Text style={styles.title}>Today</Text>
       <View style={styles.squares}>
         <View style={styles.square}>
@@ -77,7 +76,7 @@ export default function TodaySummary({ db, reset }) {
           <Text style={styles.text}>Moves</Text>
         </View>
       </View>
-    </PageTemplate>
+    </View>
   )
 }
 

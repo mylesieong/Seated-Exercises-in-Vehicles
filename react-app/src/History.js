@@ -170,7 +170,7 @@ export default function History({ db, reset }) {
                         Math.random() * (1680307200000 - 1677628800000) + 1677628800000
                       )
                       tx.executeSql('insert into Record (exercise_name, timestamp) values (?, ?)', [
-                        'just for testing',
+                        ['Stretching', 'Core Exercise'][Math.round(Math.random(1))],
                         randomTimeInMarch,
                       ])
                     })
