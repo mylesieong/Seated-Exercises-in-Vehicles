@@ -80,6 +80,7 @@ export default function ExerciseDetail({
         <View style={styles.instructionContainer}>
           <FlatList
             data={instruction}
+            contentContainerStyle={{ paddingBottom: 30 }}
             renderItem={({ item }) => <Text style={styles.instruction}>{item}</Text>}
           />
         </View>
