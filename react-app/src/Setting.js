@@ -3,6 +3,8 @@ import React from 'react'
 import ThemeColor from './Utilities/ThemeColor.js'
 import ResetIcon from '../assets/icons/reset-icon.svg'
 import ResetRightIcon from '../assets/icons/reset-arrow-right.svg'
+import History from './History.js'
+import WeekCalendar from './WeekCalendar.js'
 
 export default function Setting({ db, reset, setReset }) {
   const removeRecordsAlert = () => {
