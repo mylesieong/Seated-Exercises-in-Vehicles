@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Home from './src/Home'
 import Setting from './src/Setting'
 import History from './src/History'
@@ -8,11 +9,11 @@ import ExerciseOverview from './src/ExerciseOverview'
 import ExerciseSteps from './src/ExerciseSteps'
 import { Platform } from 'react-native'
 import Finish from './src/Finish'
+import TabBar from './src/TabBar'
 import * as SQLite from 'expo-sqlite'
 import { useFonts } from 'expo-font'
 
-const Stack = createNativeStackNavigator()
-
+// Database setup
 function openDatabase() {
   if (Platform.OS === 'web') {
     return {
@@ -36,12 +37,6 @@ __DEV__ &&
   })
 
 export default function App() {
-  useFonts({
-    NotoSans: require('./assets/fonts/NotoSans-Regular.ttf'),
-    NotoSansBold: require('./assets/fonts/NotoSans-Bold.ttf'),
-    NotoSansExtraBold: require('./assets/fonts/NotoSans-ExtraBold.ttf'),
-  })
-
   useEffect(() => {
     db.transaction((tx) => {
       // create a table
@@ -53,15 +48,27 @@ export default function App() {
 
   const [reset, resetTrigger] = useState(false)
 
-  return (
-    <NavigationContainer>
-      <Stack.Navigator
+  // Fonts setup
+  useFonts({
+    NotoSans: require('./assets/fonts/NotoSans-Regular.ttf'),
+    NotoSansBold: require('./assets/fonts/NotoSans-Bold.ttf'),
+    NotoSansExtraBold: require('./assets/fonts/NotoSans-ExtraBold.ttf'),
+  })
+
+  // Navigation setup
+  const Stack = createNativeStackNavigator()
+  const Tab = createBottomTabNavigator()
+
+  const HomeStack = () => {
+    return (
+      <Tab.Navigator
         screenOptions={{
           headerShown: false,
         }}
+        tabBar={(props) => <TabBar {...props} />}
       >
-        <Stack.Screen name='Home' component={Home} />
-        <Stack.Screen name='Setting'>
+        <Tab.Screen name='home' component={Home} />
+        <Tab.Screen name='mine'>
           {() => (
             <Setting
               db={db}
@@ -70,7 +77,19 @@ export default function App() {
               }}
             />
           )}
-        </Stack.Screen>
+        </Tab.Screen>
+      </Tab.Navigator>
+    )
+  }
+
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen name='Home' component={HomeStack} />
         <Stack.Screen name='History'>{() => <History db={db} reset={reset} />}</Stack.Screen>
         <Stack.Screen name='ExerciseOverview' component={ExerciseOverview} />
         <Stack.Screen name='Exercise Steps'>{() => <ExerciseSteps />}</Stack.Screen>

@@ -71,13 +71,14 @@ export default function History({ db, reset }) {
 
   return (
     <PageTemplate
-      topBarColor={ThemeColor.deepBackground}
-      bottomColor={recordsOfSelected[0] ? ThemeColor.component : ThemeColor.deepBackground}
+      topBarColor={ThemeColor.background}
+      bottomColor={ThemeColor.background}
+      removeIphoneXFooter={true}
     >
       <Header
         navigation={'Home'}
         height={46}
-        backgroundColor={ThemeColor.deepBackground}
+        backgroundColor={ThemeColor.background}
         buttonColor={ThemeColor.text}
       >
         <Text style={styles.title}>Exercise Record</Text>
@@ -117,7 +118,7 @@ export default function History({ db, reset }) {
             }}
             hideExtraDays={true}
             theme={{
-              calendarBackground: ThemeColor.component,
+              calendarBackground: ThemeColor.tab,
               dayTextColor: ThemeColor.text,
               arrowColor: ThemeColor.text,
               monthTextColor: ThemeColor.textGray,
@@ -211,7 +212,7 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 20,
     flex: 1,
-    backgroundColor: ThemeColor.deepBackground,
+    backgroundColor: ThemeColor.background,
   },
   calendar: {
     backgroundColor: ThemeColor.primaryDarker,
@@ -230,11 +231,11 @@ const styles = StyleSheet.create({
     color: ThemeColor.textGray,
   },
   recordList: {
-    backgroundColor: ThemeColor.component,
+    backgroundColor: ThemeColor.tab,
     flex: 1,
   },
   recordContainer: {
-    backgroundColor: ThemeColor.component,
+    backgroundColor: ThemeColor.tab,
   },
   recordInfo: {
     paddingTop: 20,
