@@ -1,12 +1,10 @@
 import { StyleSheet, View, Text, Pressable, Alert } from 'react-native'
 import React from 'react'
 import ThemeColor from './Utilities/ThemeColor.js'
-import PageTemplate from './Utilities/PageTemplate.js'
-import Header from './Utilities/Header.js'
 import ResetIcon from '../assets/icons/reset-icon.svg'
 import ResetRightIcon from '../assets/icons/reset-arrow-right.svg'
 
-export default function Setting({ db, resetTrigger }) {
+export default function Setting({ db, reset, setReset }) {
   const removeRecordsAlert = () => {
     Alert.alert('Remove all records', 'Once you delete all records, it cannot be undone', [
       {
@@ -19,33 +17,23 @@ export default function Setting({ db, resetTrigger }) {
 
   const clearRecords = () => {
     db.transaction((tx) => {
-      tx.executeSql(`DELETE FROM Record;`), [], resetTrigger()
+      tx.executeSql(`DELETE FROM Record;`), [], setReset(!reset)
     })
   }
 
   return (
-    <PageTemplate topBarColor={ThemeColor.deepBackground} bottomColor={ThemeColor.deepBackground}>
-      <Header
-        navigation={'home'}
-        height={46}
-        backgroundColor={ThemeColor.deepBackground}
-        buttonColor={ThemeColor.text}
-      >
-        <Text style={styles.headerTitle}>Exercise Record</Text>
-      </Header>
-      <View style={styles.container}>
-        <Text style={styles.title}>Setting</Text>
-        <View style={styles.buttonLayout}>
-          <Pressable style={styles.resetButton} onPress={removeRecordsAlert}>
-            <ResetIcon height={20} width={20} color={ThemeColor.text} />
-            <Text style={styles.resetText}>Reset</Text>
-            <View style={styles.resetRightIcon}>
-              <ResetRightIcon height={20} width={20} color={ThemeColor.text} />
-            </View>
-          </Pressable>
-        </View>
+    <View style={styles.container}>
+      <Text style={styles.title}>Setting</Text>
+      <View style={styles.buttonLayout}>
+        <Pressable style={styles.resetButton} onPress={removeRecordsAlert}>
+          <ResetIcon height={20} width={20} color={ThemeColor.text} />
+          <Text style={styles.resetText}>Reset</Text>
+          <View style={styles.resetRightIcon}>
+            <ResetRightIcon height={20} width={20} color={ThemeColor.text} />
+          </View>
+        </Pressable>
       </View>
-    </PageTemplate>
+    </View>
   )
 }
 

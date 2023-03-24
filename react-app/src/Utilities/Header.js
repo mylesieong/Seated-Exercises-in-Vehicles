@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import GoBackButton from './GoBackButton'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 import ThemeColor from './ThemeColor'
 
 export default function Header({
@@ -12,6 +12,9 @@ export default function Header({
   height,
 }) {
   const navigation = useNavigation()
+  const route = useRoute()
+  const path = route.name
+
   return (
     <View
       style={[
@@ -22,10 +25,12 @@ export default function Header({
         height && { height: height },
       ]}
     >
-      <GoBackButton
-        onPress={() => navigation.navigate(navigationPage)}
-        color={buttonColor ? buttonColor : ThemeColor.textColor}
-      />
+      {path !== 'mine' && (
+        <GoBackButton
+          onPress={() => navigation.navigate(navigationPage)}
+          color={buttonColor ? buttonColor : ThemeColor.textColor}
+        />
+      )}
       {children}
     </View>
   )

@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     top: 66,
     marginHorizontal: 15,
     paddingBottom: 10,
+    minWidth: '90%',
   },
   title: {
     fontFamily: 'NotoSansExtraBold',

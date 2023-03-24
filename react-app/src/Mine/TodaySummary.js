@@ -37,7 +37,7 @@ export default function TodaySummary({ db, reset }) {
       )
     })
   }, [reset])
-  console.log(records)
+
   const moveTotal =
     records.length > 0
       ? records.reduce((total, record) => {
@@ -78,8 +78,8 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     color: ThemeColor.text,
     marginTop: 12,
+    marginLeft: 20,
     fontFamily: 'NotoSansExtraBold',
-    transform: [{ scaleX: 0.75 }],
   },
   squares: {
     flex: 1,
