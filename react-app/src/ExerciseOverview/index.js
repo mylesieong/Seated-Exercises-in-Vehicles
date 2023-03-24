@@ -5,7 +5,7 @@ import Summary from './Summary'
 import ExerciseCard from './ExerciseCard'
 import { CORE_EXERCISE_DATA } from '../../data/CoreExerciseData'
 import { STRETCHING_EXERCISE_DATA } from '../../data/StretchingExerciseData'
-import { DUMMY_FUNCTION_DATA } from '../../data/DummyFunctionData'
+import { EXERCISES_INFO } from '../../data/ExercisesInfo'
 import PageTemplate from '../Utilities/PageTemplate'
 import ExerciseDetail from './ExerciseDetail'
 import ThemeColor from '../Utilities/ThemeColor'
@@ -16,7 +16,7 @@ export default function ExerciseOverview({ route }) {
   const [selectedStep, setSelectedStep] = useState(1)
   const exercises = { 1: STRETCHING_EXERCISE_DATA, 2: CORE_EXERCISE_DATA }
   const exercise = exercises[id]
-  const summary = DUMMY_FUNCTION_DATA[id - 1].summary
+  const summary = EXERCISES_INFO[id - 1].summary
   const duration = Math.ceil(
     exercise.reduce((accumulation, currentMove) => accumulation + currentMove.duration, 0) / 60
   )
