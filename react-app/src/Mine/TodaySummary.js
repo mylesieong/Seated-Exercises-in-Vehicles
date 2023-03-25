@@ -1,43 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import ThemeColor from '../Utilities/ThemeColor'
-import { CORE_EXERCISE_DATA } from '../../data/CoreExerciseData'
-import { STRETCHING_EXERCISE_DATA } from '../../data/StretchingExerciseData'
 import TimeIcon from '../../assets/icons/time.svg'
 import TrainingIcon from '../../assets/icons/training.svg'
 
-export default function TodaySummary({ db, reset }) {
-  const [records, setRecords] = useState([])
-  const exercises = { Stretching: {}, 'Core Exercise': {} }
+export default function TodaySummary({ records, exercises }) {
   const [moveTotal, setMoveTotal] = useState(0)
   const [durationTotal, setDurationTotal] = useState(0)
-  exercises['Stretching'].duration = Math.ceil(
-    STRETCHING_EXERCISE_DATA.reduce(
-      (accumulation, currentMove) => accumulation + currentMove.duration,
-      0
-    ) / 60
-  )
-  exercises['Stretching'].moves = STRETCHING_EXERCISE_DATA.length
-  exercises['Core Exercise'].duration = Math.ceil(
-    CORE_EXERCISE_DATA.reduce(
-      (accumulation, currentMove) => accumulation + currentMove.duration,
-      0
-    ) / 60
-  )
-  exercises['Core Exercise'].moves = CORE_EXERCISE_DATA.length
-
-  useEffect(() => {
-    const localStartOfDay = new Date().setHours(0, 0, 0, 0)
-    db.transaction((tx) => {
-      tx.executeSql(
-        'select timestamp, exercise_name from Record where timestamp between ? and ? order by timestamp',
-        [localStartOfDay, localStartOfDay + 24 * 60 * 60 * 1000 - 1],
-        (_, { rows }) => {
-          setRecords(rows._array)
-        }
-      )
-    })
-  }, [reset])
 
   useEffect(() => {
     const moveTotal =

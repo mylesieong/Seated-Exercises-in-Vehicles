@@ -4,8 +4,7 @@ import { Calendar } from 'react-native-calendars'
 import Header from './Utilities/Header.js'
 import ThemeColor from './Utilities/ThemeColor.js'
 import PageTemplate from './Utilities/PageTemplate.js'
-
-import { STRETCHING_EXERCISE_DATA } from '../data/StretchingExerciseData'
+import { useRoute } from '@react-navigation/native'
 
 const toYYYYMMDD = (timestamp) => {
   const date = new Date(timestamp)
@@ -27,11 +26,13 @@ const formatDate = (timestamp) => {
   return `${hour}:${minute}`
 }
 
-export default function History({ db, reset }) {
+export default function History({ db, reset, setReset, exercises }) {
+  const route = useRoute()
+  const selectedDay = route.params?.selectedDay
   const [records, setRecords] = useState({})
   const today = toYYYYMMDD(new Date().getTime())
   const [selected, setSelected] = useState({
-    [today]: {
+    [selectedDay || today]: {
       selected: true,
       dots: [{ selectedDotColor: ThemeColor.textWhite }],
       customStyles: {
@@ -143,7 +144,8 @@ export default function History({ db, reset }) {
                   <Text style={styles.timeStamp}>{formatDate(item.timestamp)}</Text>
                 </View>
                 <Text style={styles.exerciseDetail}>
-                  {STRETCHING_EXERCISE_DATA.length} Moves, 10 minutes
+                  {exercises[item.exercise_name].moves} Moves,{' '}
+                  {exercises[item.exercise_name].duration} minutes
                 </Text>
                 <View style={styles.bar}></View>
               </View>
@@ -175,21 +177,7 @@ export default function History({ db, reset }) {
                       ])
                     })
                   })
-                db.transaction((tx) => {
-                  tx.executeSql('select * from Record', [], (_, { rows }) => {
-                    let result = rows._array.reduce(
-                      (previous, current) => ({
-                        ...previous,
-                        [toYYYYMMDD(current.timestamp)]: {
-                          marked: true,
-                          dotColor: ThemeColor.secondary,
-                        },
-                      }),
-                      {}
-                    )
-                    setRecords(result)
-                  })
-                })
+                setReset(!reset)
               }}
             />
           </View>

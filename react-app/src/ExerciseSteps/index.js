@@ -18,7 +18,6 @@ export default function ExerciseSteps({ route }) {
   const exercise = exercises[id]
   const totalStep = exercise.length
   const stepDetail = exercise[step - 1]
-  console.log(id, title)
 
   return (
     <PageTemplate topBarColor={ThemeColor.manBackground} bottomColor={ThemeColor.background}>

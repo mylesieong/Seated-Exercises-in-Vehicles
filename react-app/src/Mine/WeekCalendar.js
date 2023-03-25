@@ -4,50 +4,70 @@ import { CalendarProvider, WeekCalendar as Week } from 'react-native-calendars'
 import { useNavigation } from '@react-navigation/native'
 import ThemeColor from '../Utilities/ThemeColor'
 
-const toYYYYMMDD = (timestamp) => {
-  return new Date(timestamp).toISOString().split('T')[0]
-}
-
-export default function WeekCalendar({ db, reset }) {
+export default function WeekCalendar({ startDate, records, exercises }) {
   const navigation = useNavigation()
-  const [records, setRecords] = useState({})
+  const [moveTotal, setMoveTotal] = useState(0)
+  const [durationTotal, setDurationTotal] = useState(0)
+  const [calendarRecords, setCalendarRecords] = useState({})
+  const toYYYYMMDD = (timestamp) => {
+    return new Date(timestamp).toISOString().split('T')[0]
+  }
 
   useEffect(() => {
-    db.transaction((tx) => {
-      tx.executeSql('select * from Record', [], (_, { rows }) => {
-        let result = rows._array.reduce(
-          (previous, current) => ({
-            ...previous,
-            [toYYYYMMDD(current.timestamp)]: {
-              marked: true,
-              dotColor: ThemeColor.secondary,
-              customStyles: {
-                container: {
-                  paddingBottom: 3,
-                },
-              },
+    const moveTotal =
+      records.length > 0
+        ? records.reduce((total, record) => {
+            return (
+              total + (exercises[record.exercise_name] ? exercises[record.exercise_name].moves : 0)
+            )
+          }, 0)
+        : 0
+    const durationTotal =
+      records.length > 0
+        ? records.reduce((total, record) => {
+            return (
+              total +
+              (exercises[record.exercise_name] ? exercises[record.exercise_name]?.duration : 0)
+            )
+          }, 0)
+        : 0
+    setMoveTotal(moveTotal)
+    setDurationTotal(durationTotal)
+
+    const newCalendarRecords = records.reduce(
+      (previous, current) => ({
+        ...previous,
+        [toYYYYMMDD(current.timestamp)]: {
+          marked: true,
+          dotColor: ThemeColor.secondary,
+          customStyles: {
+            container: {
+              paddingBottom: 3,
             },
-          }),
-          {}
-        )
-        setRecords(result)
-        console.log(result)
-      })
-    })
-  }, [reset])
+          },
+        },
+      }),
+      {}
+    )
+    setCalendarRecords(newCalendarRecords)
+  }, [records])
 
   return (
     <View style={styles.container}>
-      <Text style={styles.info}>Your exercise records since 03/08/2023</Text>
+      {startDate ? (
+        <Text style={styles.info}>You have been exercising since {startDate}</Text>
+      ) : (
+        <Text style={styles.info}>You have not started exercising yet</Text>
+      )}
       <View style={styles.cardContainer}>
         <View style={styles.insideCardContainer}>
           <View style={styles.summary}>
             <View style={styles.box}>
-              <Text style={styles.number}>8888</Text>
+              <Text style={styles.number}>{durationTotal}</Text>
               <Text style={styles.text}>Minutes</Text>
             </View>
             <View style={styles.box}>
-              <Text style={styles.number}>888</Text>
+              <Text style={styles.number}>{moveTotal}</Text>
               <Text style={styles.text}>Moves</Text>
             </View>
           </View>
@@ -56,7 +76,7 @@ export default function WeekCalendar({ db, reset }) {
             <CalendarProvider date={null}>
               <Week
                 markingType={'custom'}
-                markedDates={{ ...records }}
+                markedDates={{ ...calendarRecords }}
                 theme={{
                   calendarBackground: ThemeColor.tab,
                   dayTextColor: ThemeColor.text,
@@ -67,6 +87,9 @@ export default function WeekCalendar({ db, reset }) {
                   textDayFontFamily: 'NotoSansBold',
                   textDayHeaderFontFamily: 'NotoSans',
                   selectedDayBackgroundColor: ThemeColor.tab,
+                }}
+                onDayPress={(day) => {
+                  navigation.navigate('History', { selectedDay: day.dateString })
                 }}
               />
             </CalendarProvider>
