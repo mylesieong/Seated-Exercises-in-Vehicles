@@ -10,9 +10,9 @@ import WeekCalendar from './WeekCalendar'
 export default function Mine({ db, setReset, reset, exercises }) {
   const [todayRecords, setTodayRecords] = useState([])
   const [allRecords, setAllRecords] = useState([])
-  const [startDate, setStartDate] = useState('')
+  const [startDate, setStartDate] = useState(null)
   const toYYYYMMDD = (timestamp) => {
-    new Date(timestamp).toISOString().split('T')[0]
+    return new Date(timestamp).toISOString().split('T')[0]
   }
 
   useEffect(() => {
@@ -28,8 +28,11 @@ export default function Mine({ db, setReset, reset, exercises }) {
       tx.executeSql('select * from Record', [], (_, { rows }) => {
         setAllRecords(rows._array)
       })
-      tx.executeSql('select Min(timestamp) from limit 1', [], (_, { rows }) => {
-        setStartDate(toYYYYMMDD(rows._array[0]))
+      tx.executeSql('select Min(timestamp) from Record limit 1', [], (_, { rows }) => {
+        if (rows._array[0]['Min(timestamp)'] === null) {
+          return
+        }
+        setStartDate(toYYYYMMDD(rows._array[0]['Min(timestamp)']))
       })
     })
   }, [reset])

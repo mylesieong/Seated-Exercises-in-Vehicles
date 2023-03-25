@@ -54,7 +54,11 @@ export default function WeekCalendar({ startDate, records, exercises }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.info}>Your exercise records since {startDate}</Text>
+      {startDate ? (
+        <Text style={styles.info}>You have been exercising since {startDate}</Text>
+      ) : (
+        <Text style={styles.info}>You have not started exercising yet</Text>
+      )}
       <View style={styles.cardContainer}>
         <View style={styles.insideCardContainer}>
           <View style={styles.summary}>
@@ -83,6 +87,9 @@ export default function WeekCalendar({ startDate, records, exercises }) {
                   textDayFontFamily: 'NotoSansBold',
                   textDayHeaderFontFamily: 'NotoSans',
                   selectedDayBackgroundColor: ThemeColor.tab,
+                }}
+                onDayPress={(day) => {
+                  navigation.navigate('History', { selectedDay: day.dateString })
                 }}
               />
             </CalendarProvider>

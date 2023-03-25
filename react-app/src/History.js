@@ -4,6 +4,7 @@ import { Calendar } from 'react-native-calendars'
 import Header from './Utilities/Header.js'
 import ThemeColor from './Utilities/ThemeColor.js'
 import PageTemplate from './Utilities/PageTemplate.js'
+import { useRoute } from '@react-navigation/native'
 
 const toYYYYMMDD = (timestamp) => {
   const date = new Date(timestamp)
@@ -26,10 +27,12 @@ const formatDate = (timestamp) => {
 }
 
 export default function History({ db, reset, setReset, exercises }) {
+  const route = useRoute()
+  const selectedDay = route.params?.selectedDay
   const [records, setRecords] = useState({})
   const today = toYYYYMMDD(new Date().getTime())
   const [selected, setSelected] = useState({
-    [today]: {
+    [selectedDay || today]: {
       selected: true,
       dots: [{ selectedDotColor: ThemeColor.textWhite }],
       customStyles: {
