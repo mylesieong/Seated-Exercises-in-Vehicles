@@ -51,7 +51,16 @@ export default function History({ db, reset, setReset, exercises }) {
         let result = rows._array.reduce(
           (previous, current) => ({
             ...previous,
-            [toYYYYMMDD(current.timestamp)]: { marked: true, dotColor: ThemeColor.secondary },
+            [toYYYYMMDD(current.timestamp)]: {
+              marked: true,
+              dotColor: ThemeColor.secondary,
+              selectedColor: ThemeColor.primaryDarker,
+              customStyles: {
+                container: {
+                  paddingBottom: 3,
+                },
+              },
+            },
           }),
           {}
         )

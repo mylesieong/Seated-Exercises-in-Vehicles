@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text, View, Platform } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { CalendarProvider, WeekCalendar as Week } from 'react-native-calendars'
 import { useNavigation } from '@react-navigation/native'
@@ -73,7 +73,7 @@ export default function WeekCalendar({ startDate, records, exercises }) {
           </View>
           <View style={styles.bar}></View>
           <View style={styles.calendar}>
-            <CalendarProvider date={null}>
+            <CalendarProvider date={new Date().toISOString().split('T')[0]}>
               <Week
                 markingType={'custom'}
                 markedDates={{ ...calendarRecords }}
@@ -87,10 +87,30 @@ export default function WeekCalendar({ startDate, records, exercises }) {
                   textDayFontFamily: 'NotoSansBold',
                   textDayHeaderFontFamily: 'NotoSans',
                   selectedDayBackgroundColor: ThemeColor.tab,
+                  selectedDayTextColor: ThemeColor.text,
+                  stylesheet: {
+                    expandable: {
+                      main: {
+                        containerShadow: {
+                          ...Platform.select({
+                            ios: {
+                              shadowOpacity: 0,
+                              zIndex: 0,
+                            },
+                            android: {
+                              elevation: 3,
+                            },
+                          }),
+                        },
+                        containerWrapper: {
+                          paddingBottom: 0,
+                        },
+                      },
+                    },
+                  },
                 }}
                 onDayPress={(day) => {
                   navigation.navigate('History', { selectedDay: day })
-                  console.log(day)
                 }}
               />
             </CalendarProvider>
@@ -144,7 +164,6 @@ const styles = StyleSheet.create({
   },
   calendar: {
     height: 80,
-    marginBottom: 10,
   },
   button: {
     justifyContent: 'center',
