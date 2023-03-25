@@ -5,25 +5,12 @@ import { useNavigation } from '@react-navigation/native'
 import ThemeColor from '../Utilities/ThemeColor'
 
 const toYYYYMMDD = (timestamp) => {
-  new Date(timestamp).toISOString().split('T')[0]
+  return new Date(timestamp).toISOString().split('T')[0]
 }
 
 export default function WeekCalendar({ db, reset }) {
   const navigation = useNavigation()
   const [records, setRecords] = useState({})
-  const today = toYYYYMMDD(new Date().getTime())
-  const [selected, setSelected] = useState({
-    [today]: {
-      selected: true,
-      dots: [{ selectedDotColor: ThemeColor.textWhite }],
-      customStyles: {
-        container: {
-          borderRadius: 3,
-          backgroundColor: ThemeColor.primaryDarker,
-        },
-      },
-    },
-  })
 
   useEffect(() => {
     db.transaction((tx) => {
@@ -31,11 +18,20 @@ export default function WeekCalendar({ db, reset }) {
         let result = rows._array.reduce(
           (previous, current) => ({
             ...previous,
-            [toYYYYMMDD(current.timestamp)]: { marked: true, dotColor: ThemeColor.secondary },
+            [toYYYYMMDD(current.timestamp)]: {
+              marked: true,
+              dotColor: ThemeColor.secondary,
+              customStyles: {
+                container: {
+                  paddingBottom: 3,
+                },
+              },
+            },
           }),
           {}
         )
         setRecords(result)
+        console.log(result)
       })
     })
   }, [reset])
@@ -60,7 +56,7 @@ export default function WeekCalendar({ db, reset }) {
             <CalendarProvider date={null}>
               <Week
                 markingType={'custom'}
-                markedDates={{ ...records, ...selected }}
+                markedDates={{ ...records }}
                 theme={{
                   calendarBackground: ThemeColor.tab,
                   dayTextColor: ThemeColor.text,
@@ -70,7 +66,7 @@ export default function WeekCalendar({ db, reset }) {
                   textMonthFontSize: 15,
                   textDayFontFamily: 'NotoSansBold',
                   textDayHeaderFontFamily: 'NotoSans',
-                  selectedDayBackgroundColor: ThemeColor.primaryDarker,
+                  selectedDayBackgroundColor: ThemeColor.tab,
                 }}
               />
             </CalendarProvider>
@@ -124,6 +120,7 @@ const styles = StyleSheet.create({
   },
   calendar: {
     height: 80,
+    marginBottom: 10,
   },
   button: {
     justifyContent: 'center',
