@@ -28,7 +28,7 @@ const formatDate = (timestamp) => {
 
 export default function History({ db, reset, setReset, exercises }) {
   const route = useRoute()
-  const selectedDay = route.params?.selectedDay
+  const selectedDay = route.params?.selectedDay.dateString
   const [records, setRecords] = useState({})
   const today = toYYYYMMDD(new Date().getTime())
   const [selected, setSelected] = useState({
@@ -58,7 +58,9 @@ export default function History({ db, reset, setReset, exercises }) {
         setRecords(result)
       })
     })
-    const localStartOfDay = new Date().setHours(0, 0, 0, 0)
+    const localStartOfDay = route.params
+      ? route.params.selectedDay.timestamp + new Date().getTimezoneOffset() * 60 * 1000
+      : new Date().setHours(0, 0, 0, 0)
     db.transaction((tx) => {
       tx.executeSql(
         'select timestamp, exercise_name from Record where timestamp between ? and ? order by timestamp',

@@ -89,7 +89,8 @@ export default function WeekCalendar({ startDate, records, exercises }) {
                   selectedDayBackgroundColor: ThemeColor.tab,
                 }}
                 onDayPress={(day) => {
-                  navigation.navigate('History', { selectedDay: day.dateString })
+                  navigation.navigate('History', { selectedDay: day })
+                  console.log(day)
                 }}
               />
             </CalendarProvider>
