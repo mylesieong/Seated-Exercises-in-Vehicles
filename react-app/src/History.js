@@ -5,8 +5,6 @@ import Header from './Utilities/Header.js'
 import ThemeColor from './Utilities/ThemeColor.js'
 import PageTemplate from './Utilities/PageTemplate.js'
 
-import { STRETCHING_EXERCISE_DATA } from '../data/StretchingExerciseData'
-
 const toYYYYMMDD = (timestamp) => {
   const date = new Date(timestamp)
   const year = date.getFullYear()
@@ -27,7 +25,7 @@ const formatDate = (timestamp) => {
   return `${hour}:${minute}`
 }
 
-export default function History({ db, reset, setReset }) {
+export default function History({ db, reset, setReset, exercises }) {
   const [records, setRecords] = useState({})
   const today = toYYYYMMDD(new Date().getTime())
   const [selected, setSelected] = useState({
@@ -143,7 +141,8 @@ export default function History({ db, reset, setReset }) {
                   <Text style={styles.timeStamp}>{formatDate(item.timestamp)}</Text>
                 </View>
                 <Text style={styles.exerciseDetail}>
-                  {STRETCHING_EXERCISE_DATA.length} Moves, 10 minutes
+                  {exercises[item.exercise_name].moves} Moves,{' '}
+                  {exercises[item.exercise_name].duration} minutes
                 </Text>
                 <View style={styles.bar}></View>
               </View>

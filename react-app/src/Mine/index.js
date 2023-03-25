@@ -4,34 +4,16 @@ import PageTemplate from '../Utilities/PageTemplate'
 import Header from '../Utilities/Header'
 import ThemeColor from '../Utilities/ThemeColor'
 import TodaySummary from './TodaySummary'
-import { CORE_EXERCISE_DATA } from '../../data/CoreExerciseData'
-import { STRETCHING_EXERCISE_DATA } from '../../data/StretchingExerciseData'
 import Setting from '../Setting'
 import WeekCalendar from './WeekCalendar'
 
-export default function Mine({ db, setReset, reset }) {
-  const exercises = { Stretching: {}, 'Core Exercise': {} }
+export default function Mine({ db, setReset, reset, exercises }) {
   const [todayRecords, setTodayRecords] = useState([])
   const [allRecords, setAllRecords] = useState([])
   const [startDate, setStartDate] = useState('')
   const toYYYYMMDD = (timestamp) => {
     new Date(timestamp).toISOString().split('T')[0]
   }
-
-  exercises['Stretching'].duration = Math.ceil(
-    STRETCHING_EXERCISE_DATA.reduce(
-      (accumulation, currentMove) => accumulation + currentMove.duration,
-      0
-    ) / 60
-  )
-  exercises['Stretching'].moves = STRETCHING_EXERCISE_DATA.length
-  exercises['Core Exercise'].duration = Math.ceil(
-    CORE_EXERCISE_DATA.reduce(
-      (accumulation, currentMove) => accumulation + currentMove.duration,
-      0
-    ) / 60
-  )
-  exercises['Core Exercise'].moves = CORE_EXERCISE_DATA.length
 
   useEffect(() => {
     const localStartOfDay = new Date().setHours(0, 0, 0, 0)

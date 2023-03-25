@@ -12,6 +12,8 @@ import Finish from './src/Finish'
 import TabBar from './src/TabBar'
 import * as SQLite from 'expo-sqlite'
 import { useFonts } from 'expo-font'
+import { CORE_EXERCISE_DATA } from './data/CoreExerciseData'
+import { STRETCHING_EXERCISE_DATA } from './data/StretchingExerciseData'
 
 // Database setup
 function openDatabase() {
@@ -55,6 +57,23 @@ export default function App() {
     NotoSansExtraBold: require('./assets/fonts/NotoSans-ExtraBold.ttf'),
   })
 
+  // exercise data
+  const exercises = { Stretching: {}, 'Core Exercise': {} }
+  exercises['Stretching'].duration = Math.ceil(
+    STRETCHING_EXERCISE_DATA.reduce(
+      (accumulation, currentMove) => accumulation + currentMove.duration,
+      0
+    ) / 60
+  )
+  exercises['Stretching'].moves = STRETCHING_EXERCISE_DATA.length
+  exercises['Core Exercise'].duration = Math.ceil(
+    CORE_EXERCISE_DATA.reduce(
+      (accumulation, currentMove) => accumulation + currentMove.duration,
+      0
+    ) / 60
+  )
+  exercises['Core Exercise'].moves = CORE_EXERCISE_DATA.length
+
   // Navigation setup
   const Stack = createNativeStackNavigator()
   const Tab = createBottomTabNavigator()
@@ -69,7 +88,7 @@ export default function App() {
       >
         <Tab.Screen name='home' component={Home} />
         <Tab.Screen name='mine'>
-          {() => <Mine db={db} reset={reset} setReset={setReset} />}
+          {() => <Mine db={db} reset={reset} setReset={setReset} exercises={exercises} />}
         </Tab.Screen>
       </Tab.Navigator>
     )
@@ -84,7 +103,7 @@ export default function App() {
       >
         <Stack.Screen name='Home' component={HomeStack} />
         <Stack.Screen name='History'>
-          {() => <History db={db} reset={reset} setReset={setReset} />}
+          {() => <History db={db} reset={reset} setReset={setReset} exercises={exercises} />}
         </Stack.Screen>
         <Stack.Screen name='ExerciseOverview' component={ExerciseOverview} />
         <Stack.Screen name='Exercise Steps' component={ExerciseSteps} />
