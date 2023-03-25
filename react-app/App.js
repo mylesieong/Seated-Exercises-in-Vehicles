@@ -83,7 +83,9 @@ export default function App() {
         }}
       >
         <Stack.Screen name='Home' component={HomeStack} />
-        <Stack.Screen name='History'>{() => <History db={db} reset={reset} />}</Stack.Screen>
+        <Stack.Screen name='History'>
+          {() => <History db={db} reset={reset} setReset={setReset} />}
+        </Stack.Screen>
         <Stack.Screen name='ExerciseOverview' component={ExerciseOverview} />
         <Stack.Screen name='Exercise Steps' component={ExerciseSteps} />
         <Stack.Screen name='Finish'>{() => <Finish db={db} setReset={setReset} />}</Stack.Screen>

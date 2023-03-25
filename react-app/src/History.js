@@ -27,7 +27,7 @@ const formatDate = (timestamp) => {
   return `${hour}:${minute}`
 }
 
-export default function History({ db, reset }) {
+export default function History({ db, reset, setReset }) {
   const [records, setRecords] = useState({})
   const today = toYYYYMMDD(new Date().getTime())
   const [selected, setSelected] = useState({
@@ -175,21 +175,7 @@ export default function History({ db, reset }) {
                       ])
                     })
                   })
-                db.transaction((tx) => {
-                  tx.executeSql('select * from Record', [], (_, { rows }) => {
-                    let result = rows._array.reduce(
-                      (previous, current) => ({
-                        ...previous,
-                        [toYYYYMMDD(current.timestamp)]: {
-                          marked: true,
-                          dotColor: ThemeColor.secondary,
-                        },
-                      }),
-                      {}
-                    )
-                    setRecords(result)
-                  })
-                })
+                setReset(!reset)
               }}
             />
           </View>
