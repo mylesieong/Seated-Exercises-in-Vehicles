@@ -40,8 +40,9 @@ const styles = StyleSheet.create({
   },
   title: {
     marginRight: 20,
-    fontSize: 25,
+    fontSize: 28,
     color: ThemeColor.textWhite,
-    fontWeight: 500,
+    fontFamily: 'NotoSansMidExtraBold',
+    lineHeight: 32,
   },
 })

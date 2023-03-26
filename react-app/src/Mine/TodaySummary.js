@@ -80,15 +80,15 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   number: {
-    fontSize: 30,
+    fontSize: 28,
     lineHeight: 32,
     color: ThemeColor.textWhite,
-    fontFamily: 'NotoSansExtraBold',
+    fontFamily: 'NotoSansMidExtraBold',
   },
   text: {
     fontSize: 15,
-    lineHeight: 17,
+    lineHeight: 20,
     color: ThemeColor.textWhite,
-    fontFamily: 'NotoSans',
+    fontFamily: 'NotoSansMidBold',
   },
 })

@@ -35,7 +35,7 @@ export default function ExerciseOverview({ route }) {
           buttonColor={ThemeColor.textWhite}
           height={190}
         >
-          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.title}>{title} on the Seat</Text>
         </Header>
         <Summary
           moves={exercise.length}
@@ -83,8 +83,7 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     color: ThemeColor.textWhite,
     marginTop: 13,
-    fontFamily: 'NotoSansBold',
-    transform: [{ scaleX: 0.875 }],
+    fontFamily: 'NotoSansMidBold',
   },
   moves: {
     flex: 1,

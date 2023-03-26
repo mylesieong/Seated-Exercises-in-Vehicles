@@ -19,7 +19,8 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
   headerText: {
-    fontWeight: 600,
+    fontFamily: 'NotoSansMidExtraBold',
+    lineHeight: 32,
     marginRight: 20,
     fontSize: 28,
     color: ThemeColor.text,

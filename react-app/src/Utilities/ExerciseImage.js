@@ -12,10 +12,10 @@ export default function ExerciseImage({
   containerRadius,
   backgroundColor,
 }) {
-  const [step, setStep] = useState(0)
+  const [frame, setFrame] = useState(0)
   useEffect(() => {
     let timer = setInterval(() => {
-      setStep((step) => step + 1)
+      setFrame((frame) => frame + 1)
     }, 1000)
     return () => {
       clearInterval(timer)
@@ -38,7 +38,7 @@ export default function ExerciseImage({
         <SvgXml
           width={imageWidth ? imageWidth : '100%'}
           height={ImageHeight ? ImageHeight : '100%'}
-          xml={image[step % image.length]}
+          xml={image[frame % image.length]}
         />
       )}
     </View>

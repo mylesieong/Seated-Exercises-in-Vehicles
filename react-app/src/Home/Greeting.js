@@ -19,10 +19,9 @@ export default function Greeting() {
 const styles = StyleSheet.create({
   greetingText: {
     color: ThemeColor.textWhite,
-    fontFamily: 'NotoSansExtraBold',
+    fontFamily: 'NotoSansMidExtraBold',
     fontSize: 28,
     lineHeight: 32,
-    paddingHorizontal: 10,
-    transform: [{ scaleX: 0.9 }],
+    paddingHorizontal: 20,
   },
 })

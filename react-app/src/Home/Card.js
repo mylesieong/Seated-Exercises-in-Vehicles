@@ -1,12 +1,12 @@
 import { StyleSheet, View, Text, Pressable } from 'react-native'
 import React from 'react'
-import HomeMan from '../../assets/exercises_image/home-man'
+import ImageInCard from './ImageInCard'
 import TextInCard from './TextInCard'
 import { useNavigation } from '@react-navigation/native'
 import ThemeColor from '../Utilities/ThemeColor'
 
 export default function Card({ item }) {
-  const { id, title, description, image } = item
+  const { id, title, description, image, summary } = item
   const navigation = useNavigation()
   return (
     <Pressable onPress={() => navigation.navigate('ExerciseOverview', { id: id, title: title })}>
@@ -15,14 +15,14 @@ export default function Card({ item }) {
           {/* upper part */}
           <View style={styles.cardUpperPart}>
             <View style={styles.imageContainer}>
-              <HomeMan height={80} width={80} image={image} />
+              <ImageInCard height={80} width={80} image={image} />
             </View>
             <View style={styles.sentence}>
               <Text style={styles.exerciseTitle} numberOfLines={1}>
                 {title}
               </Text>
               <Text style={styles.exerciseDetail} numberOfLines={3}>
-                {description}
+                {summary}
               </Text>
             </View>
           </View>
@@ -52,44 +52,37 @@ const styles = StyleSheet.create({
     backgroundColor: ThemeColor.component,
     borderRadius: 10,
     overflow: 'hidden',
-    padding: 10,
+    paddingHorizontal: 15,
+    paddingVertical: 20,
   },
   cardUpperPart: {
     flexDirection: 'row',
+    alignContent: 'space-around',
   },
   imageContainer: {
-    height: 90,
-    padding: 10,
-    width: 90,
-    alignItems: 'center',
-    backgroundColor: ThemeColor.spacing,
+    height: 80,
+    width: 80,
   },
   sentence: {
     alignContent: 'space-around',
+    paddingHorizontal: 8,
+    flex: 1,
   },
   exerciseTitle: {
     color: ThemeColor.text,
-    fontWeight: 800,
-    paddingLeft: 5,
+    fontFamily: 'NotoSansExtraBold',
     fontSize: 20,
+    lineHeight: 24,
     textAlign: 'left',
   },
   exerciseDetail: {
-    textAlign: 'left',
-    fontStyle: 'italic',
+    paddingTop: 5,
+    fontFamily: 'NotoSansBasicBold',
     color: ThemeColor.textGray,
-    padding: 5,
-    fontSize: 13,
-    marginRight: 50,
-    paddingRight: 30,
+    fontSize: 10,
+    lineHeight: 14,
   },
   cardLowerPart: {
-    flex: 1,
-    flexDirection: 'row',
-    fontWeight: 400,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: ThemeColor.component,
-    padding: 5,
+    paddingTop: 10,
   },
 })

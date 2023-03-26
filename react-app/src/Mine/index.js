@@ -58,6 +58,5 @@ const styles = StyleSheet.create({
     color: ThemeColor.text,
     marginTop: 12,
     fontFamily: 'NotoSansExtraBold',
-    transform: [{ scaleX: 0.75 }],
   },
 })

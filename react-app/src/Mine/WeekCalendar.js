@@ -82,10 +82,10 @@ export default function WeekCalendar({ startDate, records, exercises }) {
                   dayTextColor: ThemeColor.text,
                   arrowColor: ThemeColor.text,
                   monthTextColor: ThemeColor.textGray,
-                  textMonthFontFamily: 'NotoSansBold',
+                  textMonthFontFamily: 'NotoSansBasicBold',
                   textMonthFontSize: 15,
-                  textDayFontFamily: 'NotoSansBold',
-                  textDayHeaderFontFamily: 'NotoSans',
+                  textDayFontFamily: 'NotoSansBasicBold',
+                  textDayHeaderFontFamily: 'NotoSansBasic',
                   selectedDayBackgroundColor: ThemeColor.tab,
                   selectedDayTextColor: ThemeColor.text,
                   stylesheet: {
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
   },
   info: {
     color: ThemeColor.textGray,
-    fontFamily: 'NotoSansBold',
+    fontFamily: 'NotoSansBasicBold',
     fontSize: 15,
     lineHeight: 20,
     marginBottom: 10,
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   buttonLetter: {
-    fontFamily: 'NotoSans',
+    fontFamily: 'NotoSansBasic',
     fontSize: 15,
     lineHeight: 20,
     textAlign: 'center',
@@ -182,12 +182,12 @@ const styles = StyleSheet.create({
     fontSize: 30,
     lineHeight: 32,
     color: ThemeColor.text,
-    fontFamily: 'NotoSansExtraBold',
+    fontFamily: 'NotoSansBasicExtraBold',
   },
   text: {
     fontSize: 15,
     lineHeight: 17,
     color: ThemeColor.text,
-    fontFamily: 'NotoSans',
+    fontFamily: 'NotoSansBasic',
   },
 })

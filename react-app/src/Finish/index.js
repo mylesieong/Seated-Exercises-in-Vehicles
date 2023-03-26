@@ -8,7 +8,7 @@ import Info from './Info'
 import Lottie from 'lottie-react-native'
 import { useEffect } from 'react'
 import PageTemplate from '../Utilities/PageTemplate'
-
+import { CORE_EXERCISE_DATA } from '../../data/CoreExerciseData'
 import { STRETCHING_EXERCISE_DATA } from '../../data/StretchingExerciseData'
 import ThemeColor from '../Utilities/ThemeColor'
 
@@ -16,6 +16,9 @@ export default function Finish({ db, setReset }) {
   const navigation = useNavigation()
   const route = useRoute()
   const { id, title } = route.params
+
+  const exercises = { 1: STRETCHING_EXERCISE_DATA, 2: CORE_EXERCISE_DATA }
+  const exercise = exercises[id]
 
   useEffect(() => {
     db.transaction((tx) => {
@@ -36,7 +39,12 @@ export default function Finish({ db, setReset }) {
   return (
     <PageTemplate topBarColor={ThemeColor.background} bottomColor={ThemeColor.background}>
       <Header />
-      <Info moves={STRETCHING_EXERCISE_DATA.length} time={`10`} format={`Sitting`}></Info>
+      <Info
+        moves={exercise.length}
+        // These coming two lines are kinda hard code
+        time={id == 1 ? 12 : 14}
+        format={`Sitting`}
+      ></Info>
       <Image />
       <Lottie
         source={require('../../assets/animation/62717-confetti.json')}

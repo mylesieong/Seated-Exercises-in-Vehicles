@@ -7,7 +7,7 @@ import Info from './Info'
 import ExerciseNav from './ExerciseNav'
 import PageTemplate from '../Utilities/PageTemplate'
 import ExerciseDetail from '../ExerciseOverview/ExerciseDetail'
-import { Pressable } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
 import ThemeColor from '../Utilities/ThemeColor'
 
 export default function ExerciseSteps({ route }) {
@@ -22,21 +22,19 @@ export default function ExerciseSteps({ route }) {
   return (
     <PageTemplate topBarColor={ThemeColor.manBackground} bottomColor={ThemeColor.background}>
       <Header step={step} totalStep={totalStep} setShowDetail={setShowDetail} title={title} />
-      <Pressable style={{ maxHeight: '40%' }} onPress={() => setShowDetail(false)}>
-        <ExerciseImage
-          image={stepDetail.image}
-          imageWidth={'85%'}
-          ImageHeight={'85%'}
-          containerHeight={400}
-          backgroundColor={ThemeColor.manBackground}
-        />
-      </Pressable>
-      <Info
+      <ExerciseImage
+        image={stepDetail.image}
+        imageWidth={'85%'}
+        ImageHeight={'85%'}
+        containerHeight={380}
+        backgroundColor={ThemeColor.manBackground}
         step={step}
         totalStep={totalStep}
-        stepDetail={stepDetail}
-        setShowDetail={setShowDetail}
       />
+      <Text style={styles.step}>
+        {step} / {totalStep}
+      </Text>
+      <Info stepDetail={stepDetail} setShowDetail={setShowDetail} />
       <ExerciseNav
         id={id}
         title={title}
@@ -48,3 +46,14 @@ export default function ExerciseSteps({ route }) {
     </PageTemplate>
   )
 }
+
+const styles = StyleSheet.create({
+  step: {
+    fontSize: 15,
+    lineHeight: 20,
+    color: ThemeColor.text,
+    padding: 15,
+    backgroundColor: ThemeColor.manBackground,
+    fontFamily: 'NotoSansMidBold',
+  },
+})

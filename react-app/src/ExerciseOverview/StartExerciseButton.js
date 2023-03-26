@@ -30,6 +30,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     lineHeight: 24,
     color: ThemeColor.textWhite,
-    transform: [{ scaleX: 0.75 }],
   },
 })

@@ -6,7 +6,7 @@ export default function TextInCard({ description }) {
   return (
     <View style={styles.textContainer}>
       {description?.map((value, index) => (
-        <Text key={index} style={styles.text} numberOfLines={3}>
+        <Text key={index} style={styles.text}>
           {' '}
           • {value}
         </Text>
@@ -21,6 +21,9 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 15,
+    lineHeight: 20,
+    fontFamily: 'NotoSansMid',
     color: ThemeColor.text,
+    paddingLeft: 5,
   },
 })
