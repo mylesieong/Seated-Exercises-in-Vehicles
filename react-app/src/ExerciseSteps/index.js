@@ -7,7 +7,7 @@ import Info from './Info'
 import ExerciseNav from './ExerciseNav'
 import PageTemplate from '../Utilities/PageTemplate'
 import ExerciseDetail from '../ExerciseOverview/ExerciseDetail'
-import { StyleSheet, Text } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import ThemeColor from '../Utilities/ThemeColor'
 
 export default function ExerciseSteps({ route }) {
@@ -21,20 +21,25 @@ export default function ExerciseSteps({ route }) {
 
   return (
     <PageTemplate topBarColor={ThemeColor.manBackground} bottomColor={ThemeColor.background}>
-      <Header step={step} totalStep={totalStep} setShowDetail={setShowDetail} title={title} />
-      <ExerciseImage
-        image={stepDetail.image}
-        imageWidth={'85%'}
-        ImageHeight={'85%'}
-        containerHeight={380}
-        backgroundColor={ThemeColor.manBackground}
-        step={step}
-        totalStep={totalStep}
-      />
-      <Text style={styles.step}>
-        {step} / {totalStep}
-      </Text>
-      <Info stepDetail={stepDetail} setShowDetail={setShowDetail} />
+      <View style={styles.container}>
+        <View style={styles.wrapper}>
+          <Header step={step} totalStep={totalStep} setShowDetail={setShowDetail} title={title} />
+          <View style={{ flex: 1 }}>
+            <ExerciseImage
+              image={stepDetail.image}
+              imageWidth={'85%'}
+              ImageHeight={'85%'}
+              backgroundColor={ThemeColor.manBackground}
+              step={step}
+              totalStep={totalStep}
+            />
+          </View>
+          <Text style={styles.step}>
+            {step} / {totalStep}
+          </Text>
+        </View>
+        <Info stepDetail={stepDetail} setShowDetail={setShowDetail} />
+      </View>
       <ExerciseNav
         id={id}
         title={title}
@@ -48,6 +53,13 @@ export default function ExerciseSteps({ route }) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'space-between',
+    flex: 1,
+  },
+  wrapper: {
+    flex: 1,
+  },
   step: {
     fontSize: 15,
     lineHeight: 20,

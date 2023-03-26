@@ -28,10 +28,10 @@ export default function ExerciseImage({
         styles.container,
         {
           width: containerWidth,
-          height: containerHeight,
           borderRadius: containerRadius ? containerRadius : 0,
           backgroundColor: backgroundColor ? backgroundColor : ThemeColor.spacing,
         },
+        containerHeight ? { height: containerHeight } : { flex: 1 },
       ]}
     >
       {image[0] !== `` && (

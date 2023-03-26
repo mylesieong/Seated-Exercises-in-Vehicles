@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    bottom: 60,
+    bottom: 30,
   },
   unusable: {
     opacity: 0.2,

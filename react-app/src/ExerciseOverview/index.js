@@ -49,7 +49,7 @@ export default function ExerciseOverview({ route }) {
       <View style={styles.moves}>
         <FlatList
           contentContainerStyle={{
-            marginTop: Platform.OS === 'android' ? 136 : 160,
+            marginTop: 136,
             borderRadius: 10,
             overflow: 'hidden',
             paddingBottom: Platform.OS === 'android' ? 135 : 159,

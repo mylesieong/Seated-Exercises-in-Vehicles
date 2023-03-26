@@ -21,8 +21,8 @@ export default function Info({ stepDetail, setShowDetail }) {
 
 const styles = StyleSheet.create({
   info: {
-    flex: 1,
     paddingTop: 20,
+    height: 240,
   },
   description: {
     fontSize: 15,
