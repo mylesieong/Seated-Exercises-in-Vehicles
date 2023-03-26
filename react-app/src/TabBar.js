@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontFamily: 'NotoSans',
+    fontFamily: 'NotoSansBasic',
     fontSize: 13,
     lineHeight: 20,
     color: ThemeColor.textBlack,

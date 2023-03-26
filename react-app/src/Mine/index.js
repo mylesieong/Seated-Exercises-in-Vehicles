@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text } from 'react-native'
+import { StyleSheet, Text, ScrollView } from 'react-native'
 import PageTemplate from '../Utilities/PageTemplate'
 import Header from '../Utilities/Header'
 import ThemeColor from '../Utilities/ThemeColor'
@@ -39,12 +39,14 @@ export default function Mine({ db, setReset, reset, exercises }) {
 
   return (
     <PageTemplate topBarColor={ThemeColor.deepBackground} bottomColor={ThemeColor.deepBackground}>
-      <Header navigation={'Home'} height={46} backgroundColor={ThemeColor.deepBackground}>
-        <Text style={styles.title}>Mine</Text>
-      </Header>
-      <TodaySummary records={todayRecords} exercises={exercises} />
-      <WeekCalendar db={db} records={allRecords} startDate={startDate} exercises={exercises} />
-      <Setting db={db} setReset={setReset} reset={reset} />
+      <ScrollView>
+        <Header navigation={'Home'} height={46} backgroundColor={ThemeColor.deepBackground}>
+          <Text style={styles.title}>Mine</Text>
+        </Header>
+        <TodaySummary records={todayRecords} exercises={exercises} />
+        <WeekCalendar db={db} records={allRecords} startDate={startDate} exercises={exercises} />
+        <Setting db={db} setReset={setReset} reset={reset} />
+      </ScrollView>
     </PageTemplate>
   )
 }
@@ -56,6 +58,5 @@ const styles = StyleSheet.create({
     color: ThemeColor.text,
     marginTop: 12,
     fontFamily: 'NotoSansExtraBold',
-    transform: [{ scaleX: 0.75 }],
   },
 })

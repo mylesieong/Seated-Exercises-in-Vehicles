@@ -35,7 +35,7 @@ export default function ExerciseOverview({ route }) {
           buttonColor={ThemeColor.textWhite}
           height={190}
         >
-          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.title}>{title} on the Seat</Text>
         </Header>
         <Summary
           moves={exercise.length}
@@ -49,7 +49,7 @@ export default function ExerciseOverview({ route }) {
       <View style={styles.moves}>
         <FlatList
           contentContainerStyle={{
-            marginTop: Platform.OS === 'android' ? 136 : 160,
+            marginTop: 136,
             borderRadius: 10,
             overflow: 'hidden',
             paddingBottom: Platform.OS === 'android' ? 135 : 159,
@@ -83,8 +83,7 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     color: ThemeColor.textWhite,
     marginTop: 13,
-    fontFamily: 'NotoSansBold',
-    transform: [{ scaleX: 0.875 }],
+    fontFamily: 'NotoSansMidBold',
   },
   moves: {
     flex: 1,

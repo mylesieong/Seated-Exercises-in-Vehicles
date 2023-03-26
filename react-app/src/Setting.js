@@ -45,20 +45,19 @@ const styles = StyleSheet.create({
   title: {
     color: ThemeColor.text,
     fontSize: 28,
-    paddingLeft: 4,
+    paddingLeft: 20,
     paddingTop: 20,
     lineHeight: 32,
-    fontFamily: 'NotoSansExtraBold',
-    transform: [{ scaleX: 0.9 }],
+    fontFamily: 'NotoSansMidExtraBold',
   },
 
   resetButton: {
-    backgroundColor: ThemeColor.component,
+    backgroundColor: ThemeColor.tab,
     borderRadius: 10,
     height: 70,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    marginHorizontal: 20,
+    marginHorizontal: 16,
     marginVertical: 10,
     flexDirection: 'row',
     alignItems: 'center',
@@ -74,7 +73,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     lineHeight: 24,
     fontFamily: 'NotoSansExtraBold',
-    transform: [{ scaleX: 0.75 }],
+
     color: ThemeColor.text,
   },
   resetRightIcon: {
@@ -87,6 +86,5 @@ const styles = StyleSheet.create({
     color: ThemeColor.text,
     marginTop: 12,
     fontFamily: 'NotoSansExtraBold',
-    transform: [{ scaleX: 0.75 }],
   },
 })

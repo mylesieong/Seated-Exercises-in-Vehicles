@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text, View, Platform } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { CalendarProvider, WeekCalendar as Week } from 'react-native-calendars'
 import { useNavigation } from '@react-navigation/native'
@@ -73,7 +73,7 @@ export default function WeekCalendar({ startDate, records, exercises }) {
           </View>
           <View style={styles.bar}></View>
           <View style={styles.calendar}>
-            <CalendarProvider date={null}>
+            <CalendarProvider date={new Date().toISOString().split('T')[0]}>
               <Week
                 markingType={'custom'}
                 markedDates={{ ...calendarRecords }}
@@ -82,14 +82,35 @@ export default function WeekCalendar({ startDate, records, exercises }) {
                   dayTextColor: ThemeColor.text,
                   arrowColor: ThemeColor.text,
                   monthTextColor: ThemeColor.textGray,
-                  textMonthFontFamily: 'NotoSansBold',
+                  textMonthFontFamily: 'NotoSansBasicBold',
                   textMonthFontSize: 15,
-                  textDayFontFamily: 'NotoSansBold',
-                  textDayHeaderFontFamily: 'NotoSans',
+                  textDayFontFamily: 'NotoSansBasicBold',
+                  textDayHeaderFontFamily: 'NotoSansBasic',
                   selectedDayBackgroundColor: ThemeColor.tab,
+                  selectedDayTextColor: ThemeColor.text,
+                  stylesheet: {
+                    expandable: {
+                      main: {
+                        containerShadow: {
+                          ...Platform.select({
+                            ios: {
+                              shadowOpacity: 0,
+                              zIndex: 0,
+                            },
+                            android: {
+                              elevation: 3,
+                            },
+                          }),
+                        },
+                        containerWrapper: {
+                          paddingBottom: 0,
+                        },
+                      },
+                    },
+                  },
                 }}
                 onDayPress={(day) => {
-                  navigation.navigate('History', { selectedDay: day.dateString })
+                  navigation.navigate('History', { selectedDay: day })
                 }}
               />
             </CalendarProvider>
@@ -112,7 +133,7 @@ const styles = StyleSheet.create({
   },
   info: {
     color: ThemeColor.textGray,
-    fontFamily: 'NotoSansBold',
+    fontFamily: 'NotoSansBasicBold',
     fontSize: 15,
     lineHeight: 20,
     marginBottom: 10,
@@ -143,7 +164,6 @@ const styles = StyleSheet.create({
   },
   calendar: {
     height: 80,
-    marginBottom: 10,
   },
   button: {
     justifyContent: 'center',
@@ -152,7 +172,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   buttonLetter: {
-    fontFamily: 'NotoSans',
+    fontFamily: 'NotoSansBasic',
     fontSize: 15,
     lineHeight: 20,
     textAlign: 'center',
@@ -162,12 +182,12 @@ const styles = StyleSheet.create({
     fontSize: 30,
     lineHeight: 32,
     color: ThemeColor.text,
-    fontFamily: 'NotoSansExtraBold',
+    fontFamily: 'NotoSansBasicExtraBold',
   },
   text: {
     fontSize: 15,
     lineHeight: 17,
     color: ThemeColor.text,
-    fontFamily: 'NotoSans',
+    fontFamily: 'NotoSansBasic',
   },
 })

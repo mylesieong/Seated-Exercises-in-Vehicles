@@ -40,14 +40,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     lineHeight: 28,
     fontFamily: 'NotoSansExtraBold',
-    transform: [{ scaleX: 0.875 }],
     marginBottom: -4,
   },
   info: {
     fontSize: 15,
     lineHeight: 20,
-    fontFamily: 'NotoSans',
-    transform: [{ scaleX: 0.875 }],
+    fontFamily: 'NotoSansMid',
+
     color: ThemeColor.textGray,
   },
 })

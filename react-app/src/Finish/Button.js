@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    fontWeight: 800,
+    lineHeight: 24,
+    fontFamily: 'NotoSansExtraBold',
     color: ThemeColor.textWhite,
   },
 })

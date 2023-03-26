@@ -48,26 +48,23 @@ const styles = StyleSheet.create({
     minWidth: '90%',
   },
   title: {
-    fontFamily: 'NotoSansExtraBold',
-    fontWeight: 800,
+    fontFamily: 'NotoSansMidExtraBold',
     fontSize: 28,
     lineHeight: 32,
     alignSelf: 'center',
     marginTop: 20,
     marginHorizontal: 20,
-    transform: [{ scaleX: 0.9 }],
   },
   textColor: {
     color: ThemeColor.text,
   },
   description: {
-    fontWeight: 400,
+    fontFamily: 'NotoSansMid',
     fontSize: 15,
     lineHeight: 20,
     alignItems: 'center',
-    marginHorizontal: 10,
+    paddingHorizontal: 15,
     marginVertical: 10,
-    transform: [{ scaleX: 0.875 }],
   },
   bottomPart: {
     flexDirection: 'row',
@@ -85,14 +82,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     lineHeight: 28,
     fontFamily: 'NotoSansExtraBold',
-    transform: [{ scaleX: 0.875 }],
     marginBottom: -4,
   },
   summary: {
     fontSize: 15,
     lineHeight: 20,
-    fontFamily: 'NotoSans',
-    transform: [{ scaleX: 0.875 }],
+    fontFamily: 'NotoSansMid',
+
     color: ThemeColor.textGray,
   },
   ...Platform.select({

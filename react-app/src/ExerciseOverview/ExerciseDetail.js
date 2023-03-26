@@ -146,8 +146,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   closeText: {
-    fontWeight: 600,
+    fontFamily: 'NotoSansMidBold',
     fontSize: 15,
+    lineHeight: 20,
     color: ThemeColor.textBlack,
   },
   image: {
@@ -157,14 +158,16 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   title: {
-    fontWeight: 700,
-    fontSize: 25,
+    fontFamily: 'NotoSansMidExtraBold',
+    fontSize: 24,
+    lineHeight: 28,
     marginBottom: 10,
     color: ThemeColor.text,
   },
   description: {
-    fontWeight: 500,
-    fontSize: 16,
+    fontFamily: 'NotoSansMidBold',
+    fontSize: 15,
+    lineHeight: 20,
     marginBottom: 10,
     color: ThemeColor.text,
   },
@@ -172,8 +175,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   instruction: {
-    fontWeight: 400,
-    fontSize: 16,
+    fontFamily: 'NotoSansMid',
+    fontSize: 15,
+    lineHeight: 20,
     marginBottom: 10,
     color: ThemeColor.text,
   },

@@ -52,9 +52,15 @@ export default function App() {
 
   // Fonts setup
   useFonts({
-    NotoSans: require('./assets/fonts/NotoSans-Regular.ttf'),
-    NotoSansBold: require('./assets/fonts/NotoSans-Bold.ttf'),
-    NotoSansExtraBold: require('./assets/fonts/NotoSans-ExtraBold.ttf'),
+    NotoSansBasic: require('./assets/fonts/NotoSans-Regular.ttf'),
+    NotoSansBasicBold: require('./assets/fonts/NotoSans-Bold.ttf'),
+    NotoSansBasicExtraBold: require('./assets/fonts/NotoSans-ExtraBold.ttf'),
+    NotoSansMid: require('./assets/fonts/NotoSans-Condensed.ttf'),
+    NotoSansMidBold: require('./assets/fonts/NotoSans-CondensedBold.ttf'),
+    NotoSansMidExtraBold: require('./assets/fonts/NotoSans-CondensedExtraBold.ttf'),
+    NotoSans: require('./assets/fonts/NotoSans-ExtraCondensed.ttf'),
+    NotoSansBold: require('./assets/fonts/NotoSans-ExtraCondensedBold.ttf'),
+    NotoSansExtraBold: require('./assets/fonts/NotoSans-ExtraCondensedExtraBold.ttf'),
   })
 
   // exercise data

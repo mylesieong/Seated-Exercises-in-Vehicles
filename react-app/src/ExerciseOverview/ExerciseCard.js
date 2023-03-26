@@ -34,25 +34,24 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'space-between',
     paddingVertical: 10,
-    paddingRight: 20,
+    paddingHorizontal: 20,
   },
   text: {
     color: ThemeColor.text,
   },
   textContainer: {
     flex: 1,
+    paddingRight: 5,
   },
   title: {
-    fontFamily: 'NotoSansBold',
+    fontFamily: 'NotoSansMidBold',
     fontSize: 15,
     lineHeight: 20,
-    transform: [{ scaleX: 0.875 }],
     marginTop: 10,
   },
   description: {
     marginTop: 5,
-    transform: [{ scaleX: 0.875 }],
-    fontFamily: 'NotoSans',
+    fontFamily: 'NotoSansMid',
     color: ThemeColor.textGray,
   },
   line: {

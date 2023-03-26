@@ -28,7 +28,7 @@ const formatDate = (timestamp) => {
 
 export default function History({ db, reset, setReset, exercises }) {
   const route = useRoute()
-  const selectedDay = route.params?.selectedDay
+  const selectedDay = route.params?.selectedDay.dateString
   const [records, setRecords] = useState({})
   const today = toYYYYMMDD(new Date().getTime())
   const [selected, setSelected] = useState({
@@ -51,14 +51,25 @@ export default function History({ db, reset, setReset, exercises }) {
         let result = rows._array.reduce(
           (previous, current) => ({
             ...previous,
-            [toYYYYMMDD(current.timestamp)]: { marked: true, dotColor: ThemeColor.secondary },
+            [toYYYYMMDD(current.timestamp)]: {
+              marked: true,
+              dotColor: ThemeColor.secondary,
+              selectedColor: ThemeColor.primaryDarker,
+              customStyles: {
+                container: {
+                  paddingBottom: 3,
+                },
+              },
+            },
           }),
           {}
         )
         setRecords(result)
       })
     })
-    const localStartOfDay = new Date().setHours(0, 0, 0, 0)
+    const localStartOfDay = route.params
+      ? route.params.selectedDay.timestamp + new Date().getTimezoneOffset() * 60 * 1000
+      : new Date().setHours(0, 0, 0, 0)
     db.transaction((tx) => {
       tx.executeSql(
         'select timestamp, exercise_name from Record where timestamp between ? and ? order by timestamp',
@@ -123,9 +134,9 @@ export default function History({ db, reset, setReset, exercises }) {
               dayTextColor: ThemeColor.text,
               arrowColor: ThemeColor.text,
               monthTextColor: ThemeColor.textGray,
-              textMonthFontFamily: 'NotoSansBold',
+              textMonthFontFamily: 'NotoSansMidBold',
               textMonthFontSize: 15,
-              textDayFontFamily: 'NotoSansBold',
+              textDayFontFamily: 'NotoSansMidBold',
               textDayHeaderFontFamily: 'NotoSans',
               selectedDayBackgroundColor: ThemeColor.primaryDarker,
             }}
@@ -161,10 +172,10 @@ export default function History({ db, reset, setReset, exercises }) {
             }}
           >
             <Button
-              title='PRESS TO ADD 100 RANDOM DATA'
+              title='PRESS TO ADD 30 RANDOM DATA'
               color={ThemeColor.secondary}
               onPress={() => {
-                Array(100)
+                Array(30)
                   .fill(1)
                   .forEach(() => {
                     db.transaction((tx) => {
@@ -195,7 +206,6 @@ const styles = StyleSheet.create({
     color: ThemeColor.text,
     marginTop: 12,
     fontFamily: 'NotoSansExtraBold',
-    transform: [{ scaleX: 0.75 }],
   },
   container: {
     paddingTop: 20,
@@ -214,8 +224,8 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     lineHeight: 20,
     fontSize: 15,
-    fontFamily: 'NotoSansBold',
-    transform: [{ scaleX: 0.875 }],
+    fontFamily: 'NotoSansMidBold',
+    paddingHorizontal: 15,
     color: ThemeColor.textGray,
   },
   recordList: {
@@ -231,28 +241,26 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingHorizontal: 15,
   },
   exerciseName: {
     fontSize: 20,
     lineHeight: 20,
     fontFamily: 'NotoSansExtraBold',
-    transform: [{ scaleX: 0.75 }],
     color: ThemeColor.text,
   },
   timeStamp: {
-    paddingRight: 15,
     fontSize: 15,
     lineHeight: 20,
-    fontFamily: 'NotoSans',
-    transform: [{ scaleX: 0.875 }],
+    fontFamily: 'NotoSansMid',
     color: ThemeColor.text,
   },
   exerciseDetail: {
     marginBottom: 11,
     fontSize: 15,
     lineHeight: 20,
-    fontFamily: 'NotoSans',
-    transform: [{ scaleX: 0.875 }],
+    fontFamily: 'NotoSansMid',
+    paddingLeft: 15,
     color: ThemeColor.text,
   },
   hide: {
