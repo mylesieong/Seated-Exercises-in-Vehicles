@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: 'NotoSansMidExtraBold',
-    fontWeight: 800,
     fontSize: 28,
     lineHeight: 32,
     alignSelf: 'center',
