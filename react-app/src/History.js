@@ -31,18 +31,30 @@ export default function History({ db, reset, setReset, exercises }) {
   const selectedDay = route.params?.selectedDay.dateString
   const [records, setRecords] = useState({})
   const today = toYYYYMMDD(new Date().getTime())
-  const [selected, setSelected] = useState({
-    [selectedDay || today]: {
-      selected: true,
-      dots: [{ selectedDotColor: ThemeColor.textWhite }],
-      customStyles: {
-        container: {
-          borderRadius: 3,
-          backgroundColor: ThemeColor.primaryDarker,
-        },
-      },
-    },
-  })
+
+  const showSelectDay = (recordsObj, day) => {
+    const pressDay = day.dateString
+    const theDay = pressDay || selectedDay || today
+    return {
+      ...recordsObj,
+      [theDay]: recordsObj[theDay]
+        ? {
+            ...recordsObj[theDay],
+            selected: true,
+          }
+        : {
+            selected: true,
+            customStyles: {
+              container: {
+                borderRadius: 3,
+                paddingBottom: 6,
+              },
+            },
+          },
+    }
+  }
+
+  const [selected, setSelected] = useState({})
   const [recordsOfSelected, setRecordsOfSelected] = useState([])
 
   useEffect(() => {
@@ -53,11 +65,10 @@ export default function History({ db, reset, setReset, exercises }) {
             ...previous,
             [toYYYYMMDD(current.timestamp)]: {
               marked: true,
-              dotColor: ThemeColor.secondary,
-              selectedColor: ThemeColor.primaryDarker,
               customStyles: {
                 container: {
-                  paddingBottom: 3,
+                  borderRadius: 3,
+                  paddingBottom: 6,
                 },
               },
             },
@@ -65,6 +76,7 @@ export default function History({ db, reset, setReset, exercises }) {
           {}
         )
         setRecords(result)
+        setSelected(showSelectDay(result, selectedDay || today))
       })
     })
     const localStartOfDay = route.params
@@ -99,22 +111,10 @@ export default function History({ db, reset, setReset, exercises }) {
         <View style={styles.calendar}>
           <Calendar
             markingType={'custom'}
-            markedDates={{ ...records, ...selected }}
+            markedDates={{ ...selected }}
             onDayPress={(day) => {
+              setSelected(showSelectDay(records, day))
               const localTimestamp = day.timestamp + new Date().getTimezoneOffset() * 60 * 1000
-              setSelected({
-                [day.dateString]: {
-                  selected: true,
-                  selectedColor: ThemeColor.primaryDarker,
-                  dots: [{ selectedDotColor: ThemeColor.textWhite }],
-                  customStyles: {
-                    container: {
-                      borderRadius: 3,
-                      backgroundColor: ThemeColor.primaryDarker,
-                    },
-                  },
-                },
-              })
               db.transaction((tx) => {
                 tx.executeSql(
                   'select timestamp, exercise_name from Record where timestamp between ? and ? order by timestamp',
@@ -139,6 +139,8 @@ export default function History({ db, reset, setReset, exercises }) {
               textDayFontFamily: 'NotoSansMidBold',
               textDayHeaderFontFamily: 'NotoSans',
               selectedDayBackgroundColor: ThemeColor.primaryDarker,
+              selectedDotColor: ThemeColor.textWhite,
+              dotColor: ThemeColor.secondary,
             }}
           />
         </View>
