@@ -10,7 +10,9 @@ export default function WeekCalendar({ startDate, records, exercises }) {
   const [durationTotal, setDurationTotal] = useState(0)
   const [calendarRecords, setCalendarRecords] = useState({})
   const toYYYYMMDD = (timestamp) => {
-    return new Date(timestamp).toISOString().split('T')[0]
+    const day = new Date(timestamp)
+    const fixOffsetDay = day.getTime() - day.getTimezoneOffset() * 60 * 1000
+    return new Date(fixOffsetDay).toISOString().split('T')[0]
   }
 
   useEffect(() => {
