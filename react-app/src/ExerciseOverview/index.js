@@ -1,4 +1,4 @@
-import { FlatList, Pressable, Platform, Text, StyleSheet, View } from 'react-native'
+import { FlatList, Pressable, Text, StyleSheet, View } from 'react-native'
 import React, { useState } from 'react'
 import Header from '../Utilities/Header'
 import Summary from './Summary'
@@ -52,7 +52,7 @@ export default function ExerciseOverview({ route }) {
             marginTop: 136,
             borderRadius: 10,
             overflow: 'hidden',
-            paddingBottom: Platform.OS === 'android' ? 135 : 159,
+            paddingBottom: 135,
           }}
           data={exercise}
           keyExtractor={(item) => item.id.toString()}

@@ -1,8 +1,8 @@
 import { StyleSheet, View, Text, Pressable, Alert } from 'react-native'
 import React from 'react'
-import ThemeColor from './Utilities/ThemeColor.js'
-import ResetIcon from '../assets/icons/reset-icon.svg'
-import ResetRightIcon from '../assets/icons/reset-arrow-right.svg'
+import ThemeColor from '../Utilities/ThemeColor.js'
+import ResetIcon from '../../assets/icons/reset-icon.svg'
+import ResetRightIcon from '../../assets/icons/reset-arrow-right.svg'
 
 export default function Setting({ db, reset, setReset }) {
   const removeRecordsAlert = () => {

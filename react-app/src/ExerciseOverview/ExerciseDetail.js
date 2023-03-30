@@ -131,8 +131,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   progress: {
-    fontWeight: 700,
+    fontFamily: 'NotoSansMidBold',
     fontSize: 15,
+    lineHeight: 20,
     paddingHorizontal: 15,
     color: ThemeColor.text,
   },

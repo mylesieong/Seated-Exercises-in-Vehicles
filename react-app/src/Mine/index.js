@@ -4,7 +4,7 @@ import PageTemplate from '../Utilities/PageTemplate'
 import Header from '../Utilities/Header'
 import ThemeColor from '../Utilities/ThemeColor'
 import TodaySummary from './TodaySummary'
-import Setting from '../Setting'
+import Setting from './Setting'
 import WeekCalendar from './WeekCalendar'
 
 export default function Mine({ db, setReset, reset, exercises }) {
