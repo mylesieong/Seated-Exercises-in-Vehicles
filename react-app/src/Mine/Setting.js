@@ -1,37 +1,16 @@
-import { StyleSheet, View, Text, Pressable, Alert } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import React from 'react'
 import ThemeColor from '../Utilities/ThemeColor.js'
-import ResetIcon from '../../assets/icons/reset-icon.svg'
-import ResetRightIcon from '../../assets/icons/reset-arrow-right.svg'
+import ResetButton from './Buttons/ResetButton.js'
+import AboutButton from './Buttons/AboutButton.js'
 
 export default function Setting({ db, reset, setReset }) {
-  const removeRecordsAlert = () => {
-    Alert.alert('Remove all records', 'Once you delete all records, it cannot be undone', [
-      {
-        text: 'Cancel',
-        style: 'cancel',
-      },
-      { text: 'OK', onPress: () => clearRecords() },
-    ])
-  }
-
-  const clearRecords = () => {
-    db.transaction((tx) => {
-      tx.executeSql(`DELETE FROM Record;`), [], setReset(!reset)
-    })
-  }
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Setting</Text>
-      <View style={styles.buttonLayout}>
-        <Pressable style={styles.resetButton} onPress={removeRecordsAlert}>
-          <ResetIcon height={20} width={20} color={ThemeColor.text} />
-          <Text style={styles.resetText}>Reset</Text>
-          <View style={styles.resetRightIcon}>
-            <ResetRightIcon height={20} width={20} color={ThemeColor.text} />
-          </View>
-        </Pressable>
+      <View style={styles.buttons}>
+        <ResetButton db={db} reset={reset} setReset={setReset} />
+        <AboutButton />
       </View>
     </View>
   )
@@ -50,41 +29,14 @@ const styles = StyleSheet.create({
     lineHeight: 32,
     fontFamily: 'NotoSansMidExtraBold',
   },
-
-  resetButton: {
-    backgroundColor: ThemeColor.tab,
-    borderRadius: 10,
-    height: 70,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    marginHorizontal: 16,
-    marginVertical: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    shadowOffset: { width: 0, height: -4 },
-    shadowOpacity: 0.25,
-    shadowRadius: 10,
-    shadowColor: ThemeColor.shadow,
-    // for android
-    elevation: 5,
-  },
-  resetText: {
-    fontSize: 20,
-    paddingLeft: 10,
-    lineHeight: 24,
-    fontFamily: 'NotoSansExtraBold',
-
-    color: ThemeColor.text,
-  },
-  resetRightIcon: {
-    marginLeft: 'auto',
-    justifyContent: 'center',
-  },
   headerTitle: {
     fontSize: 20,
     lineHeight: 24,
     color: ThemeColor.text,
     marginTop: 12,
     fontFamily: 'NotoSansExtraBold',
+  },
+  buttons: {
+    marginBottom: 10,
   },
 })

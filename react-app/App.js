@@ -10,6 +10,7 @@ import ExerciseSteps from './src/ExerciseSteps'
 import { Platform } from 'react-native'
 import Finish from './src/Finish'
 import TabBar from './src/TabBar'
+import About from './src/Mine/About'
 import * as SQLite from 'expo-sqlite'
 import { useFonts } from 'expo-font'
 import { CORE_EXERCISE_DATA } from './data/CoreExerciseData'
@@ -114,6 +115,7 @@ export default function App() {
         <Stack.Screen name='ExerciseOverview' component={ExerciseOverview} />
         <Stack.Screen name='Exercise Steps' component={ExerciseSteps} />
         <Stack.Screen name='Finish'>{() => <Finish db={db} setReset={setReset} />}</Stack.Screen>
+        <Stack.Screen name='About' component={About} />
       </Stack.Navigator>
     </NavigationContainer>
   )
