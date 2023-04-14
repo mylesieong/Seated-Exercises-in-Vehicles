@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { StyleSheet, Text, ScrollView } from 'react-native'
 import React from 'react'
 import PageTemplate from '../Utilities/PageTemplate'
@@ -16,7 +17,7 @@ export default function About() {
       </Header>
       <ScrollView style={styles.container}>
         <Text style={styles.text}>
-          Stretch is an innovative fitness app designed to help individuals achieve their fitness
+          SeatFit is an innovative fitness app designed to help individuals achieve their fitness
           goals with ease. Our team is made up of experienced fitness professionals and software
           developers who have collaborated to create a unique platform that combines advanced
           fitness technology with expert guidance and support.
@@ -28,20 +29,14 @@ export default function About() {
           looking to take their workouts to the next level.
         </Text>
         <Text style={styles.text}>
-          At Stretch, we are passionate about helping people reach their full potential, and we
+          At SeatFit, we are passionate about helping people reach their full potential, and we
           believe that fitness should be accessible to everyone. To that end, we have made our app
           user-friendly and affordable so that anyone can access our innovative platform's benefits.
           We also offer personalized coaching to our users to help them stay motivated and on track
           towards achieving their fitness goals.
         </Text>
         <Text style={styles.text}>
-          We believe that fitness is not just about physical strength, but also about mental
-          wellness. That's why we have incorporated mindfulness exercises and meditation practices
-          into our app to help users manage stress and maintain a healthy balance between mind and
-          body.
-        </Text>
-        <Text style={styles.text}>
-          In conclusion, Stretch is a comprehensive fitness app that offers users access to expert
+          In conclusion, SeatFit is a comprehensive fitness app that offers users access to expert
           guidance, customized workout plans, and a supportive community to help them achieve their
           fitness goals. Our team is committed to helping people live healthier, happier lives by
           providing them with the tools and resources they need to succeed.
