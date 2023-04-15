@@ -37,15 +37,7 @@ export default function Finish({ db, setReset }) {
   }, [])
 
   return (
-    <PageTemplate topBarColor={ThemeColor.background} bottomColor={ThemeColor.background}>
-      <Header />
-      <Info
-        moves={exercise.length}
-        // These coming two lines are kinda hard code
-        time={id == 1 ? 12 : 14}
-        format={`Sitting`}
-      ></Info>
-      <Image />
+    <>
       <Lottie
         source={require('../../assets/animation/62717-confetti.json')}
         autoPlay
@@ -53,8 +45,18 @@ export default function Finish({ db, setReset }) {
         style={styles.animation}
         resizeMode='cover'
       />
-      <Buttons id={id} title={title} />
-    </PageTemplate>
+      <PageTemplate topBarColor={ThemeColor.background} bottomColor={ThemeColor.background}>
+        <Header />
+        <Info
+          moves={exercise.length}
+          // These coming two lines are kinda hard code
+          time={id == 1 ? 12 : 14}
+          format={`Sitting`}
+        ></Info>
+        <Image />
+        <Buttons id={id} title={title} />
+      </PageTemplate>
+    </>
   )
 }
 
@@ -65,5 +67,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height,
     flex: 1,
     top: 0,
+    zIndex: 1,
+    pointerEvents: 'none',
   },
 })

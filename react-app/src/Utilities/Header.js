@@ -27,7 +27,9 @@ export default function Header({
     >
       {path !== 'mine' && (
         <GoBackButton
-          onPress={() => navigation.navigate(navigationPage)}
+          onPress={() =>
+            navigationPage ? navigation.navigate(navigationPage) : navigation.goBack()
+          }
           color={buttonColor ? buttonColor : ThemeColor.textColor}
         />
       )}
